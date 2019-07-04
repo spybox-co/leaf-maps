@@ -5,7 +5,9 @@ export default class Header extends Component {
     return (
       <header>
         <div className="menu">
-          {this.props.children}
+          <div className="group">
+            {this.props.children}
+          </div>
         </div>        
       </header>
     );

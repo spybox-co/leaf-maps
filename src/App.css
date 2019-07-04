@@ -1,6 +1,8 @@
-.leaflet-control-attribution,
-.leaflet-control-zoom {
+.leaflet-control-attribution {
   display: none;
+}
+.leaflet-control-zoom {
+  /* display: none; */
 }
 
 .leaflet-top {
@@ -12,23 +14,52 @@
 }
 
 .leaflet-container {
-  top: 148px;
-  height: calc(100vh - 48px);
+  top: 56px;
+  height: calc(100vh - 56px);
   width: 100%;
 }
 
 header {
   position: absolute;
   width: 100%;
+  height: 56px;
+  
 }
 .menu {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  background-color: #fff;
+  height: 56px;
+}
+.group {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #171717;
+  height: 48px;
 }
 
-.coords {
-  top: 48px;
-  position: absolute;
-  z-index: 200;
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  /* position: absolute; */
+  
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00f;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* background: #639; */
+  cursor: pointer;
 }

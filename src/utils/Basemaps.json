@@ -1,0 +1,55 @@
+[
+  {
+    "vendor": "OSM",
+    "name": "Open Topo Map",
+    "url": "http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    "maxZoom": 17
+  },
+  {
+    "vendor": "Thunder Forest",
+    "name": "Outdoors",
+    "url": "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png",
+    "apikey": "f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Thunder Forest",
+    "name": "Cycle",
+    "url": "https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png",
+    "apikey": "f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Thunder Forest",
+    "name": "Landscape",
+    "url": "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png",
+    "apikey": "f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Thunder Forest",
+    "name": "Transport",
+    "url": "https://tile.thunderforest.com/transport/{z}/{x}/{y}.png",
+    "apikey": "f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Thunder Forest",
+    "name": "Neighbourhood",
+    "url": "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png",
+    "apikey": "f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Stamen",
+    "name": "Toner",
+    "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
+    "maxZoom": 17
+  },
+  {
+    "vendor": "Stamen",
+    "name": "Terrain",
+    "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png",
+    "maxZoom": 16
+  },
+  {
+    "vendor": "Stamen",
+    "name": "Watercolor",
+    "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}{r}.png"
+  }
+]

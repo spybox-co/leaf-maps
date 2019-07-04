@@ -1,8 +1,12 @@
 {
   "name": "leaf-maps",
+  "homepage": "https://www.spybox.co/leaf-maps",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "carbon-components": "^10.3.2",
+    "carbon-components-react": "^7.3.2",
+    "carbon-icons": "^7.0.7",
     "leaflet": "^1.5.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
