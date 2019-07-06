@@ -2,7 +2,7 @@
   display: none;
 }
 .leaflet-control-zoom {
-  /* display: none; */
+  display: none;
 }
 
 .leaflet-top {
@@ -14,15 +14,16 @@
 }
 
 .leaflet-container {
-  top: 56px;
-  height: calc(100vh - 56px);
+  top: 48px;
+  height: calc(100vh - 48px);
   width: 100%;
+  z-index: 0;
 }
 
 header {
   position: absolute;
   width: 100%;
-  height: 56px;
+  height: 48px;
   
 }
 .menu {
@@ -30,7 +31,7 @@ header {
   flex-wrap: nowrap;
   overflow-x: auto;
   background-color: #fff;
-  height: 56px;
+  height: 48px;
 }
 .group {
   display: flex;
@@ -38,7 +39,12 @@ header {
   background-color: #171717;
   height: 48px;
 }
-
+.geo-not-enabled {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background: #f00;
+}
 
 
 /* width */
