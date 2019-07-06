@@ -1,3 +1,8 @@
+
+
+
+
+
 .leaflet-control-attribution {
   display: none;
 }
@@ -14,8 +19,7 @@
 }
 
 .leaflet-container {
-  top: 48px;
-  height: calc(100vh - 48px);
+  height: calc(100vh - 3rem);
   width: 100%;
   z-index: 0;
 }
@@ -47,25 +51,3 @@ header {
 }
 
 
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  /* position: absolute; */
-  
-}
-/* Track */
-::-webkit-scrollbar-track {
-  background: none;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #00f;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  /* background: #639; */
-  cursor: pointer;
-}

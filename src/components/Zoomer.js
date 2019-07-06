@@ -63,7 +63,7 @@ class Zoomer extends Component {
         <IconButton 
           style={style.button} 
           kind="secondary" 
-          disabled={this.props.zoom == 20 ? true : false}
+          disabled={this.props.zoom == this.props.maxZoom ? true : false}
           onClick={event => this.zoomIn()}
           renderIcon={add}
         />

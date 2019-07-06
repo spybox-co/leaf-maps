@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import Map from './components/Map/Map';
+
+
 import UIHeader from './components/Header/UIHeader';
+import UIMenu from './components/Menu/UIMenu';
+import { Content as UIContent } from 'carbon-components-react/lib/components/UIShell';
+
+
+
 import IconButton from './components/IconButton';
-import Panel from './components/Menu';
+import Panel from './components/Panel';
 import Zoom from './components/Zoomer';
 
 
@@ -18,7 +25,7 @@ import Menu from '@carbon/icons-react/es/menu/16';
 
 import Demo from "./Demo";
 
-import * as Basemaps from './utils/Basemaps.json';
+import data from './utils/Basemaps.json';
 
 import './App.css';
 
@@ -33,27 +40,44 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      position: {
-        lat: 54.00,
-        lng: 18.00
-      },
-      zoom: 13,
+      zoom: 6,
       maxZoom: 20,
-      mapType: "outdoors", // cycle, outdoors, transport, landscape, pioneer, mobile-atlas, neighbourhood
-      maps: ["cycle", "outdoors", "transport", "landscape", "pioneer", "mobile-atlas", "neighbourhood"],
-      baseMaps: Basemaps,
+      centerZoom: 15,
+      //mapType: "outdoors", // cycle, outdoors, transport, landscape, pioneer, mobile-atlas, neighbourhood
+      //maps: ["cycle", "outdoors", "transport", "landscape", "pioneer", "mobile-atlas", "neighbourhood"],
+      BaseMapsData: data,
       selectedMap: [], //
+
     }
 
     this.getInnerRef = this.getInnerRef.bind(this);
     this.getLocation = this.getLocation.bind(this);
   }
+
   componentDidMount() {
-    // console.log(this.state.baseMaps);
+    this.defaultMap();
+    console.log("Default map:", this.state.selectedMap);
   }
   
-  ChangeMap = ( type ) => {
-    this.setState({ mapType: type });
+  defaultMap = () => {
+    this.setState({ selectedMap: this.state.BaseMapsData[6].url })
+    if (this.state.BaseMapsData[6].maxZoom) {
+      this.setState({ maxZoom: this.state.BaseMapsData[6].maxZoom})
+    } 
+  }
+
+  changeMap = ( vendor, type, mapUrl, maxZoom ) => {
+    console.clear();
+    console.log("Vendor:", vendor);
+    console.log("Type:", type);
+    this.setState({ selectedMap: mapUrl })
+    console.log("Map URL:", mapUrl);
+    if (maxZoom) {
+      this.setState({ maxZoom: maxZoom})
+      console.log("Max zoom:", maxZoom);
+    } else {
+      this.setState({ maxZoom: 20 })
+    }
   }
 
   GetLocation = () => {
@@ -82,118 +106,59 @@ class App extends Component {
 
   render () {
     // eslint-disable-next-line
-    const { position, zoom, mapType, baseMaps, maps, selectedMap } = this.state;
+    const { position, zoom, maxZoom, centerZoom, mapType, BaseMapsData, selectedMap } = this.state;
     // eslint-disable-next-line
-    const { GetLocation, ChangeMap } = this;
-    const { getInnerRef, getLocation } = this;
+    const { GetLocation, changeMap } = this;
+    const { getInnerRef, getLocation, setZoom } = this;
 
-    return (
-              
+    return (              
       <div className="App">
-        <Panel>
-          <ClickableTile>
-            {/* {maps.map((map, i) => <Button 
-                                    key={i}
-                                    kind="primary"
-                                    small
-                                    onClick={() => ChangeMap(map)} 
-                                  >{map}</Button>
-            )} */}
-            <Demo ref={getInnerRef} />
-            <Zoom zoom={zoom} setZoom={this.setZoom} onChange={event => this.setZoom(event.target.value)}/> 
-          </ClickableTile>
-        </Panel>
+
         <UIHeader 
           GetLocation={GetLocation}
+          changeMap={changeMap}
+          BaseMapsData={BaseMapsData}
         >
           <IconButton 
             kind="danger" 
             renderIcon={Add}
             iconDescription="Menu"
-            //onClick={GetLocation}
-            onClick={getLocation}
+            onClick={event => {
+                      this.getLocation();
+                      this.setZoom(centerZoom);
+                      event.preventDefault();
+                    }}
           />
         </UIHeader> 
-        {/* <Header>
-          <IconButton 
-            kind="secondary" 
-            renderIcon={Menu}
-            iconDescription="Get location"
-            //onClick={() => GetLocation()}
+        {/* <UIMenu /> */}
+        <UIContent>
+
+          <Panel>
+            <ClickableTile>
+              <Demo ref={getInnerRef} />
+              <Zoom 
+                zoom={zoom} 
+                maxZoom={maxZoom}
+                setZoom={this.setZoom} 
+                onChange={event => this.setZoom(event.target.value)}
+              /> 
+            </ClickableTile>
+          </Panel>
+
+
+          <Map
+            zoom={zoom}
+            maxZoom={maxZoom}
+            selectedMap={selectedMap}
+            viewport={position}
+            ref={getInnerRef}
           />
-          <Button kind="danger">Leaf Maps</Button>
-          <IconButton 
-            kind="primary" 
-            renderIcon={Add}
-            iconDescription="Menu"
-            onClick={() => GetLocation()}
-          />
-        </Header> */}
-        <Map
-          tileLayer={selectedMap} 
-          position={position}
-          zoom={zoom}
-          mapType={mapType}
-          viewport={position}
-          ref={getInnerRef}
-        />
-        
-        <GeoTable />
+
+        </UIContent>
+ 
       </div>
     );
   };
 }
+
 export default App;
-
-
-// export default geolocated({
-//   positionOptions: {
-//     enableHighAccuracy: true,
-//     maximumAge: 0,
-//     timeout: Infinity,
-//   },
-//   watchPosition: true,
-//   userDecisionTimeout: null,
-//   suppressLocationOnMount: false,
-//   geolocationProvider: navigator.geolocation,
-//   isOptimisticGeolocationEnabled: true
-// })(App);
-
-
-
-
-
-const GeoTable = props => {
-  return !props.isGeolocationAvailable ? (
-      <div>Your browser does not support Geolocation</div>
-  ) : !props.isGeolocationEnabled ? (
-      <div className="geo-not-enabled">Geolocation is not enabled</div>
-  ) : props.coords ? (
-      <table className="coords">
-          <tbody>
-              <tr>
-                  <td>latitude</td>
-                  <td>{props.coords.latitude}</td>
-              </tr>
-              <tr>
-                  <td>longitude</td>
-                  <td>{props.coords.longitude}</td>
-              </tr>
-              <tr>
-                  <td>altitude</td>
-                  <td>{props.coords.altitude}</td>
-              </tr>
-              <tr>
-                  <td>heading</td>
-                  <td>{props.coords.heading}</td>
-              </tr>
-              <tr>
-                  <td>speed</td>
-                  <td>{props.coords.speed}</td>
-              </tr>
-          </tbody>
-      </table>
-  ) : (
-      <div>Getting the location data&hellip; </div>
-  )
-}

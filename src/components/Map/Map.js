@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, Circle, CircleMarker } from 'react-leaflet';
 
 import { geolocated, geoPropTypes } from "react-geolocated";
 import { isTSParenthesizedType } from '@babel/types';
@@ -32,13 +32,19 @@ class ReactLeaflet extends Component {
   componentDidMount() {
     if (this.props.coords) {
       this.setPosition();
+      console.log("juz sie zaladowaly!");
+    } else {
+      console.log("jeszcze nie");
     }
   }  
+
+
   componentDidUpdate() {
     if (this.props.coords) {
       this.setPosition();
     }
   }
+
 
   setPosition = () => {
     if (this.state.lat !== this.props.coords.latitude && this.state.lng !== this.props.coords.longitude) {
@@ -48,42 +54,29 @@ class ReactLeaflet extends Component {
 
   render() {
     // eslint-disable-next-line
-    const { coords, viewport, mapType } = this.props;
-    //const position = [this.props.position.lat, this.props.position.lng];
-    let position;
-    // const position = [this.props.coords.latitude, this.props.coords.longitude];
-
-
-    if (this.props.coords) {
-      console.log("juz sie zaladowaly!");
-      position = [this.props.coords.latitude, this.props.coords.longitude];
-    } else {
-      console.log("jeszcze nie");
-      position = [this.state.lat, this.state.lng];
-    }
+    const { selectedMap } = this.props;
     
-
-    // eslint-disable-next-line
+    // Docs Map
+    // https://react-leaflet.js.org/docs/en/components.html#map
     const { lat, lng, zoom } = this.state;
     return (
       <Map 
-        //center={this.props.position} 
         zoom={zoom} 
         maxZoom={20}
-        //viewport={this.state.viewport}
-        //viewport={{center: position}}
         viewport={{ center: [lat, lng], zoom: this.props.zoom }}
+        scrollWheelZoom={false}
       >
         <TileLayer
           
-          //url={`https://tile.thunderforest.com/${mapType}/{z}/{x}/{y}.png?apikey=f44334560bdb4771a041609cc75a8983`}
-          url={`https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png`}
+          url={`${selectedMap}`}
+          //url={`https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png`}
           //attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
         
-        <Marker position={ [lat, lng] }>
+        {/* <Marker position={ [lat, lng] }>
           <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-        </Marker>
+        </Marker> */}
+        <CircleMarker center={ [lat, lng] } radius={10}/>
       </Map>
     );
   }

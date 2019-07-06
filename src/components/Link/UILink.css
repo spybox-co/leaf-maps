@@ -1,0 +1,41 @@
+.target-link {
+  width: 100%;
+  position: relative;
+  color: #fff;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+  text-decoration: none;
+  transition: all .35s ease;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+.target-link:hover {
+  background-color: #3d3d3d;
+}
+.target-link-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+  letter-spacing: .16px;
+}
+
+.target-link-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: 0;
+  font-size: calc(1.25rem + 0*(100vw - 20rem)/62);
+  display: block;
+  max-width: 17.1875rem;
+}
+.target-link-option {
+  color: #858585;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 0;
+  display: block;
+  max-width: 17.1875rem;
+}

@@ -39,7 +39,8 @@
     "vendor": "Stamen",
     "name": "Toner",
     "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
-    "maxZoom": 17
+    "maxZoom": 17,
+    "default": true
   },
   {
     "vendor": "Stamen",
@@ -50,6 +51,7 @@
   {
     "vendor": "Stamen",
     "name": "Watercolor",
-    "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}{r}.png"
+    "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}{r}.png",
+    "maxZoom": 15
   }
 ]
