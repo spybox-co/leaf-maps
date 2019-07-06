@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import Map from './components/Map/Map';
-import Header from './components/Header/Header';
 import UIHeader from './components/Header/UIHeader';
 import IconButton from './components/IconButton';
 import Panel from './components/Menu';
 
-
+// eslint-disable-next-line
 import { Button } from 'carbon-components-react';
-// eslint-disable-next-line no-use-before-define
+// eslint-disable-next-line 
 import { Tile, ClickableTile, SelectableTile } from "carbon-components-react";
 //import IconName from '@carbon/icon-react/es/add/16';
 import Add from '@carbon/icons-react/es/add--filled/16';
-// eslint-disable-next-line no-use-before-define
+// eslint-disable-next-line
 import Menu from '@carbon/icons-react/es/menu/16';
 
 
@@ -49,7 +48,7 @@ class App extends Component {
   componentDidMount() {
     // console.log(this.state.baseMaps);
   }
-
+  
   ChangeMap = ( type ) => {
     this.setState({ mapType: type });
   }
@@ -75,7 +74,9 @@ class App extends Component {
   }
 
   render () {
+    // eslint-disable-next-line
     const { position, zoom, mapType, baseMaps, maps, selectedMap } = this.state;
+    // eslint-disable-next-line
     const { GetLocation, ChangeMap } = this;
     const { getInnerRef, getLocation } = this;
 

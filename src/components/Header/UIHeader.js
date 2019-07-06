@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import IconButton from "../IconButton";
-// eslint-disable-next-line no-use-before-define
+// eslint-disable-next-line
 import UIShell, {
   // Content,
   Header,
@@ -33,6 +33,7 @@ import Add from '@carbon/icons-react/es/add--filled/16';
 export default class UIHeader extends Component {
   
   render() {
+    // eslint-disable-next-line
     const { GetLocation, ChangeMap } = this.props;
 
     return (

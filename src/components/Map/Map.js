@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import { geolocated, geoPropTypes } from "react-geolocated";
+import { isTSParenthesizedType } from '@babel/types';
 
 // GEOLOCATION API
 // https://alligator.io/js/geolocation-api/
@@ -21,24 +22,32 @@ class ReactLeaflet extends Component {
   constructor() {
     super()
     this.state = {
-      lat: 54.5168,
-      lng: 18.5399,
+      lat: 0.0,    // 54.5168,
+      lng: 0.0,    // 18.5399,
       zoom: 13,
-    }
-    viewport: {
-
     }
   }
 
+
+  componentDidMount() {
+    if (this.props.coords) {
+      this.setPosition();
+    }
+  }  
   componentDidUpdate() {
-    // if (this.props.coords) {
-    //   console.log("juz sie zaladowaly!");
-    //   this.setState({ lat: this.props.coords.latitude, lng: this.props.coords.longitude})
-    // }
+    if (this.props.coords) {
+      this.setPosition();
+    }
+  }
+
+  setPosition = () => {
+    if (this.state.lat !== this.props.coords.latitude && this.state.lng !== this.props.coords.longitude) {
+      this.setState({ lat: this.props.coords.latitude, lng: this.props.coords.longitude })
+    }
   }
 
   render() {
-    
+    // eslint-disable-next-line
     const { coords, viewport, zoom, mapType } = this.props;
     //const position = [this.props.position.lat, this.props.position.lng];
     let position;
@@ -49,29 +58,29 @@ class ReactLeaflet extends Component {
       console.log("juz sie zaladowaly!");
       position = [this.props.coords.latitude, this.props.coords.longitude];
     } else {
+      console.log("jeszcze nie");
       position = [this.state.lat, this.state.lng];
     }
     
 
+    // eslint-disable-next-line
+    const { lat, lng } = this.state;
     return (
       <Map 
         //center={this.props.position} 
         zoom={zoom} 
         maxZoom={20}
         //viewport={this.state.viewport}
-        viewport={{center: position}}
+        //viewport={{center: position}}
+        viewport={{ center: [lat, lng], zoom: 13 }}
       >
-        {console.log("from state", position)}
-        
-        
-
         <TileLayer
           
           url={`https://tile.thunderforest.com/${mapType}/{z}/{x}/{y}.png?apikey=f44334560bdb4771a041609cc75a8983`}
           //attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
         
-        <Marker position={position}>
+        <Marker position={ [lat, lng] }>
           <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
         </Marker>
       </Map>
