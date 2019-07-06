@@ -1,6 +1,8 @@
 import React from "react";
 import { geolocated, geoPropTypes } from "react-geolocated";
 
+import Typo from "./components/Typography";
+
 import { CodeSnippet } from "carbon-components-react";
 
 // const getDirection = (degrees, isLongitude) =>
@@ -34,7 +36,7 @@ class Demo extends React.Component {
             ) : null}
           </div>
         ) : (
-          <div>Getting the location data&hellip;</div>
+          <Typo>Getting the location data&hellip;</Typo>
         )}
         {!!props.positionError && (
           <div>

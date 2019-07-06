@@ -22,8 +22,8 @@ class ReactLeaflet extends Component {
   constructor() {
     super()
     this.state = {
-      lat: 0.0,    // 54.5168,
-      lng: 0.0,    // 18.5399,
+      lat: 52.7255932,    // 54.5168,   //52.7255932,19.1612561
+      lng: 19.1612561,    // 18.5399,
       zoom: 13,
     }
   }
@@ -48,7 +48,7 @@ class ReactLeaflet extends Component {
 
   render() {
     // eslint-disable-next-line
-    const { coords, viewport, zoom, mapType } = this.props;
+    const { coords, viewport, mapType } = this.props;
     //const position = [this.props.position.lat, this.props.position.lng];
     let position;
     // const position = [this.props.coords.latitude, this.props.coords.longitude];
@@ -64,7 +64,7 @@ class ReactLeaflet extends Component {
     
 
     // eslint-disable-next-line
-    const { lat, lng } = this.state;
+    const { lat, lng, zoom } = this.state;
     return (
       <Map 
         //center={this.props.position} 
@@ -72,11 +72,12 @@ class ReactLeaflet extends Component {
         maxZoom={20}
         //viewport={this.state.viewport}
         //viewport={{center: position}}
-        viewport={{ center: [lat, lng], zoom: 13 }}
+        viewport={{ center: [lat, lng], zoom: this.props.zoom }}
       >
         <TileLayer
           
-          url={`https://tile.thunderforest.com/${mapType}/{z}/{x}/{y}.png?apikey=f44334560bdb4771a041609cc75a8983`}
+          //url={`https://tile.thunderforest.com/${mapType}/{z}/{x}/{y}.png?apikey=f44334560bdb4771a041609cc75a8983`}
+          url={`https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png`}
           //attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
         
@@ -98,6 +99,6 @@ export default geolocated({
   },
   watchPosition: true,
   userDecisionTimeout: null,
-  suppressLocationOnMount: false,
+  suppressLocationOnMount: true,
   geolocationProvider: navigator.geolocation
 })(ReactLeaflet);

@@ -43,12 +43,12 @@ export default class UIHeader extends Component {
           //onClick={action("Menu clicked")}
         />
         <HeaderName prefix="Spybox">Leaf Maps</HeaderName>
-        <IconButton 
+        {/* <IconButton 
             kind="secondary" 
             renderIcon={Add}
             iconDescription="Menu"
             onClick={GetLocation}
-        />
+        /> */}
         <Common>
           {this.props.children}
         </Common>
@@ -59,5 +59,5 @@ export default class UIHeader extends Component {
 
 
 const Common = props => {
-  return <div>{props.children}</div>
+  return <div style={{ float: 'right' }}>{props.children}</div>
 }

@@ -3,9 +3,11 @@ import Map from './components/Map/Map';
 import UIHeader from './components/Header/UIHeader';
 import IconButton from './components/IconButton';
 import Panel from './components/Menu';
+import Zoom from './components/Zoomer';
+
 
 // eslint-disable-next-line
-import { Button } from 'carbon-components-react';
+import { Button, TextInput } from 'carbon-components-react';
 // eslint-disable-next-line 
 import { Tile, ClickableTile, SelectableTile } from "carbon-components-react";
 //import IconName from '@carbon/icon-react/es/add/16';
@@ -36,6 +38,7 @@ class App extends Component {
         lng: 18.00
       },
       zoom: 13,
+      maxZoom: 20,
       mapType: "outdoors", // cycle, outdoors, transport, landscape, pioneer, mobile-atlas, neighbourhood
       maps: ["cycle", "outdoors", "transport", "landscape", "pioneer", "mobile-atlas", "neighbourhood"],
       baseMaps: Basemaps,
@@ -59,6 +62,10 @@ class App extends Component {
     }
   }
 
+  setZoom = (value) => {
+    this.setState({ zoom: value });
+    console.log(this.state.zoom);
+  }
 
 
 
@@ -85,14 +92,15 @@ class App extends Component {
       <div className="App">
         <Panel>
           <ClickableTile>
-          {/* {maps.map((map, i) => <Button 
-                                  key={i}
-                                  kind="primary"
-                                  small
-                                  onClick={() => ChangeMap(map)} 
-                                >{map}</Button>
-          )} */}
-          <Demo ref={getInnerRef} />
+            {/* {maps.map((map, i) => <Button 
+                                    key={i}
+                                    kind="primary"
+                                    small
+                                    onClick={() => ChangeMap(map)} 
+                                  >{map}</Button>
+            )} */}
+            <Demo ref={getInnerRef} />
+            <Zoom zoom={zoom} setZoom={this.setZoom} onChange={event => this.setZoom(event.target.value)}/> 
           </ClickableTile>
         </Panel>
         <UIHeader 
@@ -127,6 +135,7 @@ class App extends Component {
           zoom={zoom}
           mapType={mapType}
           viewport={position}
+          ref={getInnerRef}
         />
         
         <GeoTable />
