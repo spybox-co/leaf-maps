@@ -130,12 +130,12 @@ class App extends Component {
                     }}
           />
         </UIHeader> 
-        {/* <UIMenu /> */}
+
         <UIContent>
 
           <Panel>
             <ClickableTile>
-              <Demo ref={getInnerRef} />
+              {/* <Demo ref={getInnerRef} /> */}
               <Zoom 
                 zoom={zoom} 
                 maxZoom={maxZoom}

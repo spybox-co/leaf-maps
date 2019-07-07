@@ -64,7 +64,7 @@ class ReactLeaflet extends Component {
         zoom={zoom} 
         maxZoom={20}
         viewport={{ center: [lat, lng], zoom: this.props.zoom }}
-        scrollWheelZoom={false}
+        // scrollWheelZoom={false}
       >
         <TileLayer
           
