@@ -3,26 +3,21 @@ import Map from './components/Map/Map';
 
 
 import UIHeader from './components/Header/UIHeader';
-import UIMenu from './components/Menu/UIMenu';
-import { Content as UIContent } from 'carbon-components-react/lib/components/UIShell';
-
-
-
 import IconButton from './components/IconButton';
 import Panel from './components/Panel';
-import Zoom from './components/Zoomer';
+import ZoomPanel from './components/ZoomPanel';
 
 
 // eslint-disable-next-line
 import { Button, TextInput } from 'carbon-components-react';
 // eslint-disable-next-line 
 import { Tile, ClickableTile, SelectableTile } from "carbon-components-react";
-//import IconName from '@carbon/icon-react/es/add/16';
+import { Content as UIContent } from 'carbon-components-react/lib/components/UIShell';
+
 import Add from '@carbon/icons-react/es/add--filled/16';
+
+
 // eslint-disable-next-line
-import Menu from '@carbon/icons-react/es/menu/16';
-
-
 import Demo from "./Demo";
 
 import data from './utils/Basemaps.json';
@@ -36,18 +31,15 @@ import './App.css';
 // MDN
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super()
     this.state = {
       zoom: 6,
       maxZoom: 20,
       centerZoom: 15,
-      //mapType: "outdoors", // cycle, outdoors, transport, landscape, pioneer, mobile-atlas, neighbourhood
-      //maps: ["cycle", "outdoors", "transport", "landscape", "pioneer", "mobile-atlas", "neighbourhood"],
       BaseMapsData: data,
-      selectedMap: [], //
-
+      selectedMap: []
     }
 
     this.getInnerRef = this.getInnerRef.bind(this);
@@ -135,8 +127,14 @@ class App extends Component {
 
           <Panel>
             <ClickableTile>
-              {/* <Demo ref={getInnerRef} /> */}
-              <Zoom 
+              {/* 
+              Demo for detecting COORDS
+
+              <Demo ref={getInnerRef} /> 
+              
+              */}
+
+              <ZoomPanel
                 zoom={zoom} 
                 maxZoom={maxZoom}
                 setZoom={this.setZoom} 
@@ -160,5 +158,3 @@ class App extends Component {
     );
   };
 }
-
-export default App;

@@ -20,7 +20,8 @@ const style = {
 
 }
 
-class Zoomer extends Component {
+
+export default class ZoomPanel extends Component {
   constructor() {
     super()
     this.state = {
@@ -72,7 +73,6 @@ class Zoomer extends Component {
   }
 }
 
-export default Zoomer;
 
 
 

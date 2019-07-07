@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+
+
+// eslint-disable-next-line
 import { Map, Marker, Popup, TileLayer, Circle, CircleMarker } from 'react-leaflet';
 
 import { geolocated, geoPropTypes } from "react-geolocated";
-import { isTSParenthesizedType } from '@babel/types';
+
 
 // GEOLOCATION API
 // https://alligator.io/js/geolocation-api/
@@ -53,7 +56,6 @@ class ReactLeaflet extends Component {
   }
 
   render() {
-    // eslint-disable-next-line
     const { selectedMap } = this.props;
     
     // Docs Map
@@ -64,18 +66,36 @@ class ReactLeaflet extends Component {
         zoom={zoom} 
         maxZoom={20}
         viewport={{ center: [lat, lng], zoom: this.props.zoom }}
+        /*
+            @PARAM scrollWheelZoom - for Desktop necessary
+            @PARAM touchZoom - for Mobile as 'false'
+
+            @PARAM onViewportChange - to consider optionally
+        */
         // scrollWheelZoom={false}
       >
         <TileLayer
           
           url={`${selectedMap}`}
+
+          /*
+            @PARAM url with literals will be unnecessary, TileLayers instead
+            @PARAM required? Or custom bar?
+          */
+
           //url={`https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png`}
           //attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
         
-        {/* <Marker position={ [lat, lng] }>
+        {/* 
+            Marker optionally  
+        */}
+
+        {/* 
+        <Marker position={ [lat, lng] }>
           <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-        </Marker> */}
+        </Marker> 
+        */}
         <CircleMarker center={ [lat, lng] } radius={10}/>
       </Map>
     );
