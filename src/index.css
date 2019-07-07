@@ -14,6 +14,20 @@
   height: calc(100vh - 3rem);
 }
 
+.bx--btn--icon-only::before {
+  border-style: none;
+}
+.bx--btn--icon-only:focus svg {
+  outline: none;
+}
+
+.bx--btn--icon-only::after, .bx--btn--icon-only:hover::after {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: transparent;
+}
+
+
 li {
   list-style-type: none;
 }
