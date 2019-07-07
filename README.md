@@ -1,4 +1,9 @@
+# Project: Leaf maps
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple app using *Open Street Map* layers and browser geolocation API.
+All favourite map layers in one app!
+
 
 ## Available Scripts
 
