@@ -2,13 +2,20 @@ import React, { Component } from "react";
 
 import Link from "../Link/UILink";
 
-import { SideNav } from 'carbon-components-react/lib/components/UIShell';
+import { SideNav } from "carbon-components-react/lib/components/UIShell";
 
-export default class UIMenu extends Component { 
+import ScrollableArea from "../ScrollableArea/ScrollableArea";
+
+//https://stackoverflow.com/questions/42297728/react-js-implement-menu-highlight-active-link
+
+export default class UIMenu extends Component {
   render() {
-    // eslint-disable-next-line
-    const { actionMenuHandle, changeMap, BaseMapsData } = this.props;
-    //const { BaseMapsData } = this.state;
+    const {
+      actionMenuHandle,
+      changeMap,
+      BaseMapsData,
+      selectedMap
+    } = this.props;
 
     return (
       <SideNav
@@ -16,32 +23,52 @@ export default class UIMenu extends Component {
         expanded={this.props.expanded}
         isChildOfHeader={true}
         aria-label="Side navigation"
-      >    
-        {BaseMapsData.length !== 0 
-          ?  BaseMapsData.map((map, i) => <Link 
-                                            key={i}
-                                            label={map.vendor}
-                                            title={map.name}
-                                            option={map.default ? "Default" : null}
-                                            onClick={event => {
-                                              actionMenuHandle();
-                                              changeMap(map.vendor, map.name, map.url, map.maxZoom);
-                                              event.preventDefault();
-                                            }}
-
-                                          />
-
-          )
-
-          : null
-        }
-         
-        
+      >
+        <ScrollableArea area={{ width: `100%`, height: `100%` }}>
+          <div
+            style={{
+              padding: `1rem 0 3rem`,
+              display: `flex`,
+              flexDirection: `column`,
+              flexGrow: 1
+              //marginLeft: 48
+            }}
+          >
+            <h3
+              style={{
+                padding: `1rem 0 1rem 1rem`
+              }}
+            >
+              Maps
+            </h3>
+            {BaseMapsData.length !== 0
+              ? BaseMapsData.map((map, i) => (
+                  <Link
+                    key={i}
+                    active={selectedMap.url === map.url ? true : false}
+                    label={map.vendor}
+                    title={map.name}
+                    option={map.default ? "Default" : null}
+                    onClick={event => {
+                      actionMenuHandle();
+                      changeMap(
+                        map.vendor,
+                        map.name,
+                        map.url,
+                        map.maxZoom,
+                        map.apikey
+                      );
+                      event.preventDefault();
+                    }}
+                  />
+                ))
+              : null}
+          </div>
+        </ScrollableArea>
       </SideNav>
     );
   }
 }
-
 
 // eslint-disable-next-line
 const Fade16 = () => (

@@ -1,0 +1,35 @@
+@import "../../variables.scss";
+
+.lf-Map-container {
+  overflow: hidden;
+}
+
+.lf-Map-container {
+  &.ac-enabled {
+    .circle {
+      fill: $primary-color;
+      stroke: none;
+    }
+    .circle-marker {
+      fill: $primary-color;
+      stroke: $white;
+      fill-opacity: 1;
+    }
+  }
+  &.ac-disabled {
+    .circle {
+      fill: $black;
+      stroke: none;
+    }
+    .circle-marker {
+      fill: $secondary-color;
+      stroke: $white;
+      fill-opacity: 1;
+    }
+  }
+}
+
+.circle-marker,
+.circle {
+  transition: fill, stroke 300ms;
+}

@@ -1,0 +1,8 @@
+footer {
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  z-index: 2000;
+  height: 3rem;
+  width: 100%;
+}

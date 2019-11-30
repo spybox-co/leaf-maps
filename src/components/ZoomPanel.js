@@ -1,92 +1,100 @@
-import React, { Component } from 'react';
-import { Button, TextInput } from 'carbon-components-react';
-import IconButton from './IconButton';
-
+import React, { Component } from "react";
+//import { ClickableTile, TextInput } from "carbon-components-react";
+import IconButton from "./IconButton";
 
 const style = {
   root: {
     display: `flex`,
     flexWrap: `nowrap`,
-    flexDirection: `row`,
+    flexDirection: `column`,
     justifyContent: `flex-start`,
     alignItems: `flex-end`
   },
-  input: {
-    width: 200
+  number: {
+    width: 48,
+    height: 48,
+    display: `flex`,
+    justifyContent: `center`,
+    alignItems: `center`,
+    backgroundColor: `#f3f3f3`
   },
   button: {
-    minHeight: 40
+    minHeight: 40,
+    width: 48,
+    height: 48,
+    justifyContent: `center`,
+    alignItems: `center`
   }
-
-}
-
+};
 
 export default class ZoomPanel extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       invalid: false
-    }
+    };
   }
 
   zoomIn = () => {
     this.props.setZoom(this.props.zoom + 1);
-  }
+  };
   zoomOut = () => {
     this.props.setZoom(this.props.zoom - 1);
-  }
+  };
 
   render() {
+    const { zoom, setZoom, maxZoom, ...others } = this.props;
     return (
-      <div style={style.root}>            
-        <div style={style.input}>       
-          <TextInput 
-            style={style.input}
-            id="zoom-number"
-            labelText="Set zoom of the map (temporary)"
-            // type="number"
-            value={`${this.props.zoom}`}
-            min={0}
-            max={20}
-            maxLength={2}
-            light={true}
-            invalidText="only number & max 20"
-            invalid={this.state.invalid}
-            onChange={this.props.onChange}
-          />
-        </div> 
-        <IconButton 
-          style={style.button} 
-          kind="secondary" 
-          disabled={this.props.zoom == 0 ? true : false}
-          onClick={event => this.zoomOut()}
-          renderIcon={minus}/>
-        <IconButton 
-          style={style.button} 
-          kind="secondary" 
-          disabled={this.props.zoom == this.props.maxZoom ? true : false}
+      <div className="lf-ZoomPanel" style={style.root} {...others}>
+        <IconButton
+          style={style.button}
+          kind="secondary"
+          disabled={zoom === undefined || zoom === maxZoom ? true : false}
           onClick={event => this.zoomIn()}
           renderIcon={add}
+          iconDescription="Zoom in"
+        />
+        <div style={style.number}>
+          <span>{`${zoom ? zoom.toFixed() : "-"}`}</span>
+        </div>
+        <IconButton
+          style={style.button}
+          kind="secondary"
+          disabled={zoom === undefined || zoom === 0 ? true : false}
+          onClick={event => this.zoomOut()}
+          renderIcon={minus}
+          iconDescription="Zoom out"
         />
       </div>
     );
   }
 }
 
-
-
-
 const minus = () => {
   return (
-    <svg x="0px" y="0px" style={{ fill: `#ffffff` }} width="12px" height="12px" viewBox="0 0 16 16">
-      <rect x="4" y="7.5" width="8" height="1"/>
+    <svg
+      x="0px"
+      y="0px"
+      style={{ fill: `#ffffff` }}
+      width="12px"
+      height="12px"
+      viewBox="0 0 16 16"
+    >
+      <rect x="4" y="7.5" width="8" height="1" />
     </svg>
-  )
-}
+  );
+};
 const add = () => {
   return (
-    <svg x="0px" y="0px" style={{ fill: `#ffffff` }} width="12px" height="12px" viewBox="0 0 16 16">
-      <polygon points="8.5,7.5 8.5,3 7.5,3 7.5,7.5 3,7.5 3,8.5 7.5,8.5 7.5,13 8.5,13 8.5,8.5 13,8.5 13,7.5 "/>
+    <svg
+      x="0px"
+      y="0px"
+      style={{ fill: `#ffffff` }}
+      width="12px"
+      height="12px"
+      viewBox="0 0 16 16"
+    >
+      <polygon points="8.5,7.5 8.5,3 7.5,3 7.5,7.5 3,7.5 3,8.5 7.5,8.5 7.5,13 8.5,13 8.5,8.5 13,8.5 13,7.5 " />
     </svg>
-  )
-}
+  );
+};

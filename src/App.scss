@@ -1,0 +1,80 @@
+.leaflet-control-attribution {
+  display: none;
+}
+.leaflet-control-zoom {
+  display: none;
+}
+
+.leaflet-top {
+  bottom: 10px;
+}
+
+.leaflet-bar {
+  border: none;
+}
+
+.leaflet-container {
+  height: calc(100vh - 3rem);
+  width: 100%;
+  z-index: 0;
+  background-color: #171717;
+}
+.lf-ZoomPanel {
+  border-top: 1px solid #3d3d3d;
+  border-left: 1px solid #3d3d3d;
+  border-bottom: 1px solid #3d3d3d;
+}
+body {
+  overflow: hidden;
+}
+header {
+  position: absolute;
+  width: 100%;
+  height: 48px;
+}
+
+#hamburger,
+#locator.bx--btn--secondary {
+  border-color: transparent;
+  background-color: transparent;
+}
+#hamburger:hover,
+#locator.bx--btn--secondary:hover {
+  border-color: transparent;
+  background-color: #4c4c4c;
+}
+#hamburger:active,
+#locator.bx--btn--secondary:active {
+  border-color: #d3d3d3;
+  background-color: transparent;
+}
+#hamburger:focus,
+#locator.bx--btn--secondary:focus {
+  border-color: #fff;
+  /* outline: 1px red; */
+  background-color: transparent;
+}
+#hamburger,
+#locator {
+  transition: 300ms;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  background-color: #fff;
+  height: 48px;
+}
+.group {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #171717;
+  height: 48px;
+}
+.geo-not-enabled {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  background: #f00;
+}

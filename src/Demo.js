@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { geolocated, geoPropTypes } from "react-geolocated";
 
 import Typo from "./components/Typography";
@@ -10,11 +10,48 @@ import { CodeSnippet } from "carbon-components-react";
 
 // // addapted from http://stackoverflow.com/a/5786281/2546338
 // const formatDegrees = (degrees, isLongitude) =>
-//   `${0 | degrees}° ${0 |
+//   `${0 | degrees}Â° ${0 |
 //     (((degrees < 0 ? (degrees = -degrees) : degrees) % 1) * 60)}' ${0 |
 //     (((degrees * 60) % 1) * 60)}" ${getDirection(degrees, isLongitude)}`;
 
-class Demo extends React.Component {
+class Demo extends Component {
+  constructor() {
+    super();
+    this.state = {
+      lat: null,
+      lng: null
+    };
+  }
+  componentDidMount() {
+    if (this.props.coords) {
+      this.setPosition();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.coords) {
+      this.setPosition();
+    }
+  }
+
+  setPosition = () => {
+    if (
+      this.state.lat !== this.props.coords.latitude &&
+      this.state.lng !== this.props.coords.longitude
+    ) {
+      this.setState({
+        lat: this.props.coords.latitude,
+        lng: this.props.coords.longitude
+      });
+      this.props.getCoordsEnabled(
+        this.props.coords.latitude,
+        this.props.coords.longitude
+      );
+    }
+  };
+  // componentDidUpdate() {
+  //   this.props.coords ? this.props.getCoordsEnabled() : null;
+  // }
   render() {
     const { props } = this;
     return (
@@ -27,8 +64,13 @@ class Demo extends React.Component {
           <CodeSnippet type="inline">`Geolocation is not enabled`</CodeSnippet>
         ) : props.coords ? (
           <div>
-            <CodeSnippet>{`latitude:  ${props.coords.latitude ? props.coords.latitude : "common"}`}</CodeSnippet>
-            <CodeSnippet>{`longitude: ${props.coords.longitude ? props.coords.longitude : "common"}`}</CodeSnippet>
+            <Typo>GeoAPI Enabled!</Typo>
+            <CodeSnippet>{`latitude:  ${
+              props.coords.latitude ? props.coords.latitude : "common"
+            }`}</CodeSnippet>
+            <CodeSnippet>{`longitude: ${
+              props.coords.longitude ? props.coords.longitude : "common"
+            }`}</CodeSnippet>
             {props.coords.altitude ? (
               <CodeSnippet>
                 {`altitude:  ${props.coords.altitude} m.`}
@@ -56,7 +98,7 @@ export default geolocated({
   positionOptions: {
     enableHighAccuracy: true,
     maximumAge: 0,
-    timeout: Infinity
+    timeout: 20000 //Infinity
   },
   watchPosition: true,
   userDecisionTimeout: null,

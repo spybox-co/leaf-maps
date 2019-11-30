@@ -1,0 +1,37 @@
+.lf-Panel {
+  color: #fff;
+  position: absolute;
+  background-color: #171717;
+  min-width: 15rem;
+  min-height: 100%;
+  z-index: 3000;
+  border-top: none;
+  border-left: 1px solid #3d3d3d;
+  right: 0;
+  /* top: calc(100% - 23rem); */
+  top: 3rem;
+  transition: top 500ms ease;
+  overflow: hidden;
+}
+@media screen and (max-width: 480px) {
+  .lf-Panel {
+    width: 100%;
+    border-left: none;
+  }
+}
+.lf-Panel.collapsed {
+  top: calc(100% - 3rem);
+  border-top: 1px solid #3d3d3d;
+}
+.lf-Panel-header-title {
+  padding: 1rem;
+}
+.lf-Panel-header {
+  display: flex;
+  width: 100%;
+  height: 3rem;
+  border-bottom: 1px solid #3d3d3d;
+}
+.lf-Panel .bx--snippet {
+  color: #171717;
+}

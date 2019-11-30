@@ -5,10 +5,26 @@
   padding-bottom: 2rem;
   padding-top: 1rem;
   text-decoration: none;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
   padding-right: 1rem;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   cursor: pointer;
+}
+.target-link.active {
+  color: #00f;
+  background-color: #eaeaea;
+}
+.target-link.active .target-link-active-label {
+  position: absolute;
+  content: "";
+  border-left: 0.5rem solid #00f;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.target-link.active:hover {
+  color: #00f;
+  background-color: #fff;
 }
 .target-link:hover {
   background-color: #3d3d3d;
@@ -18,7 +34,7 @@
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.125rem;
-  letter-spacing: .16px;
+  letter-spacing: 0.16px;
 }
 
 .target-link-title {
@@ -26,11 +42,12 @@
   font-weight: 400;
   line-height: 130%;
   letter-spacing: 0;
-  font-size: calc(1.25rem + 0*(100vw - 20rem)/62);
+  font-size: calc(1.25rem + 0 * (100vw - 20rem) / 62);
   display: block;
   max-width: 17.1875rem;
 }
 .target-link-option {
+  position: absolute;
   color: #858585;
   font-size: 0.875rem;
   font-weight: 600;
