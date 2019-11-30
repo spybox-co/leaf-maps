@@ -223,7 +223,7 @@ export default class App extends Component {
             iconDescription="Locate your position!"
             onClick={event => {
               this.getLocation();
-              coordsEnabled ? this.focusZoom(MAP_FOCUS) : null; // TO-DO focus event when?
+              //coordsEnabled ? this.focusZoom(MAP_FOCUS) : null; // TO-DO focus event when?
               this.setState({ autoCenterMap: true });
               event.preventDefault();
             }}
