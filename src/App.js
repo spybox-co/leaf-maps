@@ -49,6 +49,7 @@ export default class App extends Component {
     super();
     this.state = {
       initZoom: 6,
+      minZoom: 1,
       maxZoom: 20,
       centerZoom: 8,
       BaseMapsData: data,
@@ -62,7 +63,8 @@ export default class App extends Component {
       position: {
         lat: 0,
         lng: 0
-      }
+      },
+      scrollWheel: true
     };
 
     this.getInnerRef = this.getInnerRef.bind(this);
@@ -80,7 +82,8 @@ export default class App extends Component {
         url: this.state.BaseMapsData[0].url,
         apikey: this.state.BaseMapsData[0].apikey
           ? this.state.BaseMapsData[0].apikey
-          : null
+          : null,
+        maxZoom: this.state.BaseMapsData[0].maxZoom ? this.state.BaseMapsData[0].maxZoom : 20
       }
     });
     if (this.state.BaseMapsData[0].maxZoom) {
@@ -90,16 +93,17 @@ export default class App extends Component {
 
   changeMap = (vendor, type, mapUrl, maxZoom, apiKey) => {
     const key = apiKey ? apiKey : null;
+    const zoom = maxZoom ? maxZoom : 20;
     this.setState(
       {
-        selectedMap: { url: mapUrl, apikey: key }
+        selectedMap: { url: mapUrl, apikey: key, maxZoom: zoom }
       },
       () => console.log(this.state.selectedMap)
     );
     if (maxZoom) {
-      this.setState({ maxZoom: maxZoom });
+      this.setState({ maxZoom: maxZoom }, () => console.log("max limited here:", this.state.maxZoom));
     } else {
-      this.setState({ maxZoom: 20 });
+      this.setState({ maxZoom: 20 }, () => console.log("max default:", this.state.maxZoom));
     }
   };
 
@@ -109,6 +113,7 @@ export default class App extends Component {
 
   getCoordsEnabled = (lat, lng) => {
     this.setState({ coordsEnabled: true, position: { lat: lat, lng: lng } });
+    //this.focusZoom(MAP_FOCUS);
   };
 
   focusZoom = value => {
@@ -131,8 +136,25 @@ export default class App extends Component {
     });
   };
 
+  focusZoomWhenCoordEnabled = () => {
+    if (this.state.coordsEnabled) {
+     this.focusZoom(MAP_FOCUS);
+    }
+  }
+
   onViewportChanged = viewport => {
-    this.setState({ viewport });
+    const zoom = viewport.zoom >= this.state.maxZoom ? this.state.maxZoom : viewport.zoom;
+    this.setState({
+      viewport: {
+        center: viewport.center,
+        zoom: zoom // viewport.zoom
+      }
+    });
+    // if (viewport.zoom < this.state.maxZoom) {
+    //   this.setState({ scrollWheel: true });
+    // } else {
+    //   this.setState({ scrollWheel: false });
+    // }
   };
 
   innerRef;
@@ -181,13 +203,14 @@ export default class App extends Component {
   render() {
     const {
       position,
-      zoom,
+      minZoom,
       maxZoom,
       BaseMapsData,
       selectedMap,
       autoCenterMap,
       coordsEnabled,
-      viewport
+      viewport,
+      scrollWheel
     } = this.state;
 
     const {
@@ -223,7 +246,7 @@ export default class App extends Component {
             iconDescription="Locate your position!"
             onClick={event => {
               this.getLocation();
-              //coordsEnabled ? this.focusZoom(MAP_FOCUS) : null; // TO-DO focus event when?
+              this.focusZoomWhenCoordEnabled();
               this.setState({ autoCenterMap: true });
               event.preventDefault();
             }}
@@ -234,7 +257,7 @@ export default class App extends Component {
           <Panel />
 
           <Map
-            zoom={zoom}
+            minZoom={minZoom}
             maxZoom={maxZoom}
             selectedMap={selectedMap}
             ref={getInnerRef}
@@ -245,10 +268,12 @@ export default class App extends Component {
             coordsEnabled={coordsEnabled} // ONLY for tests!
             viewport={viewport}
             position={position}
+            scrollWheel={scrollWheel} 
           />
           <ZoomPanel
             style={{ position: `absolute`, right: 0, top: 80 }}
             zoom={viewport.zoom}
+            minZoom={minZoom}
             maxZoom={maxZoom}
             setZoom={this.setZoom}
           />

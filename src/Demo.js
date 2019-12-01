@@ -49,9 +49,7 @@ class Demo extends Component {
       );
     }
   };
-  // componentDidUpdate() {
-  //   this.props.coords ? this.props.getCoordsEnabled() : null;
-  // }
+
   render() {
     const { props } = this;
     return (
@@ -98,7 +96,7 @@ export default geolocated({
   positionOptions: {
     enableHighAccuracy: true,
     maximumAge: 0,
-    timeout: 20000 //Infinity
+    timeout: Infinity
   },
   watchPosition: true,
   userDecisionTimeout: null,

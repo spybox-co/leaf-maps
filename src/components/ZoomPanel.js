@@ -43,7 +43,7 @@ export default class ZoomPanel extends Component {
   };
 
   render() {
-    const { zoom, setZoom, maxZoom, ...others } = this.props;
+    const { zoom, setZoom, minZoom, maxZoom, ...others } = this.props;
     return (
       <div className="lf-ZoomPanel" style={style.root} {...others}>
         <IconButton
@@ -60,7 +60,7 @@ export default class ZoomPanel extends Component {
         <IconButton
           style={style.button}
           kind="secondary"
-          disabled={zoom === undefined || zoom === 0 ? true : false}
+          disabled={zoom === undefined || zoom === minZoom ? true : false}
           onClick={event => this.zoomOut()}
           renderIcon={minus}
           iconDescription="Zoom out"
