@@ -11,6 +11,8 @@ export default class Locator extends Component {
   }
   // Stack:
   // https://stackoverflow.com/questions/50780417/update-google-map-based-on-geolocation-with-react
+
+  // https://github.com/uber/react-map-gl/blob/5.1-release/src/utils/geolocate-utils.js
   componentDidMount() {
     this.getGeoLocation();
   }

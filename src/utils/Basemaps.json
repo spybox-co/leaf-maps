@@ -18,6 +18,11 @@
     "maxZoom": 19
   },
   {
+    "vendor": "4UMaps",
+    "name": "Map4U",
+    "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png"
+  },
+  {
     "vendor": "Map1",
     "name": "Map of Europe (beta)",
     "url": "http://beta.map1.eu/tiles/{z}/{x}/{y}.jpg",
@@ -27,6 +32,11 @@
     "vendor": "Wikimedia Labs",
     "name": "Hike & Bike",
     "url": "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "Wikimedia Labs",
+    "name": "Mapnik",
+    "url": "https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png"
   },
   {
     "vendor": "Thunder Forest",
@@ -57,5 +67,20 @@
     "name": "Neighbourhood",
     "url": "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png",
     "apikey": "f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Carto",
+    "name": "Positron",
+    "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "Carto",
+    "name": "Dark Matter",
+    "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "TerpNav",
+    "name": "Pedestrian Maps",
+    "url": "https://terpnav.umd.edu/umd_tiles/{z}/{x}/{y}.png"
   }
 ]
