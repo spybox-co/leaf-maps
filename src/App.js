@@ -19,7 +19,7 @@ import { Content as UIContent } from "carbon-components-react/lib/components/UIS
 import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
 import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
 
-
+import * as LocationAPI from "./utils/getUserLocationData";
 
 import data from "./utils/Basemaps.json";
 
@@ -27,6 +27,10 @@ import "./App.scss";
 
 // GEOLOCATION React
 // https://www.npmjs.com/package/react-geolocated
+// https://github.com/trekhleb/use-position - seems lite lib!
+
+// User Aprox Location APIS:
+// https://geolocation-db.com/json/
 
 // Geolocation MDN
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation
@@ -80,7 +84,7 @@ export default class App extends Component {
     let mapToLoad;
     let lastMap = localStorage.getItem('lastMap');
     if (lastMap !== null) {
-      mapToLoad = parseInt(lastMap, 10);
+      mapToLoad = Number(lastMap); //parseInt(lastMap, 10);
     } else {
       mapToLoad = 0;
     }
@@ -176,34 +180,34 @@ export default class App extends Component {
   }
 
   getUserLocationData = () => {
+    let location = [];
+    
     axios
-      .get(`https://ipinfo.io`)
-      .then(res => {
-        const response = res.data;
-        let centerUserMap = [parseFloat(response.loc.slice(0, 7)), parseFloat(response.loc.slice(8, 15))]
-        // const lat = parseFloat(response.loc.slice(0, 7));
-        // const lng = parseFloat(response.loc.slice(8, 15));
-        this.setState(
-          {
-            viewport: {
-              center: centerUserMap, //[lat, lng],
-              zoom: this.state.initZoom
-            }
-          },
-          () => console.log("User Location:", this.state.viewport.center)
-        );
+    .get(LocationAPI.GEOLOCDB)
+    .then(res => {
+      const response = res.data;
+      location = [response.latitude, response.longitude];
+      console.log(location);
+      this.setState({
+        viewport: {
+          center: location,
+          zoom: this.state.initZoom
+        }
       })
-      .catch(error => {
-        this.setState(
-          {
-            viewport: {
-              center: [51, 0],
-              zoom: this.state.initZoom
-            }
-          },
-          () => console.log("Can't get User Location, generic [51,0]")
-        );
-      });
+
+    })
+    .catch(error => {
+      location = [51,0];
+      console.log(error)
+      this.setState({
+        viewport: {
+          center: location,
+          zoom: this.state.initZoom
+        }
+      })
+    });
+
+
   };
 
   render() {
