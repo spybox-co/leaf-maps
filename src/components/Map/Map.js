@@ -32,9 +32,6 @@ export default class MapContainer extends Component {
   // }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log('thisProps', this.props.maxZoom)
-    // console.log('nextProps', nextProps.maxZoom)
-    // console.log("Did update:", this.state.maxZoom)
     if (this.props.maxZoom === nextProps.maxZoom) {
         return true
     }
@@ -43,12 +40,13 @@ export default class MapContainer extends Component {
         return false
     }
     
+    
   }
   componentDidlUpdate(nextProps, nextState) {
     if (nextProps) {
       this.setState({ maxZoom: nextProps.maxZoom });
     }
-    //console.log("map data", this.props.selectedMap.maxZoom)
+    
   }
 
   render() {
@@ -81,12 +79,11 @@ export default class MapContainer extends Component {
           }
           maxZoom={maxZoom}
           minZoom={minZoom}
-          //ref="map"
           scrollWheelZoom={this.props.scrollWheel ? mapZoom : false}
           touchZoom={mapZoom}
           zoomControl={false} // disable default zoom control
           onDrag={event => this.props.disableAutoCenterMap()}
-          //setMaxZoom={15}
+
           style={mapStyle}
         >
           <TileLayer

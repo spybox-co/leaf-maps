@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Map from "./components/Map/Map";
-// import Geolocation from "react-geolocation";
-// import { geolocated, geoPropTypes } from "react-geolocated";
-// import Locator from "./components/Locator";
+import GeoLocate from "./GeoLocate";
 
 import UIHeader from "./components/Header/UIHeader";
 import UIFooter from "./components/Footer/UIFooter";
 import IconButton from "./components/IconButton";
 import Typo from "./components/Typography";
 import Panel from "./components/Panel";
-import ZoomPanel from "./components/ZoomPanel";
+import ZoomPanel from "./components/ZoomPanel/ZoomPanel";
 
 import ExpandablePanel from "./components/ExpandablePanel/ExpandablePanel";
 
@@ -21,7 +19,7 @@ import { Content as UIContent } from "carbon-components-react/lib/components/UIS
 import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
 import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
 
-import Demo from "./Demo";
+
 
 import data from "./utils/Basemaps.json";
 
@@ -30,7 +28,7 @@ import "./App.scss";
 // GEOLOCATION React
 // https://www.npmjs.com/package/react-geolocated
 
-// MDN
+// Geolocation MDN
 // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation
 
 // RxJS - state management
@@ -64,7 +62,8 @@ export default class App extends Component {
         lat: 0,
         lng: 0
       },
-      scrollWheel: true
+      scrollWheel: true,
+      errors: null
     };
 
     this.getInnerRef = this.getInnerRef.bind(this);
@@ -72,26 +71,35 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.defaultMap();
+    this.loadMap();
     this.getUserLocationData();
   }
 
-  defaultMap = () => {
+  loadMap = () => {
+    const { BaseMapsData } = this.state;
+    let mapToLoad;
+    let lastMap = localStorage.getItem('lastMap');
+    if (lastMap !== null) {
+      mapToLoad = parseInt(lastMap, 10);
+    } else {
+      mapToLoad = 0;
+    }
     this.setState({
       selectedMap: {
-        url: this.state.BaseMapsData[0].url,
-        apikey: this.state.BaseMapsData[0].apikey
-          ? this.state.BaseMapsData[0].apikey
+        url: BaseMapsData[mapToLoad].url,
+        apikey: BaseMapsData[mapToLoad].apikey
+          ? this.state.BaseMapsData[mapToLoad].apikey
           : null,
-        maxZoom: this.state.BaseMapsData[0].maxZoom ? this.state.BaseMapsData[0].maxZoom : 20
+        maxZoom: BaseMapsData[mapToLoad].maxZoom ? BaseMapsData[mapToLoad].maxZoom : 20
       }
     });
-    if (this.state.BaseMapsData[0].maxZoom) {
-      this.setState({ maxZoom: this.state.BaseMapsData[0].maxZoom });
+    if (BaseMapsData[mapToLoad].maxZoom) {
+      this.setState({ maxZoom: BaseMapsData[mapToLoad].maxZoom });
     }
   };
 
-  changeMap = (vendor, type, mapUrl, maxZoom, apiKey) => {
+  changeMap = (vendor, type, mapUrl, maxZoom, apiKey, index) => {
+    const { viewport } = this.state;
     const key = apiKey ? apiKey : null;
     const zoom = maxZoom ? maxZoom : 20;
     this.setState(
@@ -100,8 +108,13 @@ export default class App extends Component {
       },
       () => console.log(this.state.selectedMap)
     );
+    localStorage.setItem('lastMap', index);
+    console.log("Local Stored Map ID:", localStorage.getItem('lastMap'), typeof localStorage.getItem('lastMap'));
     if (maxZoom) {
       this.setState({ maxZoom: maxZoom }, () => console.log("max limited here:", this.state.maxZoom));
+      if (maxZoom < viewport.zoom) {
+        this.setZoom(maxZoom);
+      }
     } else {
       this.setState({ maxZoom: 20 }, () => console.log("max default:", this.state.maxZoom));
     }
@@ -113,10 +126,10 @@ export default class App extends Component {
 
   getCoordsEnabled = (lat, lng) => {
     this.setState({ coordsEnabled: true, position: { lat: lat, lng: lng } });
-    //this.focusZoom(MAP_FOCUS);
   };
 
   focusZoom = value => {
+    // At first run (invoke getting location) this function does not work
     let zoom = this.state.viewport.zoom;
     if (value > zoom) {
       setTimeout(() => {
@@ -147,14 +160,9 @@ export default class App extends Component {
     this.setState({
       viewport: {
         center: viewport.center,
-        zoom: zoom // viewport.zoom
+        zoom: zoom
       }
     });
-    // if (viewport.zoom < this.state.maxZoom) {
-    //   this.setState({ scrollWheel: true });
-    // } else {
-    //   this.setState({ scrollWheel: false });
-    // }
   };
 
   innerRef;
@@ -165,8 +173,6 @@ export default class App extends Component {
 
   getLocation() {
     this.innerRef && this.innerRef.getLocation();
-    // this.setState({ autoCenterMap: true });
-    // console.log("auto-center:", this.state.autoCenterMap);
   }
 
   getUserLocationData = () => {
@@ -174,12 +180,13 @@ export default class App extends Component {
       .get(`https://ipinfo.io`)
       .then(res => {
         const response = res.data;
-        const lat = parseFloat(response.loc.slice(0, 7));
-        const lng = parseFloat(response.loc.slice(8, 15));
+        let centerUserMap = [parseFloat(response.loc.slice(0, 7)), parseFloat(response.loc.slice(8, 15))]
+        // const lat = parseFloat(response.loc.slice(0, 7));
+        // const lng = parseFloat(response.loc.slice(8, 15));
         this.setState(
           {
             viewport: {
-              center: [lat, lng],
+              center: centerUserMap, //[lat, lng],
               zoom: this.state.initZoom
             }
           },
@@ -197,7 +204,6 @@ export default class App extends Component {
           () => console.log("Can't get User Location, generic [51,0]")
         );
       });
-    //console.log("getLocation:", this.state.lat, this.state.lng);
   };
 
   render() {
@@ -218,7 +224,8 @@ export default class App extends Component {
       changeMap,
       onViewportChanged,
       disableAutoCenterMap,
-      getCoordsEnabled
+      getCoordsEnabled,
+      setZoom
     } = this;
 
     const { getInnerRef } = this;
@@ -268,20 +275,21 @@ export default class App extends Component {
             coordsEnabled={coordsEnabled} // ONLY for tests!
             viewport={viewport}
             position={position}
-            scrollWheel={scrollWheel} 
+            scrollWheel={scrollWheel}
+            setZoom={setZoom} 
           />
           <ZoomPanel
             style={{ position: `absolute`, right: 0, top: 80 }}
             zoom={viewport.zoom}
             minZoom={minZoom}
             maxZoom={maxZoom}
-            setZoom={this.setZoom}
+            setZoom={setZoom}
           />
         </UIContent>
         <UIFooter />
         <ExpandablePanel title="Console">
           <ClickableTile style={expandStyle}>
-            <Demo ref={getInnerRef} getCoordsEnabled={getCoordsEnabled} />
+            <GeoLocate ref={getInnerRef} getCoordsEnabled={getCoordsEnabled} />
           </ClickableTile>
 
           <ClickableTile style={expandStyle}>

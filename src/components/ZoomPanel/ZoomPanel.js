@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 //import { ClickableTile, TextInput } from "carbon-components-react";
-import IconButton from "./IconButton";
+import IconButton from "../IconButton";
+
+
+import "./ZoomPanel.scss";
 
 const style = {
   root: {
@@ -54,9 +57,9 @@ export default class ZoomPanel extends Component {
           renderIcon={add}
           iconDescription="Zoom in"
         />
-        <div style={style.number}>
-          <span>{`${zoom ? zoom.toFixed() : "-"}`}</span>
-        </div>
+
+        <ZoomNumber zoom={zoom} maxZoom={maxZoom}/>
+
         <IconButton
           style={style.button}
           kind="secondary"
@@ -70,14 +73,24 @@ export default class ZoomPanel extends Component {
   }
 }
 
+const ZoomNumber = ({ zoom, maxZoom }) => {
+  
+
+  return (
+    <div style={style.number}>
+      <span>{zoom}</span>
+    </div>
+  )
+}
+
 const minus = () => {
   return (
     <svg
       x="0px"
       y="0px"
       style={{ fill: `#ffffff` }}
-      width="12px"
-      height="12px"
+      width="16px"
+      height="16px"
       viewBox="0 0 16 16"
     >
       <rect x="4" y="7.5" width="8" height="1" />
@@ -90,8 +103,8 @@ const add = () => {
       x="0px"
       y="0px"
       style={{ fill: `#ffffff` }}
-      width="12px"
-      height="12px"
+      width="16px"
+      height="16px"
       viewBox="0 0 16 16"
     >
       <polygon points="8.5,7.5 8.5,3 7.5,3 7.5,7.5 3,7.5 3,8.5 7.5,8.5 7.5,13 8.5,13 8.5,8.5 13,8.5 13,7.5 " />

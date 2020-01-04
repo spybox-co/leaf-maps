@@ -34,13 +34,13 @@ export default class UIMenu extends Component {
               //marginLeft: 48
             }}
           >
-            <h3
+            <h6
               style={{
                 padding: `1rem 0 1rem 1rem`
               }}
             >
               Maps
-            </h3>
+            </h6>
             {BaseMapsData.length !== 0
               ? BaseMapsData.map((map, i) => (
                   <Link
@@ -49,6 +49,7 @@ export default class UIMenu extends Component {
                     label={map.vendor}
                     title={map.name}
                     option={map.default ? "Default" : null}
+                    description={map.desc ? map.desc : null}
                     onClick={event => {
                       actionMenuHandle();
                       changeMap(
@@ -56,7 +57,8 @@ export default class UIMenu extends Component {
                         map.name,
                         map.url,
                         map.maxZoom,
-                        map.apikey
+                        map.apikey,
+                        i
                       );
                       event.preventDefault();
                     }}

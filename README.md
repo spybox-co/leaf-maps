@@ -3,7 +3,7 @@
 Simple app using *Open Street Map* layers and browser geolocation API.
 All favourite map layers in one app!
 
-Live demo on heroku: [Open Leaf Maps](https://leafmaps.herokuapp.com/)
+Live Project: [Open Leaf Maps at SPYBOX](https://spybox.co/leafmaps)
 
 ## About project
 
