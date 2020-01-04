@@ -60,7 +60,7 @@
 }
 .target-link-desc {
   position: absolute;
-  color: lighten($secondary-color, 10%);
+  color: lighten($primary-color, 20%);
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 100%;
@@ -69,6 +69,6 @@
   max-width: 17.1875rem;
 }
 
-// .active .target-link-desc {
-//   color: $secondary-color;
-// }
+.active .target-link-desc {
+  color: darken($primary-color, 20%);
+}

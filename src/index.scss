@@ -1,3 +1,6 @@
+@import "./variables.scss";
+
+
 li {
   list-style-type: none;
 }
@@ -12,15 +15,15 @@ main {
 }
 
 .bx--side-nav {
-  background-color: #171717;
-  color: #fff;
+  background-color: $black;
+  color: $white;
   transition: transform 0.35s ease;
   overflow-y: auto;
   height: calc(100vh - 3rem);
   // max-width: 30rem;
-  // &.--expanded {
-  //   width: 30rem;
-  // }
+  &.--expanded {
+    width: 90rem;
+  }
 }
 
 
@@ -39,31 +42,11 @@ main {
 }
 .bx--snippet-container {
   outline: none;
-}
-/* .dupa.bx--snippet pre {
-  font-size: 0.4rem;
-} */
-
-
-
-/*
-
-::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
+  code::-webkit-scrollbar {
+    display: none;
+  }
+  code {
+    -ms-overflow-style: none;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: none;
-}
-
-
-::-webkit-scrollbar-thumb {
-  background: #666;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  cursor: pointer;
-}
-
-*/

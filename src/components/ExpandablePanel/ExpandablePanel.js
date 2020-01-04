@@ -4,7 +4,9 @@ import IconButton from "../IconButton";
 import Up from "@carbon/icons-react/es/up-to-top/16";
 import Down from "@carbon/icons-react/es/down-to-bottom/16";
 
-import "./ExpandablePanel.css";
+import ScrollableArea from "../ScrollableArea/ScrollableArea";
+
+import "./ExpandablePanel.scss";
 
 export default class ExpandablePanel extends Component {
   constructor(props) {
@@ -28,6 +30,7 @@ export default class ExpandablePanel extends Component {
 
     const collapse = collapsed ? " collapsed" : "";
     return (
+      
       <div className={`lf-Panel${collapse}`}>
         <div className="lf-Panel-header">
           <div
@@ -59,7 +62,13 @@ export default class ExpandablePanel extends Component {
             />
           </div>
         </div>
-        <div className="lf-Panel-container">{this.props.children}</div>
+        
+        <div className="lf-Panel-container">
+          <ScrollableArea area={{ width: `100%`, height: `100%` }}>
+            {this.props.children}
+          </ScrollableArea>
+        </div>
+        
       </div>
     );
   }

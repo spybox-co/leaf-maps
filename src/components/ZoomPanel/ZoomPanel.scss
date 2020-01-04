@@ -1,7 +1,25 @@
 @import "../../variables.scss";
 
 .lf-ZoomPanel {
+  position: absolute; 
+  right: 0; 
+  top: 5rem;
   border-top: 1px solid $gray-50;
   border-left: 1px solid $gray-50;
   border-bottom: 1px solid $gray-50;
+}
+
+.lf-ZoomPanel-indicator {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $gray-10;
+  color: $black;
+  user-select: none;
+  &.maxedOut {
+    background-color: lighten($danger-color, 40%);
+    color: $danger-color; 
+  }
 }

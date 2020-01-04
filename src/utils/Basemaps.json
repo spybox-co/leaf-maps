@@ -33,7 +33,7 @@
     "name": "Map of Europe (beta)",
     "url": "http://beta.map1.eu/tiles/{z}/{x}/{y}.jpg",
     "maxZoom": 17,
-    "desc": "Old HTTP adress, could throw errors!"
+    "desc": "Only Europe"
   },
   {
     "vendor": "Wikimedia Labs",

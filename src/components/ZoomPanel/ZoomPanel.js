@@ -47,24 +47,29 @@ export default class ZoomPanel extends Component {
 
   render() {
     const { zoom, setZoom, minZoom, maxZoom, ...others } = this.props;
+    const { zoomIn, zoomOut } = this;
     return (
       <div className="lf-ZoomPanel" style={style.root} {...others}>
         <IconButton
           style={style.button}
           kind="secondary"
           disabled={zoom === undefined || zoom === maxZoom ? true : false}
-          onClick={event => this.zoomIn()}
+          onClick={event => zoomIn()}
           renderIcon={add}
           iconDescription="Zoom in"
         />
 
-        <ZoomNumber zoom={zoom} maxZoom={maxZoom}/>
+        <Indicator
+          className="lf-ZoomPanel-indicator"
+          zoom={zoom} 
+          maxZoom={maxZoom}
+        />
 
         <IconButton
           style={style.button}
           kind="secondary"
           disabled={zoom === undefined || zoom === minZoom ? true : false}
-          onClick={event => this.zoomOut()}
+          onClick={event => zoomOut()}
           renderIcon={minus}
           iconDescription="Zoom out"
         />
@@ -73,11 +78,16 @@ export default class ZoomPanel extends Component {
   }
 }
 
-const ZoomNumber = ({ zoom, maxZoom }) => {
-  
-
+const Indicator = ({ zoom, maxZoom, className, ...other }) => {
+  let maxedOut = false;
+  if (zoom >= maxZoom) {
+    maxedOut = true;
+  } else {
+    maxedOut = false;
+  }
+  const classes = `${className}${maxedOut ? " maxedOut" : ""}`;
   return (
-    <div style={style.number}>
+    <div className={classes} {...other}>
       <span>{zoom}</span>
     </div>
   )

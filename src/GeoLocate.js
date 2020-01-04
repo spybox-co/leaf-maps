@@ -14,7 +14,7 @@ import { CodeSnippet } from "carbon-components-react";
 //     (((degrees < 0 ? (degrees = -degrees) : degrees) % 1) * 60)}' ${0 |
 //     (((degrees * 60) % 1) * 60)}" ${getDirection(degrees, isLongitude)}`;
 
-class Demo extends Component {
+class GeoLocate extends Component {
   constructor() {
     super();
     this.state = {
@@ -75,9 +75,7 @@ class Demo extends Component {
               </CodeSnippet>
             ) : null}
           </div>
-        ) : (
-          <Typo>Getting the location data&hellip;</Typo>
-        )}
+        ) : null}
         {!!props.positionError && (
           <div>
             <br />
@@ -90,7 +88,7 @@ class Demo extends Component {
   }
 }
 
-Demo.propTypes = { ...Demo.propTypes, ...geoPropTypes };
+GeoLocate.propTypes = { ...GeoLocate.propTypes, ...geoPropTypes };
 
 export default geolocated({
   positionOptions: {
@@ -102,4 +100,8 @@ export default geolocated({
   userDecisionTimeout: null,
   suppressLocationOnMount: true,
   geolocationProvider: navigator.geolocation
-})(Demo);
+})(GeoLocate);
+
+
+
+// <Typo>Getting the location data&hellip;</Typo>

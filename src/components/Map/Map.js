@@ -36,7 +36,7 @@ export default class MapContainer extends Component {
         return true
     }
     else {
-        this.setState({ maxZoom: nextProps.maxZoom }, () => console.log("update:", this.state.maxZoom))
+        this.setState({ maxZoom: nextProps.maxZoom }, () => console.log("Map: update max zoom:", this.state.maxZoom))
         return false
     }
     
