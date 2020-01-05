@@ -149,7 +149,7 @@ export default class App extends Component {
 
   getCoordsEnabled = (lat, lng) => {
     this.setState({ coordsEnabled: true, position: { lat: lat, lng: lng } });
-    this.focusZoom(initData.mapFocus)
+    //this.focusZoom(initData.mapFocus)
   };
 
   focusZoom = value => {
