@@ -6,10 +6,10 @@
     "default": true
   },
   {
-    "vendor": "Stamen",
-    "name": "Terrain",
-    "url": "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png",
-    "maxZoom": 15
+    "vendor": "Open Street Map",
+    "name": "Standard",
+    "url": "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+    "maxZoom": 19
   },
   {
     "vendor": "Open Street Map",
@@ -18,15 +18,10 @@
     "maxZoom": 17
   },
   {
-    "vendor": "Open Street Map",
-    "name": "Standard",
-    "url": "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-    "maxZoom": 19
-  },
-  {
     "vendor": "4UMaps",
     "name": "Map4U",
-    "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png"
+    "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png",
+    "maxZoom": 15
   },
   {
     "vendor": "Map1",
@@ -37,38 +32,69 @@
   },
   {
     "vendor": "Wikimedia Labs",
+    "name": "Bright",
+    "url": "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
+    "maxZoom": 19
+  },
+  {
+    "vendor": "Wikimedia Labs",
     "name": "Hike & Bike",
     "url": "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
   },
   {
-    "vendor": "Thunder Forest",
+    "vendor": "Mapbox",
+    "name": "Streets",
+    "url": "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}",
+    "apikey": "?access_token=pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ"
+  },
+  {
+    "vendor": "Mapbox",
     "name": "Outdoors",
-    "url": "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png",
-    "apikey": "f44334560bdb4771a041609cc75a8983"
+    "url": "https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}",
+    "apikey": "?access_token=pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ"
+  },
+  {
+    "vendor": "Mapbox",
+    "name": "Satellite Streets",
+    "url": "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}",
+    "apikey": "?access_token=pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ"
   },
   {
     "vendor": "Thunder Forest",
     "name": "Cycle",
     "url": "https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png",
-    "apikey": "f44334560bdb4771a041609cc75a8983"
+    "apikey": "?apikey=f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Thunder Forest",
+    "name": "Outdoors",
+    "url": "https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png",
+    "apikey": "?apikey=f44334560bdb4771a041609cc75a8983"
   },
   {
     "vendor": "Thunder Forest",
     "name": "Landscape",
     "url": "https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png",
-    "apikey": "f44334560bdb4771a041609cc75a8983"
+    "apikey": "?apikey=f44334560bdb4771a041609cc75a8983"
   },
   {
     "vendor": "Thunder Forest",
     "name": "Transport",
     "url": "https://tile.thunderforest.com/transport/{z}/{x}/{y}.png",
-    "apikey": "f44334560bdb4771a041609cc75a8983"
+    "apikey": "?apikey=f44334560bdb4771a041609cc75a8983"
   },
   {
     "vendor": "Thunder Forest",
     "name": "Neighbourhood",
     "url": "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png",
-    "apikey": "f44334560bdb4771a041609cc75a8983"
+    "apikey": "?apikey=f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    "vendor": "Öpnvkarte",
+    "name": "Transport Map",
+    "url": "https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png",
+    "apikey": "?apikey=f44334560bdb4771a041609cc75a8983",
+    "maxZoom": 18
   },
   {
     "vendor": "Carto",

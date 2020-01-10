@@ -4,13 +4,14 @@ import ReactToPrint from "react-to-print";
 
 import Map from "./components/Map/Map";
 import GeoLocate from "./GeoLocate";
+import Locator from "./components/Locator";
 
 import UIHeader from "./components/Header/UIHeader";
 //import UIFooter from "./components/Footer/UIFooter";
 import IconButton from "./components/IconButton";
 import Typo from "./components/Typography";
 import Tile from "./components/Tile"
-import Panel from "./components/Panel";
+//import Panel from "./components/Panel";
 import ZoomPanel from "./components/ZoomPanel/ZoomPanel";
 import ExpandablePanel from "./components/ExpandablePanel/ExpandablePanel";
 //import CaptureScreen from "./components/CaptureScreen/CaptureScreen";
@@ -86,6 +87,7 @@ export default class App extends Component {
         lng: 0
       },
       scrollWheel: true,
+      lastMaps: [], // To-do
       errors: null
     };
 
@@ -189,6 +191,15 @@ export default class App extends Component {
         zoom: zoom
       }
     });
+    let position = JSON.stringify(viewport.center)
+    localStorage.setItem("lastViewportDataPosition", position);
+    localStorage.setItem("lastViewportDataZoomNumber", zoom);
+    let storedPosition = localStorage.getItem("lastViewportDataPosition");
+    let zoomNumberStored = localStorage.getItem("lastViewportDataZoomNumber");
+    // console.log(storedPosition);
+    let array = JSON.parse(storedPosition);
+    // console.log(array);
+    // console.log(zoomNumberStored);
   };
 
   innerRef;
@@ -203,34 +214,58 @@ export default class App extends Component {
 
   getUserLocationData = () => {
     let location = [];
-
-    axios
-    .get(LocationAPI.GEOLOCDB)
-    .then(res => {
-      const response = res.data;
-      location = [response.latitude, response.longitude];
-      console.log(response);
+    let storedPosition = localStorage.getItem("lastViewportDataPosition");
+    let zoomNumberStored = localStorage.getItem("lastViewportDataZoomNumber");
+    if (storedPosition && zoomNumberStored) {
+      location = JSON.parse(storedPosition)
+      console.log("LocationStored:", location);
       this.setState(prevState => ({
         viewport: {
-          ...prevState.viewport,
           center: location,
+          zoom: zoomNumberStored
         }
       }));
+    } else {
+      axios
+      .get(LocationAPI.GEOLOCDB)
+      .then(res => {
+        const response = res.data;
+        location = [response.latitude, response.longitude];
+        console.log(response);
+        this.setState(prevState => ({
+          viewport: {
+            ...prevState.viewport,
+            center: location,
+          }
+        }));
 
-    })
-    .catch(error => {
-      location = [51,0];
-      console.log(error)
-      this.setState(prevState => ({
-        viewport: {
-          ...prevState.viewport,
-          center: location,
-        }
-      }));
-    });
-
-
+      })
+      .catch(error => {
+        location = [51,0];
+        console.log(error)
+        this.setState(prevState => ({
+          viewport: {
+            ...prevState.viewport,
+            center: location,
+          }
+        }));
+      });
+    }
   };
+  handleGeolocatePosition = () => {
+    const { coordsEnabled, autoCenterMap } = this.state;
+    if (coordsEnabled && autoCenterMap) {
+      this.setState({ coordsEnabled: false, autoCenterMap: false });
+    }
+    if (!coordsEnabled && !autoCenterMap) {
+      this.getLocation();
+      this.setState({ autoCenterMap: true });
+    }
+    if (coordsEnabled && !autoCenterMap) {
+      this.getLocation();
+      this.setState({ autoCenterMap: true });
+    }
+  }
 
   render() {
     const {
@@ -246,12 +281,12 @@ export default class App extends Component {
     } = this.state;
 
     const {
-      GetLocation,
       changeMap,
       onViewportChanged,
       disableAutoCenterMap,
       getCoordsEnabled,
-      setZoom
+      setZoom,
+      focusZoom
     } = this;
 
     const { getInnerRef } = this;
@@ -267,7 +302,6 @@ export default class App extends Component {
     return (
       <div className="App">
         <UIHeader
-          GetLocation={GetLocation}
           changeMap={changeMap}
           BaseMapsData={BaseMapsData}
           selectedMap={selectedMap}
@@ -282,14 +316,15 @@ export default class App extends Component {
             onClick={event => {
               this.getLocation();
               this.focusZoomWhenCoordEnabled();
+              //this.handleGeolocatePosition(); //NEED REVIEW ALL STATES
               this.setState({ autoCenterMap: true });
-              event.preventDefault();
+              //event.preventDefault();
             }}
           />
         </UIHeader>
         
         <UIContent>
-          <Panel />
+          {/* <Panel /> */}
 
           <Map
             minZoom={minZoom}
@@ -347,6 +382,18 @@ export default class App extends Component {
           <Tile style={expandStyle}>
             <Typo>Viewport:</Typo>
             <CodeSnippet>{`AUTO CENTER MAP: ${autoCenterMap}`}</CodeSnippet>
+            {!autoCenterMap && coordsEnabled ? (
+              <Button
+                renderIcon={icon}
+                iconDescription="Locate your position!"
+                onClick={event => {
+                  //this.getLocation();
+                  this.focusZoomWhenCoordEnabled();
+                  this.setState({ autoCenterMap: true });
+                  event.preventDefault();
+                }}
+              >Center map to my position</Button>
+              ) : null}
             {!autoCenterMap ? (
               <>
                 <CodeSnippet>{`VP.LAT: ${viewport.center[0]}`}</CodeSnippet>
@@ -374,7 +421,8 @@ export default class App extends Component {
 
           <Tile style={expandStyle}>
             <Typo>Status</Typo>
-            <GeoLocate ref={getInnerRef} getCoordsEnabled={getCoordsEnabled} />
+            <GeoLocate ref={getInnerRef} getCoordsEnabled={getCoordsEnabled} focusZoom={focusZoom}/>
+            <Locator />
           </Tile>
         </ExpandablePanel>
       </div>

@@ -25,6 +25,7 @@ class GeoLocate extends Component {
   componentDidMount() {
     if (this.props.coords) {
       this.setPosition();
+      //this.props.focusZoom(17);
     }
   }
 

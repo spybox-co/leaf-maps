@@ -32,7 +32,7 @@ export default class Locator extends Component {
         }));
       });
     } else {
-      error => console.log(error);
+      console.log("error");
     }
   };
   render() {
@@ -40,10 +40,10 @@ export default class Locator extends Component {
     return (
       <div>
         {position !== "" ? (
-          <Fragment>
+          <>
             <CodeSnippet>{`latitude: ${position.lat}`}</CodeSnippet>
             <CodeSnippet>{`longitude: ${position.lng}`}</CodeSnippet>
-          </Fragment>
+          </>
         ) : (
           <span>Niet!</span>
         )}

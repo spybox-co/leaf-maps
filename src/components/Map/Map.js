@@ -18,18 +18,7 @@ export default class MapContainer extends Component {
     this.state = {
       maxZoom: 20
     }
-    //this.limitZoom = this.limitZoom.bind(this);
   }
-
-  // componentDidMount() {
-  //   this.mapApi = this.refs.map.leafletElement; // <= this is the Leaflet Map object
-  // }
-  // fitBounds() {
-  //   this.mapApi.fitBounds();// you can access Leaflet methods
-  // }
-  // setMaxZoom() {
-  //   this.mapApi.setMaxZoom(20)
-  // }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.maxZoom === nextProps.maxZoom) {
@@ -67,7 +56,7 @@ export default class MapContainer extends Component {
     };
     const mapZoom = autoCenterMap ? "center" : "true";
     const mapApi =
-      selectedMap.apikey !== null ? `?apikey=${selectedMap.apikey}` : "";
+      selectedMap.apikey !== null ? `${selectedMap.apikey}` : "";
     return (
       <div className={classes.map}>
         <Map
