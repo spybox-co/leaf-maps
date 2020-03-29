@@ -32,12 +32,6 @@
   },
   {
     "vendor": "Wikimedia Labs",
-    "name": "Bright",
-    "url": "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
-    "maxZoom": 19
-  },
-  {
-    "vendor": "Wikimedia Labs",
     "name": "Hike & Bike",
     "url": "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
   },

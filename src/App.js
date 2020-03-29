@@ -23,7 +23,7 @@ import { Content as UIContent } from "carbon-components-react/lib/components/UIS
 
 import * as LocationAPI from "./utils/getUserLocationData";
 
-import data from "./utils/Basemaps.json";
+import data from "./utils/MapsData.json";
 
 import "./App.scss";
 

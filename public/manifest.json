@@ -1,6 +1,7 @@
 {
   "short_name": "Leaf Maps",
   "name": "SPYBOX Leaf Maps",
+  "start_url": "/?standalone",
   "icons": [
     {
       "src": "favicon.ico",
@@ -33,7 +34,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
   "display": "standalone",
   "theme_color": "#171717",
   "background_color": "#171717"
