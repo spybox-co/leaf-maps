@@ -1,0 +1,4 @@
+RewriteCond %{HTTP_HOST} ^(.*)spybox.co/leafmaps [NC]
+RewriteCond %{DOCUMENT_ROOT}/%1/ -d
+RewriteCond %1::%{REQUEST_URI} !^(.*?)::/1/?
+RewriteRule "^(.*)$" "%{DOCUMENT_ROOT}/%1/$1" [L]

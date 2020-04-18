@@ -6,8 +6,50 @@ All favourite map layers in one app!
 Live Project: [Open Leaf Maps at SPYBOX](https://spybox.co/leafmaps)
 
 ## About project
+**Project is at early development stage**.
+App designed as mobile map in pocket and **PWA** (Progressive Web Application) to explore terrain by hiking, biking or any other outdoor activity.
+
+Idea is to create an universal app that gives access to many types of maps designed to different purposes and activities, for example:
+
+* Cycling maps with routes and bike trails
+* Hiking maps with all terain marks
+* Topographic maps for hiking and biking or just for exploring interesting data
+* Transport maps for exploring Public Transport Network data
+...and more 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+## How to Run Application
+**Possible options**:
+1. You can vivit my website and run app [Leaf Maps](https://spybox.co/leafmaps) ([https://spybox.co/leafmaps](https://spybox.co/leafmaps))
+
+2. Or run it on your local machine:
+
+* download or clone the repository
+* next follow these instructions
+
+
+### Instructions
+
+**Running application on local machine**
+
+To get started, after cloned or downloaded repository from GitHub:
+
+* cd `leaf-maps` (or `leaf-maps-master`) folder
+* install all project dependencies with `npm install`
+* start the development server with `npm start`
+* with your server running, visit the site: http://localhost:1000 if not open automatically
+
+
+## Dependencies & External Libraries Used
+* React Leaflet - `react-leaflet`
+* React Router - `react-router-dom`
+* Carbon Components by IBM - [Carbon Design System](https://www.carbondesignsystem.com)
+* Geolocated - `react-geolocated`
+
+
+
 
 ## Available Scripts
 

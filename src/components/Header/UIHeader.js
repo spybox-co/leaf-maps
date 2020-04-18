@@ -9,17 +9,17 @@ import UIMenu from "../Menu/UIMenu";
 import {
   // Content,
   Header,
-  //HeaderMenuButton,
+  // HeaderMenuButton,
   HeaderName
   // HeaderNavigation,
-  //HeaderMenu,
+  // HeaderMenu,
   // HeaderMenuItem,
   // HeaderGlobalBar,
-  //HeaderGlobalAction
+  // HeaderGlobalAction
   // HeaderPanel,
   // SkipToContent,
   // SideNav,
-  // Temporarily comment these out until they are needed again
+  //Temporarily comment these out until they are needed again
   // SideNavHeader,
   // SideNavDetails,
   // SideNavSwitcher,
@@ -74,7 +74,9 @@ export default class UIHeader extends Component {
           Leaf Maps
         </HeaderName>
 
-        <Common>{this.props.children}</Common>
+        <Common>
+          {this.props.children}
+        </Common>
 
         {/* <HeaderGlobalAction
             aria-label="App Switcher"

@@ -23,13 +23,7 @@
     "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png",
     "maxZoom": 15
   },
-  {
-    "vendor": "Map1",
-    "name": "Map of Europe (beta)",
-    "url": "http://beta.map1.eu/tiles/{z}/{x}/{y}.jpg",
-    "maxZoom": 17,
-    "desc": "Only Europe"
-  },
+
   {
     "vendor": "Wikimedia Labs",
     "name": "Hike & Bike",

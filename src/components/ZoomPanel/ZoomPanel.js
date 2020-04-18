@@ -34,7 +34,8 @@ export default class ZoomPanel extends Component {
   constructor() {
     super();
     this.state = {
-      invalid: false
+      invalid: false,
+      zoom: 0
     };
   }
 
@@ -45,8 +46,23 @@ export default class ZoomPanel extends Component {
     this.props.setZoom(this.props.zoom - 1);
   };
 
+  setZoomNumber = (value) => {
+    let number = Number.isInteger(value) ? value : Math.ceil(value);
+    this.setState({ zoom: number })
+  }
+
+  componentDidMount() {
+    this.setZoomNumber(this.props.zoom);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.zoom !== prevProps.zoom) {
+      this.setZoomNumber(this.props.zoom);
+    }
+  }
+
   render() {
-    const { zoom, setZoom, minZoom, maxZoom, ...others } = this.props;
+    const { setZoom, minZoom, maxZoom, ...others } = this.props;
+    const { zoom } = this.state;
     const { zoomIn, zoomOut } = this;
     return (
       <div className="lf-ZoomPanel" style={style.root} {...others}>
@@ -85,7 +101,9 @@ const Indicator = ({ zoom, maxZoom, className, ...other }) => {
   } else {
     maxedOut = false;
   }
+
   const classes = `${className}${maxedOut ? " maxedOut" : ""}`;
+  
   return (
     <div className={classes} {...other}>
       <span>{zoom}</span>
