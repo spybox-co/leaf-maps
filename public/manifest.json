@@ -1,8 +1,7 @@
 {
   "short_name": "Leaf Maps",
   "name": "SPYBOX Leaf Maps",
-  "start_url": "/leafmaps/?source=pwa",
-  "scope": "/leafmaps/",
+  "start_url": "/",
   "display": "standalone",
   "icons": [
     {
