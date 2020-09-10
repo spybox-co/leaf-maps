@@ -3,9 +3,16 @@
 // Classic
 // https://www.toptal.com/react/react-context-api
 
-import data from './utils/MapsData.json';
 
-import React, { createContext, useReducer } from 'react';
+
+import maps from './utils/MapsData.json';
+import layers from './utils/LayersData.json';
+
+import React, { createContext, useReducer, useEffect } from 'react';
+
+let storedPosition = localStorage.getItem("lastViewportDataPosition");
+let storedZoom = localStorage.getItem("lastViewportDataZoomNumber");
+let storedLastActiveMap = localStorage.getItem('lastMap')
 
 const initialMapData = {
   zoom: 6,
@@ -16,16 +23,23 @@ const initialMapData = {
 }
 
 const initialState = {
-  maps: data,
-  activeMap: data[0],
+  maps: maps,
+  layers: layers,
+  activeMap: maps[2],
+  activeLayers: [layers[0], layers[1]],
   viewport: {
     center: initialMapData.center,
     zoom: initialMapData.zoom
+  },
+  mapSettings: {
+    minZoom: initialMapData.minZoom,
+    maxZoom: initialMapData.maxZoom,
   },
   position: {
     lat: 0,
     lng: 0
   },
+  autoCenterMap: true,
 };
 
 const store = createContext(initialState);
@@ -34,13 +48,40 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch(action.type) {
-      case 'action description':
-        const newState = null; // do something with the action
+      case 'sample action #1':
+        const newState = { ...state, viewport: { ...state.viewport, center: action.value } }// do something with the action
         return newState;
+      case 'sample action #2':
+        return {...state, viewport: { ...state.viewport, center: action.value }};
+      // initial position  
+      case 'set initial position':
+        return {...state, viewport: { ...state.viewport, center: action.value }};
+      case 'change map':
+        return {...state, activeMap: maps[action.value] };
+      case 'last stored settings':
+        let location = JSON.parse(storedPosition)
+        console.log(location)
+        return {
+          ...state, 
+          activeMap: maps[storedLastActiveMap],
+          viewport: { center: location, zoom: storedZoom }
+        };
       default:
         throw new Error();
     };
   }, initialState);
+
+  useEffect(
+    () => {
+      if (storedPosition && storedZoom && storedLastActiveMap) {
+        dispatch({ type: 'last stored settings' })
+      } else {
+        dispatch({ type: 'set initial position', value: [50,19] })
+      }
+      
+    }, []
+  );
+  
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };

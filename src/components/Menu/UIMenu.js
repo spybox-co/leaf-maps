@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-
+import React, { useContext } from "react";
+import { store } from '../../store.js';
 import Link from "../Link/UILink";
 
 import { SideNav } from "carbon-components-react/lib/components/UIShell";
@@ -8,69 +8,70 @@ import ScrollableArea from "../ScrollableArea/ScrollableArea";
 
 //https://stackoverflow.com/questions/42297728/react-js-implement-menu-highlight-active-link
 
-export default class UIMenu extends Component {
-  render() {
-    const {
-      actionMenuHandle,
-      changeMap,
-      BaseMapsData,
-      selectedMap
-    } = this.props;
+const UIMenu = props => {
+  const { dispatch } = useContext(store);
+  const {
+    actionMenuHandle,
+    changeMap,
+    BaseMapsData,
+    selectedMap
+  } = props;
 
-    return (
-      <SideNav
-        isFixedNav
-        expanded={this.props.expanded}
-        isChildOfHeader={true}
-        aria-label="Side navigation"
-      >
-        <ScrollableArea area={{ width: `100%`, height: `100%` }}>
-          <div
+  return (
+    <SideNav
+      isFixedNav
+      expanded={props.expanded}
+      isChildOfHeader={true}
+      aria-label="Side navigation"
+    >
+      <ScrollableArea area={{ width: `100%`, height: `100%` }}>
+        <div
+          style={{
+            padding: `1rem 0 3rem`,
+            display: `flex`,
+            flexDirection: `column`,
+            flexGrow: 1
+            //marginLeft: 48
+          }}
+        >
+          <h6
             style={{
-              padding: `1rem 0 3rem`,
-              display: `flex`,
-              flexDirection: `column`,
-              flexGrow: 1
-              //marginLeft: 48
+              padding: `1rem 0 1rem 1rem`
             }}
           >
-            <h6
-              style={{
-                padding: `1rem 0 1rem 1rem`
-              }}
-            >
-              Maps
-            </h6>
-            {BaseMapsData.length !== 0
-              ? BaseMapsData.map((map, i) => (
-                  <Link
-                    key={i}
-                    active={selectedMap.url === map.url ? true : false}
-                    label={map.vendor}
-                    title={map.name}
-                    option={map.default ? "Default" : null}
-                    description={map.desc ? map.desc : null}
-                    onClick={event => {
-                      actionMenuHandle();
-                      changeMap(
-                        map.vendor,
-                        map.name,
-                        map.url,
-                        map.maxZoom,
-                        map.apikey,
-                        i
-                      );
-                      event.preventDefault();
-                    }}
-                  />
-                ))
-              : null}
-          </div>
-        </ScrollableArea>
-      </SideNav>
-    );
-  }
+            Maps
+          </h6>
+          {BaseMapsData.length !== 0
+            ? BaseMapsData.map((map, i) => (
+                <Link
+                  key={i}
+                  active={selectedMap.url === map.url ? true : false}
+                  label={map.vendor}
+                  title={map.name}
+                  option={map.default ? "Default" : null}
+                  description={map.desc ? map.desc : null}
+                  onClick={event => {
+                    actionMenuHandle();
+                    dispatch({ type: 'change map', value: i });
+                    changeMap(
+                      map.vendor,
+                      map.name,
+                      map.url,
+                      map.maxZoom,
+                      map.apikey,
+                      i
+                    );
+                    event.preventDefault();
+                  }}
+                />
+              ))
+            : null}
+        </div>
+      </ScrollableArea>
+    </SideNav>
+  );
 }
+export default UIMenu;
 
 // eslint-disable-next-line
 const Fade16 = () => (

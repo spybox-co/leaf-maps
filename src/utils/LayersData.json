@@ -1,0 +1,17 @@
+[
+  {
+    "vendor": "Lonvia",
+    "name": "Hike Routes",
+    "url": "http://tile.lonvia.de/hiking/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "Lonvia",
+    "name": "Bike Routes",
+    "url": "http://tile.lonvia.de/cycling/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "Wikimedia Labs",
+    "name": "Hillshading",
+    "url": "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png"
+  }
+]

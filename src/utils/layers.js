@@ -24,3 +24,12 @@
 //   "maxZoom": 17,
 //   "desc": "Only Europe"
 // },
+
+
+
+// {
+//   "vendor": "4UMaps",
+//   "name": "Map4U",
+//   "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png",
+//   "maxZoom": 15
+// },

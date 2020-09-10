@@ -103,6 +103,7 @@ export default class MapContainer extends Component {
                               center={[position.lat, position.lng]}
                               radius={8}
                             />}
+                            
         </Map>
       </div>
     );

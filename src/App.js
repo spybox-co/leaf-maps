@@ -10,7 +10,8 @@ import { store } from './store.js';
 import { CodeSnippet, Button } from "carbon-components-react";
 import { Content as UIContent } from "carbon-components-react/lib/components/UIShell";
 
-import Map from "./components/Map/Map";
+import Map from './components/Map/MapContainer';
+// import Map from "./components/Map/Map";
 import GeoLocate from "./GeoLocate";
 import Locator from "./components/Locator";
 
@@ -104,7 +105,7 @@ export default class App extends Component {
       errors: null,
       width: 0,
       height: 0,
-      panel: true
+      panel: false
     };
 
     this.getInnerRef = this.getInnerRef.bind(this);

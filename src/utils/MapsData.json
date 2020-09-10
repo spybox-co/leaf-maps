@@ -18,13 +18,6 @@
     "maxZoom": 17
   },
   {
-    "vendor": "4UMaps",
-    "name": "Map4U",
-    "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png",
-    "maxZoom": 15
-  },
-
-  {
     "vendor": "Wikimedia Labs",
     "name": "Hike & Bike",
     "url": "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
