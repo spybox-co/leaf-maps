@@ -1,9 +1,20 @@
 import React, { Component } from "react";
-import { Map, TileLayer, Circle, CircleMarker } from "react-leaflet";
+import { 
+  Map,
+  TileLayer,
+  //Marker, 
+  Circle, 
+  CircleMarker,
+} from "react-leaflet";
+
+import LayersControlGroup from './LayerControlGroup';
 
 import Tile from "../../images/tile.png"
 
 import "./Map.scss";
+
+// Geolocate
+// https://stackoverflow.com/questions/54099898/react-locate-on-map
 
 // dynamic minZoom & maxZoom (two last post)
 // https://github.com/PaulLeCam/react-leaflet/issues/350
@@ -28,15 +39,14 @@ export default class MapContainer extends Component {
         this.setState({ maxZoom: nextProps.maxZoom }, () => console.log("Map: update max zoom:", this.state.maxZoom))
         return false
     }
-    
-    
   }
-  componentDidlUpdate(nextProps, nextState) {
-    if (nextProps) {
-      this.setState({ maxZoom: nextProps.maxZoom });
-    }
-    
-  }
+  // Console throw error "Exceed depth of..."
+
+  // componentDidUpdate(nextProps, nextState) {
+  //   if (nextProps) {
+  //     this.setState({ maxZoom: nextProps.maxZoom });
+  //   }   
+  // }
 
   render() {
     //const { ...others } = this.props;
@@ -75,31 +85,40 @@ export default class MapContainer extends Component {
 
           style={mapStyle}
         >
-          <TileLayer
-            url={`${selectedMap.url}${mapApi}`}
-            /*
-              @PARAM url with literals will be unnecessary, TileLayers instead
-              @PARAM required? Or custom bar?
-            */
-            // maxZoom={18}
-            // maxZoom={selectedMap.maxZoom}
-          />
-          {coordsEnabled ? (
-            <Circle
-              className="circle"
-              center={[position.lat, position.lng]}
-              radius={48}
-            />
-          ) : null}
-          {coordsEnabled ? (
-            <CircleMarker
-              className="circle-marker"
-              center={[position.lat, position.lng]}
-              radius={8}
-            />
-          ) : null}
+          <LayersControlGroup />
+             
+          {selectedMap && <TileLayer
+                            url={`${selectedMap.url}${mapApi}`}
+                          />}
+
+          
+          {coordsEnabled && <Circle
+                              className="circle"
+                              center={[position.lat, position.lng]}
+                              radius={48}
+                            />}
+
+          {coordsEnabled && <CircleMarker
+                              className="circle-marker"
+                              center={[position.lat, position.lng]}
+                              radius={8}
+                            />}
         </Map>
       </div>
     );
   }
 }
+
+/** 
+
+<TileLayer
+url={`${selectedMap.url}${mapApi}`}
+
+//  @PARAM url with literals will be unnecessary, TileLayers instead
+//  @PARAM required? Or custom bar?
+
+// maxZoom={18}
+// maxZoom={selectedMap.maxZoom}
+/>
+
+*/

@@ -30,6 +30,11 @@
     "url": "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
   },
   {
+    "vendor": "Wikimedia Labs",
+    "name": "Black & White",
+    "url": "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+  },
+  {
     "vendor": "Mapbox",
     "name": "Streets",
     "url": "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}",

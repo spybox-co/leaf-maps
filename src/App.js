@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import axios from "axios";
 import ReactToPrint from "react-to-print";
+
+
+import { store } from './store.js';
 
 
 // Carbon Components
@@ -33,6 +36,8 @@ import * as LocationAPI from "./utils/getUserLocationData";
 
 import data from "./utils/MapsData.json";
 
+import * as update from "./version";
+
 import "./App.scss";
 
 
@@ -40,10 +45,6 @@ import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
 import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
 import Launch16 from "@carbon/icons-react/es/launch/16";
 
-const updateApp = {
-  version: `1.0.11`,
-  color: `lightblue`
-}
 
 //import { Printer, iconAddSolid, iconAddOutline } from 'carbon-icons';
 //import { Printer16 } from '@carbon/icons-react';
@@ -369,9 +370,7 @@ export default class App extends Component {
           selectedMap={selectedMap}
         > 
           {/* <CaptureScreen /> */}
-          <div style={{ display: `flex`, alignItems: `center`}}>
-            <span style={{ color: updateApp.color, padding: `0 1rem` }}>ver. {updateApp.version}</span>
-          </div>
+          <Version />
           <IconButton
             id="locator"
             kind={kind}
@@ -512,3 +511,14 @@ const Printer = () => (
     <title>Printer</title>
   </svg>
 )
+
+
+const Version = () => {
+  const context = useContext(store);
+  console.log("Store", context)
+  return(
+    <div style={{ display: `flex`, alignItems: `center`}}>      
+      <small style={{ color: update.app.color, padding: `0 1rem` }}>ver. {update.app.version}</small>
+    </div>
+  )
+}

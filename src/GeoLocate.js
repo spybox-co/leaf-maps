@@ -5,6 +5,9 @@ import Typo from "./components/Typography";
 
 import { CodeSnippet } from "carbon-components-react";
 
+// Geolocate
+// https://stackoverflow.com/questions/54099898/react-locate-on-map
+
 // const getDirection = (degrees, isLongitude) =>
 //   degrees > 0 ? (isLongitude ? "E" : "N") : isLongitude ? "W" : "S";
 

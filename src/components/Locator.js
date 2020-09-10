@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
-import { Button, ClickableTile, CodeSnippet } from "carbon-components-react";
+import { CodeSnippet } from "carbon-components-react";
 
 export default class Locator extends Component {
   constructor() {
