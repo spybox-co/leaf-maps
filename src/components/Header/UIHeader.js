@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
 import Hamburger from "../IconButton";
+
+import * as update from "../../version";
 // eslint-disable-next-line
 import Button from "../IconButton";
 
+import LocateButton from './LocateButton';
 import UIMenu from "../Menu/UIMenu";
 
 import {
@@ -57,11 +60,6 @@ export default class UIHeader extends Component {
 
     return (
       <Header aria-label="Leaf Maps by Spybox.co">
-        {/* <HeaderMenuButton
-          aria-label="Open menu"
-          //onClick={action("Menu clicked")}
-        /> */}
-
         <Hamburger
           id="hamburger"
           kind={"secondary"}
@@ -74,18 +72,11 @@ export default class UIHeader extends Component {
           Leaf Maps
         </HeaderName>
 
+
         <Common>
-          {this.props.children}
+          <Version />
+          <LocateButton />
         </Common>
-
-        {/* <HeaderGlobalAction
-            aria-label="App Switcher"
-            //onClick={action('app-switcher click')}
-        >
-          <Menu16 />
-        </HeaderGlobalAction> */}
-
-        {/* <HeaderMenu /> */}
 
         <UIMenu
           expanded={expanded}
@@ -108,6 +99,14 @@ const Common = props => {
 
   return <div style={style}>{props.children}</div>;
 };
+
+const Version = () => {
+  return(
+    <div style={{ display: `flex`, alignItems: `center`}}>      
+      <small style={{ color: update.app.color, padding: `0 1rem` }}>ver. {update.app.version}</small>
+    </div>
+  )
+}
 
 const Menu16 = () => (
   <svg

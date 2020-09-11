@@ -9,6 +9,7 @@ import {
 
 import LayersControlGroup from './LayerControlGroup';
 
+
 import Tile from "../../images/tile.png"
 
 import "./Map.scss";
@@ -70,6 +71,7 @@ export default class MapContainer extends Component {
     return (
       <div className={classes.map}>
         <Map
+          attributionControl={false}
           onViewportChanged={onViewportChanged}
           viewport={
             autoCenterMap && coordsEnabled
@@ -81,11 +83,14 @@ export default class MapContainer extends Component {
           scrollWheelZoom={this.props.scrollWheel ? mapZoom : false}
           touchZoom={mapZoom}
           zoomControl={false} // disable default zoom control
+          
           onDrag={event => this.props.disableAutoCenterMap()}
 
           style={mapStyle}
         >
           <LayersControlGroup />
+
+          
              
           {selectedMap && <TileLayer
                             url={`${selectedMap.url}${mapApi}`}

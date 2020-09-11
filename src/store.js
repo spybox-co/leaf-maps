@@ -25,7 +25,7 @@ const initialMapData = {
 const initialState = {
   maps: maps,
   layers: layers,
-  activeMap: maps[2],
+  activeMap: maps[0],
   activeLayers: [layers[0], layers[1]],
   viewport: {
     center: initialMapData.center,
@@ -35,11 +35,10 @@ const initialState = {
     minZoom: initialMapData.minZoom,
     maxZoom: initialMapData.maxZoom,
   },
-  position: {
-    lat: 0,
-    lng: 0
-  },
+  position: null,
+  startLocate: false,
   autoCenterMap: true,
+  compactMode: false
 };
 
 const store = createContext(initialState);
@@ -60,6 +59,12 @@ const StateProvider = ({ children }) => {
         return {...state, activeMap: maps[action.value] };
       case 'on change viewport':
         return {...state, viewport: action.value };
+      case 'center map on position':
+        return {...state, viewport: { ...state.viewport, center: action.value }};
+      case 'set my position':
+        return {...state, position: action.value };
+      case 'start locate':
+        return {...state, startLocate: action.value };
       case 'last stored settings':
         let location = JSON.parse(storedPosition)
         console.log(location)

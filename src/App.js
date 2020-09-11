@@ -1,51 +1,35 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import ReactToPrint from "react-to-print";
 
-
-import { store } from './store.js';
-
-
-// Carbon Components
-import { CodeSnippet, Button } from "carbon-components-react";
-import { Content as UIContent } from "carbon-components-react/lib/components/UIShell";
-
-import Map from './components/Map/MapContainer';
-// import Map from "./components/Map/Map";
-import GeoLocate from "./GeoLocate";
-import Locator from "./components/Locator";
 
 import UIHeader from "./components/Header/UIHeader";
 
-import IconButton from "./components/IconButton";
-import Typo from "./components/Typography";
-import Tile from "./components/Tile"
 
+
+// Carbon Components
+import { Content as UIContent } from "carbon-components-react/lib/components/UIShell";
+
+import Map from './components/Map/MapContainer';
+// eslint disable-next-line
 import ZoomPanel from "./components/ZoomPanel/ZoomPanel";
-import ExpandablePanel from "./components/ExpandablePanel/ExpandablePanel";
+// import Map from "./components/Map/Map";
+
+
+
+
+
+
 
 // TO-USE in future:
 //import CaptureScreen from "./components/CaptureScreen/CaptureScreen";
 //import Panel from "./components/Panel";
 //import UIFooter from "./components/Footer/UIFooter";
 
-
-
-
-
 import * as LocationAPI from "./utils/getUserLocationData";
 
 import data from "./utils/MapsData.json";
 
-import * as update from "./version";
-
 import "./App.scss";
-
-
-import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
-import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
-import Launch16 from "@carbon/icons-react/es/launch/16";
-
 
 //import { Printer, iconAddSolid, iconAddOutline } from 'carbon-icons';
 //import { Printer16 } from '@carbon/icons-react';
@@ -92,6 +76,7 @@ export default class App extends Component {
       selectedMap: [],
       autoCenterMap: false,
       coordsEnabled: false,
+      startLocate: false,
       viewport: {
         center: initData.center,
         zoom: initData.zoom
@@ -107,9 +92,6 @@ export default class App extends Component {
       height: 0,
       panel: false
     };
-
-    this.getInnerRef = this.getInnerRef.bind(this);
-    this.getLocation = this.getLocation.bind(this);
   }
 
   // https://blog.anam.co/progressive-web-apps-with-create-react-app/
@@ -219,49 +201,10 @@ export default class App extends Component {
     }
   };
 
-  setZoom = value => {
-    this.setState({
-      viewport: {
-        center: this.state.viewport.center,
-        zoom: value
-      }
-    });
-  };
 
-  focusZoomWhenCoordEnabled = () => {
-    if (this.state.coordsEnabled) {
-     this.focusZoom(initData.mapFocus);
-    }
-  }
 
-  onViewportChanged = viewport => {
-    const zoom = viewport.zoom >= this.state.maxZoom ? this.state.maxZoom : viewport.zoom;
-    this.setState({
-      viewport: {
-        center: viewport.center,
-        zoom: zoom
-      }
-    });
-    let position = JSON.stringify(viewport.center)
-    localStorage.setItem("lastViewportDataPosition", position);
-    localStorage.setItem("lastViewportDataZoomNumber", zoom);
-    let storedPosition = localStorage.getItem("lastViewportDataPosition");
-    let zoomNumberStored = localStorage.getItem("lastViewportDataZoomNumber");
-    // console.log(storedPosition);
-    let array = JSON.parse(storedPosition);
-    // console.log(array);
-    // console.log(zoomNumberStored);
-  };
 
-  innerRef;
 
-  getInnerRef(ref) {
-    this.innerRef = ref;
-  }
-
-  getLocation() {
-    this.innerRef && this.innerRef.getLocation();
-  }
 
   getUserLocationData = () => {
     let location = [];
@@ -303,20 +246,7 @@ export default class App extends Component {
       });
     }
   };
-  handleGeolocatePosition = () => {
-    const { coordsEnabled, autoCenterMap } = this.state;
-    if (coordsEnabled && autoCenterMap) {
-      this.setState({ coordsEnabled: false, autoCenterMap: false });
-    }
-    if (!coordsEnabled && !autoCenterMap) {
-      this.getLocation();
-      this.setState({ autoCenterMap: true });
-    }
-    if (coordsEnabled && !autoCenterMap) {
-      this.getLocation();
-      this.setState({ autoCenterMap: true });
-    }
-  }
+
 
   render() {
     const {
@@ -327,77 +257,34 @@ export default class App extends Component {
       selectedMap,
       autoCenterMap,
       coordsEnabled,
+      startLocate,
       viewport,
       scrollWheel,
-      width,
-      height,
-      panel
     } = this.state;
 
     const {
       changeMap,
-      onViewportChanged,
       disableAutoCenterMap,
       getCoordsEnabled,
       setZoom,
-      focusZoom
     } = this;
 
-    const { getInnerRef } = this;
-
-    const kind = coordsEnabled
-      ? autoCenterMap
-        ? "primary"
-        : "danger"
-      : "secondary";
-
-    const icon = coordsEnabled ? AddFilled16 : AddAlt16;
-
-    const styles = {
-      root: {
-        width: width, //"100vw",
-        height: height, //"100vh",
-      },
-    }
 
     return (
-      <div 
-        className="App" 
-        //style={styles.root}
-      >
+      <div className="App">
         <UIHeader
           changeMap={changeMap}
           BaseMapsData={BaseMapsData}
           selectedMap={selectedMap}
-        > 
-          {/* <CaptureScreen /> */}
-          <Version />
-          <IconButton
-            id="locator"
-            kind={kind}
-            renderIcon={icon}
-            iconDescription="Locate your position!"
-            onClick={event => {
-              this.getLocation();
-              this.focusZoomWhenCoordEnabled();
-              //this.handleGeolocatePosition(); //NEED REVIEW ALL STATES
-              this.setState({ autoCenterMap: true });
-              //event.preventDefault();
-            }}
-          />
-        </UIHeader>
-        
-        <UIContent>
-          {/* <Panel /> */}
+        />
 
+        {/* Carbon Component */}
+        <UIContent>
           <Map
             minZoom={minZoom}
             maxZoom={maxZoom}
             selectedMap={selectedMap}
-            ref={getInnerRef}
-            ref={print => (this.componentRef = print)}
             autoCenterMap={autoCenterMap}
-            onViewportChanged={onViewportChanged}
             disableAutoCenterMap={disableAutoCenterMap}
             getCoordsEnabled={getCoordsEnabled}
             coordsEnabled={coordsEnabled} // ONLY for tests!
@@ -405,121 +292,18 @@ export default class App extends Component {
             position={position}
             scrollWheel={scrollWheel}
             setZoom={setZoom} 
+            startLocate={startLocate}
           />
-          <ZoomPanel
-            zoom={viewport.zoom}
-            minZoom={minZoom}
-            maxZoom={maxZoom}
-            setZoom={setZoom}
-          />
+          <ZoomPanel />
         </UIContent>
-        {/* <UIFooter /> */}
-        {panel ? (
-          <ExpandablePanel title="Console">
-            <Tile style={expandStyle}>
-              <Typo>My position:</Typo>
-              <CodeSnippet>{`COORDS ENABLED: ${coordsEnabled}`}</CodeSnippet>
-              {coordsEnabled ? (
-                <>
-                  <CodeSnippet>{`POS.LAT: ${position.lat}`}</CodeSnippet>
-                  <CodeSnippet>{`POS.LNG: ${position.lng}`}</CodeSnippet>
-                  <Button 
-                    renderIcon={Launch16}
-                    kind="secondary"
-                    href={`https://www.google.pl/maps/@${position.lat},${position.lng},${viewport.zoom}z`}
-                    target="_blank"
-                  >Show my position on Google Maps</Button>
-                </>
-              ) : (
-                <Button
-                  renderIcon={icon}
-                  iconDescription="Locate your position!"
-                  onClick={event => {
-                    this.getLocation();
-                    this.focusZoomWhenCoordEnabled();
-                    this.setState({ autoCenterMap: true });
-                    event.preventDefault();
-                  }}
-                >Get my position now</Button>
-              )}
-            </Tile>
 
-            <Tile style={expandStyle}>
-              <Typo>Viewport:</Typo>
-              <CodeSnippet>{`AUTO CENTER MAP: ${autoCenterMap}`}</CodeSnippet>
-              {!autoCenterMap && coordsEnabled ? (
-                <Button
-                  renderIcon={icon}
-                  iconDescription="Locate your position!"
-                  onClick={event => {
-                    //this.getLocation();
-                    this.focusZoomWhenCoordEnabled();
-                    this.setState({ autoCenterMap: true });
-                    event.preventDefault();
-                  }}
-                >Center map to my position</Button>
-                ) : null}
-              {!autoCenterMap ? (
-                <>
-                  <CodeSnippet>{`VP.LAT: ${viewport.center[0]}`}</CodeSnippet>
-                  <CodeSnippet>{`VP.LNG: ${viewport.center[1]}`}</CodeSnippet>
-                </>
-              ) : null}
-              <Button 
-                renderIcon={Launch16}
-                kind="secondary"
-                href={`https://www.google.pl/maps/@${viewport.center[0]},${viewport.center[1]},${viewport.zoom}z`}
-                target="_blank"
-              >Show this view on Google Maps</Button>
-            </Tile>
-            <Tile style={expandStyle}>
-              <Typo>Print Map</Typo>
-              <ReactToPrint
-                trigger={() => 
-                  <Button 
-                    kind="secondary"
-                    renderIcon={Printer}
-                  >Print map out (viewport)</Button>}
-                content={() => this.componentRef}
-              />
-            </Tile>
-
-            <Tile style={expandStyle}>
-              <Typo>Status</Typo>
-              <GeoLocate ref={getInnerRef} getCoordsEnabled={getCoordsEnabled} focusZoom={focusZoom}/>
-              <Locator />
-            </Tile>
-          </ExpandablePanel>) : null}
       </div>
     );
   }
 }
 
-const expandStyle = { color: `black` };
-
-const Printer = () => (
-  <svg 
-    focusable="false" 
-    preserveAspectRatio="xMidYMid meet" 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="32" 
-    height="32" 
-    viewBox="0 0 32 32" 
-    aria-hidden="true"
-    className="bx--btn__icon"
-  >
-    <path d="M28,9H25V3H7V9H4a2,2,0,0,0-2,2V21a2,2,0,0,0,2,2H7v6H25V23h3a2,2,0,0,0,2-2V11A2,2,0,0,0,28,9ZM9,5H23V9H9ZM23,27H9V17H23Zm5-6H25V15H7v6H4V11H28Z"></path>
-    <title>Printer</title>
-  </svg>
-)
 
 
-const Version = () => {
-  const context = useContext(store);
-  console.log("Store", context)
-  return(
-    <div style={{ display: `flex`, alignItems: `center`}}>      
-      <small style={{ color: update.app.color, padding: `0 1rem` }}>ver. {update.app.version}</small>
-    </div>
-  )
-}
+
+
+

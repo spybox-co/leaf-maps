@@ -1,0 +1,74 @@
+@import '../../styles/variables.scss';
+
+.root {
+
+}
+.SideNavigation {
+  display: flex;
+  position: relative;
+  color: #fff;
+  //transition: transform 0.35s ease;
+  //overflow-y: auto;
+  height: calc(100vh - 3rem);
+
+
+  position: fixed;
+  top: 3rem;
+  bottom: 0;
+  left: 0;
+  z-index: 8000;
+  width: 20rem;
+  max-width: 20rem;
+  overflow: hidden;
+  transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+  will-change: width;
+}
+.TabNavigator {
+  
+  width: 3rem;
+  
+  
+  z-index: 100;
+  ul {
+    display: flex;
+    flex-direction: column;
+    background-color: $background;
+    border-right: 1px $gray-70 solid;
+    border-bottom: 1px $gray-70 solid;
+  }
+}
+
+.NavigationContent {
+  position: absolute;
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+
+.Tab {
+  width: 3rem;
+  height: 3rem;
+  // background: blue;
+  
+  button {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 0;
+    color: $white;
+    cursor: pointer;
+  }
+  svg {
+    fill: currentColor;
+  }
+}

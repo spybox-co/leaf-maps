@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
+import { store  } from '../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
 import IconButton from "../IconButton";
 
@@ -30,69 +31,44 @@ const style = {
   }
 };
 
-export default class ZoomPanel extends Component {
-  constructor() {
-    super();
-    this.state = {
-      invalid: false,
-      zoom: 0
-    };
-  }
+const ZoomPanel = props => {
 
-  zoomIn = () => {
-    this.props.setZoom(this.props.zoom + 1);
-  };
-  zoomOut = () => {
-    this.props.setZoom(this.props.zoom - 1);
-  };
+  const { state, dispatch } = useContext(store);
+  const { mapSettings, viewport } = state;
+  const { ...others } = props;
 
-  setZoomNumber = (value) => {
-    let number = Number.isInteger(value) ? value : Math.ceil(value);
-    this.setState({ zoom: number })
-  }
+  const { minZoom, maxZoom } = mapSettings;
+  const zoom = viewport.zoom;
+  return (
+    <div className="lf-ZoomPanel" style={style.root} {...others}>
+      <IconButton
+        style={style.button}
+        kind="secondary"
+        disabled={zoom === maxZoom ? true : false}
+        // onClick={event => zoomIn()}
+        renderIcon={add}
+        iconDescription="Zoom in"
+      />
 
-  componentDidMount() {
-    this.setZoomNumber(this.props.zoom);
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.zoom !== prevProps.zoom) {
-      this.setZoomNumber(this.props.zoom);
-    }
-  }
+      <Indicator
+        className="lf-ZoomPanel-indicator"
+        zoom={zoom} 
+        maxZoom={maxZoom}
+      />
 
-  render() {
-    const { setZoom, minZoom, maxZoom, ...others } = this.props;
-    const { zoom } = this.state;
-    const { zoomIn, zoomOut } = this;
-    return (
-      <div className="lf-ZoomPanel" style={style.root} {...others}>
-        <IconButton
-          style={style.button}
-          kind="secondary"
-          disabled={zoom === undefined || zoom === maxZoom ? true : false}
-          onClick={event => zoomIn()}
-          renderIcon={add}
-          iconDescription="Zoom in"
-        />
-
-        <Indicator
-          className="lf-ZoomPanel-indicator"
-          zoom={zoom} 
-          maxZoom={maxZoom}
-        />
-
-        <IconButton
-          style={style.button}
-          kind="secondary"
-          disabled={zoom === undefined || zoom === minZoom ? true : false}
-          onClick={event => zoomOut()}
-          renderIcon={minus}
-          iconDescription="Zoom out"
-        />
-      </div>
-    );
-  }
+      <IconButton
+        style={style.button}
+        kind="secondary"
+        disabled={zoom === minZoom ? true : false}
+        // onClick={event => zoomOut()}
+        renderIcon={minus}
+        iconDescription="Zoom out"
+      />
+    </div>
+  );
 }
+
+export default ZoomPanel;
 
 const Indicator = ({ zoom, maxZoom, className, ...other }) => {
   let maxedOut = false;

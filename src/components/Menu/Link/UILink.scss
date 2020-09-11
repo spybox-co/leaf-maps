@@ -1,10 +1,10 @@
-@import "../../variables.scss";
+@import "../../../styles/variables.scss";
 
 .target-link {
   width: 100%;
   position: relative;
   color: $white;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   padding-top: 1rem;
   text-decoration: none;
   transition: all 0.35s ease;
@@ -71,4 +71,9 @@
 
 .active .target-link-desc {
   color: darken($primary-color, 20%);
+}
+
+.map-preview {
+  margin-top: 0.75rem;
+  height: 6rem;
 }

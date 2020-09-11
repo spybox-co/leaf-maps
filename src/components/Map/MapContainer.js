@@ -1,26 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import useGeolocation from 'react-hook-geolocation';
 import { 
   Map,
   TileLayer,
   // Marker, 
-  // Circle, 
-  // CircleMarker,
+  Circle, 
+  CircleMarker,
   useLeaflet,
-  LeafletProvider,
-  LeafletConsumer,
-  withLeaflet
+  //withLeaflet
 } from 'react-leaflet';
-import { useLeafletMap } from 'use-leaflet';
+// import { useLeafletMap } from 'use-leaflet';
 
-import { store, StateProvider } from '../../store.js';
+import { store } from '../../store.js';
 import { cn } from '../../utils/helpers';
 import Tile from "../../images/tile.png"
-import LayersControlGroup from './LayerControlGroup';
+
+
+// import LayersControlGroup from './LayerControlGroup';
+// import LocateControl from './LocateControl';
 
 import "./Map.scss";
-
-// Geolocate
-// https://stackoverflow.com/questions/54099898/react-locate-on-map
 
 // dynamic minZoom & maxZoom (two last post)
 // https://github.com/PaulLeCam/react-leaflet/issues/350
@@ -38,24 +37,22 @@ import "./Map.scss";
 
 const mapStyle = {
   backgroundImage: `url(${Tile})`,
+  marginLeft: `20rem`
 }
 
 const MapContainer = () => {
   const { state, dispatch } = useContext(store);
   // const { map } = useLeaflet();
-
-  const leafletContextMap = useLeafletMap()
-  // const mapiszcze = useLeaflet(map)
-
-  const leafletContext = LeafletProvider;
-
+  
+  
   const {
     activeMap,
     activeLayers,
     autoCenterMap,
     position,
     viewport,
-    coordsEnabled
+    coordsEnabled,
+    startLocate
   } = state;
 
   const classes = {
@@ -65,9 +62,10 @@ const MapContainer = () => {
 
   const mapProps = {
     layer: !activeMap.apikey ? activeMap.url : `${activeMap.url}${activeMap.apikey}`,
-    maxZoom: activeMap.maxZoom || state.mapSettings.maxZoom, // activeMap.maxZoom ? activeMap.maxZoom : context.state.mapSettings.maxZoom,
+    maxZoom: activeMap.maxZoom || state.mapSettings.maxZoom,
     minZoom: state.mapSettings.minZoom,
-    viewport: autoCenterMap && coordsEnabled ? { center: [position.lat, position.lng], zoom: viewport.zoom } : viewport
+    viewport: autoCenterMap && coordsEnabled ? { center: [position.lat, position.lng], zoom: viewport.zoom } : viewport,
+    zoom: 6
   }
 
   const onViewportChanged = viewport => {
@@ -79,48 +77,105 @@ const MapContainer = () => {
     localStorage.setItem("lastViewportDataZoomNumber", viewport.zoom);
     
   }
-  
+  console.log("start lokejt", startLocate)
   return(
     <div className={classes.map}>
       <Map
           onViewportChanged={onViewportChanged}
-          // viewport={
-          //   autoCenterMap && coordsEnabled
-          //     ? { center: [position.lat, position.lng], zoom: viewport.zoom }
-          //     : viewport
-          // }
+          setView={true}
           viewport={viewport}
           maxZoom={mapProps.maxZoom}
           minZoom={mapProps.minZoom}
           // scrollWheelZoom={this.props.scrollWheel ? mapZoom : false}
-          // touchZoom={mapZoom}
-          touchZoom={6}
-          zoomControl={true} // disable default zoom control
+          touchZoom={mapProps.zoom}
+          zoomControl={true} // next to disable default zoom control or make custom
+
           //onDrag={event => this.props.disableAutoCenterMap()}
 
           style={mapStyle}
         >
           <YourComponent />
 
+          {startLocate && <ComponentWithGeolocation />}
+
+          {position !== null && <PositionMarker position={position} />}
+
           {activeMap && <TileLayer url={mapProps.layer} />}
 
           {activeLayers.length > 0 && (
             <>
-              {activeLayers.map((layer, i) => <TileLayer url={layer.url} />)}
+              {activeLayers.map((layer, i) => <TileLayer key={i} url={layer.url} />)}
             </>
           )}
 
-          {/* <LayersControlGroup /> */}
-          {/* <LeafletConsumer>
-            {context => console.log("kontekst lifleta", context.layerContainer)}
-          </LeafletConsumer> */}
-          
         </Map>
     </div>
   )
 }
 
 export default MapContainer;
+
+
+const PositionMarker = ({ position })=> (
+  <>
+    <Circle
+      className="circle"
+      center={position}
+      radius={48}
+    />
+    <CircleMarker
+      className="circle-marker"
+      center={position}
+      radius={8}
+    />
+  </>
+)
+
+
+
+const ComponentWithGeolocation = props => {
+  // const { startLocate } = props;
+  //const geolocation = useGeolocation()
+  const { dispatch } = useContext(store);
+
+  const onGeolocationUpdate = geolocation => {
+    console.log('Here’s some new data from the Geolocation API: ', geolocation)
+    dispatch({ type: 'center map on position', value: [ geolocation.latitude, geolocation.longitude ]})
+    dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
+  }
+
+
+   
+  const geolocation = useGeolocation({}, onGeolocationUpdate)
+
+  // if error -> handle to store & context
+ 
+  return !geolocation.error
+    ? (
+      <ul>
+        <li>Latitude:          {geolocation.latitude}</li>
+        <li>Longitude:         {geolocation.longitude}</li>
+        <li>Location accuracy: {geolocation.accuracy}</li>
+        <li>Altitude:          {geolocation.altitude}</li>
+        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
+        <li>Heading:           {geolocation.heading}</li>
+        <li>Speed:             {geolocation.speed}</li>
+        <li>Timestamp:         {geolocation.timestamp}</li>
+      </ul>
+    )
+    : (
+      <p>No geolocation, sorry.</p>
+    )
+}
+
+
+
+
+
+
+
+
+
 
 
 
