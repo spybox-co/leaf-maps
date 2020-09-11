@@ -41,7 +41,7 @@ const mapStyle = {
 }
 
 const MapContainer = () => {
-  const context = useContext(store);
+  const { state, dispatch } = useContext(store);
   // const { map } = useLeaflet();
 
   const leafletContextMap = useLeafletMap()
@@ -55,7 +55,8 @@ const MapContainer = () => {
     autoCenterMap,
     position,
     viewport,
-  } = context.state;
+    coordsEnabled
+  } = state;
 
   const classes = {
     map: cn('lf-Map-container', autoCenterMap ? 'ac-enabled' : 'ac-disabled')
@@ -64,14 +65,15 @@ const MapContainer = () => {
 
   const mapProps = {
     layer: !activeMap.apikey ? activeMap.url : `${activeMap.url}${activeMap.apikey}`,
-    maxZoom: activeMap.maxZoom || context.state.mapSettings.maxZoom, // activeMap.maxZoom ? activeMap.maxZoom : context.state.mapSettings.maxZoom,
-    minZoom: context.state.mapSettings.minZoom,
+    maxZoom: activeMap.maxZoom || state.mapSettings.maxZoom, // activeMap.maxZoom ? activeMap.maxZoom : context.state.mapSettings.maxZoom,
+    minZoom: state.mapSettings.minZoom,
+    viewport: autoCenterMap && coordsEnabled ? { center: [position.lat, position.lng], zoom: viewport.zoom } : viewport
   }
 
   const onViewportChanged = viewport => {
-    console.log("On Czeńdź Wiułport", viewport)
-    console.log("On Czeńdź Wiułport in kontekst", context.state.viewport)
-    console.log("On Czeńdź Wiułport in kontekst hook", leafletContextMap)
+    // console.log("On Czeńdź Wiułport", viewport.center, viewport.zoom)
+    // console.log("On Czeńdź Wiułport in kontekst", state.viewport.center, state.viewport.zoom)
+    dispatch({ type: 'on change viewport', value: { center: viewport.center, zoom: viewport.zoom }})
     let position = JSON.stringify(viewport.center)
     localStorage.setItem("lastViewportDataPosition", position);
     localStorage.setItem("lastViewportDataZoomNumber", viewport.zoom);

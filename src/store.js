@@ -18,7 +18,7 @@ const initialMapData = {
   zoom: 6,
   center: [0, 0],
   mapFocus: 17,
-  minZoom: 1,
+  minZoom: 4,
   maxZoom: 20,
 }
 
@@ -58,6 +58,8 @@ const StateProvider = ({ children }) => {
         return {...state, viewport: { ...state.viewport, center: action.value }};
       case 'change map':
         return {...state, activeMap: maps[action.value] };
+      case 'on change viewport':
+        return {...state, viewport: action.value };
       case 'last stored settings':
         let location = JSON.parse(storedPosition)
         console.log(location)
