@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Hamburger from "../IconButton";
 
-import * as update from "../../version";
 // eslint-disable-next-line
 import Button from "../IconButton";
 
@@ -10,29 +9,8 @@ import LocateButton from './LocateButton';
 import UIMenu from "../Menu/UIMenu";
 
 import {
-  // Content,
   Header,
-  // HeaderMenuButton,
   HeaderName
-  // HeaderNavigation,
-  // HeaderMenu,
-  // HeaderMenuItem,
-  // HeaderGlobalBar,
-  // HeaderGlobalAction
-  // HeaderPanel,
-  // SkipToContent,
-  // SideNav,
-  //Temporarily comment these out until they are needed again
-  // SideNavHeader,
-  // SideNavDetails,
-  // SideNavSwitcher,
-  // SideNavItems,
-  // SideNavLink,
-  // SideNavMenu,
-  // SideNavMenuItem,
-  // Switcher,
-  // SwitcherItem,
-  // SwitcherItemLink
 } from "carbon-components-react/lib/components/UIShell";
 
 // import Add from '@carbon/icons-react/es/add--filled/16';
@@ -74,7 +52,6 @@ export default class UIHeader extends Component {
 
 
         <Common>
-          <Version />
           <LocateButton />
         </Common>
 
@@ -100,13 +77,7 @@ const Common = props => {
   return <div style={style}>{props.children}</div>;
 };
 
-const Version = () => {
-  return(
-    <div style={{ display: `flex`, alignItems: `center`}}>      
-      <small style={{ color: update.app.color, padding: `0 1rem` }}>ver. {update.app.version}</small>
-    </div>
-  )
-}
+
 
 const Menu16 = () => (
   <svg

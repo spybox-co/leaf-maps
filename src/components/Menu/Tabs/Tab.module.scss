@@ -1,18 +1,29 @@
 @import '../../../styles/variables.scss';
 
 .Container {
+  
   padding: 1rem 0 3rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: $gray-80;
+  background-color: $gray-80;  
 }
 
 .Header {
   display: flex;
+  position: relative;
   width: 100%;
   padding: 0 0 0 1.5rem;
   align-items: center;
   height: 3rem;
-  border-bottom: 1px $gray-70 solid;
+  justify-content: space-between;
+  &::after {
+    position: absolute;
+    content: "";
+    border-top: 1px $gray-70 solid;
+    z-index: 100;
+    width: 100%;
+    left: 0;
+    bottom: -1px;
+  }
 }

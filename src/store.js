@@ -61,6 +61,10 @@ const StateProvider = ({ children }) => {
         return {...state, viewport: action.value };
       case 'center map on position':
         return {...state, viewport: { ...state.viewport, center: action.value }};
+      case 'set zoom':
+        return {...state, viewport: { ...state.viewport, zoom: action.value }};
+      case 'zoom in':
+        return {...state, viewport: { ...state.viewport, zoom: state.viewport.zoom + 1 }};
       case 'set my position':
         return {...state, position: action.value };
       case 'start locate':

@@ -9,6 +9,8 @@ import {
   useLeaflet,
   //withLeaflet
 } from 'react-leaflet';
+// import L from 'leaflet';
+
 // import { useLeafletMap } from 'use-leaflet';
 
 import { store } from '../../store.js';
@@ -37,7 +39,6 @@ import "./Map.scss";
 
 const mapStyle = {
   backgroundImage: `url(${Tile})`,
-  marginLeft: `20rem`
 }
 
 const MapContainer = () => {
@@ -68,6 +69,12 @@ const MapContainer = () => {
     zoom: 6
   }
 
+  const layersProps = {
+    map: !activeMap.apikey ? activeMap.url : `${activeMap.url}${activeMap.apikey}`,
+    activeMap: activeMap,
+    activeLayers: activeLayers,
+  }
+
   const onViewportChanged = viewport => {
     // console.log("On Czeńdź Wiułport", viewport.center, viewport.zoom)
     // console.log("On Czeńdź Wiułport in kontekst", state.viewport.center, state.viewport.zoom)
@@ -82,13 +89,14 @@ const MapContainer = () => {
     <div className={classes.map}>
       <Map
           onViewportChanged={onViewportChanged}
-          setView={true}
+          //setView={true}
           viewport={viewport}
           maxZoom={mapProps.maxZoom}
           minZoom={mapProps.minZoom}
           // scrollWheelZoom={this.props.scrollWheel ? mapZoom : false}
           touchZoom={mapProps.zoom}
-          zoomControl={true} // next to disable default zoom control or make custom
+          zoomControl={false} // next to disable default zoom control & make custom
+          attributionControl={false} // maybe custom in the future
 
           //onDrag={event => this.props.disableAutoCenterMap()}
 
@@ -96,18 +104,13 @@ const MapContainer = () => {
         >
           <YourComponent />
 
-          {startLocate && <ComponentWithGeolocation />}
+          
+          {startLocate && <Geolocation />}
 
           {position !== null && <PositionMarker position={position} />}
 
-          {activeMap && <TileLayer url={mapProps.layer} />}
-
-          {activeLayers.length > 0 && (
-            <>
-              {activeLayers.map((layer, i) => <TileLayer key={i} url={layer.url} />)}
-            </>
-          )}
-
+          <BaseMapLayer {...layersProps} />
+          <MapOverLayers {...layersProps} />
         </Map>
     </div>
   )
@@ -115,6 +118,21 @@ const MapContainer = () => {
 
 export default MapContainer;
 
+
+const BaseMapLayer = props => {
+  const { activeMap, map } = props;
+  if (activeMap) {
+    return <TileLayer url={map} />
+  }
+  // else -> handle Error and custom tile load with error message
+}
+
+const MapOverLayers = props => {
+  const { activeLayers } = props;
+  if (activeLayers.length > 0) {
+    return activeLayers.map((layer, i) => <TileLayer key={i} url={layer.url} />);
+  }
+}
 
 const PositionMarker = ({ position })=> (
   <>
@@ -133,39 +151,37 @@ const PositionMarker = ({ position })=> (
 
 
 
-const ComponentWithGeolocation = props => {
+const Geolocation = props => {
   // const { startLocate } = props;
   //const geolocation = useGeolocation()
   const { dispatch } = useContext(store);
-
+  
   const onGeolocationUpdate = geolocation => {
     console.log('Here’s some new data from the Geolocation API: ', geolocation)
     dispatch({ type: 'center map on position', value: [ geolocation.latitude, geolocation.longitude ]})
     dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
   }
-
-
-   
+ 
   const geolocation = useGeolocation({}, onGeolocationUpdate)
 
   // if error -> handle to store & context
- 
-  return !geolocation.error
-    ? (
-      <ul>
-        <li>Latitude:          {geolocation.latitude}</li>
-        <li>Longitude:         {geolocation.longitude}</li>
-        <li>Location accuracy: {geolocation.accuracy}</li>
-        <li>Altitude:          {geolocation.altitude}</li>
-        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
-        <li>Heading:           {geolocation.heading}</li>
-        <li>Speed:             {geolocation.speed}</li>
-        <li>Timestamp:         {geolocation.timestamp}</li>
-      </ul>
-    )
-    : (
-      <p>No geolocation, sorry.</p>
-    )
+  return null;
+  // return !geolocation.error
+  //   ? (
+  //     <ul>
+  //       <li>Latitude:          {geolocation.latitude}</li>
+  //       <li>Longitude:         {geolocation.longitude}</li>
+  //       <li>Location accuracy: {geolocation.accuracy}</li>
+  //       <li>Altitude:          {geolocation.altitude}</li>
+  //       <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
+  //       <li>Heading:           {geolocation.heading}</li>
+  //       <li>Speed:             {geolocation.speed}</li>
+  //       <li>Timestamp:         {geolocation.timestamp}</li>
+  //     </ul>
+  //   )
+  //   : (
+  //     <p>No geolocation, sorry.</p>
+  //   )
 }
 
 

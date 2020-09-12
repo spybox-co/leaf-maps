@@ -35,7 +35,10 @@ main {
     width: 90rem;
   }
 }
-
+.bx--btn--icon-only {
+  background-color: inherit;
+  transition: 300ms;
+}
 
 .bx--btn--icon-only::before {
   border-style: none;

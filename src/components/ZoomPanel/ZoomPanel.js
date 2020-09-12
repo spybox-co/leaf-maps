@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { store  } from '../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
 import IconButton from "../IconButton";
@@ -37,30 +37,43 @@ const ZoomPanel = props => {
   const { mapSettings, viewport } = state;
   const { ...others } = props;
 
+
+
   const { minZoom, maxZoom } = mapSettings;
   const zoom = viewport.zoom;
+
+  const zoomNumber = zoom;
+  useEffect(
+    () => {
+      if (zoomNumber !== zoom) {
+        setTimeout(() => { zoomNumber = zoom; }, 500);
+      }
+    }, [zoom]
+  );
+  
   return (
     <div className="lf-ZoomPanel" style={style.root} {...others}>
       <IconButton
         style={style.button}
         kind="secondary"
         disabled={zoom === maxZoom ? true : false}
-        // onClick={event => zoomIn()}
+        onClick={() => dispatch({ type: 'zoom in' })}
+        // onClick={() => dispatch({ type: 'set zoom', value: zoom + 1 })}
         renderIcon={add}
         iconDescription="Zoom in"
       />
 
-      <Indicator
+      {/* <Indicator
         className="lf-ZoomPanel-indicator"
         zoom={zoom} 
         maxZoom={maxZoom}
-      />
+      /> */}
 
       <IconButton
         style={style.button}
         kind="secondary"
         disabled={zoom === minZoom ? true : false}
-        // onClick={event => zoomOut()}
+        onClick={() => dispatch({ type: 'set zoom', value: zoom - 1 })}
         renderIcon={minus}
         iconDescription="Zoom out"
       />
@@ -71,6 +84,15 @@ const ZoomPanel = props => {
 export default ZoomPanel;
 
 const Indicator = ({ zoom, maxZoom, className, ...other }) => {
+
+  const zoomNumber = zoom;
+  useEffect(
+    () => {
+      if (zoomNumber !== zoom) {
+        setTimeout(() => { zoomNumber = zoom; }, 500);
+      }
+    }, [zoom]
+  );
   let maxedOut = false;
   if (zoom >= maxZoom) {
     maxedOut = true;
@@ -82,7 +104,7 @@ const Indicator = ({ zoom, maxZoom, className, ...other }) => {
   
   return (
     <div className={classes} {...other}>
-      <span>{zoom}</span>
+      <span>{zoomNumber}</span>
     </div>
   )
 }

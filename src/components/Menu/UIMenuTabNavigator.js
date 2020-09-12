@@ -1,5 +1,5 @@
 import React from 'react';
-
+import IconButton from "../IconButton";
 import styles from './Menu.module.scss'
 
 
@@ -20,7 +20,14 @@ export default UIMenuTabnavigator;
 const TabButton = props => {
   return(
     <li className={styles.Tab}>
-      <button className><Fade16 /></button>
+      <IconButton
+        kind="secondary"
+        disabled={false}
+        // onClick={() => dispatch({ type: 'zoom in' })}
+        // onClick={() => dispatch({ type: 'set zoom', value: zoom + 1 })}
+        renderIcon={Fade16}
+        iconDescription="Zoom in"
+      />
     </li>
   )
 }

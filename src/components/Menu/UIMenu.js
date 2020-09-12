@@ -9,6 +9,8 @@ import UISideNavigation from './UISideNavigation';
 
 import TabContainer, { TabHeader } from './Tabs'
 
+import * as update from "../../version";
+
 // import { SideNav } from "carbon-components-react/lib/components/UIShell";
 
 import styles from './Menu.module.scss'
@@ -35,14 +37,17 @@ const UIMenu = props => {
     <UISideNavigation
       isFixedNav
       // expanded={true}
-      // expanded={props.expanded}
+      expanded={props.expanded}
       isChildOfHeader={true}
       aria-label="Side navigation"
     >
       <UIMenuNavigator />
       
         
-      <UIMenuTabContainer title="Maps">
+      <UIMenuTabContainer 
+        title="Maps"
+        expanded={props.expanded}
+      >
           {BaseMapsData.length !== 0
             && BaseMapsData.map((map, i) => (
                 <Link
@@ -77,13 +82,36 @@ const UIMenu = props => {
 }
 export default UIMenu;
 
-const UIMenuTabContainer = ({ children, title }) => (
-  <div className={styles.NavigationContent}>
-    <TabHeader title={title} />
-    <TabContainer>
-      {children}
-    </TabContainer>
-  </div>
-)
+const UIMenuTabContainer = ({ children, title }) => {
+  const classes = cn(styles.NavigationContent, "navigation-content")
+  return(
+    <div className={classes}>
+      <TabHeader title={title} />
+      <TabContainer>
+        {children}
+      </TabContainer>
+      <Version />
+    </div>
+  )
+}
 
 
+const Version = () => {
+  return(
+    <div style={{ 
+      display: `flex`, 
+      bottom: `6.75rem`,
+      height: `3rem`,
+      width: `16rem`,
+      left: `-6.5rem`,
+      position: `absolute`, 
+      alignItems: `center`,
+      transform: `rotate(-90deg)`
+    }}>
+      <small style={{ color: update.app.color, padding: `0 1rem` }}>
+        {update.app.version && <span>ver. {update.app.version}</span>}
+        {update.app.variant && <span style={{ marginLeft: `0.75rem` }}>variant: {update.app.variant}</span>}
+      </small>
+    </div>
+  )
+}

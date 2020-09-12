@@ -1,12 +1,13 @@
-@import "../../variables.scss";
+@import "../../styles/variables.scss";
 
 .lf-ZoomPanel {
   position: absolute; 
   right: 0; 
-  top: 5rem;
-  border-top: 1px solid $gray-50;
-  border-left: 1px solid $gray-50;
-  border-bottom: 1px solid $gray-50;
+  top: 12rem;
+  border-top: 1px solid $gray-70;
+  border-left: 1px solid $gray-70;
+  border-bottom: 1px solid $gray-70;
+  background-color: $background;
 }
 
 .lf-ZoomPanel-indicator {
