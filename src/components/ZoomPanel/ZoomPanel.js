@@ -42,7 +42,7 @@ const ZoomPanel = props => {
   const { minZoom, maxZoom } = mapSettings;
   const zoom = viewport.zoom;
 
-  const zoomNumber = zoom;
+  let zoomNumber = zoom;
   useEffect(
     () => {
       if (zoomNumber !== zoom) {
@@ -50,7 +50,7 @@ const ZoomPanel = props => {
       }
     }, [zoom]
   );
-  
+
   return (
     <div className="lf-ZoomPanel" style={style.root} {...others}>
       <IconButton
@@ -63,11 +63,13 @@ const ZoomPanel = props => {
         iconDescription="Zoom in"
       />
 
-      {/* <Indicator
+      {/* 
+      <Indicator
         className="lf-ZoomPanel-indicator"
         zoom={zoom} 
         maxZoom={maxZoom}
-      /> */}
+      /> 
+      */}
 
       <IconButton
         style={style.button}

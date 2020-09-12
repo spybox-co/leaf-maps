@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "./styles/variables.scss";
 
 
 li {
@@ -36,7 +36,7 @@ main {
   }
 }
 .bx--btn--icon-only {
-  background-color: inherit;
+  // background-color: inherit;
   transition: 300ms;
 }
 
@@ -53,6 +53,11 @@ main {
   box-shadow: none;
   background-color: transparent;
 }
+
+.bx--btn--secondary {
+  background-color: $background;
+}
+
 .bx--snippet-container {
   outline: none;
   code::-webkit-scrollbar {

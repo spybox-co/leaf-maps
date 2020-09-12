@@ -37,7 +37,7 @@ const initialState = {
   },
   position: null,
   startLocate: false,
-  autoCenterMap: true,
+  autoCenterMap: false,
   compactMode: false
 };
 
@@ -69,6 +69,8 @@ const StateProvider = ({ children }) => {
         return {...state, position: action.value };
       case 'start locate':
         return {...state, startLocate: action.value };
+      case 'center map':
+        return {...state, autoCenterMap: action.value };
       case 'last stored settings':
         let location = JSON.parse(storedPosition)
         console.log(location)
@@ -78,7 +80,8 @@ const StateProvider = ({ children }) => {
           viewport: { center: location, zoom: storedZoom }
         };
       default:
-        throw new Error();
+        //throw new Error();
+        console.warn("No dispatchEvent set!")
     };
   }, initialState);
 

@@ -5,7 +5,7 @@ export const app = {
 }
 
 
-// to 1.0.11 variant: Linden (lipa)
+// 1.0 to 1.0.11 variant: Linden (lipa)
 
 // 1.0.12 + variant: Nut Tree
 

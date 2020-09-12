@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { store  } from '../../store.js';
 import IconButton from "../IconButton";
 import styles from './Menu.module.scss'
 
@@ -18,15 +19,15 @@ const UIMenuTabnavigator = props => {
 export default UIMenuTabnavigator;
 
 const TabButton = props => {
+  const { state, dispatch } = useContext(store);
   return(
     <li className={styles.Tab}>
       <IconButton
         kind="secondary"
         disabled={false}
-        // onClick={() => dispatch({ type: 'zoom in' })}
-        // onClick={() => dispatch({ type: 'set zoom', value: zoom + 1 })}
+        //onClick={() => dispatch({ type: 'default' })}
         renderIcon={Fade16}
-        iconDescription="Zoom in"
+        iconDescription="Tab icon"
       />
     </li>
   )
