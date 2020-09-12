@@ -1,13 +1,13 @@
 [
   {
-    "vendor": "Lonvia",
-    "name": "Hike Routes",
-    "url": "http://tile.lonvia.de/hiking/{z}/{x}/{y}.png"
+    "vendor": "Way Marked Trails",
+    "name": "Hiking Routes",
+    "url": "https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png"
   },
   {
-    "vendor": "Lonvia",
-    "name": "Bike Routes",
-    "url": "http://tile.lonvia.de/cycling/{z}/{x}/{y}.png"
+    "vendor": "Way Marked Trails",
+    "name": "Cycling Routes",
+    "url": "https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png"
   },
   {
     "vendor": "Wikimedia Labs",

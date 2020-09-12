@@ -10,6 +10,11 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read http://bit.ly/CRA-PWA
 
+// Showing "new version available" notification on create-react-app PWAs
+// https://dev.to/daniellycosta/showing-new-version-available-notification-on-create-react-app-pwas-3jc9
+// Update Notification
+// https://felixgerschau.com/create-a-pwa-update-notification-with-create-react-app/
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.

@@ -33,3 +33,15 @@
 //   "url": "https://tileserver.4umaps.com/{z}/{x}/{y}.png",
 //   "maxZoom": 15
 // },
+
+
+// {
+//   "vendor": "Lonvia",
+//   "name": "Hike Routes",
+//   "url": "https://tile.lonvia.de/hiking/{z}/{x}/{y}.png"
+// },
+// {
+//   "vendor": "Lonvia",
+//   "name": "Bike Routes",
+//   "url": "https://tile.lonvia.de/cycling/{z}/{x}/{y}.png"
+// },
