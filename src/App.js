@@ -1,18 +1,15 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 
-import UIHeader from "./components/Header/UIHeader";
-
-
+import UIHeader from './components/Header';
 
 // Carbon Components
 import { Content as UIContent } from "carbon-components-react/lib/components/UIShell";
 
-import Map from './components/Map/MapContainer';
+import Map from './components/Map';
 // eslint disable-next-line
 import ZoomPanel from "./components/ZoomPanel/ZoomPanel";
-// import Map from "./components/Map/Map";
 
 
 
@@ -26,8 +23,6 @@ import ZoomPanel from "./components/ZoomPanel/ZoomPanel";
 //import UIFooter from "./components/Footer/UIFooter";
 
 import * as LocationAPI from "./utils/getUserLocationData";
-
-import data from "./utils/MapsData.json";
 
 import "./App.scss";
 
@@ -70,13 +65,6 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      minZoom: 1,
-      maxZoom: 20,
-      BaseMapsData: data,
-      selectedMap: [],
-      autoCenterMap: false,
-      coordsEnabled: false,
-      startLocate: false,
       viewport: {
         center: initData.center,
         zoom: initData.zoom
@@ -85,17 +73,14 @@ export default class App extends Component {
         lat: 0,
         lng: 0
       },
-      scrollWheel: true,
       lastMaps: [], // To-Do -> push to localStore used last 3 maps 
       errors: null,
-      width: 0,
-      height: 0,
-      panel: false
     };
   }
 
   // https://blog.anam.co/progressive-web-apps-with-create-react-app/
   installPrompt = null;
+
   componentDidMount(){
     console.log("Listening for Install prompt");
     window.addEventListener('beforeinstallprompt',e=>{
@@ -113,24 +98,11 @@ export default class App extends Component {
       })
     })
 
-
-    this.loadMap();
     this.getUserLocationData();    
-    this.handleWindowSizeChange(); // Set width
-    window.addEventListener("resize", this.handleWindowSizeChange);
+
     console.log("👋 mounted");
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
-  }
-
-  handleWindowSizeChange = () => {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    this.setState({ width: width, height: height });
-  };
 
   // Migrate to ContextAPI
   loadMap = () => {
@@ -156,50 +128,9 @@ export default class App extends Component {
     }
   };
 
-  changeMap = (vendor, type, mapUrl, maxZoom, apiKey, index) => {
-    const { viewport } = this.state;
-    const key = apiKey ? apiKey : null;
-    const zoom = maxZoom ? maxZoom : 20;
-    this.setState(
-      {
-        selectedMap: { url: mapUrl, apikey: key, maxZoom: zoom }
-      },
-      () => console.log(this.state.selectedMap)
-    );
-    localStorage.setItem('lastMap', index);
-    console.log("Local Stored Map ID:", localStorage.getItem('lastMap'), typeof localStorage.getItem('lastMap'));
-    if (maxZoom) {
-      this.setState({ maxZoom: maxZoom }, () => console.log("max limited here:", this.state.maxZoom));
-      if (maxZoom < viewport.zoom) {
-        this.setZoom(maxZoom);
-      }
-    } else {
-      this.setState({ maxZoom: 20 }, () => console.log("max default:", this.state.maxZoom));
-    }
-  };
 
-  disableAutoCenterMap = () => {
-    this.setState({ autoCenterMap: false });
-  };
 
-  getCoordsEnabled = (lat, lng) => {
-    this.setState({ coordsEnabled: true, position: { lat: lat, lng: lng } });
-    //this.focusZoom(initData.mapFocus)
-  };
 
-  focusZoom = value => {
-    let zoom = this.state.viewport.zoom;
-    let maxZoom = this.state.selectedMap.maxZoom;
-    
-    if (value > maxZoom) {
-      value = maxZoom;
-    }
-    if (value > zoom) {
-      setTimeout(() => {
-        this.setZoom(value);
-      }, 1000);
-    }
-  };
 
 
 
@@ -249,54 +180,15 @@ export default class App extends Component {
 
 
   render() {
-    const {
-      position,
-      minZoom,
-      maxZoom,
-      BaseMapsData,
-      selectedMap,
-      autoCenterMap,
-      coordsEnabled,
-      startLocate,
-      viewport,
-      scrollWheel,
-    } = this.state;
-
-    const {
-      changeMap,
-      disableAutoCenterMap,
-      getCoordsEnabled,
-      setZoom,
-    } = this;
-
-
     return (
       <div className="App">
-        <UIHeader
-          changeMap={changeMap}
-          BaseMapsData={BaseMapsData}
-          selectedMap={selectedMap}
-        />
+        <UIHeader />
 
         {/* Carbon Component */}
         <UIContent>
-          <Map
-            minZoom={minZoom}
-            maxZoom={maxZoom}
-            selectedMap={selectedMap}
-            autoCenterMap={autoCenterMap}
-            disableAutoCenterMap={disableAutoCenterMap}
-            getCoordsEnabled={getCoordsEnabled}
-            coordsEnabled={coordsEnabled} // ONLY for tests!
-            viewport={viewport}
-            position={position}
-            scrollWheel={scrollWheel}
-            setZoom={setZoom} 
-            startLocate={startLocate}
-          />
+          <Map />
           <ZoomPanel />
         </UIContent>
-
       </div>
     );
   }

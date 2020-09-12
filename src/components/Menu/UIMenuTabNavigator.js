@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
-import { store  } from '../../store.js';
+// import { store  } from '../../store.js';
 import IconButton from "../IconButton";
 import styles from './Menu.module.scss'
 
 
 const UIMenuTabnavigator = props => {
+  // const { state, dispatch } = useContext(store);
+
+
+
   return(
     <div className={styles.TabNavigator}>
       <ul>
-        <TabButton />
-        <TabButton />
-        <TabButton />
+        {props.children}
       </ul>
     </div>
   );
@@ -18,14 +20,14 @@ const UIMenuTabnavigator = props => {
 
 export default UIMenuTabnavigator;
 
-const TabButton = props => {
-  const { state, dispatch } = useContext(store);
+export const TabButton = props => {
+  // const { state, dispatch } = useContext(store);
   return(
     <li className={styles.Tab}>
       <IconButton
         kind="secondary"
         disabled={false}
-        //onClick={() => dispatch({ type: 'default' })}
+        onClick={props.onClick}
         renderIcon={Fade16}
         iconDescription="Tab icon"
       />

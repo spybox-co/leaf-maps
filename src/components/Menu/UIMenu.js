@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { store } from '../../store.js';
 import { cn } from '../../utils/helpers';
 
-import Link from './Link/UILink';
+
 
 import UIMenuNavigator, { TabButton } from './UIMenuTabNavigator';
 import UISideNavigation from './UISideNavigation';
 
-import TabContainer, { TabHeader } from './Tabs'
+import TabContainer, { TabHeader, Maps, Layers } from './Tabs'
 
 import * as update from "../../version";
-
-// import { SideNav } from "carbon-components-react/lib/components/UIShell";
 
 import styles from './Menu.module.scss'
 
@@ -20,61 +18,55 @@ import styles from './Menu.module.scss'
 const tabs = [
   {
     name: "Maps",
-    content: ""
+    component: <Maps />
+  },
+  {
+    name: "Layers",
+    component: <Layers />
   }
-]
+];
 
 const UIMenu = props => {
   const { state, dispatch } = useContext(store);
+  const [activeTab, setActiveTab] = useState(tabs[0])
   const {
+    expanded,
     actionMenuHandle,
-    changeMap,
-    BaseMapsData,
-    selectedMap
   } = props;
+
+  const { maps } = state;
+
+  console.log("Tab ys aktiw:", activeTab);
+
+
+
+  const actionTabClick = tab => {
+    if (!expanded) dispatch({ type: 'open menu'});
+    if (expanded && activeTab.name === tab.name)  dispatch({ type: 'close menu'})
+    if (activeTab.name !== tab.name) setActiveTab(tab);
+  }
 
   return (
     <UISideNavigation
-      isFixedNav
-      // expanded={true}
-      expanded={props.expanded}
-      isChildOfHeader={true}
+      // isFixedNav
+      expanded={expanded}
+      // isChildOfHeader={true}
       aria-label="Side navigation"
     >
-      <UIMenuNavigator />
+      <UIMenuNavigator>
+        {tabs.map((tab, i) => (
+          <TabButton 
+            key={i} 
+            onClick={() => actionTabClick(tab)} 
+          />))}
+      </UIMenuNavigator>
       
         
       <UIMenuTabContainer 
-        title="Maps"
-        expanded={props.expanded}
+        title={activeTab.name}
+        expanded={expanded}
       >
-          {BaseMapsData.length !== 0
-            && BaseMapsData.map((map, i) => (
-                <Link
-                  key={i}
-                  active={selectedMap.url === map.url ? true : false}
-                  label={map.vendor}
-                  title={map.name}
-                  map={!map.apikey ? map.url : `${map.url}${map.apikey}`}
-                  center={state.viewport.center}
-                  zoom={state.viewport.zoom}
-                  option={map.default ? "Default" : null}
-                  description={map.desc ? map.desc : null}
-                  onClick={event => {
-                    actionMenuHandle();
-                    dispatch({ type: 'change map', value: i });
-                    changeMap(
-                      map.vendor,
-                      map.name,
-                      map.url,
-                      map.maxZoom,
-                      map.apikey,
-                      i
-                    );
-                    event.preventDefault();
-                  }}
-                />
-              ))}
+        {activeTab.component}
       </UIMenuTabContainer>
       
     </UISideNavigation>

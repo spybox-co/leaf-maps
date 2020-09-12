@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-
+import React, { useContext } from "react";
+import { store } from '../../store.js';
 import Hamburger from "../IconButton";
 
 // eslint-disable-next-line
@@ -13,59 +13,43 @@ import {
   HeaderName
 } from "carbon-components-react/lib/components/UIShell";
 
-// import Add from '@carbon/icons-react/es/add--filled/16';
+const UIHeader = () => {
+  const { state, dispatch } = useContext(store);
 
-export default class UIHeader extends Component {
-  constructor() {
-    super();
-    this.state = {
-      expanded: false
-    };
-    this.actionMenuHandle = this.actionMenuHandle.bind(this);
-  }
-
-  actionMenuHandle = () => {
-    this.setState(prevState => ({
-      expanded: !prevState.expanded
-    }));
-    //this.setState({ expanded: false })
+  const actionMenuHandle = () => {
+    dispatch({ type: 'toggle menu'})
   };
 
-  render() {
-    const { changeMap, BaseMapsData, selectedMap } = this.props;
-    const { actionMenuHandle } = this;
-    const { expanded } = this.state;
 
-    return (
-      <Header aria-label="Leaf Maps by Spybox.co">
-        <Hamburger
-          id="hamburger"
-          kind={"secondary"}
-          renderIcon={expanded ? Close16 : Menu16}
-          iconDescription="Menu"
-          onClick={actionMenuHandle}
-        />
+  const { expanded } = state;
 
-        <HeaderName href="./" prefix="SPYBOX">
-          Leaf Maps
-        </HeaderName>
+  return (
+    <Header aria-label="Leaf Maps by Spybox.co">
+      <Hamburger
+        id="hamburger"
+        kind={"secondary"}
+        renderIcon={expanded ? Close16 : Menu16}
+        iconDescription="Menu"
+        onClick={actionMenuHandle}
+      />
+
+      <HeaderName href="./" prefix="SPYBOX">
+        Leaf Maps
+      </HeaderName>
 
 
-        <Common>
-          <LocateButton />
-        </Common>
+      <Common>
+        <LocateButton />
+      </Common>
 
-        <UIMenu
-          expanded={expanded}
-          actionMenuHandle={actionMenuHandle}
-          changeMap={changeMap}
-          BaseMapsData={BaseMapsData}
-          selectedMap={selectedMap}
-        />
-      </Header>
-    );
-  }
+      <UIMenu
+        expanded={expanded}
+        actionMenuHandle={actionMenuHandle}
+      />
+    </Header>
+  );
 }
+export default UIHeader;
 
 const Common = props => {
   const style = {

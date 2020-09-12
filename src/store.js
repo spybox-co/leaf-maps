@@ -38,6 +38,7 @@ const initialState = {
   position: null,
   startLocate: false,
   autoCenterMap: false,
+  expanded: false,
   compactMode: false
 };
 
@@ -47,12 +48,16 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch(action.type) {
+
+      // Samples
       case 'sample action #1':
         const newState = { ...state, viewport: { ...state.viewport, center: action.value } }// do something with the action
         return newState;
       case 'sample action #2':
         return {...state, viewport: { ...state.viewport, center: action.value }};
-      // initial position  
+
+
+      // Initial position  
       case 'set initial position':
         return {...state, viewport: { ...state.viewport, center: action.value }};
       case 'change map':
@@ -71,6 +76,16 @@ const StateProvider = ({ children }) => {
         return {...state, startLocate: action.value };
       case 'center map':
         return {...state, autoCenterMap: action.value };
+      
+      // Menu 
+      case 'open menu':
+        return {...state, expanded: true };
+      case 'close menu':
+        return {...state, expanded: false };
+      case 'toggle menu':
+        return {...state, expanded: !state.expanded };
+
+      // Local store  
       case 'last stored settings':
         let location = JSON.parse(storedPosition)
         console.log(location)
@@ -79,6 +94,8 @@ const StateProvider = ({ children }) => {
           activeMap: maps[storedLastActiveMap],
           viewport: { center: location, zoom: storedZoom }
         };
+
+      // No action...  
       default:
         //throw new Error();
         console.warn("No dispatchEvent set!")

@@ -1,5 +1,6 @@
 
 import React, { useContext } from 'react';
+import { store } from '../../../store.js';
 import ScrollableArea from "../../ScrollableArea";
 
 import CloseButton from "../../IconButton";
@@ -9,13 +10,14 @@ import { cn } from '../../../utils/helpers';
 import '../UIMenu.scss';
 import styles from './Tab.module.scss';
 
-const TabContainer = ({ children, expanded }) => {
+const TabContainer = ({ children, component, expanded }) => {
   const classes = cn(styles.Container, 'tab-container', expanded && 'open')
   return(
     
       <ScrollableArea area={{ width: `100%`, height: `calc(100% - 3rem)` }}>
         <div className={classes}>
 
+          {/* {component} */}
           {children}
         
         </div>
@@ -26,20 +28,23 @@ const TabContainer = ({ children, expanded }) => {
 
 export default TabContainer;
 
-export const TabHeader = ({ title, expanded }) => (
-  <div className={styles.Header}>
-    <h6>
-      {title}
-    </h6>
-    <CloseButton          
-           // id="hamburger"
-          kind={"secondary"}
-          renderIcon={Close16}
-          iconDescription="Close"
-          //onClick={actionMenuHandle}
-        />
-  </div>
-);
+export const TabHeader = ({ title, expanded }) => {
+  const { state, dispatch } = useContext(store);
+
+  return(
+    <div className={styles.Header}>
+      <h6>
+        {title}
+      </h6>
+      <CloseButton          
+        kind={"secondary"}
+        renderIcon={Close16}
+        iconDescription="Close"
+        onClick={() => dispatch({ type: 'close menu'})}
+      />
+    </div>
+  );
+}
 
 const Close16 = () => (
   <svg
