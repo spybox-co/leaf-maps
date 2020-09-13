@@ -1,6 +1,6 @@
 @import "../../../styles/variables.scss";
 
-.target-link {
+.target-checkbox {
   width: 100%;
   position: relative;
   color: $white;
@@ -9,14 +9,15 @@
   text-decoration: none;
   transition: all 0.35s ease;
   padding-right: 1rem;
-  padding-left: 1.5rem;
+  padding-left: 1rem;
   cursor: pointer;
 }
-.target-link.active {
-  color: $primary-color;
-  background-color: $gray-10;
+.target-checkbox.active {
+  // color: $primary-color;
+  // background-color: $gray-10;
+  background-color: $primary-color;
 }
-.target-link.active .target-link-active-label {
+.target-checkbox.active .target-checkbox-active-label {
   position: absolute;
   content: "";
   border-left: 0.5rem solid $primary-color;
@@ -24,14 +25,14 @@
   left: 0;
   height: 100%;
 }
-.target-link.active:hover {
+.target-checkbox.active:hover {
   color: $primary-color;
   background-color: $white;
 }
-.target-link:hover {
+.target-checkbox:hover {
   background-color: $gray-50;
 }
-.target-link-label {
+.target-checkbox-label {
   display: block;
   font-size: 0.875rem;
   font-weight: 400;
@@ -39,7 +40,7 @@
   letter-spacing: 0.16px;
 }
 
-.target-link-title {
+.target-checkbox-title {
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 130%;
@@ -48,7 +49,7 @@
   display: block;
   max-width: 17.1875rem;
 }
-.target-link-option {
+.target-checkbox-option {
   position: absolute;
   color: $gray-30;
   font-size: 0.875rem;
@@ -58,7 +59,7 @@
   display: block;
   max-width: 17.1875rem;
 }
-.target-link-desc {
+.target-checkbox-desc {
   position: absolute;
   color: lighten($primary-color, 20%);
   font-size: 0.75rem;
@@ -69,11 +70,12 @@
   max-width: 17.1875rem;
 }
 
-.active .target-link-desc {
+.active .target-checkbox-desc {
   color: darken($primary-color, 20%);
 }
 
-.map-preview {
+.target-checkbox-map-preview {
   margin-top: 0.75rem;
   height: 6rem;
+  width: 8rem;
 }

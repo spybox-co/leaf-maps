@@ -1,9 +1,11 @@
+
+
 // https://blog.logrocket.com/use-hooks-and-context-not-react-and-redux/
 
 // Classic
 // https://www.toptal.com/react/react-context-api
 
-
+import _ from 'lodash';
 
 import maps from './utils/MapsData.json';
 import layers from './utils/LayersData.json';
@@ -57,6 +59,14 @@ const StateProvider = ({ children }) => {
         return {...state, viewport: { ...state.viewport, center: action.value }};
 
 
+      // Updating map overlayers
+      case 'add layer':
+        return {...state, activeLayers: [ ...state.activeLayers, action.value ]};
+      case 'delete layer':
+        const updateActiveLayers = _.reject(state.activeLayers, (el) => { return el.url === action.value.url });
+        return {...state, activeLayers: updateActiveLayers };
+
+
       // Initial position  
       case 'set initial position':
         return {...state, viewport: { ...state.viewport, center: action.value }};
@@ -74,7 +84,7 @@ const StateProvider = ({ children }) => {
       // Set user geolocation data
       case 'set my position':
         return {...state, position: action.value };
-        
+
       case 'start locate':
         return {...state, startLocate: action.value };
       case 'center map':

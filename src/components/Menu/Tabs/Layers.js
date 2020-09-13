@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { store } from '../../../store.js';
 import CheckBox from '../CheckBox/UICheckBox';
-import { Checkbox } from 'carbon-components-react';
+// import { Checkbox } from 'carbon-components-react';
 
 export default () => {
   const { state, dispatch } = useContext(store);
@@ -15,23 +15,38 @@ export default () => {
   //   console.log("aktiw map is:", state.activeMap)
   // }
 
+  // const findLayer = state.activelayer.filter(lay => lay.url === layer.url)
+
+  // const sampleLayerUrl = "https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png"
+
+  // const filtrator = state.activeLayers.filter(l => l.url === sampleLayerUrl).map(l => l.url);
+
+  // console.log(filtrator ? true : false, filtrator)
+
+  console.log(state.activeLayers);
+
+  const filterActiveLayers = (layer) => {
+    const result = state.activeLayers.filter(l => l.url === layer).map(l => l.url);
+    if (result[0] === layer) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return layers.length !== 0 && layers.map((layer, index) => (
         <CheckBox
           key={index}
-          //active={state.activelayer.url === layer.url ? true : false}
+          active={filterActiveLayers(layer.url) ? true : false}
           label={layer.vendor}
           title={layer.name}
           layer={layer.url}
-          // map={activeMap.url}
           map={!activeMap.apikey ? activeMap.url : `${activeMap.url}${activeMap.apikey}`}
           center={state.viewport.center}
           zoom={state.viewport.zoom}
           option={layer.default ? "Default" : null}
           description={layer.desc ? layer.desc : null}
-          // onClick={event => {
-          //   changeMap(index);
-          //   event.preventDefault();
-          // }}
+          composition={layer}
         />
       ))
 }

@@ -1,35 +1,55 @@
-import React from 'react';
-import {
-  Map, 
-  TileLayer
-} from 'react-leaflet';
+import React, { useContext } from 'react';
+import { Map, TileLayer } from 'react-leaflet';
+import { store } from '../../../store.js';
+import { cn } from '../../../utils/helpers';
+
 import "./UICheckBox.scss";
 
 const CheckBox = props => {
+  const { state, dispatch } = useContext(store);
+  const { label, title, option, active, description, map, layer, zoom, center, composition, ...other } = props;
 
-    const { label, title, option, active, description, map, layer, zoom, center, ...other } = props;
+  const classes = {
+    root: cn('target-checkbox', active && 'active')
+  }
 
-    const isActive = active ? " active" : "";
+  const handleClickCheckBox = (composition) => {
+    
+    if (!active) {
+      console.log(composition, typeof composition);
+      dispatch({ type: 'add layer', value: composition });
+    } else {
+      console.log("this is active layer, I will delete it!")
+      dispatch({ type: 'delete layer', value: composition });
+    }
+  }
 
-    return (
-      <a className={`target-link${isActive}`} {...other}>
-        <span className="target-link-label">{label ? label : "Label"}</span>
-        <span className="target-link-title">{title ? title : "Title"}</span>
-        {/* 
-          {option ? <span className="target-link-option">{option}</span> : null}
-          {description ? <span className="target-link-desc">{description}</span> : null} 
-        */}
-        {active ? <div className="target-link-active-label" /> : null}
+  return (
+    <a 
+      className={classes.root}
+      onClick={event => {
+        handleClickCheckBox(composition);
+        event.preventDefault();
+      }}
+      {...other}
+    >
+      <span className="target-checkbox-label">{label ? label : "Label"}</span>
+      <span className="target-checkbox-title">{title ? title : "Title"}</span>
+      {/* 
+        {option ? <span className="target-checkbox-option">{option}</span> : null}
+        {description ? <span className="target-checkbox-desc">{description}</span> : null} 
+      */}
+      {active ? <div className="target-checkbox-active-label" /> : null}
 
-        <Preview 
-          className="map-preview"
-          source={map} 
-          layer={layer}
-          center={center} 
-          zoom={zoom}
-        />
-      </a>
-    );
+      <Preview 
+        className="target-checkbox-map-preview"
+        source={map} 
+        layer={layer}
+        center={center} 
+        zoom={zoom}
+      />
+    </a>
+  );
 }
 
 export default CheckBox;

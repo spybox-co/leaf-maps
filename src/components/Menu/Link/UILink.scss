@@ -9,12 +9,13 @@
   text-decoration: none;
   transition: all 0.35s ease;
   padding-right: 1rem;
-  padding-left: 1.5rem;
+  padding-left: 1rem;
   cursor: pointer;
 }
 .target-link.active {
-  color: $primary-color;
-  background-color: $gray-10;
+  // color: $primary-color;
+  // background-color: $gray-10;
+  background-color: $primary-color;
 }
 .target-link.active .target-link-active-label {
   position: absolute;

@@ -1,18 +1,19 @@
 import React from 'react';
-import {
-  Map, 
-  TileLayer
-} from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
+import { cn } from '../../../utils/helpers';
+
 import "./UILink.scss";
 
 const Link = props => {
 
     const { label, title, option, active, description, map, zoom, center, ...other } = props;
 
-    const isActive = active ? " active" : "";
+    const classes = {
+      root: cn('target-link', active && 'active')
+    }
 
     return (
-      <a className={`target-link${isActive}`} {...other}>
+      <a className={classes.root} {...other}>
         <span className="target-link-label">{label ? label : "Label"}</span>
         <span className="target-link-title">{title ? title : "Title"}</span>
         {/* 
