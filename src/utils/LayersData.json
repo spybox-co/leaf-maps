@@ -10,6 +10,16 @@
     "url": "https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png"
   },
   {
+    "vendor": "Way Marked Trails",
+    "name": "Riding Routes",
+    "url": "https://tile.waymarkedtrails.org/riding/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "Open Sea Map",
+    "name": "Sea Marks",
+    "url": "https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
+  },
+  {
     "vendor": "Wikimedia Labs",
     "name": "Hillshading",
     "url": "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png"

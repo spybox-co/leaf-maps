@@ -36,7 +36,7 @@ const UIMenu = props => {
 
   const { maps } = state;
 
-  console.log("Tab ys aktiw:", activeTab);
+  // console.log("Tab ys aktiw:", activeTab);
 
 
 

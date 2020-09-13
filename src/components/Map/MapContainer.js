@@ -64,7 +64,7 @@ const MapContainer = () => {
     minZoom: state.mapSettings.minZoom,
     zoom: viewport.zoom,
     scrollWheelZoom: autoCenterMap ? "center" : "true",
-    setView: true,
+    setView: autoCenterMap ? true : false, // false if autocenter map is not true?
     style: mapStyle
   }
 
@@ -73,6 +73,20 @@ const MapContainer = () => {
     activeMap: activeMap,
     activeLayers: activeLayers,
   }
+
+  // const [follow, setPosition] = useState(position)
+
+  useEffect(
+    () => {
+      if (position !== null && autoCenterMap) {
+        //setPosition(position)
+        dispatch({ type: 'center map on position', value: position })
+      }
+      console.log("posyszyn in store", state.position)
+      // console.log("posyszyn in map stejt", follow)
+      console.log('centering map', autoCenterMap)
+    }, [position, autoCenterMap]
+  )
 
   const onViewportChanged = viewport => {
 
@@ -149,19 +163,21 @@ const Geolocation = props => {
 
   // const geolocation = useGeolocation()
   const { state, dispatch } = useContext(store);
-  const { autoCenterMap, startLocate } = state;
+  const { autoCenterMap, position, startLocate } = state;
+
+
+
   
   const onGeolocationUpdate = geolocation => {
     console.log('Here’s some new data from the Geolocation API: ', geolocation)
-    if (autoCenterMap) dispatch({ type: 'center map on position', value: [ geolocation.latitude, geolocation.longitude ]})
-    
     dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
-    // {startLocate && dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})}
-    //dispatch({ type: 'center map', value: true });
+    //if (autoCenterMap) dispatch({ type: 'center map on position', value: [ geolocation.latitude, geolocation.longitude ]})
   }
  
   // eslint-disable-next-line
   const geolocation = useGeolocation({}, onGeolocationUpdate)
+
+
 
   // if error -> handle to store & context
   return null;

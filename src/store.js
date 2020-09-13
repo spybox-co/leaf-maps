@@ -26,7 +26,7 @@ const initialState = {
   maps: maps,
   layers: layers,
   activeMap: maps[0],
-  activeLayers: [layers[0], layers[1]],
+  activeLayers: [layers[0], layers[1], layers[2]],
   viewport: {
     center: initialMapData.center,
     zoom: initialMapData.zoom
@@ -70,8 +70,11 @@ const StateProvider = ({ children }) => {
         return {...state, viewport: { ...state.viewport, zoom: action.value }};
       case 'zoom in':
         return {...state, viewport: { ...state.viewport, zoom: state.viewport.zoom + 1 }};
+
+      // Set user geolocation data
       case 'set my position':
         return {...state, position: action.value };
+        
       case 'start locate':
         return {...state, startLocate: action.value };
       case 'center map':
