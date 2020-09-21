@@ -3,7 +3,7 @@ import { store } from '../../store.js';
 import Hamburger from "../IconButton";
 
 // eslint-disable-next-line
-import Button from "../IconButton";
+import Button from "../Button";
 
 import LocateButton from './LocateButton';
 import UIMenu from "../Menu/UIMenu";
@@ -39,6 +39,7 @@ const UIHeader = () => {
 
 
       <Common>
+        <Button kind="primary" >Sample button</Button>
         <LocateButton />
       </Common>
 

@@ -4,6 +4,7 @@ import App from './App';
 import { StateProvider } from './store.js';
 
 import './index.scss';
+import './styles/fibre.scss';
 
 import * as serviceWorker from './serviceWorker';
 

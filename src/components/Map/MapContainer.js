@@ -43,6 +43,8 @@ const mapStyle = {
 const MapContainer = () => {
   const { state, dispatch } = useContext(store);
   // const { map } = useLeaflet();
+
+  // console.log("viewport store", state.viewport)
   
   
   const {

@@ -1,12 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Button extends Component {
-  render() {
-    const { label, onClick } = this.props;
+import Icon from './Icon';
+
+const Button = props => {
+
+    const { 
+      children,
+      label, 
+      onClick,
+      renderIcon,
+      kind,
+      hasOnlyIcon 
+    } = props;
+
+    const buttonKind = 
+      kind === 'primary' && 'spbx--button--primary' ||
+      kind === 'secondary' && 'spbx--button--secondary' ||
+      kind === 'tertiary' && 'spbx--button--tertiary' ||
+      kind === 'danger' && 'spbx--button--danger';
+
+    
+
+    const classes = [
+      'spbx--button',
+      hasOnlyIcon && 'spbx--button--icon-only',
+      kind ? buttonKind : 'spbx--button--default'
+    ].join(' ');
+
+    const Icon = renderIcon ? renderIcon : null;
+
     return (
-      <button onClick={onClick}>{label}</button>
+      <button 
+        className={classes}
+        onClick={onClick}
+      >
+          {children}
+          {renderIcon && <Icon />}
+        </button>
     );
-  }
+  
 }
 
 export default Button;

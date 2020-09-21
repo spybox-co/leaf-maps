@@ -10,8 +10,8 @@ export default () => {
     dispatch({ type: 'close menu'})
 
     localStorage.setItem('lastMap', index);
-    console.log("Local Stored Map ID:", localStorage.getItem('lastMap'), typeof localStorage.getItem('lastMap'));
-    console.log("aktiw map is:", state.activeMap)
+    // console.log("Local Stored Map ID:", localStorage.getItem('lastMap'), typeof localStorage.getItem('lastMap'));
+    // console.log("aktiw map is:", state.activeMap)
   }
 
   return maps.length !== 0 && maps.map((map, index) => (

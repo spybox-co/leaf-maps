@@ -12,8 +12,9 @@ import layers from './utils/LayersData.json';
 
 import React, { createContext, useReducer, useEffect } from 'react';
 
-let storedPosition = localStorage.getItem("lastViewportDataPosition");
-let storedZoom = localStorage.getItem("lastViewportDataZoomNumber");
+//  @Param lastViewportDataPosition & lastViewportDataZoomNumber from localStorage is initially parsed as a string!
+let storedPosition = JSON.parse( localStorage.getItem("lastViewportDataPosition") );
+let storedZoom = parseInt(localStorage.getItem("lastViewportDataZoomNumber"), 10);
 let storedLastActiveMap = localStorage.getItem('lastMap')
 
 const initialMapData = {
@@ -100,12 +101,16 @@ const StateProvider = ({ children }) => {
 
       // Local store  
       case 'last stored settings':
-        let location = JSON.parse(storedPosition)
-        console.log(location)
+        console.group("Initial location from localStorage");
+          console.log("Position (lat, lng):", storedPosition);
+          console.log("Zoom (number):", storedZoom);
+          console.log("Initial map from localStorage:", maps[storedLastActiveMap].name);
+        console.groupEnd();
+
         return {
           ...state, 
           activeMap: maps[storedLastActiveMap],
-          viewport: { center: location, zoom: storedZoom }
+          viewport: { center: storedPosition, zoom: storedZoom }
         };
 
       // No action...  

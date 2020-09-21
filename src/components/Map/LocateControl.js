@@ -4,6 +4,8 @@ import Locate from 'leaflet.locatecontrol';
 
 
 // https://www.npmjs.com/package/react-leaflet-locate-control
+// Oryginal Locate Control to customize
+// https://github.com/domoritz/leaflet-locatecontrol/blob/gh-pages/src/L.Control.Locate.js
 class LocateControl extends Component {
   componentDidMount() {
     const { options, startDirectly } = this.props;
