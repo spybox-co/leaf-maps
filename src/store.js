@@ -29,7 +29,7 @@ const initialState = {
   maps: maps,
   layers: layers,
   activeMap: maps[0],
-  activeLayers: [layers[0], layers[1], layers[2]],
+  activeLayers: [], // layers[0], layers[1], layers[2]
   viewport: {
     center: initialMapData.center,
     zoom: initialMapData.zoom
@@ -62,6 +62,8 @@ const StateProvider = ({ children }) => {
 
       // Updating map overlayers
       case 'add layer':
+        // Lodash operator and method needed to construct Array
+        // localStorage.setItem("lastActiveLayer", [ ...state.activeLayers, action.value.name ]);
         return {...state, activeLayers: [ ...state.activeLayers, action.value ]};
       case 'delete layer':
         const updateActiveLayers = _.reject(state.activeLayers, (el) => { return el.url === action.value.url });
@@ -101,11 +103,23 @@ const StateProvider = ({ children }) => {
 
       // Local store  
       case 'last stored settings':
+
+        const HowManyLayersAreActive = layers => {
+          for (let i = 0; i < layers.length; i++) {
+            console.log(`${i + 1}.`, layers[i].name);
+          }
+        }
         console.group("Initial location from localStorage");
           console.log("Position (lat, lng):", storedPosition);
           console.log("Zoom (number):", storedZoom);
           console.log("Initial map from localStorage:", maps[storedLastActiveMap].name);
+          // Still variable from state
+          console.group("Initial layers from localStorage:");
+            HowManyLayersAreActive(state.activeLayers)
+          console.groupEnd();
         console.groupEnd();
+
+        
 
         return {
           ...state, 

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Locate from '../Icon/Library/Locate';
 import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
 import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
 import Launch16 from "@carbon/icons-react/es/launch/16";
@@ -11,7 +12,8 @@ const LocateButton = () => {
   const { state, dispatch } = useContext(store);
   const { startLocate, autoCenterMap } = state;
 
-  const icon = startLocate ? AddFilled16 : AddAlt16;
+  const icon = Locate;
+  // const icon = startLocate ? AddFilled16 : AddAlt16;
   
   const kind = startLocate
   ? autoCenterMap

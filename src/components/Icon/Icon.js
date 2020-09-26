@@ -21,7 +21,11 @@ import {
   GlyphStar,
 } from './OtherIcons';
 
-import { tidy } from "utils/lib";
+import {
+  Locate
+} from './Library/Locate';
+
+// import { tidy } from "utils/lib";
 
 
 import './Icon.scss';
@@ -38,6 +42,7 @@ const Components = {
   Download: Download32,
   GlyphStar: GlyphStar,
   Launch: Launch32,
+  Locate: Locate,
   LogoLinkedIn: LogoLinkedIn,
   LogoBehance: LogoBehance,
   LogoGitHub: LogoGitHub,

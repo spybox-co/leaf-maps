@@ -11,7 +11,12 @@
   },
   {
     "vendor": "Way Marked Trails",
-    "name": "Riding Routes",
+    "name": "Ski Slopes",
+    "url": "https://tile.waymarkedtrails.org/slopes/{z}/{x}/{y}.png"
+  },
+  {
+    "vendor": "Way Marked Trails",
+    "name": "Horse Riding",
     "url": "https://tile.waymarkedtrails.org/riding/{z}/{x}/{y}.png"
   },
   {
