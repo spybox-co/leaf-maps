@@ -14,10 +14,21 @@ $gray-10:#e6e6e6;
 $white: #fff;
 
 
-$primary-color: #0f62fe;
-$secondary-color: #da1e28;
+
+$red-color: #da1e28;
+$green-color: #24a148;
+$blue-color: #0f62fe;
+
+$yellow-color: #fdd13a;
+$orange-color: #ff832b;
+
+$primary-color: $blue-color;
+$danger-color: $red-color;
+$warning-color: $yellow-color;
+
+$secondary-color: $gray-100;
 $tetrinary-color: $gray-30;
+
 
 $background: $gray-100;
 
-$danger-color: #da1e28;

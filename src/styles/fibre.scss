@@ -36,9 +36,30 @@
     border-style: solid;
     border-width: 1px;
   }
+  &--warning {
+    color: $gray-100;
+    background-color: $warning-color;
+    border-color: rgba(0,0,0,0);
+    border-style: solid;
+    border-width: 1px;
+  }
   &--secondary {
     color: $white;
     background-color: $gray-100;
+    border-color: rgba(0,0,0,0);
+    border-style: solid;
+    border-width: 1px;
+  }
+  &--green {
+    color: $white;
+    background-color: $green-color;
+    border-color: rgba(0,0,0,0);
+    border-style: solid;
+    border-width: 1px;
+  }
+  &--orange {
+    color: $white;
+    background-color: $orange-color;
     border-color: rgba(0,0,0,0);
     border-style: solid;
     border-width: 1px;

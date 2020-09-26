@@ -17,7 +17,12 @@ const Button = props => {
       kind === 'primary' && 'spbx--button--primary' ||
       kind === 'secondary' && 'spbx--button--secondary' ||
       kind === 'tertiary' && 'spbx--button--tertiary' ||
-      kind === 'danger' && 'spbx--button--danger';
+      kind === 'danger' && 'spbx--button--danger' ||
+      kind === 'warning' && 'spbx--button--warning' ||
+      kind === 'green' && 'spbx--button--green' ||
+      kind === 'orange' && 'spbx--button--orange' ||
+      // To-Do
+      kind ? `spbx--button--${kind}` : '';
 
     
 

@@ -18,7 +18,7 @@ const LocateButton = () => {
   const kind = startLocate
   ? autoCenterMap
     ? "primary"
-    : "danger"
+    : "green"
   : "secondary";
 
 

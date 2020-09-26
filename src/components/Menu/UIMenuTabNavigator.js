@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // import { store  } from '../../store.js';
 import IconButton from "../IconButton";
 import styles from './Menu.module.scss'
