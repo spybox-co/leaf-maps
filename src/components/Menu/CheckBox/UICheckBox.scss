@@ -17,20 +17,21 @@
   // background-color: $gray-10;
   background-color: $primary-color;
 }
-.target-checkbox.active .target-checkbox-active-label {
-  position: absolute;
-  content: "";
-  border-left: 0.5rem solid $primary-color;
-  top: 0;
-  left: 0;
-  height: 100%;
-}
+// .target-checkbox.active .target-checkbox-active-label {
+//   position: absolute;
+//   content: "";
+//   border-left: 0.5rem solid $primary-color;
+//   top: 0;
+//   left: 0;
+//   height: 100%;
+// }
+
 .target-checkbox.active:hover {
-  color: $primary-color;
-  background-color: $white;
+  color: $white;
+  background-color: darken($primary-color, 10%);
 }
 .target-checkbox:hover {
-  background-color: $gray-50;
+  background-color: $gray-70;
 }
 .target-checkbox-label {
   display: block;

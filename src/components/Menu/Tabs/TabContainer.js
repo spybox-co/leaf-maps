@@ -10,8 +10,15 @@ import { cn } from '../../../utils/helpers';
 import '../UIMenu.scss';
 import styles from './Tab.module.scss';
 
-const TabContainer = ({ children, component, expanded }) => {
-  const classes = cn(styles.Container, 'tab-container', expanded && 'open')
+const TabContainer = props => {
+  const { 
+    children, 
+    // component, 
+    expanded 
+  } = props;
+
+  const classes = cn(styles.Container, 'tab-container', expanded && 'open');
+
   return(
     
       <ScrollableArea area={{ width: `100%`, height: `calc(100% - 3rem)` }}>

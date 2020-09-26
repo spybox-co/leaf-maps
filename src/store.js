@@ -13,9 +13,11 @@ import layers from './utils/LayersData.json';
 import React, { createContext, useReducer, useEffect } from 'react';
 
 //  @Param lastViewportDataPosition & lastViewportDataZoomNumber from localStorage is initially parsed as a string!
-let storedPosition = JSON.parse( localStorage.getItem("lastViewportDataPosition") );
-let storedZoom = parseInt(localStorage.getItem("lastViewportDataZoomNumber"), 10);
-let storedLastActiveMap = localStorage.getItem('lastMap')
+let storedPosition = JSON.parse(localStorage.getItem('lastViewportDataPosition'));
+let storedZoom = parseInt(localStorage.getItem('lastViewportDataZoomNumber'), 10);
+let storedLastActiveMap = localStorage.getItem('lastMap');
+let lastStoredActiveLayers = JSON.parse(localStorage.getItem('lastStoredActiveLayers'));
+
 
 const initialMapData = {
   zoom: 6,
@@ -29,7 +31,7 @@ const initialState = {
   maps: maps,
   layers: layers,
   activeMap: maps[0],
-  activeLayers: [], // layers[0], layers[1], layers[2]
+  activeLayers: [],
   viewport: {
     center: initialMapData.center,
     zoom: initialMapData.zoom
@@ -62,18 +64,22 @@ const StateProvider = ({ children }) => {
 
       // Updating map overlayers
       case 'add layer':
-        // Lodash operator and method needed to construct Array
-        // localStorage.setItem("lastActiveLayer", [ ...state.activeLayers, action.value.name ]);
-        return {...state, activeLayers: [ ...state.activeLayers, action.value ]};
+        const addActiveLayer = [ ...state.activeLayers, action.value ];
+        localStorage.setItem('lastStoredActiveLayers', JSON.stringify(addActiveLayer));
+        return {...state, activeLayers: addActiveLayer };
+
       case 'delete layer':
         const updateActiveLayers = _.reject(state.activeLayers, (el) => { return el.url === action.value.url });
+        localStorage.setItem('lastStoredActiveLayers', JSON.stringify(updateActiveLayers));
         return {...state, activeLayers: updateActiveLayers };
+
 
 
       // Initial position  
       case 'set initial position':
         return {...state, viewport: { ...state.viewport, center: action.value }};
       case 'change map':
+        localStorage.setItem('lastMap', action.value);
         return {...state, activeMap: maps[action.value] };
       case 'on change viewport':
         return {...state, viewport: action.value };
@@ -101,30 +107,17 @@ const StateProvider = ({ children }) => {
       case 'toggle menu':
         return {...state, expanded: !state.expanded };
 
-      // Local store  
-      case 'last stored settings':
-
-        const HowManyLayersAreActive = layers => {
-          for (let i = 0; i < layers.length; i++) {
-            console.log(`${i + 1}.`, layers[i].name);
-          }
-        }
-        console.group("Initial location from localStorage");
-          console.log("Position (lat, lng):", storedPosition);
-          console.log("Zoom (number):", storedZoom);
-          console.log("Initial map from localStorage:", maps[storedLastActiveMap].name);
-          // Still variable from state
-          console.group("Initial layers from localStorage:");
-            HowManyLayersAreActive(state.activeLayers)
-          console.groupEnd();
-        console.groupEnd();
-
-        
-
+      // Local Storage
+      case 'last stored position':
         return {
           ...state, 
-          activeMap: maps[storedLastActiveMap],
           viewport: { center: storedPosition, zoom: storedZoom }
+        };
+      case 'last stored settings':
+        return {
+          ...state, 
+          activeMap: storedLastActiveMap ? maps[storedLastActiveMap] : maps[0],
+          activeLayers: lastStoredActiveLayers ? lastStoredActiveLayers : [],
         };
 
       // No action...  
@@ -136,11 +129,29 @@ const StateProvider = ({ children }) => {
 
   useEffect(
     () => {
-      if (storedPosition && storedZoom && storedLastActiveMap) {
-        dispatch({ type: 'last stored settings' })
+      if (storedPosition && storedZoom) {
+        dispatch({ type: 'last stored position' })
       } else {
         dispatch({ type: 'set initial position', value: [50,19] })
       }
+      if (storedLastActiveMap || lastStoredActiveLayers) {
+        dispatch({ type: 'last stored settings' })
+      }
+
+      const HowManyLayersAreActive = layers => {
+        for (let i = 0; i < layers.length; i++) {
+          console.log(`${i + 1}.`, layers[i].name);
+        }
+      }
+      console.group("Initial location from localStorage");
+      console.log("Position (lat, lng):", storedPosition);
+      console.log("Zoom (number):", storedZoom);
+      console.log("Initial map from localStorage:", maps[storedLastActiveMap].name);
+      // Still variable from state
+        console.group("Initial layers from localStorage:");
+          HowManyLayersAreActive(lastStoredActiveLayers)
+        console.groupEnd();
+      console.groupEnd();
       
     }, []
   );

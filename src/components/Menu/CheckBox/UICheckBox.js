@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
+import { IndexKind } from 'typescript';
 import { store } from '../../../store.js';
 import { cn } from '../../../utils/helpers';
 
@@ -7,20 +8,31 @@ import "./UICheckBox.scss";
 
 const CheckBox = props => {
   const { state, dispatch } = useContext(store);
-  const { label, title, option, active, description, map, layer, zoom, center, composition, ...other } = props;
+  const { 
+    label, 
+    title,
+    index, 
+    option, 
+    active, 
+    description, 
+    map, 
+    layer, 
+    zoom, 
+    center, 
+    composition, 
+    ...other 
+  } = props;
 
   const classes = {
     root: cn('target-checkbox', active && 'active')
   }
 
-  const handleClickCheckBox = (composition) => {
-    
+  const handleClickCheckBox = (composition, index) => {
     if (!active) {
       console.log(composition, typeof composition);
-      dispatch({ type: 'add layer', value: composition });
+      dispatch({ type: 'add layer', value: composition, index: index });
     } else {
-      console.log("this is active layer, I will delete it!")
-      dispatch({ type: 'delete layer', value: composition });
+      dispatch({ type: 'delete layer', value: composition, index: index });
     }
   }
 
@@ -28,7 +40,7 @@ const CheckBox = props => {
     <a 
       className={classes.root}
       onClick={event => {
-        handleClickCheckBox(composition);
+        handleClickCheckBox(composition, index);
         event.preventDefault();
       }}
       {...other}

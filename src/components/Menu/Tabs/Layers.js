@@ -7,8 +7,6 @@ export default () => {
   const { state } = useContext(store);
   const { layers, activeMap } = state;
 
-  console.log(state.activeLayers);
-
   const filterActiveLayers = (layer) => {
     const result = state.activeLayers.filter(l => l.url === layer).map(l => l.url);
     if (result[0] === layer) {
@@ -21,6 +19,7 @@ export default () => {
   return layers.length !== 0 && layers.map((layer, index) => (
     <CheckBox
       key={index}
+      index={index} // optionally
       active={filterActiveLayers(layer.url) ? true : false}
       label={layer.vendor}
       title={layer.name}
