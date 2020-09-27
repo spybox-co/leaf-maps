@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { store } from '../../../store.js';
 import ScrollableArea from "../../ScrollableArea";
 
-import CloseButton from "../../IconButton";
+import { IconButton as CloseButton } from "../../Button";
 
 import { cn } from '../../../utils/helpers';
 

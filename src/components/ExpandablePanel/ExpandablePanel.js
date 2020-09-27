@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import IconButton from "../IconButton";
+import { IconButton } from "../Button";
 import Up from "@carbon/icons-react/es/up-to-top/16";
 import Down from "@carbon/icons-react/es/down-to-bottom/16";
 

@@ -64,6 +64,13 @@
     border-style: solid;
     border-width: 1px;
   }
+  &--custom {
+    color: $white;
+    background: none;
+    border-color: rgba(0,0,0,0);
+    border-style: solid;
+    border-width: 1px;
+  }
 }
 
 

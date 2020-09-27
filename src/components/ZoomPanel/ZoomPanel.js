@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { store  } from '../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
-import IconButton from "../IconButton";
+import { IconButton } from "../Button";
 import { Add, Substract } from '../Icon/Library';
 
 

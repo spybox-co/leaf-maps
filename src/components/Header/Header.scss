@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.Logo {
+  path {
+    opacity: 0.66;
+    transition: opacity 150ms ease;
+  }
+  
+}
+.Logo.filled {
+  path {
+    opacity: 1;
+  }
+}
+
+.GeolocateButton {
+  &.autocentermap-enabled {
+    background-color: $navigation-autocentermap-enabled-color;
+  }
+  &.autocentermap-disabled {
+    background-color: $navigation-autocentermap-disabled-color;
+  }
+}

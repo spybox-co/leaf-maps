@@ -7,7 +7,7 @@ import { cn } from '../../../utils/helpers';
 import "./UICheckBox.scss";
 
 const CheckBox = props => {
-  const { state, dispatch } = useContext(store);
+  const { dispatch } = useContext(store);
   const { 
     label, 
     title,

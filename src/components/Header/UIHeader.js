@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { store } from '../../store.js';
-import Hamburger from "../IconButton";
+
+import { cn } from '../../utils/helpers';
 
 // eslint-disable-next-line
-import Button from "../Button";
+import { Button, IconButton } from "../Button";
 
 import LocateButton from './LocateButton';
 import UIMenu from "../Menu/UIMenu";
@@ -13,6 +14,9 @@ import {
   HeaderName
 } from "carbon-components-react/lib/components/UIShell";
 
+import styles from './UIHeader.module.scss';
+import './Header.scss';
+
 const UIHeader = () => {
   const { state, dispatch } = useContext(store);
 
@@ -21,17 +25,30 @@ const UIHeader = () => {
   };
 
 
-  const { expanded } = state;
+  const { expanded, compactMode } = state;
 
   return (
     <Header aria-label="Leaf Maps by Spybox.co">
-      <Hamburger
+
+      {!compactMode ? (
+        <LogoLeafMaps fill={expanded}/>
+      ) : (
+        <IconButton
+          id="hamburger"
+          kind={"secondary"}
+          renderIcon={expanded ? Close16 : Menu16}
+          iconDescription="Menu"
+          onClick={actionMenuHandle}
+        />
+      )}
+      
+      {/* <Hamburger
         id="hamburger"
         kind={"secondary"}
         renderIcon={expanded ? Close16 : Menu16}
         iconDescription="Menu"
         onClick={actionMenuHandle}
-      />
+      /> */}
 
       <HeaderName href="./" prefix="SPYBOX">
       {/* <HeaderName href="./" prefix={<SPYBOXtypo/>}> */}
@@ -63,7 +80,25 @@ const Common = props => {
   return <div style={style}>{props.children}</div>;
 };
 
+const LogoLeafMaps = ({ fill }) => (
+  <div className={cn(styles.logo, 'Logo', 'Leafmaps', fill && 'filled')}>
+    <svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      {/* <path d="M326 199.613V119.613L256 80L186 119.613V199.613L116.5 160L47 199.613V280.584L116.5 321L116.61 320.936L117 321.161V400.584L186.5 441L255.641 400.793L256 401L256.359 400.793L325.5 441L395 400.584V321.165L395.392 320.937L395.5 321L465 280.584V199.613L395.5 160L326 199.613Z" /> */}
+      
+      <path d="M117 400.584L186.5 441L256 400.584V319.613L186.5 280L117 319.613V400.584Z" />
+      <path d="M116 320.584L186 361L256 320.584V239.613L186 200L116 239.613V320.584Z" />
+      <path d="M47 280.584L116.5 321L186 280.584V199.613L116.5 160L47 199.613V280.584Z" />
+      <path d="M256 400.584L325.5 441L395 400.584V319.613L325.5 280L256 319.613V400.584Z" />
+      <path d="M257 320.584L326.5 361L396 320.584V239.613L326.5 200L257 239.613V320.584Z" />
+      <path d="M326 280.584L395.5 321L465 280.584V199.613L395.5 160L326 199.613V280.584Z" />
+      <path d="M186 200.584L256 241L326 200.584V119.613L256 80L186 119.613V200.584Z" />
+      <path d="M186 280.584L256 321L326 280.584V199.613L256 160L186 199.613V280.584Z" />
+      <path d="M186 360.584L256 401L326 360.584V279.613L256 240L186 279.613V360.584Z" />
 
+
+    </svg>
+  </div>
+)
 
 const Menu16 = () => (
   <svg

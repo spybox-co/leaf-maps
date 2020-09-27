@@ -4,7 +4,7 @@ import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
 import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
 import Launch16 from "@carbon/icons-react/es/launch/16";
 
-import IconButton from "../IconButton";
+import { IconButton } from "../Button";
 
 import { store  } from '../../store.js';
 
@@ -17,9 +17,9 @@ const LocateButton = () => {
   
   const kind = startLocate
   ? autoCenterMap
-    ? "primary"
-    : "green"
-  : "secondary";
+    ? "geolocation-on autocentermap-enabled"
+    : "geolocation-on autocentermap-disabled"
+  : "geolocation-off";
 
 
   const handleLocateClick = () => {
@@ -42,7 +42,8 @@ const LocateButton = () => {
 
   return(
     <IconButton
-      id="locator"
+      className="GeolocateButton"
+      id="geolocate"
       kind={kind}
       renderIcon={icon}
       iconDescription="Locate your position!"

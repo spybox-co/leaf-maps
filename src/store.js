@@ -149,7 +149,7 @@ const StateProvider = ({ children }) => {
       console.log("Initial map from localStorage:", maps[storedLastActiveMap].name);
       // Still variable from state
         console.group("Initial layers from localStorage:");
-          HowManyLayersAreActive(lastStoredActiveLayers)
+          lastStoredActiveLayers ? HowManyLayersAreActive(lastStoredActiveLayers) : console.info("No layers stored")
         console.groupEnd();
       console.groupEnd();
       

@@ -1,14 +1,11 @@
 import React from 'react';
 // import { store  } from '../../store.js';
-import IconButton from "../IconButton";
+import { IconButton } from "../Button";
 import styles from './Menu.module.scss'
 
 
 const UIMenuTabnavigator = props => {
   // const { state, dispatch } = useContext(store);
-
-
-
   return(
     <div className={styles.TabNavigator}>
       <ul>

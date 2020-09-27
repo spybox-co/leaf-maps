@@ -23,7 +23,8 @@
       stroke: none;
     }
     .circle-marker {
-      fill: $green-color;
+      fill: $navigation-autocentermap-disabled-color;
+      // fill: $green-color;
       stroke: $white;
       fill-opacity: 1;
     }

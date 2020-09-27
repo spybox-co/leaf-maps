@@ -1,7 +1,7 @@
 export const app = {
-  version: `1.0.15`,
+  version: `1.0.18`,
   variant: `Nut Tree`,
-  color: `#ffd800`
+  color: `#ff579a`
 }
 
 
