@@ -1,6 +1,7 @@
 import React from 'react';
 
 // import Icon from '../Icon';
+import './styles.scss';
 
 const Button = props => {
     const { 

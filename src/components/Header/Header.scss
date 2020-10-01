@@ -13,11 +13,3 @@
   }
 }
 
-.GeolocateButton {
-  &.autocentermap-enabled {
-    background-color: $navigation-autocentermap-enabled-color;
-  }
-  &.autocentermap-disabled {
-    background-color: $navigation-autocentermap-disabled-color;
-  }
-}

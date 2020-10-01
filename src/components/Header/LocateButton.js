@@ -1,25 +1,34 @@
 import React, { useContext } from 'react';
+
+
+import { cn } from '../../utils/helpers';
+
 import Locate from '../Icon/Library/Locate';
-import AddFilled16 from "@carbon/icons-react/es/add--filled/16";
-import AddAlt16 from "@carbon/icons-react/es/add--alt/16";
-import Launch16 from "@carbon/icons-react/es/launch/16";
 
 import { IconButton } from "../Button";
 
 import { store  } from '../../store.js';
 
+import './LocateButton.scss';
+
 const LocateButton = () => {
   const { state, dispatch } = useContext(store);
-  const { startLocate, autoCenterMap } = state;
+  const { startLocate, autoCenterMap, position } = state;
 
   const icon = Locate;
   // const icon = startLocate ? AddFilled16 : AddAlt16;
+
+  // if (position) console.log("User detected position", position);
   
-  const kind = startLocate
-  ? autoCenterMap
-    ? "geolocation-on autocentermap-enabled"
-    : "geolocation-on autocentermap-disabled"
-  : "geolocation-off";
+  const kind = startLocate && position && (autoCenterMap
+    ? "autocentermap-enabled"
+    : "autocentermap-disabled");
+
+  // const kind = startLocate
+  // ? autoCenterMap
+  //   ? "geolocation-on autocentermap-enabled"
+  //   : "geolocation-on autocentermap-disabled"
+  // : "geolocation-off";
 
 
   const handleLocateClick = () => {
@@ -31,7 +40,7 @@ const LocateButton = () => {
     // When geolocation is active but map is not centered on user position
     if (startLocate && !autoCenterMap) {
       dispatch({ type: 'center map', value: true });
-      dispatch({ type: 'center map on position', value: state.position });
+      dispatch({ type: 'center map on position', value: position });
     }
     // Disable showing user's position on map
     if (startLocate && autoCenterMap) {
@@ -42,7 +51,7 @@ const LocateButton = () => {
 
   return(
     <IconButton
-      className="GeolocateButton"
+      className={cn("GeolocateButton", startLocate && position ? "geolocation-on" : "geolocation-off")}
       id="geolocate"
       kind={kind}
       renderIcon={icon}

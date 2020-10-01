@@ -15,6 +15,14 @@
     transform: translateX(0); 
   }
 }
-// .navigation.open {
-//   transform: translateX(0); 
+
+// In the future: 
+
+// .item {
+//   animation: animated 300ms ease-out;
+// }
+
+// @keyframes animated {
+//   from {margin: 1rem 0}
+//   to {margin: 0}
 // }

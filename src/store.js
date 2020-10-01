@@ -137,22 +137,30 @@ const StateProvider = ({ children }) => {
       if (storedLastActiveMap || lastStoredActiveLayers) {
         dispatch({ type: 'last stored settings' })
       }
+      
 
+      // Settings localStorage in console
+      
       const HowManyLayersAreActive = layers => {
         for (let i = 0; i < layers.length; i++) {
           console.log(`${i + 1}.`, layers[i].name);
         }
       }
-      console.group("Initial location from localStorage");
-      console.log("Position (lat, lng):", storedPosition);
-      console.log("Zoom (number):", storedZoom);
-      console.log("Initial map from localStorage:", maps[storedLastActiveMap].name);
-      // Still variable from state
-        console.group("Initial layers from localStorage:");
-          lastStoredActiveLayers ? HowManyLayersAreActive(lastStoredActiveLayers) : console.info("No layers stored")
-        console.groupEnd();
-      console.groupEnd();
-      
+      console.group("Initial settings from localStorage");
+        console.log("Position (lat, lng):", storedPosition ? storedPosition : "not stored data");
+        console.log("Zoom (number):", storedZoom ? storedZoom : 'not stored data');
+
+        console.log("Initial map from localStorage:", storedLastActiveMap ? maps[storedLastActiveMap].name : "not stored data");
+        // Still variable from state
+        if (lastStoredActiveLayers && lastStoredActiveLayers.length > 0) {
+          console.group("Initial layers from localStorage:");
+          console.log(lastStoredActiveLayers)
+            HowManyLayersAreActive(lastStoredActiveLayers); 
+          console.groupEnd();
+        } else { 
+          console.info("Initial layers from localStorage:", "not stored data");
+        }
+      console.groupEnd();      
     }, []
   );
   

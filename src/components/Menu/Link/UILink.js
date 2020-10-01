@@ -24,11 +24,11 @@ const Link = props => {
 
   const changeMap = index => {
     dispatch({ type: 'change map', value: index });
-    dispatch({ type: 'close menu'})
+    // dispatch({ type: 'close menu'})
   }
 
   const classes = {
-    root: cn('target-link', active && 'active')
+    root: cn('target-link', active && 'active', 'item')
   }
 
   return (

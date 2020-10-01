@@ -57,7 +57,8 @@ const UIHeader = () => {
 
 
       <Common>
-        {/* <Button kind="primary" >Sample button</Button> */}
+        {/* <Button kind="primary">Sample button</Button>
+        <Button>Sample button</Button> */}
         <LocateButton />
       </Common>
 

@@ -17,15 +17,17 @@
 body {
   overflow: hidden;
 }
-header {
-  position: absolute;
-  width: 100%;
-  height: 3rem;
-}
 .App {
   min-width: 20rem;
 }
+header {
+  position: absolute;
+  width: 100%;
+  min-width: 20rem;
+  height: 3rem;
+}
 
+// Migrate to another styles in header
 #hamburger,
 #locator.bx--btn--secondary {
   border-color: transparent;

@@ -24,7 +24,7 @@ const CheckBox = props => {
   } = props;
 
   const classes = {
-    root: cn('target-checkbox', active && 'active')
+    root: cn('target-checkbox', active && 'active', 'item')
   }
 
   const handleClickCheckBox = (composition, index) => {

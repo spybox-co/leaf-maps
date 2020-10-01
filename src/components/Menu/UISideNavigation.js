@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { cn } from '../../utils/helpers';
 
 import './UIMenu.scss';
@@ -10,7 +10,7 @@ const UISideNavigation = props => {
   const classes = cn(styles.SideNavigation, 'navigation', expanded && 'open')
   return(
     <nav className={classes}>
-      <div style={{ position: `relative `}}>
+      <div>
         {children}
       </div>
     </nav>

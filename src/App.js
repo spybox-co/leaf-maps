@@ -143,7 +143,7 @@ export default class App extends Component {
     let zoomNumberStored = localStorage.getItem("lastViewportDataZoomNumber");
     if (storedPosition && zoomNumberStored) {
       location = JSON.parse(storedPosition)
-      console.log("LocationStored:", location);
+      // console.log("LocationStored:", location);
       this.setState(prevState => ({
         viewport: {
           center: location,

@@ -7,10 +7,10 @@ import { LayerStack, Map } from '../Icon/Library';
 
 
 
-import UIMenuNavigator, { TabButton } from './UIMenuTabNavigator';
+import UIMenuNavigator from './UIMenuTabNavigator';
 import UISideNavigation from './UISideNavigation';
 
-import TabContainer, { TabHeader, Maps, Layers } from './Tabs'
+import TabContainer, { TabHeader, TabButton, Maps, Layers } from './Tabs'
 
 import * as update from "../../version";
 
@@ -66,6 +66,7 @@ const UIMenu = props => {
             key={i} 
             onClick={() => actionTabClick(tab)} 
             icon={tab.icon}
+            active={tab.name === activeTab.name && expanded ? true : false}
           />))}
       </UIMenuNavigator>
       

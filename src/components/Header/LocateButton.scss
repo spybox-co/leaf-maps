@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.GeolocateButton {
+  &.autocentermap-enabled {
+    background-color: $navigation-autocentermap-enabled-color;
+    &:hover {
+      background-color: darken($navigation-autocentermap-enabled-color, 10%);
+    }
+    &:active {
+      background-color: darken($navigation-autocentermap-enabled-color, 20%);
+    }
+  }
+  &.autocentermap-disabled {
+    background-color: $navigation-autocentermap-disabled-color;
+    &:hover {
+      background-color: darken($navigation-autocentermap-disabled-color, 10%);
+    }
+    &:active {
+      background-color: darken($navigation-autocentermap-disabled-color, 20%);
+    }
+  }
+  &.geolocation-off {
+    &:hover {
+      background-color: $gray-80;
+    }
+    &:active {
+      background-color: $gray-60;
+    }
+  }
+}
