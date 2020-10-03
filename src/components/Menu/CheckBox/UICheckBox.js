@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
-import { IndexKind } from 'typescript';
 import { store } from '../../../store.js';
 import { cn } from '../../../utils/helpers';
+import Preview from '../Preview';
 
 import "./UICheckBox.scss";
 
@@ -66,21 +65,21 @@ const CheckBox = props => {
 
 export default CheckBox;
 
-const Preview = ({ source, layer, center, zoom, className }) => (
-  <div className={className}>
-    <Map 
-      zoomControl={false}
-      attributionControl={false}
-      style={{ height: `100%` }}
-      center={center} 
-      zoom={zoom-2}
-      scrollWheelZoom={false}
-      dragging={false}
-      touchZoom={false}
-    > 
-      <TileLayer url={source} />
-      <TileLayer url={layer} />
+// const Preview = ({ source, layer, center, zoom, className }) => (
+//   <div className={className}>
+//     <Map 
+//       zoomControl={false}
+//       attributionControl={false}
+//       style={{ height: `100%` }}
+//       center={center} 
+//       zoom={zoom-2}
+//       scrollWheelZoom={false}
+//       dragging={false}
+//       touchZoom={false}
+//     > 
+//       <TileLayer url={source} />
+//       <TileLayer url={layer} />
       
-    </Map>
-  </div>
-)
+//     </Map>
+//   </div>
+// )

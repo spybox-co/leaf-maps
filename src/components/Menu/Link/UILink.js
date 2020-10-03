@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { store } from '../../../store.js';
-import { Map, TileLayer } from 'react-leaflet';
 import { cn } from '../../../utils/helpers';
+import Preview from '../Preview';
 
 import "./UILink.scss";
 
@@ -60,20 +60,3 @@ const Link = props => {
 }
 
 export default Link;
-
-const Preview = ({ source, center, zoom, className }) => (
-  <div className={className}>
-    <Map 
-      zoomControl={false}
-      attributionControl={false}
-      style={{ height: `100%` }}
-      center={center} 
-      zoom={zoom-2}
-      scrollWheelZoom={false}
-      dragging={false}
-      touchZoom={false}
-    >
-      <TileLayer url={source} />
-    </Map>
-  </div>
-)

@@ -49,9 +49,11 @@ const LocateButton = () => {
     }
   }
 
+  const classes = cn("GeolocateButton", startLocate && position ? "geolocation-on" : "geolocation-off");
+
   return(
     <IconButton
-      className={cn("GeolocateButton", startLocate && position ? "geolocation-on" : "geolocation-off")}
+      className={classes}
       id="geolocate"
       kind={kind}
       renderIcon={icon}

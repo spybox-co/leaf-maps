@@ -65,11 +65,11 @@ const ZoomPanel = props => {
       />
 
       
-      {/* <Indicator
+      <Indicator
         className="lf-ZoomPanel-indicator"
         zoom={zoom} 
         maxZoom={maxZoom}
-      />  */}
+      /> 
      
 
       <IconButton
