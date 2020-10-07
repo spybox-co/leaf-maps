@@ -61,7 +61,6 @@ const MapContainer = () => {
   };
 
   const mapOptions = {
-    maxZoom: activeMap.maxZoom || state.mapSettings.maxZoom,
     minZoom: state.mapSettings.minZoom,
     zoom: viewport.zoom,
     scrollWheelZoom: autoCenterMap ? "center" : "true",
@@ -75,13 +74,17 @@ const MapContainer = () => {
     activeLayers: activeLayers,
   }
 
+  
+  let maxZoom = activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom;
 
   useEffect(
     () => {
+      
       if (position !== null && autoCenterMap) {
         dispatch({ type: 'center map on position', value: position })
       }
-    }, [position, autoCenterMap]
+      console.log("MaksZóm:", maxZoom)
+    }, [position, autoCenterMap, maxZoom]
   )
 
   const onViewportChanged = viewport => {
@@ -101,6 +104,7 @@ const MapContainer = () => {
           onDrag={() => dispatch({ type: 'center map', value: false })}
           viewport={viewport}
           {...mapOptions}
+          maxZoom={maxZoom}
           // To-Do
           zoomControl={false} // next to disable default zoom control & make custom
           attributionControl={false} // maybe custom in the future
