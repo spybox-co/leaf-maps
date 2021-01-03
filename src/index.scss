@@ -1,14 +1,43 @@
-@import "./styles/variables.scss";
+@import './styles/variables.scss';
 
-
-li {
-  list-style-type: none;
+body {
+  overflow: hidden;
 }
+header {
+  position: absolute;
+  width: 100%;
+  min-width: 20rem;
+  height: 3rem;
+}
+
+
 main {
   overflow: hidden;
   width: 100%;
   height: 100%;
 }
+
+li {
+  list-style-type: none;
+}
+
+/* LEAFLET OVERRIDES */
+
+.leaflet-top {
+  bottom: 10px;
+}
+
+.leaflet-bar {
+  border: none;
+}
+
+.leaflet-container {
+  height: calc(100vh - 3rem);
+  width: 100%;
+  z-index: 0;
+  background-color: $black;
+}
+
 .lf-Map-container {
   width: 100%;
   height: 100%;

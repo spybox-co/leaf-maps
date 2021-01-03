@@ -6,6 +6,9 @@
 // https://www.toptal.com/react/react-context-api
 
 import _ from 'lodash';
+import axios from 'axios';
+
+import { locationAPI } from "./utils/helpers";
 
 import maps from './utils/MapsData.json';
 import layers from './utils/LayersData.json';
@@ -78,6 +81,9 @@ const StateProvider = ({ children }) => {
       // Initial position  
       case 'set initial position':
         return {...state, viewport: { ...state.viewport, center: action.value }};
+
+
+      // Map actions  
       case 'change map':
         localStorage.setItem('lastMap', action.value);
         return {...state, activeMap: maps[action.value] };
@@ -99,7 +105,7 @@ const StateProvider = ({ children }) => {
       case 'center map':
         return {...state, autoCenterMap: action.value };
       
-      // Menu 
+      // Menu actions
       case 'open menu':
         return {...state, expanded: true };
       case 'close menu':
@@ -127,13 +133,41 @@ const StateProvider = ({ children }) => {
     };
   }, initialState);
 
+
+  const getDefaultUserLocationData = () => {
+    let location = [];
+
+    axios
+    .get(locationAPI.GEOLOCDB)
+    .then(res => {
+      const response = res.data;
+      location = [response.latitude, response.longitude];
+
+      // To-Do
+      console.group("Initial user position");
+        console.log("response from GEOLOCDB:", response);
+        console.log("Position:", location);
+      console.groupEnd(); 
+
+      dispatch({ type: 'set initial position', value: location })
+    })
+    .catch(error => {
+      // In case of error locating default posiotion use Greenwich as start location
+      location = [51,0];
+      console.log(error)
+      dispatch({ type: 'set initial position', value: location })
+    });
+  };
+
   useEffect(
     () => {
+      
       if (storedPosition && storedZoom) {
         dispatch({ type: 'last stored position' })
       } else {
-        dispatch({ type: 'set initial position', value: [50,19] })
+        getDefaultUserLocationData();
       }
+      
       if (storedLastActiveMap || lastStoredActiveLayers) {
         dispatch({ type: 'last stored settings' })
       }

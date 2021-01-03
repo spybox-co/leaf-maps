@@ -44,6 +44,10 @@ const ZoomPanel = props => {
   const zoom = viewport.zoom;
 
   let zoomNumber = zoom;
+
+  // Assignments to the 'zoomNumber' variable from inside React Hook useEffect will be lost after each render. 
+  // To preserve the value over time, store it in a useRef Hook and keep the mutable value in the '.current' property. 
+  // Otherwise, you can move this variable directly inside useEffect  react-hooks/exhaustive-deps
   useEffect(
     () => {
       if (zoomNumber !== zoom) {
@@ -88,7 +92,7 @@ export default ZoomPanel;
 
 const Indicator = ({ zoom, maxZoom, className, ...other }) => {
 
-  const zoomNumber = zoom;
+  let zoomNumber = zoom;
   useEffect(
     () => {
       if (zoomNumber !== zoom) {

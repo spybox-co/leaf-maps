@@ -1,34 +1,11 @@
-@import "./styles/variables.scss";
+@import './styles/variables.scss';
 
 
-.leaflet-top {
-  bottom: 10px;
-}
-
-.leaflet-bar {
-  border: none;
-}
-
-.leaflet-container {
-  height: calc(100vh - 3rem);
-  width: 100%;
-  z-index: 0;
-  background-color: $black;
-}
-
-body {
-  overflow: hidden;
-}
 .App {
   // font-family: "HK Grotesk", sans-serif;
   min-width: 20rem;
 }
-header {
-  position: absolute;
-  width: 100%;
-  min-width: 20rem;
-  height: 3rem;
-}
+
 
 // Migrate to another styles in header
 

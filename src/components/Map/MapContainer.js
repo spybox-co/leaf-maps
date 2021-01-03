@@ -77,7 +77,7 @@ const MapContainer = () => {
     activeLayers: activeLayers,
   }
 
-  
+  // @Param maxZoom in the future
   const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
 
   useEffect(
@@ -85,6 +85,7 @@ const MapContainer = () => {
       if (position !== null && autoCenterMap) {
         dispatch({ type: 'center map on position', value: position })
       }
+      
       if (activeMap.maxZoom) {
         setMaxZoom(activeMap.maxZoom)
       } else {

@@ -4,7 +4,6 @@
 
 .lf-Map-container {
   overflow: hidden;
-  //margin-left: 0rem;
 }
 
 .lf-Map-container {
@@ -21,12 +20,11 @@
   }
   &.ac-disabled {
     .circle {
-      fill: $purple-60; // $gray-100;
+      fill: $purple-60;
       stroke: none;
     }
     .circle-marker {
       fill: $navigation-autocentermap-disabled-color;
-      // fill: $green-color;
       stroke: $white;
       fill-opacity: 1;
     }

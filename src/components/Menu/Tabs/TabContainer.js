@@ -36,7 +36,7 @@ const TabContainer = props => {
 export default TabContainer;
 
 export const TabHeader = ({ title, expanded }) => {
-  const { state, dispatch } = useContext(store);
+  const { dispatch } = useContext(store);
 
   return(
     <div className={styles.Header}>
