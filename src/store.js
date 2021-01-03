@@ -23,7 +23,7 @@ const initialMapData = {
   zoom: 6,
   center: [0, 0],
   mapFocus: 17,
-  minZoom: 4,
+  minZoom: 3,
   maxZoom: 20,
 }
 

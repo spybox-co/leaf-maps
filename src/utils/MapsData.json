@@ -25,7 +25,8 @@
   {
     "vendor": "Wikimedia Labs",
     "name": "Black & White",
-    "url": "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+    "url": "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
+    "maxZoom": 18
   },
   {
     "vendor": "Mapbox",

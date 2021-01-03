@@ -1,5 +1,7 @@
 @import '../../styles/variables.scss';
 
+
+
 .lf-Map-container {
   overflow: hidden;
   //margin-left: 0rem;
@@ -19,7 +21,7 @@
   }
   &.ac-disabled {
     .circle {
-      fill: $black;
+      fill: $purple-60; // $gray-100;
       stroke: none;
     }
     .circle-marker {

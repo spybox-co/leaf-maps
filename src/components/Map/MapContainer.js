@@ -15,7 +15,10 @@ import { PositionMarker } from './Markers';
 
 import { store } from '../../store.js';
 import { cn } from '../../utils/helpers';
+
+
 import Tile from "../../images/tile.png"
+
 
 
 // import LocateControl from './LocateControl';
@@ -75,16 +78,20 @@ const MapContainer = () => {
   }
 
   
-  let maxZoom = activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom;
+  const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
 
   useEffect(
     () => {
-      
       if (position !== null && autoCenterMap) {
         dispatch({ type: 'center map on position', value: position })
       }
-      console.log("MaksZóm:", maxZoom)
-    }, [position, autoCenterMap, maxZoom]
+      if (activeMap.maxZoom) {
+        setMaxZoom(activeMap.maxZoom)
+      } else {
+        setMaxZoom(state.mapSettings.maxZoom)
+      }
+
+    }, [position, autoCenterMap, activeMap]
   )
 
   const onViewportChanged = viewport => {
@@ -96,15 +103,24 @@ const MapContainer = () => {
     localStorage.setItem("lastViewportDataZoomNumber", viewport.zoom);
     
   }
+  const onClickReset = () => {
+    // Reset to position provided in props
+    console.log("Clicked on the map!")
+  }
+
+  const onDrag = () => dispatch({ type: 'center map', value: false });
 
   return(
     <div className={classes.map}>
       <Map
           onViewportChanged={onViewportChanged}
-          onDrag={() => dispatch({ type: 'center map', value: false })}
+          onDrag={onDrag}
+          onClick={onClickReset}
           viewport={viewport}
           {...mapOptions}
-          maxZoom={maxZoom}
+          maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
+          // maxZoom={maxZoom}
+          zoomend={event => console.log(event)}
           // To-Do
           zoomControl={false} // next to disable default zoom control & make custom
           attributionControl={false} // maybe custom in the future
@@ -127,6 +143,7 @@ export default MapContainer;
 
 // @Docs 
 // https://www.npmjs.com/package/react-hook-geolocation
+
 const Geolocation = props => {
 
   // const geolocation = useGeolocation()
@@ -144,28 +161,32 @@ const Geolocation = props => {
   }
  
   // eslint-disable-next-line
-  const geolocation = useGeolocation({}, onGeolocationUpdate)
+  const geolocation = useGeolocation({
+    enableHighAccuracy: true, 
+    maximumAge:         15000, 
+    timeout:            12000
+  }, onGeolocationUpdate)
 
 
 
   // if error -> handle to store & context
-  return null;
-  // return !geolocation.error
-  //   ? (
-  //     <ul>
-  //       <li>Latitude:          {geolocation.latitude}</li>
-  //       <li>Longitude:         {geolocation.longitude}</li>
-  //       <li>Location accuracy: {geolocation.accuracy}</li>
-  //       <li>Altitude:          {geolocation.altitude}</li>
-  //       <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
-  //       <li>Heading:           {geolocation.heading}</li>
-  //       <li>Speed:             {geolocation.speed}</li>
-  //       <li>Timestamp:         {geolocation.timestamp}</li>
-  //     </ul>
-  //   )
-  //   : (
-  //     <p>No geolocation, sorry.</p>
-  //   )
+  // return null;
+  return !geolocation.error
+    ? (
+      <ul>
+        <li>Latitude:          {geolocation.latitude}</li>
+        <li>Longitude:         {geolocation.longitude}</li>
+        <li>Location accuracy: {geolocation.accuracy}</li>
+        <li>Altitude:          {geolocation.altitude}</li>
+        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
+        <li>Heading:           {geolocation.heading}</li>
+        <li>Speed:             {geolocation.speed}</li>
+        <li>Timestamp:         {geolocation.timestamp}</li>
+      </ul>
+    )
+    : (
+      <p>No geolocation, sorry.</p>
+    )
 }
 
 
