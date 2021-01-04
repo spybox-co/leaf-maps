@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 
 
-import { cn } from '../../utils/helpers';
+import { cn } from '../../../../utils/helpers';
 
-import Locate from '../Icon/Library/Locate';
 
-import { IconButton } from "../Button";
 
-import { store  } from '../../store.js';
+import { IconButton } from "../../../Button";
+import ActionButton from '../ActionButton';
+
+import { store  } from '../../../../store.js';
 
 import './LocateButton.scss';
 
@@ -15,20 +16,17 @@ const LocateButton = () => {
   const { state, dispatch } = useContext(store);
   const { startLocate, autoCenterMap, position } = state;
 
-  const icon = Locate;
-  // const icon = startLocate ? AddFilled16 : AddAlt16;
-
   // if (position) console.log("User detected position", position);
   
-  const kind = startLocate && position && (autoCenterMap
-    ? "autocentermap-enabled"
-    : "autocentermap-disabled");
+  // const kind = startLocate && position && (autoCenterMap
+  //   ? "autocentermap-enabled"
+  //   : "autocentermap-disabled");
 
-  // const kind = startLocate
-  // ? autoCenterMap
-  //   ? "geolocation-on autocentermap-enabled"
-  //   : "geolocation-on autocentermap-disabled"
-  // : "geolocation-off";
+  const kind = startLocate
+  ? autoCenterMap
+    ? "autocentermap-enabled"
+    : "autocentermap-disabled"
+  : "gps-off";
 
 
   const handleLocateClick = () => {
@@ -49,14 +47,14 @@ const LocateButton = () => {
     }
   }
 
-  const classes = cn("GeolocateButton", startLocate && position ? "geolocation-on" : "geolocation-off");
+  const classes = cn("LocateButton", startLocate && position ? "geolocation-on" : "geolocation-off");
 
   return(
-    <IconButton
+    <ActionButton
       className={classes}
       id="geolocate"
       kind={kind}
-      renderIcon={icon}
+      renderIcon="Locate"
       iconDescription="Locate your position!"
       onClick={handleLocateClick}
     />

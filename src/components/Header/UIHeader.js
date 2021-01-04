@@ -5,18 +5,20 @@ import { cn } from '../../utils/helpers';
 
 // eslint-disable-next-line
 import { Button, IconButton } from '../Button';
-import { SearchForm } from '../SearchBox';
+import { SearchBox } from '../SearchBox';
 
-import LocateButton from './LocateButton';
+import { MenuButton, SearchButton, LocateButton } from './Actions';
 import UIMenu from '../Menu/UIMenu';
 
+
+// TO-DO Custom Header based on Carbon and "unhook" from IBM styles.
 import {
   Header,
   HeaderName
 } from "carbon-components-react/lib/components/UIShell";
 
 import styles from './UIHeader.module.scss';
-import './Header.scss';
+import './UIHeader.scss';
 
 const UIHeader = () => {
   const { state, dispatch } = useContext(store);
@@ -28,17 +30,17 @@ const UIHeader = () => {
 
   const { expanded, compactMode } = state;
 
+
+
+  // href="./" prefix={<SPYBOXtypo/>}>
   return (
     <Header aria-label="Leaf Maps by Spybox.co">
 
       {!compactMode ? (
         <LogoLeafMaps fill={expanded}/>
       ) : (
-        <IconButton
-          id="hamburger"
-          kind={"secondary"}
-          renderIcon={expanded ? Close16 : Menu16}
-          iconDescription="Menu"
+        <MenuButton
+          expanded={expanded}
           onClick={actionMenuHandle}
         />
       )}
@@ -52,7 +54,6 @@ const UIHeader = () => {
       /> */}
 
       <HeaderName href="./" prefix="SPYBOX">
-      {/* <HeaderName href="./" prefix={<SPYBOXtypo/>}> */}
         Leaf Maps
       </HeaderName>
 
@@ -60,7 +61,8 @@ const UIHeader = () => {
       <Common>
         {/* <Button kind="primary">Sample button</Button>
         <Button>Sample button</Button> */}
-        <SearchForm />
+        <SearchBox />
+        <SearchButton />
         <LocateButton />
       </Common>
 
@@ -132,7 +134,7 @@ const Close16 = () => (
 );
 
 
-const SPYBOXtypo = () => (
+export const SPYBOXtypo = () => (
   <svg width="97" height="16" viewBox="0 0 970 160" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path d="M577.2 40V120L646.4 160L715.7 120V39.9L646.4 0L577.2 40ZM692.6 106.6L646.4 133.3L600.3 106.6V53.3L646.5 26.6L692.7 53.2L692.6 106.6Z" />
     <path d="M900.4 93.3L877.3 80L784.9 133.3V160L877.3 106.6L969.6 160V133.3L900.4 93.3Z" />

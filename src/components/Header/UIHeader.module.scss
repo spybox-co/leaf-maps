@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .logo {
   display: inline-flex;
@@ -11,9 +11,9 @@
   padding-right: 0.75rem;
   padding-left: 0.75rem;
   color: $white;
+  
   svg {
     width: 1.5rem;
     height: 1.5rem;
-
   }
 }

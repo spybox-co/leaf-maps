@@ -47,7 +47,7 @@ const initialState = {
   startLocate: false,
   autoCenterMap: false,
   expanded: false,
-  compactMode: false
+  compactMode: true
 };
 
 const store = createContext(initialState);
@@ -96,6 +96,10 @@ const StateProvider = ({ children }) => {
       case 'zoom in':
         return {...state, viewport: { ...state.viewport, zoom: state.viewport.zoom + 1 }};
 
+      // Search Location actions  
+      case 'center map on location':
+        return {...state,  autoCenterMap: false, viewport: { ...state.viewport, center: action.value }};
+
       // Set user geolocation data
       case 'set my position':
         return {...state, position: action.value };
@@ -115,10 +119,7 @@ const StateProvider = ({ children }) => {
 
       // Local Storage
       case 'last stored position':
-        return {
-          ...state, 
-          viewport: { center: storedPosition, zoom: storedZoom }
-        };
+        return { ...state, viewport: { center: storedPosition, zoom: storedZoom }};
       case 'last stored settings':
         return {
           ...state, 
@@ -167,7 +168,7 @@ const StateProvider = ({ children }) => {
       } else {
         getDefaultUserLocationData();
       }
-      
+
       if (storedLastActiveMap || lastStoredActiveLayers) {
         dispatch({ type: 'last stored settings' })
       }

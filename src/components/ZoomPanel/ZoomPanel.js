@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { store  } from '../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
 import { IconButton } from "../Button";
-import { Add, Substract } from '../Icon/Library';
 
 
 import "./ZoomPanel.scss";
@@ -64,7 +63,7 @@ const ZoomPanel = props => {
         disabled={zoom === maxZoom ? true : false}
         onClick={() => dispatch({ type: 'zoom in' })}
         // onClick={() => dispatch({ type: 'set zoom', value: zoom + 1 })}
-        renderIcon={Add}
+        renderIcon="Add"
         iconDescription="Zoom in"
       />
 
@@ -81,7 +80,7 @@ const ZoomPanel = props => {
         kind="secondary"
         disabled={zoom === minZoom ? true : false}
         onClick={() => dispatch({ type: 'set zoom', value: zoom - 1 })}
-        renderIcon={Substract}
+        renderIcon="Substract"
         iconDescription="Zoom out"
       />
     </div>

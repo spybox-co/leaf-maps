@@ -160,7 +160,7 @@ const Geolocation = props => {
 
   
   const onGeolocationUpdate = geolocation => {
-    console.log('Here’s some new data from the Geolocation API: ', geolocation)
+    // console.log('Here’s some new data from the Geolocation API: ', geolocation)
     dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
   }
  

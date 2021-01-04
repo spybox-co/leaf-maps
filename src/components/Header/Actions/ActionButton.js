@@ -1,27 +1,27 @@
 import React from 'react';
 
-import Icon from '../Icon';
-import './styles.scss';
+import Icon from '../../Icon';
+import './ActionButton.scss';
 
 const Button = props => {
   const { 
-    children,
+    // children,
     className,
     // label, 
     onClick,
     renderIcon,
     kind,
-    hasOnlyIcon,
+    hasLabel,
   } = props;
 
   const buttonKind = 
-    (kind === 'primary' && 'spbx--button--primary') ||
-    (kind === 'secondary' && 'spbx--button--secondary') ||
-    (kind === 'tertiary' && 'spbx--button--tertiary') ||
-    (kind === 'danger' && 'spbx--button--danger') ||
-    (kind === 'warning' && 'spbx--button--warning') ||
-    (kind === 'green' && 'spbx--button--green') ||
-    (kind === 'orange' && 'spbx--button--orange') ||
+    (kind === 'primary' && 'spbx--header__action--primary') ||
+    (kind === 'secondary' && 'spbx--header__action--secondary') ||
+    (kind === 'tertiary' && 'spbx--header__action--tertiary') ||
+    (kind === 'danger' && 'spbx--header__action--danger') ||
+    (kind === 'warning' && 'spbx--header__action--warning') ||
+    (kind === 'green' && 'spbx--header__action--green') ||
+    (kind === 'orange' && 'spbx--header__action--orange') ||
     // To-Do
     (kind && `spbx--button--custom ${kind}`);
 
@@ -29,10 +29,9 @@ const Button = props => {
 
   const classes = [
     className ? className : null,
-    'spbx--button',
-    hasOnlyIcon && 'spbx--button--icon-only',
-    kind ? buttonKind : 'spbx--button--default',
-    
+    'spbx--header__action',
+    hasLabel && 'spbx--header__action-label',
+    kind ? buttonKind : 'spbx--header__action--default',
   ].join(' ').trim();
 
   // To-Do:
@@ -46,7 +45,8 @@ const Button = props => {
         className={classes}
         onClick={onClick}
       >
-        {children}
+        {/* {children} */}
+
         {renderIcon && <RenderIconComponent icon={renderIcon} />}
       </button>
   );
@@ -60,7 +60,7 @@ export default Button;
 
 const RenderIconComponent = ({ icon }) => {
   if (typeof icon === 'string') {
-    return <Icon type={icon} />
+    return <Icon type={icon} size={20} />
   }
   if (typeof icon === 'function') {
     return icon;
