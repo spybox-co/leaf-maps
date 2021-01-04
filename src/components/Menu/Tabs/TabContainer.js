@@ -43,12 +43,12 @@ export const TabHeader = ({ title, expanded }) => {
       <h6>
         {title}
       </h6>
-      <CloseButton          
+      {/* <CloseButton          
         kind={"secondary"}
-        renderIcon={Close16}
+        renderIcon="Close"
         iconDescription="Close"
         onClick={() => dispatch({ type: 'close menu'})}
-      />
+      /> */}
     </div>
   );
 }

@@ -1,33 +1,26 @@
-import React, { useContext } from 'react';
-
-
-import { cn } from '../../../../utils/helpers';
+import React from 'react';
 
 
 
-import { IconButton } from "../../../Button";
+
 import ActionButton from '../ActionButton';
 
-import { store  } from '../../../../store.js';
 
 import './SearchButton.scss';
 
-const SearchButton = () => {
-  const { state, dispatch } = useContext(store);
-  // const { startLocate, autoCenterMap, position } = state;
+const SearchButton = ({ onClick, ...other }) => {
 
   const icon = "Search";
 
-  return(
-    <div>
-      <ActionButton
-        className="SearchButton"
-        id="search"
-        renderIcon={icon}
-        iconDescription="Search location"
-        //onClick={handleLocateClick}
-      />
-    </div>
+  return(    
+    <ActionButton
+      className="SearchButton"
+      id="search"
+      renderIcon={icon}
+      iconDescription="Search location"
+      onClick={onClick}
+      {...other}
+    />
   )
 }
 

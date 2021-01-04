@@ -1,23 +1,32 @@
-@import '../../styles/variables.scss';
+@import '../../../../styles/variables.scss';
 
+
+.SearchBox {
+  display: flex;
+  width: 3rem;
+  max-width: 30rem;
+  position: relative;
+  transition: width ease 150ms;
+  &.expanded {
+    background-color: $gray-80;
+    outline: $white solid 2px;
+    outline-offset: -2px;
+    width: 100%;
+  }
+  
+}
 .SearchBox-Input {
   background-color: transparent;
   color: $gray-30;
   height: 100%;
-  width: 20rem;
-  &:focus {
-    background-color: $gray-80;
-    outline: $white solid 2px;
-    outline-offset: -2px;
-  }
+  width: calc(100% - 6rem);
 }
 
 .SearchBox-Results {
   position: absolute;
   top: 3rem;
-  right: 3rem;
   background-color: $white;
-  width: 20rem;
+  width: 100%;
   
 }
 

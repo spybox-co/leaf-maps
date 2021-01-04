@@ -8,7 +8,7 @@ import {
   DocumentBlank32,
   DocumentPdf32, 
   Download32,
-  Fade32, 
+  //Fade32, 
   Launch32,
   Menu32,
   View32,
@@ -41,7 +41,7 @@ import './Icon.scss';
 // @Info: Dynamic Component name in React
 // @See:  https://dev.to/arpit016/dynamic-components-in-react-4iic
 const Components = {
-  default: Fade32,
+  default: DocumentBlank32,
   // Add: Add32,
   Add: Add,
   ArrowUp: ArrowUp32,
@@ -50,7 +50,7 @@ const Components = {
   DocumentBlank: DocumentBlank32,
   DocumentPdf: DocumentPdf32,
   Download: Download32,
-  Fade: Fade32,
+  //Fade: Fade32,
   GlyphStar: GlyphStar,
   Launch: Launch32,
   LayerStack: LayerStack,

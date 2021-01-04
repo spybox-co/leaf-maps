@@ -3,11 +3,8 @@ import { store } from '../../store.js';
 
 import { cn } from '../../utils/helpers';
 
-// eslint-disable-next-line
-import { Button, IconButton } from '../Button';
-import { SearchBox } from '../SearchBox';
+import { MenuButton, SearchBox, LocateButton } from './Actions';
 
-import { MenuButton, SearchButton, LocateButton } from './Actions';
 import UIMenu from '../Menu/UIMenu';
 
 
@@ -44,27 +41,18 @@ const UIHeader = () => {
           onClick={actionMenuHandle}
         />
       )}
-      
-      {/* <Hamburger
-        id="hamburger"
-        kind={"secondary"}
-        renderIcon={expanded ? Close16 : Menu16}
-        iconDescription="Menu"
-        onClick={actionMenuHandle}
-      /> */}
 
       <HeaderName href="./" prefix="SPYBOX">
         Leaf Maps
       </HeaderName>
 
 
-      <Common>
+      <GlobalPanel>
         {/* <Button kind="primary">Sample button</Button>
         <Button>Sample button</Button> */}
         <SearchBox />
-        <SearchButton />
         <LocateButton />
-      </Common>
+      </GlobalPanel>
 
       <UIMenu
         expanded={expanded}
@@ -75,14 +63,8 @@ const UIHeader = () => {
 }
 export default UIHeader;
 
-const Common = props => {
-  const style = {
-    display: `inline-flex`,
-    justifyContent: `flex-end`,
-    flex: `1 1 0%`
-  };
-
-  return <div style={style}>{props.children}</div>;
+const GlobalPanel = props => {
+  return <div className="Header__global">{props.children}</div>;
 };
 
 const LogoLeafMaps = ({ fill }) => (
@@ -104,34 +86,6 @@ const LogoLeafMaps = ({ fill }) => (
     </svg>
   </div>
 )
-
-const Menu16 = () => (
-  <svg
-    width="16"
-    height="16"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    style={{ fill: `#fff` }}
-  >
-    <rect x="2" y="12" width="12" height="1" />
-    <rect x="2" y="9" width="12" height="1" />
-    <rect x="2" y="6" width="12" height="1" />
-    <rect x="2" y="3" width="12" height="1" />
-  </svg>
-);
-const Close16 = () => (
-  <svg
-    width="16"
-    height="16"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    style={{ fill: `#fff` }}
-  >
-    <polygon points="12,4.7 11.3,4 8,7.3 4.7,4 4,4.7 7.3,8 4,11.3 4.7,12 8,8.7 11.3,12 12,11.3 8.7,8 " />
-  </svg>
-);
 
 
 export const SPYBOXtypo = () => (

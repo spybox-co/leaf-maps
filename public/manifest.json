@@ -3,6 +3,7 @@
   "name": "SPYBOX Leaf Maps",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "favicon.ico",
@@ -40,7 +41,7 @@
       "density": 1
     }
   ],
-  "theme_color": "#171717",
-  "background_color": "#171717"
+  "theme_color": "#161616",
+  "background_color": "#161616"
 }
 

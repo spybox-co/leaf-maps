@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 
 
-// import { cn } from '../../../../utils/helpers';
+import { cn } from '../../../../utils/helpers';
 
 // import ActionButton from '../MenuButton';
 import ActionButton from '../ActionButton';
 
 // import { store  } from '../../../../store.js';
 
-// import './MenuButton.scss';
+import './MenuButton.scss';
 
 const MenuButton = ({ expanded, onClick }) => {
   // const { state, dispatch } = useContext(store);
@@ -16,11 +16,12 @@ const MenuButton = ({ expanded, onClick }) => {
 
   const icon = expanded ? "Close" : "Menu";
 
+  const classes = cn('MenuButton', expanded ? 'Menu--opened' : 'Menu--closed');
+
   return(
     <ActionButton
-      className="MenuButton"
+      className={classes}
       id="hamburger"
-      // kind={"secondary"}
       renderIcon={icon}
       iconDescription="Menu"
       onClick={onClick}

@@ -13,3 +13,17 @@
   }
 }
 
+.Header__global {
+  position: static;
+  
+  display: flex;
+  flex: 1 1;
+  justify-content: flex-end;
+  height: 100%;
+  @media screen and (max-width: 50rem) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 3rem);
+  }
+}
