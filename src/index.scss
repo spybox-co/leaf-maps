@@ -21,6 +21,21 @@ li {
   list-style-type: none;
 }
 
+input {
+  font-size: 0.875rem;
+  padding-left: 0.5rem;
+  color: inherit;
+  border: 0;
+  &:focus {
+    outline: 0;
+  }
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 /* LEAFLET OVERRIDES */
 
 .leaflet-top {

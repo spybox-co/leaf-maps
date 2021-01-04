@@ -10,6 +10,7 @@ import {
 import { BaseLayer, MapOverlays } from './Layers';
 import { PositionMarker } from './Markers';
 
+
 // import L from 'leaflet';
 // import { useLeafletMap } from 'use-leaflet';
 
@@ -85,7 +86,7 @@ const MapContainer = () => {
       if (position !== null && autoCenterMap) {
         dispatch({ type: 'center map on position', value: position })
       }
-      
+
       if (activeMap.maxZoom) {
         setMaxZoom(activeMap.maxZoom)
       } else {
@@ -127,6 +128,8 @@ const MapContainer = () => {
           attributionControl={false} // maybe custom in the future
         >
           {/* <YourComponent /> */}
+
+          {/* <SearchBox query="Gdynia" /> */}
 
           {startLocate && <Geolocation />}
 

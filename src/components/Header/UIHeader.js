@@ -4,10 +4,11 @@ import { store } from '../../store.js';
 import { cn } from '../../utils/helpers';
 
 // eslint-disable-next-line
-import { Button, IconButton } from "../Button";
+import { Button, IconButton } from '../Button';
+import { SearchForm } from '../SearchBox';
 
 import LocateButton from './LocateButton';
-import UIMenu from "../Menu/UIMenu";
+import UIMenu from '../Menu/UIMenu';
 
 import {
   Header,
@@ -59,6 +60,7 @@ const UIHeader = () => {
       <Common>
         {/* <Button kind="primary">Sample button</Button>
         <Button>Sample button</Button> */}
+        <SearchForm />
         <LocateButton />
       </Common>
 
