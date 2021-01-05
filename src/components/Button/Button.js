@@ -47,7 +47,8 @@ const Button = props => {
         onClick={onClick}
       >
         {children}
-        {renderIcon && <RenderIconComponent icon={renderIcon} />}
+        {/* {renderIcon && <RenderIconComponent icon={renderIcon} />} */}
+        {renderIcon && RenderIconComponent(renderIcon)}
       </button>
   );
   
@@ -58,12 +59,16 @@ export default Button;
 
 
 
-const RenderIconComponent = ({ icon }) => {
+const RenderIconComponent = (icon) => {
+
+  console.log("Ikona:", icon, typeof icon);
   if (typeof icon === 'string') {
     return <Icon type={icon} />
   }
   if (typeof icon === 'function') {
     return icon;
+    // return <icon />;
   }
-  return null;
+
+  //return <Icon />;
 }

@@ -8,7 +8,7 @@ import {
 } from 'react-leaflet';
 
 import { BaseLayer, MapOverlays } from './Layers';
-import { PositionMarker } from './Markers';
+import { PositionMarker, LocationMarker } from './Markers';
 
 
 // import L from 'leaflet';
@@ -56,6 +56,7 @@ const MapContainer = () => {
     activeLayers,
     autoCenterMap,
     position,
+    location,
     viewport,
     startLocate
   } = state;
@@ -83,9 +84,15 @@ const MapContainer = () => {
 
   useEffect(
     () => {
+
+
       if (position !== null && autoCenterMap) {
         dispatch({ type: 'center map on position', value: position })
       }
+      // Genreating Error -> watch out!
+      // if (location.set && !autoCenterMap) {
+      //   dispatch({ type: 'center map on position', value: location.center })
+      // }
 
       if (activeMap.maxZoom) {
         setMaxZoom(activeMap.maxZoom)
@@ -93,7 +100,7 @@ const MapContainer = () => {
         setMaxZoom(state.mapSettings.maxZoom)
       }
 
-    }, [position, autoCenterMap, activeMap]
+    }, [position, location, autoCenterMap, activeMap]
   )
 
   const onViewportChanged = viewport => {
@@ -127,14 +134,13 @@ const MapContainer = () => {
           zoomControl={false} // next to disable default zoom control & make custom
           attributionControl={false} // maybe custom in the future
         >
-          {/* <YourComponent /> */}
-
-          {/* <SearchBox query="Gdynia" /> */}
 
           {startLocate && <Geolocation />}
 
+          
           {startLocate && position !== null && <PositionMarker position={position} />}
 
+          {location.set && location.center !== null && location.label !== null && <LocationMarker position={location.center} label={location.label} />}
           <BaseLayer {...layersProps} />
           <MapOverlays {...layersProps} />
 
@@ -144,6 +150,8 @@ const MapContainer = () => {
 }
 
 export default MapContainer;
+// {location.set && location.center !== null && location.label !== null && <LocationMarker position={location.center} label={location.label} />}
+
 
 // @Docs 
 // https://www.npmjs.com/package/react-hook-geolocation
@@ -161,12 +169,19 @@ const Geolocation = props => {
   
   const onGeolocationUpdate = geolocation => {
     // console.log('Here’s some new data from the Geolocation API: ', geolocation)
-    dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
+    if (geolocation) {
+      dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
+    } else {
+      console.log("Coś nie tak!")
+    }
+    
+
+    // else -> keep user waiting and ask for patient! :P
   }
  
   // eslint-disable-next-line
   const geolocation = useGeolocation({
-    enableHighAccuracy: true, 
+    enableHighAccuracy: false, 
     maximumAge:         15000, 
     timeout:            12000
   }, onGeolocationUpdate)

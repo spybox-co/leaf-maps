@@ -100,7 +100,10 @@ const SearchForm = () => {
           />
 
           <CloseButton
-            onClick={() => setExpanded(false)}
+            onClick={() => {
+              setExpanded(false);
+              dispatch({ type: 'clear location'});
+            }}
             kind={expanded && 'expanded'}
           />
         </>
@@ -111,6 +114,7 @@ const SearchForm = () => {
             <ResultItem 
               key={i}
               onClick={() => {
+                dispatch({ type: 'set location', value: [r.geometry.coordinates[1], r.geometry.coordinates[0]], label: [r.properties.name, r.properties.city ? r.properties.city : null, r.properties.country ? r.properties.country : null, r.properties.postcode ? r.properties.postcode : null].filter(Boolean).join(', ') });
                 dispatch({ type: 'center map on location', value: [ r.geometry.coordinates[1], r.geometry.coordinates[0] ] });
                 dispatch({ type: 'set zoom', value: 14 });
                 showDropdown(false);

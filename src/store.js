@@ -44,10 +44,16 @@ const initialState = {
     maxZoom: initialMapData.maxZoom,
   },
   position: null,
+  location: {
+    set: false,
+    center: null,
+    label: null,
+    bounds: null
+  },
   startLocate: false,
   autoCenterMap: false,
   expanded: false,
-  compactMode: true
+  compactMode: false
 };
 
 const store = createContext(initialState);
@@ -82,7 +88,6 @@ const StateProvider = ({ children }) => {
       case 'set initial position':
         return {...state, viewport: { ...state.viewport, center: action.value }};
 
-
       // Map actions  
       case 'change map':
         localStorage.setItem('lastMap', action.value);
@@ -90,6 +95,7 @@ const StateProvider = ({ children }) => {
       case 'on change viewport':
         return {...state, viewport: action.value };
       case 'center map on position':
+        // console.log("skonsolowany stejt:", state.position, action.value);
         return {...state, viewport: { ...state.viewport, center: action.value }};
       case 'set zoom':
         return {...state, viewport: { ...state.viewport, zoom: action.value }};
@@ -99,6 +105,10 @@ const StateProvider = ({ children }) => {
       // Search Location actions  
       case 'center map on location':
         return {...state,  autoCenterMap: false, viewport: { ...state.viewport, center: action.value }};
+      case 'set location':
+        return {...state, location: { ...state.viewport, set: true, center: action.value, label: action.label }};
+      case 'clear location':
+        return {...state,  location: { ...state.viewport, set: false, center: null, label: null }};
 
       // Set user geolocation data
       case 'set my position':
@@ -160,6 +170,7 @@ const StateProvider = ({ children }) => {
     });
   };
 
+
   useEffect(
     () => {
       
@@ -172,6 +183,7 @@ const StateProvider = ({ children }) => {
       if (storedLastActiveMap || lastStoredActiveLayers) {
         dispatch({ type: 'last stored settings' })
       }
+
       
 
       // Settings localStorage in console
