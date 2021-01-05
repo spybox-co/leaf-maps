@@ -3,35 +3,17 @@ import React, { useContext } from 'react';
 
 import { cn } from '../../../../utils/helpers';
 
-
-
-import { IconButton } from "../../../Button";
 import ActionButton from '../ActionButton';
 
-import { store  } from '../../../../store.js';
+import { store } from '../../../../store.js';
 
 import './LocateButton.scss';
 
-const LocateIcon = ({ enabled }) => (
-  <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="16" cy="16" r="2" />
-    <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="2" fill="none" />
-    <rect x="26" y="15" width="6" height="2" />
-    <rect y="15" width="6" height="2" />
-    <rect x="15" width="2" height="6" />
-    <rect x="15" y="26" width="2" height="6" />
-  </svg>
-)
+
 
 const LocateButton = () => {
   const { state, dispatch } = useContext(store);
   const { startLocate, autoCenterMap, position } = state;
-
-  // if (position) console.log("User detected position", position);
-  
-  // const kind = startLocate && position && (autoCenterMap
-  //   ? "autocentermap-enabled"
-  //   : "autocentermap-disabled");
 
   const kind = startLocate
   ? autoCenterMap
@@ -58,25 +40,41 @@ const LocateButton = () => {
     }
   }
 
-  const classes = cn("LocateButton", startLocate && position ? "geolocation-on" : "geolocation-off");
-
-  const icon = <LocateIcon />;
-
-  
+  const classes = cn('LocateButton', startLocate && position ? 'geolocation-on' : 'geolocation-off');
 
   return(
     <ActionButton
       className={classes}
       id="geolocate"
       kind={kind}
-      renderIcon={LocateIcon}
+      // renderIcon={LocateIcon}
       iconDescription="Locate your position!"
       onClick={handleLocateClick}
-    />
+    >
+      <LocateIcon enabled={startLocate} follow={autoCenterMap}/>
+    </ActionButton>
   )
 }
 
 export default LocateButton;
 
 
-
+const LocateIcon = ({ enabled, follow }) => {
+  const classes = cn('Icon', 'Icon-20', 'LocateIcon', follow && 'follow');
+  const dot = follow ? 6 : 4;
+  return(
+    <div className={classes}>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r={enabled ? dot : 0} />
+        {/* {enabled ? <circle cx="16" cy="16" r={dot} /> : <circle cx="16" cy="16" r={2} />} */}
+        <circle cx="16" cy="16" r={enabled ? 11 : 9} stroke="currentColor" strokeWidth="2" fill="none" />
+        <g>
+          <rect x="26" y="15" width="6" height="2" />
+          <rect y="15" width="6" height="2" />
+          <rect x="15" width="2" height="6" />
+          <rect x="15" y="26" width="2" height="6" />
+        </g>
+      </svg>
+    </div>
+  )
+}

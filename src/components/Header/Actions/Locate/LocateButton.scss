@@ -29,3 +29,15 @@
     }
   }
 }
+
+.LocateIcon {
+  svg circle {
+    transition: 300ms ease;
+  }
+  // &.follow {
+  //   svg g {
+  //     transition: 300ms ease;
+  //     transform: rotate(90deg);
+  //   }
+  // }
+}

@@ -5,7 +5,7 @@ import './ActionButton.scss';
 
 const Button = props => {
   const { 
-    // children,
+    children,
     className,
     // label, 
     onClick,
@@ -38,16 +38,18 @@ const Button = props => {
   // Implement Icon Component
   // const Icon = renderIcon ? renderIcon : null;
 
-
+  if (renderIcon && children) {
+    console.error("Not allowed arguments 'renderIcon' and react children in <ActionButton /> at the same time. Choose one option.")
+  }
 
   return (
       <button 
         className={classes}
         onClick={onClick}
       >
-        {/* {children} */}
+        {!renderIcon && children ? children : null}
 
-        {renderIcon && <RenderIconComponent icon={renderIcon} />}
+        {renderIcon && !children && (<RenderIconComponent icon={renderIcon} />)}
       </button>
   );
   
@@ -61,9 +63,11 @@ export default Button;
 const RenderIconComponent = ({ icon }) => {
   if (typeof icon === 'string') {
     return <Icon type={icon} size={20} />
+  } else {
+    console.error("Type of 'renderIcon' argument should be a 'string' only in <ActionButton />!")
   }
-  if (typeof icon === 'function') {
-    return icon;
-  }
+  // if (typeof icon === 'function') {
+  //   return icon;
+  // }
   return null;
 }
