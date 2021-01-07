@@ -53,7 +53,10 @@ const initialState = {
   startLocate: false,
   autoCenterMap: false,
   expanded: false,
-  compactMode: false
+  compactMode: false,
+  globalHeader: {
+    expanded: false
+  }
 };
 
 const store = createContext(initialState);

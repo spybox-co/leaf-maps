@@ -4,22 +4,26 @@
 .SearchBox {
   display: flex;
   width: 3rem;
-  max-width: 30rem;
+  max-width: 35rem;
   position: relative;
   transition: width ease 150ms;
   &.expanded {
     background-color: $gray-80;
     outline: $white solid 2px;
     outline-offset: -2px;
-    width: 100%;
+    //width: 100%;
+    flex: 1 1 100%;
   }
-  
+
 }
 .SearchBox-Input {
   background-color: transparent;
   color: $gray-30;
+  padding: 0;
   height: 100%;
-  width: calc(100% - 6rem);
+  flex: 1 1 100%;
+  display: flex;
+  min-width: calc(100% - 6rem);
 }
 
 .SearchBox-Results {

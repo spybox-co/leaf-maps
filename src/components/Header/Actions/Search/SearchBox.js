@@ -29,10 +29,11 @@ const SearchForm = () => {
 
   const handleClick = () => {
     if(expanded) {
-      console.log("klikłem!")
       setExpanded(false);
+      
     } else {
       setExpanded(true);
+      
     }
   }
 
@@ -45,7 +46,8 @@ const SearchForm = () => {
   useEffect(
     () => {
       if (results.length > 0) console.log("Results:", results);
-    }, [results]);
+      {expanded ? window.document.querySelector('.Header__global').classList.add("search-is-active") : window.document.querySelector('.Header__global').classList.remove("search-is-active")}
+    }, [results, expanded]);
 
 
   const ResultsProvider = (query) => {
