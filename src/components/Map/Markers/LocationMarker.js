@@ -6,7 +6,9 @@ const LocationMarker = ({ position, label }) => {
   return(
     <>
       <Marker position={position}>
-        <Popup>
+        <Popup 
+          className="Tooltip "
+        >
           {label}
         </Popup>
       </Marker>
