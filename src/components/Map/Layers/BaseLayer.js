@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TileLayer } from 'react-leaflet';
 
-import MapTileError from "../../../images/map_tile_error.png"
+import MapTileError from '../../../images/map_tile_error.png';
 
 const BaseLayer = props => {
   const { activeMap, map } = props;

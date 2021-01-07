@@ -65,7 +65,7 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   
   const [state, dispatch] = useReducer((state, action) => {
-    const focusLocationOnMapZoom = state.activeMap.maxZoom < state.mapSettings.maxZoom ? state.activeMap.maxZoom : 18;
+    const focusLocationOnMapZoom = state.activeMap.maxZoom < state.mapSettings.maxZoom ? state.activeMap.maxZoom : 16;
     const focusPositionOnMapZoom = state.viewport.zoom < 14 ? focusLocationOnMapZoom : state.viewport.zoom;
 
     switch(action.type) {
