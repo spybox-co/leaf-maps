@@ -12,6 +12,7 @@ const Button = props => {
     renderIcon,
     kind,
     hasOnlyIcon,
+    disabled
   } = props;
 
   const buttonKind = 
@@ -32,6 +33,7 @@ const Button = props => {
     'spbx--button',
     hasOnlyIcon && 'spbx--button--icon-only',
     kind ? buttonKind : 'spbx--button--default',
+    disabled && 'spbx--button--disabled',
     
   ].join(' ').trim();
 
@@ -45,6 +47,7 @@ const Button = props => {
       <button 
         className={classes}
         onClick={onClick}
+        disabled={disabled}
       >
         {children}
         {/* {renderIcon && <RenderIconComponent icon={renderIcon} />} */}

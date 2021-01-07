@@ -11,8 +11,8 @@ const BaseLayer = props => {
     return (
       <TileLayer 
         url={map} 
-        // maxZoom={20}
-        // detectRetina={true}
+        // maxZoom={activeMap.maxZoom}
+        detectRetina={true}
         errorTileUrl={MapTileError}
       />
     );
