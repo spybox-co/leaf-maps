@@ -36,9 +36,15 @@ const SearchForm = () => {
     }
   }
 
+  // const maxZoom = state.mapSettings.maxZoom;
+
+  
+  // const zoomFocusValue = maxZoom > 18 ? 18 : maxZoom;
+
+
   useEffect(
     () => {
-      if (results.length > 0) console.log("Results:", results)
+      if (results.length > 0) console.log("Results:", results);
     }, [results]);
 
 
@@ -59,7 +65,6 @@ const SearchForm = () => {
   }
   // const prov = OpenStreetMapProvider();
   // const GeoSearchControlElement = SearchControl;
-
 
   const classes = {
     root: cn('Header--module__Search', 'SearchBox', expanded && 'expanded'),
@@ -116,7 +121,7 @@ const SearchForm = () => {
               onClick={() => {
                 dispatch({ type: 'set location', value: [r.geometry.coordinates[1], r.geometry.coordinates[0]], label: [r.properties.name, r.properties.city ? r.properties.city : null, r.properties.country ? r.properties.country : null, r.properties.postcode ? r.properties.postcode : null].filter(Boolean).join(', ') });
                 dispatch({ type: 'center map on location', value: [ r.geometry.coordinates[1], r.geometry.coordinates[0] ] });
-                dispatch({ type: 'set zoom', value: 14 });
+                // dispatch({ type: 'set zoom', value: zoomFocusValue });
                 showDropdown(false);
               }}
               properties={r.properties}

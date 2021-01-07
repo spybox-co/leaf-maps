@@ -48,8 +48,6 @@ const UIHeader = () => {
 
 
       <GlobalPanel>
-        {/* <Button kind="primary">Sample button</Button>
-        <Button>Sample button</Button> */}
         <SearchBox />
         <LocateButton />
       </GlobalPanel>

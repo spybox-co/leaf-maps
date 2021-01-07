@@ -89,10 +89,6 @@ const MapContainer = () => {
       if (position !== null && autoCenterMap) {
         dispatch({ type: 'center map on position', value: position })
       }
-      // Genreating Error -> watch out!
-      // if (location.set && !autoCenterMap) {
-      //   dispatch({ type: 'center map on position', value: location.center })
-      // }
 
       if (activeMap.maxZoom) {
         setMaxZoom(activeMap.maxZoom)
@@ -127,6 +123,7 @@ const MapContainer = () => {
           onClick={onClickReset}
           viewport={viewport}
           {...mapOptions}
+
           maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
           // maxZoom={maxZoom}
           zoomend={event => console.log(event)}

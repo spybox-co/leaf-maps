@@ -59,8 +59,15 @@ const initialState = {
 const store = createContext(initialState);
 const { Provider } = store;
 
+
+
+
 const StateProvider = ({ children }) => {
+  
   const [state, dispatch] = useReducer((state, action) => {
+    const focusLocationOnMapZoom = state.activeMap.maxZoom < state.mapSettings.maxZoom ? state.activeMap.maxZoom : 18;
+    const focusPositionOnMapZoom = state.viewport.zoom < 14 ? focusLocationOnMapZoom : state.viewport.zoom;
+
     switch(action.type) {
 
       // Samples
@@ -95,8 +102,7 @@ const StateProvider = ({ children }) => {
       case 'on change viewport':
         return {...state, viewport: action.value };
       case 'center map on position':
-        // console.log("skonsolowany stejt:", state.position, action.value);
-        return {...state, viewport: { ...state.viewport, center: action.value }};
+        return {...state, viewport: { ...state.viewport, center: action.value, zoom: focusPositionOnMapZoom }};
       case 'set zoom':
         return {...state, viewport: { ...state.viewport, zoom: action.value }};
       case 'zoom in':
@@ -104,7 +110,7 @@ const StateProvider = ({ children }) => {
 
       // Search Location actions  
       case 'center map on location':
-        return {...state,  autoCenterMap: false, viewport: { ...state.viewport, center: action.value }};
+        return {...state,  autoCenterMap: false, viewport: { ...state.viewport, center: action.value, zoom: focusLocationOnMapZoom }};
       case 'set location':
         return {...state, location: { ...state.viewport, set: true, center: action.value, label: action.label }};
       case 'clear location':

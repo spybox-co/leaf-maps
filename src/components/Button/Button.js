@@ -61,14 +61,13 @@ export default Button;
 
 const RenderIconComponent = (icon) => {
 
-  console.log("Ikona:", icon, typeof icon);
+  // console.log("Icon type:", icon, typeof icon);
+  
   if (typeof icon === 'string') {
     return <Icon type={icon} />
   }
   if (typeof icon === 'function') {
     return icon;
-    // return <icon />;
   }
-
-  //return <Icon />;
+  return null;
 }
