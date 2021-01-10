@@ -6,8 +6,8 @@ import L from 'leaflet';
 
 const Icon = L.icon({
   iconUrl: require('../../../images/map_pin_marker.png'),
-  iconSize: [64,64],
-  iconAnchor: [32, 64],
+  iconSize: [48,48],
+  iconAnchor: [24, 48],
   popupAnchor: [0, -42], // [0, -64] - 100% of pin height on top 
   // shadowUrl: null,
   // shadowSize: null,
