@@ -23,6 +23,11 @@ const tabs = [
     name: "Layers",
     component: <Layers />,
     icon: "LayerStack"
+  },
+  {
+    name: "Settings",
+    component: <>settings</>,
+    icon: "default"
   }
 ];
 

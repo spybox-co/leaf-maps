@@ -1,6 +1,15 @@
 @import '../../../styles/variables.scss';
 
 .Tab {
+  button {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+    &:focus {
+      outline-color: $primary-color;
+    }
+  }
+
+
   .active {
     background-color: $gray-80;
     &:hover {
@@ -17,6 +26,7 @@
       left: 0;
       height: 100%;
     }
+
   }
   .inactive {
     background: none;

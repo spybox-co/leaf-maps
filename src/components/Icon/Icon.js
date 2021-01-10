@@ -42,6 +42,7 @@ import './Icon.scss';
 // @See:  https://dev.to/arpit016/dynamic-components-in-react-4iic
 const Components = {
   default: DocumentBlank32,
+  Default: DocumentBlank32,
   // Add: Add32,
   Add: Add,
   ArrowUp: ArrowUp32,

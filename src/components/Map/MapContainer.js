@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import React, { useState, useEffect, useContext } from 'react';
 import useGeolocation from 'react-hook-geolocation';
+import Geolocation from '../Geolocation';
 import { 
   Map,
   useLeaflet,
@@ -153,7 +154,7 @@ export default MapContainer;
 // @Docs 
 // https://www.npmjs.com/package/react-hook-geolocation
 
-const Geolocation = props => {
+const GeolocationHook = props => {
 
   // const geolocation = useGeolocation()
   const { state, dispatch } = useContext(store);
