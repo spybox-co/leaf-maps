@@ -8,8 +8,8 @@ export default () => {
   const { state, dispatch } = useContext(store);
   // const { autoCenterMap, position, startLocate } = state;
 
-  const watchUserPosition = () => {
-    if (navigator.geoloction) {
+  const componentDidMount = () => {
+    if (navigator.geolocation) {
       navigator.geolocation.watchPosition(function(position) {
         console.log("Latitude is :", position.coords.latitude);
         console.log("Longitude is :", position.coords.longitude);
@@ -22,8 +22,9 @@ export default () => {
 
   useEffect(
     () => {
-      watchUserPosition();
-    }, [navigator.geolocation]
+      componentDidMount();
+
+    }, []
   )
 
 
