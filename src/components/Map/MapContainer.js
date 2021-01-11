@@ -58,25 +58,25 @@ const MapContainer = () => {
     startLocate
   } = state;
 
-    // @Param maxZoom in the future
-    const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
+  // @Param maxZoom in the future
+  //const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
 
-    useEffect(
-      () => {
-  
-  
-        if (position !== null && autoCenterMap) {
-          dispatch({ type: 'center map on position', value: position })
-        }
-  
-        if (activeMap.maxZoom) {
-          setMaxZoom(activeMap.maxZoom)
-        } else {
-          setMaxZoom(state.mapSettings.maxZoom)
-        }
-  
-      }, [position, location, autoCenterMap, activeMap]
-    )
+  useEffect(
+    () => {
+
+
+      if (position !== null && autoCenterMap) {
+        dispatch({ type: 'center map on position', value: position })
+      }
+      /*
+      if (activeMap.maxZoom) {
+        setMaxZoom(activeMap.maxZoom)
+      } else {
+        setMaxZoom(state.mapSettings.maxZoom)
+      }
+      */
+    }, [position, location, autoCenterMap, activeMap, dispatch]
+  )
 
   const classes = {
     map: cn('lf-Map-container', autoCenterMap ? 'ac-enabled' : 'ac-disabled')

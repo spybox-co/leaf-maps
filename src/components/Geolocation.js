@@ -30,7 +30,7 @@ export default () => {
           dispatch({ type: 'set my position', value: [ position.coords.latitude, position.coords.longitude ]})
         });
       }
-    }, []
+    }, [dispatch]
   )
 
 
