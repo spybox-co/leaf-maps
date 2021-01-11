@@ -47,11 +47,7 @@ const mapStyle = {
 
 const MapContainer = () => {
   const { state, dispatch } = useContext(store);
-  // const { map } = useLeaflet();
-
-  // console.log("viewport store", state.viewport)
-  
-  
+  // const { map } = useLeaflet();  
   const {
     activeMap,
     activeLayers,
@@ -61,6 +57,26 @@ const MapContainer = () => {
     viewport,
     startLocate
   } = state;
+
+    // @Param maxZoom in the future
+    const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
+
+    useEffect(
+      () => {
+  
+  
+        if (position !== null && autoCenterMap) {
+          dispatch({ type: 'center map on position', value: position })
+        }
+  
+        if (activeMap.maxZoom) {
+          setMaxZoom(activeMap.maxZoom)
+        } else {
+          setMaxZoom(state.mapSettings.maxZoom)
+        }
+  
+      }, [position, location, autoCenterMap, activeMap]
+    )
 
   const classes = {
     map: cn('lf-Map-container', autoCenterMap ? 'ac-enabled' : 'ac-disabled')
@@ -80,25 +96,7 @@ const MapContainer = () => {
     activeLayers: activeLayers,
   }
 
-  // @Param maxZoom in the future
-  const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
 
-  useEffect(
-    () => {
-
-
-      if (position !== null && autoCenterMap) {
-        dispatch({ type: 'center map on position', value: position })
-      }
-
-      if (activeMap.maxZoom) {
-        setMaxZoom(activeMap.maxZoom)
-      } else {
-        setMaxZoom(state.mapSettings.maxZoom)
-      }
-
-    }, [position, location, autoCenterMap, activeMap]
-  )
 
   const onViewportChanged = viewport => {
 
@@ -154,13 +152,11 @@ export default MapContainer;
 // @Docs 
 // https://www.npmjs.com/package/react-hook-geolocation
 
-const GeolocationHook = props => {
+export const GeolocationHook = props => {
 
   // const geolocation = useGeolocation()
-  const { state, dispatch } = useContext(store);
-
-  // eslint-disable-next-line
-  const { autoCenterMap, position, startLocate } = state;
+  const { dispatch } = useContext(store);
+  // const { autoCenterMap, position, startLocate } = state;
 
 
 
@@ -216,8 +212,8 @@ const GeolocationHook = props => {
 
 
 
-// eslint disable-next-line
-const YourComponent = () => {
+
+export const YourComponent = () => {
   const { map } = useLeaflet();
   const [bounds, setBounds] = React.useState({});
 

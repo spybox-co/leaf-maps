@@ -1,5 +1,7 @@
+import * as data from '../package.json';
+
 export const app = {
-  version: `1.0.20`,
+  version: `${data.version}`,
   variant: `Nut Tree`,
   color: `#a56eff`
 }

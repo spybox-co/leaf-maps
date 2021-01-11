@@ -11,9 +11,7 @@ import SearchButton from './SearchButton';
 
 import './SearchBox.scss';
 
-// const provider = new OpenStreetMapProvider();
-// const results = provider.search({ query: "Gdynia"});
-// const results = provider.search({ query: input.value });
+
 
 
 
@@ -24,29 +22,24 @@ const SearchForm = () => {
   const [value, setValue] = useState('');
   const [expanded, setExpanded] = useState(false);
 
-  // To-Do
-  // const { searchState (blured or not - focused) } = state;
-
   const handleClick = () => {
     if(expanded) {
       setExpanded(false);
       
     } else {
       setExpanded(true);
-      
     }
   }
-
-  // const maxZoom = state.mapSettings.maxZoom;
-
-  
-  // const zoomFocusValue = maxZoom > 18 ? 18 : maxZoom;
-
 
   useEffect(
     () => {
       if (results.length > 0) console.log("Results:", results);
-      {expanded ? window.document.querySelector('.Header__global').classList.add("search-is-active") : window.document.querySelector('.Header__global').classList.remove("search-is-active")}
+
+      if (expanded) {
+        window.document.querySelector('.Header__global').classList.add("search-is-active")
+      } else {
+        window.document.querySelector('.Header__global').classList.remove("search-is-active")
+      }
     }, [results, expanded]);
 
 
@@ -123,7 +116,6 @@ const SearchForm = () => {
               onClick={() => {
                 dispatch({ type: 'set location', value: [r.geometry.coordinates[1], r.geometry.coordinates[0]], label: [r.properties.name, r.properties.city ? r.properties.city : null, r.properties.country ? r.properties.country : null, r.properties.postcode ? r.properties.postcode : null].filter(Boolean).join(', ') });
                 dispatch({ type: 'center map on location', value: [ r.geometry.coordinates[1], r.geometry.coordinates[0] ] });
-                // dispatch({ type: 'set zoom', value: zoomFocusValue });
                 showDropdown(false);
               }}
               properties={r.properties}
@@ -148,7 +140,6 @@ const SearchForm = () => {
 export default SearchForm;
 
 const ResultItem = ({ name, properties, onClick }) => {
-  // name ? name : null, 
   const label = [properties.city ? properties.city : null, properties.country ? properties.country : null, properties.postcode ? properties.postcode : null].filter(Boolean).join(', ')
   return(
     <li className="SearchBox-Result-item">

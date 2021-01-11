@@ -24,25 +24,21 @@ const tabs = [
     component: <Layers />,
     icon: "LayerStack"
   },
-  {
-    name: "Settings",
-    component: <>settings</>,
-    icon: "default"
-  }
+  // {
+  //   name: "Settings",
+  //   component: <>settings</>,
+  //   icon: "default"
+  // }
 ];
 
 const UIMenu = props => {
-  const { state, dispatch } = useContext(store);
+  const { dispatch } = useContext(store);
   const [activeTab, setActiveTab] = useState(tabs[0])
   const {
     expanded,
-    actionMenuHandle,
   } = props;
 
-  const { maps } = state;
-
-  // console.log("Tab ys aktiw:", activeTab);
-
+  // const { maps } = state;
 
 
   const actionTabClick = tab => {

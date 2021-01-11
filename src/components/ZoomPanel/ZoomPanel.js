@@ -1,4 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { 
+  useContext
+  // useEffect 
+} from "react";
 import { store  } from '../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
 import { IconButton } from "../Button";
@@ -42,11 +45,13 @@ const ZoomPanel = props => {
   const { minZoom, maxZoom } = mapSettings;
   const zoom = viewport.zoom;
 
-  let zoomNumber = zoom;
+  // let zoomNumber = zoom;
 
   // Assignments to the 'zoomNumber' variable from inside React Hook useEffect will be lost after each render. 
   // To preserve the value over time, store it in a useRef Hook and keep the mutable value in the '.current' property. 
   // Otherwise, you can move this variable directly inside useEffect  react-hooks/exhaustive-deps
+
+  /*
   useEffect(
     () => {
       if (zoomNumber !== zoom) {
@@ -54,6 +59,7 @@ const ZoomPanel = props => {
       }
     }, [zoom]
   );
+  */
 
   return (
     <div className="lf-ZoomPanel" style={style.root} {...others}>
@@ -91,6 +97,7 @@ export default ZoomPanel;
 
 const Indicator = ({ zoom, maxZoom, className, ...other }) => {
 
+  /*
   let zoomNumber = zoom;
   useEffect(
     () => {
@@ -99,6 +106,8 @@ const Indicator = ({ zoom, maxZoom, className, ...other }) => {
       }
     }, [zoom]
   );
+  */
+
   let maxedOut = false;
   if (zoom >= maxZoom) {
     maxedOut = true;
@@ -110,7 +119,7 @@ const Indicator = ({ zoom, maxZoom, className, ...other }) => {
   
   return (
     <div className={classes} {...other}>
-      <span>{zoomNumber}</span>
+      <span>{zoom}</span>
     </div>
   )
 }
