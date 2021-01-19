@@ -1,12 +1,7 @@
-// eslint-disable-next-line
-import React, { useState, useEffect, useContext } from 'react';
-import useGeolocation from 'react-hook-geolocation';
+import React, { useEffect, useContext } from 'react';
+
 import Geolocation from '../Geolocation';
-import { 
-  Map,
-  useLeaflet,
-  //withLeaflet
-} from 'react-leaflet';
+import { Map } from 'react-leaflet';
 
 import { BaseLayer, MapOverlays } from './Layers';
 import { PositionMarker, LocationMarker } from './Markers';
@@ -146,72 +141,17 @@ const MapContainer = () => {
 }
 
 export default MapContainer;
-// {location.set && location.center !== null && location.label !== null && <LocationMarker position={location.center} label={location.label} />}
+
+
+
 
 
 // @Docs 
-// https://www.npmjs.com/package/react-hook-geolocation
-
-export const GeolocationHook = props => {
-
-  // const geolocation = useGeolocation()
-  const { dispatch } = useContext(store);
-  // const { autoCenterMap, position, startLocate } = state;
+// https://www.npmjs.com/package/react-hook-geolocation as alternative of Geolocation component
 
 
 
-  
-  const onGeolocationUpdate = geolocation => {
-    // console.log('Here’s some new data from the Geolocation API: ', geolocation)
-    if (geolocation) {
-      dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
-    } else {
-      console.log("Coś nie tak!")
-    }
-    
-
-    // else -> keep user waiting and ask for patient! :P
-  }
- 
-  // eslint-disable-next-line
-  const geolocation = useGeolocation({
-    enableHighAccuracy: false, 
-    maximumAge:         15000, 
-    timeout:            12000
-  }, onGeolocationUpdate)
-
-
-
-  // if error -> handle to store & context
-  // return null;
-  return !geolocation.error
-    ? (
-      <ul>
-        <li>Latitude:          {geolocation.latitude}</li>
-        <li>Longitude:         {geolocation.longitude}</li>
-        <li>Location accuracy: {geolocation.accuracy}</li>
-        <li>Altitude:          {geolocation.altitude}</li>
-        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
-        <li>Heading:           {geolocation.heading}</li>
-        <li>Speed:             {geolocation.speed}</li>
-        <li>Timestamp:         {geolocation.timestamp}</li>
-      </ul>
-    )
-    : (
-      <p>No geolocation, sorry.</p>
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
+/*
 
 export const YourComponent = () => {
   const { map } = useLeaflet();
@@ -235,3 +175,5 @@ export const YourComponent = () => {
     <div style={{ zIndex: 1000 }}>Lat: {bounds.lat}; long: {bounds.lng}</div>
   )
 }
+
+*/
