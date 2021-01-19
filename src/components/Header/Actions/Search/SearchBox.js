@@ -11,7 +11,10 @@ import SearchButton from './SearchButton';
 
 import './SearchBox.scss';
 
-
+const options = {
+  minQuerylength: 2,
+  timeOut: 500,
+}
 
 
 
@@ -49,8 +52,6 @@ const SearchForm = () => {
     .get(SearchAPI)
     .then(res => {
       const response = res.data;
-      // console.log(response.features);
-      console.log(SearchAPI)
       setResults(response.features);
     })
     .catch(error => {
@@ -77,8 +78,8 @@ const SearchForm = () => {
         <>
           <DebounceInput
             className={classes.input}
-            minLength={2}
-            debounceTimeout={500}
+            minLength={options.minQuerylength}
+            debounceTimeout={options.timeOut}
             type="text"
             value={value}
             placeholder="Find place..."
@@ -125,14 +126,8 @@ const SearchForm = () => {
         </ul>
       )}
 
-      {results.length === 0 && value !== "" && dropdown && (
-        <div className="SearchBox-Results">
-          <div className="SearchBox-Result-item empty">
-            Nothing found! Try again.
-          </div>
-        </div>
-      )}
-      
+      {results.length === 0 && value.length > options.minQuerylength && dropdown && <NoResultsItem />}
+
     </div>
   )
 }
@@ -151,6 +146,34 @@ const ResultItem = ({ name, properties, onClick }) => {
       </button>
     </li>
   );
+}
+
+
+
+
+const NoResultsItem = () => {
+  const [message, showMessage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      showMessage(true);
+    }, options.timeOut);
+    return () => clearTimeout(timer);
+  }, [])
+
+  const Component = (
+    <div className="SearchBox-Results">
+      <div className="SearchBox-Result-item empty">
+        Nothing found! Try again.
+      </div>
+    </div>
+  );
+
+  
+  if (message) {
+    return Component;
+  }
+  return null;
 }
 
 
