@@ -2,9 +2,11 @@
   "name": "leaf-maps",
   "homepage": "https://leafmaps.spybox.co/",
   "version": "1.0.20",
+  "author": "Spybox CO <agent@spybox.pl>",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "license": "private",
   "dependencies": {
     "@carbon/icons": "^10.22.0",
     "@carbon/icons-react": "^10.22.0",
@@ -33,9 +35,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-1111": "set PORT=1111 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "delete": "rm -rf node_modules && rm -rf build"
   },
   "browserslist": [
     ">0.2%",

@@ -15,6 +15,8 @@ const LocateButton = () => {
   const { state, dispatch } = useContext(store);
   const { startLocate, autoCenterMap, position } = state;
 
+
+  // @PARAM position needed
   const kind = startLocate
   ? autoCenterMap
     ? "autocentermap-enabled"
@@ -29,8 +31,8 @@ const LocateButton = () => {
       dispatch({ type: 'center map', value: true });
     }
     // When geolocation is active but map is not centered on user position
-    if (startLocate && !autoCenterMap) {
-      dispatch({ type: 'center map', value: true });
+    if (startLocate && !autoCenterMap && position !== null) {
+      //dispatch({ type: 'center map', value: true });
       dispatch({ type: 'center map on position', value: position });
     }
     // Disable showing user's position on map
@@ -66,7 +68,6 @@ const LocateIcon = ({ enabled, follow }) => {
     <div className={classes}>
       <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <circle cx="16" cy="16" r={enabled ? dot : 0} />
-        {/* {enabled ? <circle cx="16" cy="16" r={dot} /> : <circle cx="16" cy="16" r={2} />} */}
         <circle cx="16" cy="16" r={enabled ? 11 : 9} stroke="currentColor" strokeWidth="2" fill="none" />
         <g>
           <rect x="26" y="15" width="6" height="2" />
