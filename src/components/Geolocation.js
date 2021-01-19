@@ -9,35 +9,45 @@ const options = {
 };
 
 
-export default ({ watchPosition }) => {
+export default () => {
 
   const { dispatch } = useContext(store);
 
-  const userPosition = (position) => {
-    console.log("Latitude is :", position.coords.latitude);
-    console.log("Longitude is :", position.coords.longitude);
-    console.log("Overall position data:", position);
-    dispatch({ type: 'set my position', value: [ position.coords.latitude, position.coords.longitude ]})
-  }
+  // const userPosition = (position) => {
+  //   console.log("Latitude is :", position.coords.latitude);
+  //   console.log("Longitude is :", position.coords.longitude);
+  //   console.log("Overall position data:", position);
+  //   dispatch({ type: 'set my position', value: [ position.coords.latitude, position.coords.longitude ]})
+  // }
 
-  const errorPosition = (error) => {
-    console.warn('GEO ERROR(' + error.code + '): ' + error.message);
-  };
+  // const errorPosition = (error) => {
+  //   console.warn('GEO ERROR(' + error.code + '): ' + error.message);
+  // };
 
-  const handleUserPosition = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(userPosition, errorPosition, options);
-    }
-    // else throw error
-  }
+  // const handleUserPosition = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.watchPosition(userPosition, errorPosition, options);
+  //   }
+  //   // else throw error
+  // }
 
 
   useEffect(
     () => {
-      if(watchPosition) {
-        handleUserPosition();
+      //handleUserPosition();
+      // if(watchPosition) {
+      //   handleUserPosition();
+      // }
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition((position) => {
+            console.log("Latitude is :", position.coords.latitude);
+            console.log("Longitude is :", position.coords.longitude);
+            console.log("Overall position data:", position);
+            dispatch({ type: 'set my position', value: [ position.coords.latitude, position.coords.longitude ]})
+          }
+        );
       }
-    }, [handleUserPosition, watchPosition]
+    }, [dispatch]
   )
 
 

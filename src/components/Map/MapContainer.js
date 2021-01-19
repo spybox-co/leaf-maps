@@ -131,8 +131,8 @@ const MapContainer = () => {
           attributionControl={false} // maybe custom in the future
         >
 
-          {/* {startLocate && <Geolocation watchPosition={startLocate} />} */}
-          <Geolocation watchPosition={startLocate} />
+          {startLocate && <Geolocation />}
+          {/* <Geolocation watchPosition={startLocate} /> */}
           
           {startLocate && position !== null && <PositionMarker position={position} />}
 
