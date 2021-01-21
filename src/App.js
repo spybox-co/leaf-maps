@@ -55,6 +55,10 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log("👋 mounted");
+    window.screen.orientation.lock("portrait-primary")
+		.catch(function(error) {
+			console.error(error);
+		});
   }
 
   customInstallPWAPrompt = () => {

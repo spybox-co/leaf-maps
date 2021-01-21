@@ -1,9 +1,11 @@
 import * as data from '../package.json';
 
+import { GetColor } from './utils/helpers';
+
 export const app = {
   version: `${data.version}`,
   variant: `Nut Tree`,
-  color: `#a56eff`
+  color: GetColor(`${data.version} ${data.version}`)
 }
 
 
@@ -24,3 +26,12 @@ export const app = {
 // 1.7.x variant: Chestnut (kasztanowiec)
 // 1.8.x variant: Oak (dąb)
 // 1.9.x variant: Maple (klon)
+
+
+
+
+
+
+
+
+
