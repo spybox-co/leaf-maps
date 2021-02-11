@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-1111": "set PORT=1111 && react-scripts start",
+    "develop": "set PORT=1111 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

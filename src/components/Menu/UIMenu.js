@@ -24,11 +24,11 @@ const tabs = [
     component: <Layers />,
     icon: "LayerStack"
   },
-  // {
-  //   name: "Settings",
-  //   component: <>settings</>,
-  //   icon: "default"
-  // }
+  {
+    name: "Console",
+    component: <>settings</>,
+    icon: "default"
+  }
 ];
 
 const UIMenu = props => {

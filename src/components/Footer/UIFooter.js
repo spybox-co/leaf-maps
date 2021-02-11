@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./UIFooter.css";
+import "./UIFooter.scss";
 
 const UIFooter = props => {
   return <footer>{props.children}</footer>;

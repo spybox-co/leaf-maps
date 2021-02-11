@@ -55,10 +55,10 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log("👋 mounted");
-    window.screen.orientation.lock("portrait-primary")
-		.catch(function(error) {
-			console.error(error);
-		});
+    console.log('screen rientation is ', window.screen.orientation.type)
+    window.screen.orientation.addEventListener('change', function() {
+      console.log('new orientation is ', window.screen.orientation.type);
+    });
   }
 
   customInstallPWAPrompt = () => {

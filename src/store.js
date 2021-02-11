@@ -10,8 +10,10 @@ import axios from 'axios';
 
 import { locationAPI } from "./utils/helpers";
 
-import maps from './utils/MapsData.json';
-import layers from './utils/LayersData.json';
+// import maps from './utils/MapsData.json';
+// import layers from './utils/LayersData.json';
+import { maps, layers } from './utils/data';
+
 
 import React, { createContext, useReducer, useEffect } from 'react';
 

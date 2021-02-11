@@ -8,6 +8,10 @@ import {
   FeatureGroup 
 } from "react-leaflet";
 
+
+// Miss some zoom levels for your tiles?
+// https://github.com/Zverik/Leaflet.LimitZoom
+
 export default () => (
   <LayersControl position="topleft">
     {/* <LayersControl.BaseLayer name="OpenStreetMap.BlackAndWhite">
