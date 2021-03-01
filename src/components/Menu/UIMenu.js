@@ -5,6 +5,8 @@ import { cn } from '../../utils/helpers';
 import UIMenuNavigator from './UIMenuTabNavigator';
 import UISideNavigation from './UISideNavigation';
 
+import Console from '../../components/Console';
+
 import TabContainer, { TabHeader, TabButton, Maps, Layers } from './Tabs'
 
 import * as update from "../../version";
@@ -26,7 +28,8 @@ const tabs = [
   },
   {
     name: "Console",
-    component: <>settings</>,
+    component: <Console />,
+    // component: <>settings</>,
     icon: "default"
   }
 ];

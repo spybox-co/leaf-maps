@@ -18,7 +18,8 @@ const Preview = props => {
         style={{ height: `100%` }}
         center={center} 
         //zoom={zoom-2}
-        zoom={layer ? zoomPrev : zoom-2}
+        zoom={13}
+        // zoom={layer ? zoomPrev : zoom-2}
         scrollWheelZoom={false}
         dragging={false}
         touchZoom={false}
