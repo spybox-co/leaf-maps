@@ -27,6 +27,14 @@
   border-style: solid;
   border-width: 1px;
 
+  &__icon {
+    flex-shrink: 0;
+    height: 1rem;
+    position: absolute;
+    right: 1rem;
+    width: 1rem;
+  }
+
 
   &--default {
     color: $white;

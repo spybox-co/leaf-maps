@@ -12,7 +12,9 @@ const Button = props => {
     renderIcon,
     kind,
     hasOnlyIcon,
-    disabled
+    anchor,
+    disabled,
+    ...other
   } = props;
 
   const buttonKind = 
@@ -41,18 +43,19 @@ const Button = props => {
   // Implement Icon Component
   // const Icon = renderIcon ? renderIcon : null;
 
-
+  const Component = anchor ? "a" : "button";
 
   return (
-      <button 
+      <Component
         className={classes}
         onClick={onClick}
         disabled={disabled}
+        {...other}
       >
         {children}
         {/* {renderIcon && <RenderIconComponent icon={renderIcon} />} */}
         {renderIcon && RenderIconComponent(renderIcon)}
-      </button>
+      </Component>
   );
   
 }
@@ -67,7 +70,7 @@ const RenderIconComponent = (icon) => {
   // console.log("Icon type:", icon, typeof icon);
   
   if (typeof icon === 'string') {
-    return <Icon type={icon} />
+    return <Icon className="spbx--button__icon" type={icon} />
   }
   if (typeof icon === 'function') {
     return icon;

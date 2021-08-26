@@ -29,14 +29,13 @@ const tabs = [
   {
     name: "Console",
     component: <Console />,
-    // component: <>settings</>,
     icon: "Settings"
   }
 ];
 
 const UIMenu = props => {
   const { dispatch } = useContext(store);
-  const [activeTab, setActiveTab] = useState(tabs[0])
+  const [activeTab, setActiveTab] = useState(tabs[2])
   const {
     expanded,
   } = props;

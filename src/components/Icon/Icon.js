@@ -78,7 +78,7 @@ const IconComponent = ({ type }) => {
 
 
 const Icon = ({ type, size, className, ...others }) => {
-  const classes = cn('Icon', className && className, size ? `Icon-${size}` : 'Icon-16');
+  const classes = cn(className && className, 'Icon', size ? `Icon-${size}` : 'Icon-16');
   return (
     <div className={classes} {...others}>
       <IconComponent type={type ? type : "default"} />   

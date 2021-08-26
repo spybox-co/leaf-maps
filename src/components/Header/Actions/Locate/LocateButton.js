@@ -37,8 +37,9 @@ const LocateButton = () => {
     }
     // Disable showing user's position on map
     if (startLocate && autoCenterMap) {
-      dispatch({ type: 'start locate', value: false });
-      dispatch({ type: 'center map', value: false });
+      // dispatch({ type: 'start locate', value: false });
+      // dispatch({ type: 'center map', value: false });
+      dispatch({ type: 'locate off' });
     }
   }
 

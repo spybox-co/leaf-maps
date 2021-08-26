@@ -23,13 +23,19 @@ let storedZoom = parseInt(localStorage.getItem('lastViewportDataZoomNumber'), 10
 let storedLastActiveMap = localStorage.getItem('lastMap');
 let lastStoredActiveLayers = JSON.parse(localStorage.getItem('lastStoredActiveLayers'));
 
+const initialAppSettings = {
+  menu: {
+    expanded: true,
+    activeTab: 0,
+  },
+}
 
 const initialMapData = {
   zoom: 6,
   center: [0, 0],
   mapFocus: 16,
   minZoom: 3,
-  maxZoom: 20,
+  maxZoom: 20,  
 }
 
 const initialState = {
@@ -54,10 +60,11 @@ const initialState = {
   },
   startLocate: false,
   autoCenterMap: false,
-  expanded: false,
+  expanded: initialAppSettings.menu.expanded,
   compactMode: false,
+  menuActiveTab: initialAppSettings.menu.activeTab,
   globalHeader: {
-    expanded: true //false
+    expanded: false
   }
 };
 
@@ -127,6 +134,8 @@ const StateProvider = ({ children }) => {
 
       case 'start locate':
         return {...state, startLocate: action.value };
+      case 'locate off':
+        return {...state, startLocate: false, position: null, autoCenterMap: false };  
       case 'center map':
         return {...state, autoCenterMap: action.value };
       

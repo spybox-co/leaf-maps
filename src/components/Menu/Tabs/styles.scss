@@ -38,3 +38,9 @@
     }
   }
 }
+
+.Console {
+  .bx--tile > *, .bx--tile-content span div > *, #viewport-data > * {
+    margin-bottom: 0.75rem;
+  }
+}
