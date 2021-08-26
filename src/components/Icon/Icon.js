@@ -29,6 +29,8 @@ import {
   LayerStack, 
   Locate,
   Map,
+  Printer,
+  Settings,
   Substract
 } from './Library';
 
@@ -62,8 +64,10 @@ const Components = {
   LogoInstagram: LogoInstagram,
   Map: Map,
   Menu: Menu32,
+  Printer: Printer,
   Search: Search32,
   Send: Send32,
+  Settings: Settings,
   Substract: Substract,
   View: View32,
 };

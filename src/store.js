@@ -27,7 +27,7 @@ let lastStoredActiveLayers = JSON.parse(localStorage.getItem('lastStoredActiveLa
 const initialMapData = {
   zoom: 6,
   center: [0, 0],
-  mapFocus: 17,
+  mapFocus: 16,
   minZoom: 3,
   maxZoom: 20,
 }
@@ -57,7 +57,7 @@ const initialState = {
   expanded: false,
   compactMode: false,
   globalHeader: {
-    expanded: false
+    expanded: true //false
   }
 };
 
@@ -70,7 +70,7 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   
   const [state, dispatch] = useReducer((state, action) => {
-    const focusLocationOnMapZoom = state.activeMap.maxZoom < state.mapSettings.maxZoom ? state.activeMap.maxZoom : 16;
+    const focusLocationOnMapZoom = initialMapData.mapFocus; // state.activeMap.maxZoom < state.mapSettings.maxZoom ? state.activeMap.maxZoom : 16;
     const focusPositionOnMapZoom = state.viewport.zoom < 14 ? focusLocationOnMapZoom : state.viewport.zoom;
 
     switch(action.type) {

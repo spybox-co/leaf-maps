@@ -5,9 +5,9 @@ import { cn } from '../../utils/helpers';
 import UIMenuNavigator from './UIMenuTabNavigator';
 import UISideNavigation from './UISideNavigation';
 
-import Console from '../../components/Console';
+// import Console from '../../components/Console';
 
-import TabContainer, { TabHeader, TabButton, Maps, Layers } from './Tabs'
+import TabContainer, { TabHeader, TabButton, Maps, Layers, Console } from './Tabs'
 
 import * as update from "../../version";
 
@@ -30,7 +30,7 @@ const tabs = [
     name: "Console",
     component: <Console />,
     // component: <>settings</>,
-    icon: "default"
+    icon: "Settings"
   }
 ];
 
