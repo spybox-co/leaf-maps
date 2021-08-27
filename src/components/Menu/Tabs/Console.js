@@ -120,7 +120,8 @@ export default () => {
           renderIcon={"Launch"}
           kind="tertiary"
           anchor
-          href={`https://www.google.pl/maps/@${viewport.center[0]},${viewport.center[1]},${viewport.zoom}z`}
+          disabled={autoCenterMap}
+          href={!autoCenterMap ? `https://www.google.pl/maps/@${viewport.center[0]},${viewport.center[1]},${viewport.zoom}z` : null}
           target="_blank"
         >Show this view on Google Maps</Button>
       </Tile>

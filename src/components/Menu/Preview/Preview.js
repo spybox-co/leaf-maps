@@ -4,7 +4,13 @@ import { Map, TileLayer } from 'react-leaflet';
 import { cn } from '../../../utils/helpers';
 
 const Preview = props => {
-  const { source, layer, center, zoom, className } = props;
+  const { 
+    source, 
+    layer, 
+    center, 
+    // zoom, 
+    className 
+  } = props;
 
   const classes = cn(className, 'ui--item-preview');
 
@@ -16,8 +22,7 @@ const Preview = props => {
         zoomControl={false}
         attributionControl={false}
         style={{ height: `100%` }}
-        center={center} 
-        //zoom={zoom-2}
+        center={center}
         zoom={13}
         // zoom={layer ? zoomPrev : zoom-2}
         scrollWheelZoom={false}
