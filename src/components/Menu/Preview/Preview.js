@@ -8,7 +8,7 @@ const Preview = props => {
 
   const classes = cn(className, 'ui--item-preview');
 
-  const zoomPrev = (zoom < 12 ? 10 : zoom-2)
+  //  const zoomPrev = (zoom < 12 ? 10 : zoom-2)
 
   return(
     <div className={classes}>

@@ -6,7 +6,8 @@ import { CodeSnippet, ExpandableTile, TileBelowTheFoldContent, TileAboveTheFoldC
 import {Button} from "../../../components/Button";
 import Typo from "../../../components/Typography";
 import Tile from "../../../components/Tile";
-import Icon from "../../../components/Icon";
+
+// import Icon from "../../../components/Icon";
 
 //import ExpandablePanel from "./components/ExpandablePanel/ExpandablePanel";
 
