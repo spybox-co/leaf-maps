@@ -34,7 +34,7 @@ export default () => {
   return(
     <div className="Console">
       <StaticTile>
-      <Typo>My position</Typo>
+      <h3>My position</h3>
       {startLocate && position !== null ? (
               <Button
                 renderIcon={"Locate"}
@@ -110,7 +110,7 @@ export default () => {
           ) : null}
         
         <div id="viewport-data" style={autoCenterMap ? { color: `gray`} : null}>
-          <h6>Latitude</h6>
+          <Typo>Latitude</Typo>
           <CodeSnippet type="single">{`${viewport.center[0]}`}</CodeSnippet>
           <h6>Longtitude</h6>
           <CodeSnippet type="single">{`${viewport.center[1]}`}</CodeSnippet>
@@ -126,7 +126,7 @@ export default () => {
         >Show this view on Google Maps</Button>
       </Tile>
       <Tile style={expandStyle}>
-        <Typo>Print Map</Typo>
+        <h6>Print Map</h6>
         <ReactToPrint
           trigger={() => 
             <Button 

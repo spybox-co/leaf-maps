@@ -2,8 +2,7 @@ export const maps = [
   {
     vendor: "Stamen",
     name: "Toner Lite",
-    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
-    default: true
+    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
   },
   {
     vendor: "Open Street Map",
@@ -91,7 +90,8 @@ export const maps = [
   {
     vendor: "Carto",
     name: "Dark Matter",
-    url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+    url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
+    default: true
   },
   {
     vendor: "Esri",

@@ -7,7 +7,7 @@ import { Content as UIContent } from "carbon-components-react/lib/components/UIS
 
 import Map from './components/Map';
 // eslint disable-next-line
-import ZoomPanel from "./components/ZoomPanel/ZoomPanel";
+import ZoomPanel from "./components/ZoomPanel";
 
 // TO-USE in future:
 //import CaptureScreen from "./components/CaptureScreen/CaptureScreen";

@@ -34,18 +34,19 @@
 }
 .target-link-label {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.125rem;
+  // font-size: calc(0.875rem + 0 * (100vw - 20rem) / 62);
   letter-spacing: 0.16px;
 }
 
 .target-link-title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: 0;
-  font-size: calc(1.25rem + 0 * (100vw - 20rem) / 62);
+  // font-size: calc(1.25rem + 0 * (100vw - 20rem) / 62);
   display: block;
   max-width: 17.1875rem;
 }

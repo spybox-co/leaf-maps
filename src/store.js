@@ -23,11 +23,18 @@ let storedZoom = parseInt(localStorage.getItem('lastViewportDataZoomNumber'), 10
 let storedLastActiveMap = localStorage.getItem('lastMap');
 let lastStoredActiveLayers = JSON.parse(localStorage.getItem('lastStoredActiveLayers'));
 
+
+
+const defaultMap = maps.filter(i => [true].includes(i.default)).[0];
+
+// console.info("default map", defaultMap );
+
 const initialAppSettings = {
   menu: {
     expanded: true,
     activeTab: 0,
   },
+  map: defaultMap
 }
 
 const initialMapData = {
@@ -41,7 +48,7 @@ const initialMapData = {
 const initialState = {
   maps: maps,
   layers: layers,
-  activeMap: maps[0],
+  activeMap: initialAppSettings.map,
   activeLayers: [],
   viewport: {
     center: initialMapData.center,

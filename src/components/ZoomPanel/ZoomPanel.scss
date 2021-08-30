@@ -4,9 +4,9 @@
   position: absolute; 
   right: 0; 
   top: 12rem;
-  border-top: 1px solid $gray-70;
-  border-left: 1px solid $gray-70;
-  border-bottom: 1px solid $gray-70;
+  // border-top: 1px solid $gray-70;
+  // border-left: 1px solid $gray-70;
+  // border-bottom: 1px solid $gray-70;
   background-color: $background;
 }
 
@@ -16,11 +16,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $gray-10;
-  color: $black;
+  background-color: $background;
+  color: $gray-30;
   user-select: none;
   &.maxedOut {
-    background-color: lighten($danger-color, 40%);
-    color: $danger-color; 
+    color: $red-30;
+    background-color: $red-80; 
   }
 }
