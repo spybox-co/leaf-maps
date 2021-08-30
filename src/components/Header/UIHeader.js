@@ -24,12 +24,8 @@ const UIHeader = () => {
     dispatch({ type: 'toggle menu'})
   };
 
-
   const { expanded, compactMode } = state;
 
-
-
-  // href="./" prefix={<SPYBOXtypo/>}>
   return (
     <Header aria-label="Leaf Maps by Spybox.co">
 
@@ -68,8 +64,6 @@ const GlobalPanel = props => {
 const LogoLeafMaps = ({ fill }) => (
   <div className={cn(styles.logo, 'Logo', 'Leafmaps', fill && 'filled')}>
     <svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      {/* <path d="M326 199.613V119.613L256 80L186 119.613V199.613L116.5 160L47 199.613V280.584L116.5 321L116.61 320.936L117 321.161V400.584L186.5 441L255.641 400.793L256 401L256.359 400.793L325.5 441L395 400.584V321.165L395.392 320.937L395.5 321L465 280.584V199.613L395.5 160L326 199.613Z" /> */}
-      
       <path d="M117 400.584L186.5 441L256 400.584V319.613L186.5 280L117 319.613V400.584Z" />
       <path d="M116 320.584L186 361L256 320.584V239.613L186 200L116 239.613V320.584Z" />
       <path d="M47 280.584L116.5 321L186 280.584V199.613L116.5 160L47 199.613V280.584Z" />
@@ -79,8 +73,6 @@ const LogoLeafMaps = ({ fill }) => (
       <path d="M186 200.584L256 241L326 200.584V119.613L256 80L186 119.613V200.584Z" />
       <path d="M186 280.584L256 321L326 280.584V199.613L256 160L186 199.613V280.584Z" />
       <path d="M186 360.584L256 401L326 360.584V279.613L256 240L186 279.613V360.584Z" />
-
-
     </svg>
   </div>
 )

@@ -21,7 +21,7 @@ const TabContainer = props => {
 
   return(
     
-      <ScrollableArea area={{ width: `100%`, height: `calc(100% - 3rem)` }}>
+      <ScrollableArea className={styles.root} area={{ width: `100%`, height: `calc(100% - 3rem)` }}>
         <div className={classes}>
 
           {/* {component} */}

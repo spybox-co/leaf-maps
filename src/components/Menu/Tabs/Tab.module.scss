@@ -1,13 +1,15 @@
 @import '../../../styles/variables.scss';
 
+.root {
+  background-color: $gray-80;  
+}
+
 .Container {
-  
   padding: 1rem 0 3rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: $gray-80;  
-  height: 100%;
+
 }
 
 .Header {

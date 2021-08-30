@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 @import './styles/variables.scss';
+
+
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
 
 body {
   overflow: hidden;
+  font-family: $font-stack;
 }
+
 header {
   position: absolute;
   width: 100%;
@@ -88,9 +103,7 @@ input[type=number]::-webkit-outer-spin-button {
     outline: 2px solid $white;
   }
 }
-// .leaflet-popup-content {
-//   background: red;
-// }
+
 .leaflet-popup-tip-container {
   .leaflet-popup-tip {
     background: $gray-100;

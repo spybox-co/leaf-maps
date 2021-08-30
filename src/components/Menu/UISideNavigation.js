@@ -8,6 +8,7 @@ const UISideNavigation = props => {
   const { children, expanded } = props;
 
   const classes = cn(styles.SideNavigation, 'navigation', expanded && 'open')
+  
   return(
     <nav className={classes}>
       <div>
