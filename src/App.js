@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import UIHeader from './components/Header';
+// import UIHeader from './components/Header';
 
 
 // Carbon Components
