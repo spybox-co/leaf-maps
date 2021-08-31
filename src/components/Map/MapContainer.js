@@ -35,9 +35,15 @@ import "./MapContainer.scss";
 // Other hooks (installed)
 // https://github.com/vadzim/use-leaflet
 // @Sample https://codesandbox.io/embed/use-leaflet-jbftf
+const mapFilterSettings = {
+  saturation: 1,
+  contrast: 100,
+}
+
 
 const mapStyle = {
   backgroundImage: `url(${Tile})`,
+  filter: `saturate(${mapFilterSettings.saturation}) contrast(${mapFilterSettings.contrast}%)`
 }
 
 const MapContainer = () => {

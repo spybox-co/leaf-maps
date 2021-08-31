@@ -3,6 +3,8 @@ import { Map, TileLayer } from 'react-leaflet';
 
 import { cn } from '../../../utils/helpers';
 
+//import './Preview.scss';
+
 const Preview = props => {
   const { 
     source, 
@@ -14,6 +16,13 @@ const Preview = props => {
 
   const classes = cn(className, 'ui--item-preview');
 
+  const previewStyle = {
+    height: `100%`
+    // filter: `saturate(0.75) contrast(70%)`,
+    // filter: `invert(90%) hue-rotate(175deg)`
+    // filter: `brightness(0.7) saturate(150%) contrast(100%) hue-rotate(30deg)`
+  }
+
   //  const zoomPrev = (zoom < 12 ? 10 : zoom-2)
 
   return(
@@ -21,7 +30,7 @@ const Preview = props => {
       <Map 
         zoomControl={false}
         attributionControl={false}
-        style={{ height: `100%` }}
+        style={previewStyle}
         center={center}
         zoom={13}
         // zoom={layer ? zoomPrev : zoom-2}
@@ -29,7 +38,7 @@ const Preview = props => {
         dragging={false}
         touchZoom={false}
       >
-        <TileLayer url={source} />
+        <TileLayer url={source} className="map-prev" />
         {layer && <TileLayer url={layer} />}
       </Map>
     </div>

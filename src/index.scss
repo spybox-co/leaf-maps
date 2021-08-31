@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400;1,600;1,700&display=swap');
 
 @import './styles/variables.scss';
 @import './styles/typography.scss';
@@ -114,7 +116,11 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-
+.target-checkbox .map-prev {
+  filter: saturate(0.75) contrast(50%);
+  // filter: invert(90%) hue-rotate(175deg)
+  //filter: brightness(0.7) saturate(150%) contrast(100%) hue-rotate(30deg);
+}
 
 
 /* CARBON OVERRIDES */
