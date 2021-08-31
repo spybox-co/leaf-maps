@@ -1,0 +1,9 @@
+@import '../../../../../styles/variables.scss';
+
+.MenuButton {
+
+  &.Menu--opened {
+    background-color: $gray-100;
+    border-right: $gray-80 solid 1px;
+  }
+}

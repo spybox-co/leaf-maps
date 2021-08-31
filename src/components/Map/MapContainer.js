@@ -112,30 +112,30 @@ const MapContainer = () => {
   return(
     <div className={classes.map}>
       <Map
-          onViewportChanged={onViewportChanged}
-          onDrag={onDrag}
-          onClick={onClickReset}
-          viewport={viewport}
-          {...mapOptions}
+        onViewportChanged={onViewportChanged}
+        onDrag={onDrag}
+        onClick={onClickReset}
+        viewport={viewport}
+        {...mapOptions}
 
-          maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
-          // maxZoom={maxZoom}
-          zoomend={event => console.log(event)}
-          // To-Do
-          zoomControl={false} // next to disable default zoom control & make custom
-          attributionControl={false} // maybe custom in the future
-        >
+        maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
+        // maxZoom={maxZoom}
+        zoomend={event => console.log(event)}
+        // To-Do
+        zoomControl={false} // next to disable default zoom control & make custom
+        attributionControl={false} // maybe custom in the future
+      >
 
-          {startLocate && <Geolocation />}
-          {/* <Geolocation watchPosition={startLocate} /> */}
-          
-          {startLocate && position !== null && <PositionMarker position={position} />}
+        {startLocate && <Geolocation />}
+        {/* <Geolocation watchPosition={startLocate} /> */}
+        
+        {startLocate && position !== null && <PositionMarker position={position} />}
 
-          {location.set && location.center !== null && location.label !== null && <LocationMarker position={location.center} label={location.label} />}
-          <BaseLayer {...layersProps} />
-          <MapOverlays {...layersProps} />
+        {location.set && location.center !== null && location.label !== null && <LocationMarker position={location.center} label={location.label} />}
+        <BaseLayer {...layersProps} />
+        <MapOverlays {...layersProps} />
 
-        </Map>
+      </Map>
     </div>
   )
 }

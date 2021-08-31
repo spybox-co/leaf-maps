@@ -1,0 +1,10 @@
+.spbx--header ~ .spbx--content {
+  padding-top: 3rem;
+  margin: 0;
+}
+
+.spbx--content {
+  padding: 0;
+  background: black;
+  will-change: margin-left;
+}

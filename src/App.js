@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 
 import UIHeader from './components/Header';
 
+
 // Carbon Components
-import { Content as UIContent } from "carbon-components-react/lib/components/UIShell";
+// import { Content as UIContent } from "carbon-components-react/lib/components/UIShell";
+
+
+import { Header, Content } from './modules/Shell';
 
 import Map from './components/Map';
 // eslint disable-next-line
@@ -55,9 +59,9 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log("👋 mounted");
-    console.log('screen rientation is ', window.screen.orientation.type)
+    console.log("screen rientation is ", window.screen.orientation.type)
     window.screen.orientation.addEventListener('change', function() {
-      console.log('new orientation is ', window.screen.orientation.type);
+      console.log("new orientation is ", window.screen.orientation.type);
     });
   }
 
@@ -82,11 +86,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <UIHeader />
-        <UIContent>
+        <Header />
+        <Content>
           <Map />
           <ZoomPanel />
-        </UIContent>
+        </Content>
       </div>
     );
   }
