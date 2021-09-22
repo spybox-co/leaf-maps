@@ -15,9 +15,10 @@ import Tile from "../../../components/Tile";
 // Screen Print Leaflet
 // https://github.com/grinat/leaflet-simple-map-screenshoter
 
-
-// https://www.npmjs.com/package/dom-to-image
+// https://github.com/tsayen/dom-to-image & https://www.npmjs.com/package/dom-to-image
 // Use with ref -> https://stackoverflow.com/questions/55591967/is-it-correct-to-use-dom-to-image-module-in-reactjs-app/56476101
+
+
 export default () => {
   const { state, dispatch } = useContext(store);
   const { autoCenterMap, position, viewport, startLocate } = state;

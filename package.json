@@ -14,6 +14,7 @@
     "carbon-components": "^10.3.1",
     "carbon-components-react": "^7.3.2",
     "carbon-icons": "^7.0.7",
+    "dom-to-image": "^2.6.0",
     "leaflet": "1.5.1",
     "leaflet.locatecontrol": "^0.72.0",
     "node-sass": "4.12.0",
