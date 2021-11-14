@@ -95,6 +95,8 @@ const MapContainer = () => {
     map: !activeMap.apikey ? activeMap.url : `${activeMap.url}${activeMap.apikey}`,
     activeMap: activeMap,
     activeLayers: activeLayers,
+    zoom: viewport.zoom,
+    maxZoom: state.mapSettings.maxZoom
   }
 
 

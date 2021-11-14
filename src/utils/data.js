@@ -8,7 +8,7 @@ export const maps = [
     vendor: "Open Street Map",
     name: "Standard",
     url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-    maxZoom: 19
+    maxZoom: 20
   },
   {
     vendor: "Open Street Map",
