@@ -3,6 +3,12 @@ import useGeolocation from 'react-hook-geolocation';
 import { store } from '../../../store.js';
 
 
+const options = {
+  enableHighAccuracy: true, 
+  maximumAge:         15000, 
+  timeout:            12000
+};
+
 // @Docs 
 // https://www.npmjs.com/package/react-hook-geolocation
 const Geolocate = props => {
@@ -22,7 +28,7 @@ const Geolocate = props => {
   }
  
   // eslint-disable-next-line
-  const geolocation = useGeolocation({}, onGeolocationUpdate)
+  const geolocation = useGeolocation(options, onGeolocationUpdate)
 
 
 

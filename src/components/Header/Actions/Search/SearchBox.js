@@ -28,25 +28,26 @@ const SearchForm = () => {
   const handleClick = () => {
     if(expanded) {
       setExpanded(false);
-      
     } else {
       setExpanded(true);
     }
   }
 
   useEffect(
+    // To-Do createRef syntax here to refactor
     () => {
       if (results.length > 0) console.log("Results:", results);
 
       if (expanded) {
-        window.document.querySelector('.Header__global').classList.add("search-is-active")
+        window.document.querySelector('.Header__global').classList.add('search-is-active')
       } else {
-        window.document.querySelector('.Header__global').classList.remove("search-is-active")
+        window.document.querySelector('.Header__global').classList.remove('search-is-active')
       }
     }, [results, expanded]);
 
 
   const ResultsProvider = (query) => {
+    // const [ lat, lng ] = state.viewport.center;
     const SearchAPI = `https://photon.komoot.io/api/?q=${query}&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}`;
     axios
     .get(SearchAPI)
