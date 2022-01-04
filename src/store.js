@@ -29,7 +29,7 @@ const defaultMap = maps.filter(i => [true].includes(i.default)).[0];
 
 const initialAppSettings = {
   menu: {
-    expanded: true,
+    expanded: false,
     activeTab: 0,
   },
   map: defaultMap

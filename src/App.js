@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Content } from './modules/Shell';
 
-import Map from './components/Map';
+import Map from './containers/Map';
 import ZoomPanel from "./components/ZoomPanel";
 
 // TO-USE in future:

@@ -5,7 +5,6 @@ import L from 'leaflet';
 
 
 const Icon = L.icon({
-  // iconUrl: require('../../../images/map_pin_marker.png'),
   iconUrl: require('../../../images/marker/02_pin_blue.png'),
   iconSize: [48,48],
   iconAnchor: [24, 48],
@@ -32,10 +31,3 @@ const LocationMarker = ({ position, label }) => {
 }
 
 export default LocationMarker;
-
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { IconButton } from "../Button";
 import Up from "@carbon/icons-react/es/up-to-top/16";
@@ -8,68 +8,35 @@ import ScrollableArea from "../ScrollableArea/ScrollableArea";
 
 import "./ExpandablePanel.scss";
 
-export default class ExpandablePanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: true
-    };
-    this.actionCollapse = this.actionCollapse.bind(this);
+
+// @Sample
+// https://pretagteam.com/question/expand-and-collapse-divs-in-react
+
+export const ExpandablePanel = ({ expanded, children }) => {
+  const [isExpanded, setIsExpanded] = React.useState(expanded);
+
+
+  const classes = {
+    root: ['lf-Panel', isExpanded ? 'expanded' : 'collapsed'].join(' ').trim();
   }
 
-  actionCollapse = () => {
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed
-    }));
-  };
-
-  render() {
-    const { collapsed } = this.state;
-
-    const icon = collapsed ? Up : Down;
-
-    const collapse = collapsed ? " collapsed" : "";
-    return (
-      
-      <div className={`lf-Panel${collapse}`}>
-        <div className="lf-Panel-header">
-          <div
-            className="lf-Panel-header-title"
-            style={{
-              display: `inline-flex`,
-              justifyContent: `flex-end`,
-              alignItems: `center`
-            }}
-          >
-            {this.props.title}
-          </div>
-          <div
-            style={{
-              display: `inline-flex`,
-              justifyContent: `flex-end`,
-              flex: `1 1 0%`
-            }}
-          >
-            <IconButton
-              id="locator"
-              kind={`secondary`}
-              renderIcon={icon}
-              iconDescription="Locate your position!"
-              onClick={event => {
-                this.actionCollapse();
-                event.preventDefault();
-              }}
-            />
-          </div>
-        </div>
-        
-        <div className="lf-Panel-container">
-          <ScrollableArea area={{ width: `100%`, height: `100%` }}>
-            {this.props.children}
-          </ScrollableArea>
-        </div>
-        
+  return(
+    <div
+      className={`collapse-content ${isCollapsed ? 'collapsed' : 'expanded'}`}
+      aria-expanded={isCollapsed}
+    >  
+      <button
+        className="collapse-button"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        {isExpanded ? 'Show' : 'Hide'} content
+      </button>
+      <div className="lf-Panel-container">
+        <ScrollableArea area={{ width: `100%`, height: `100%` }}>
+          {children}
+        </ScrollableArea>
       </div>
-    );
-  }
+      
+    </div>
+  );
 }

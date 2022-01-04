@@ -17,8 +17,6 @@ import { cn } from '../../utils/helpers';
 
 import Tile from "../../images/tile.png"
 
-
-
 // import LocateControl from './LocateControl';
 
 import "./MapContainer.scss";
@@ -49,7 +47,7 @@ const mapStyle = {
 
 const MapContainer = () => {
   const { state, dispatch } = useContext(store);
-  // const { map } = useLeaflet();  
+ 
   const {
     activeMap,
     activeLayers,
@@ -128,9 +126,8 @@ const MapContainer = () => {
         {...mapOptions}
 
         maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
-        // maxZoom={maxZoom}
         zoomend={event => console.log(event)}
-        // To-Do
+        // ToDo
         zoomControl={false} // next to disable default zoom control & make custom
         attributionControl={false} // maybe custom in the future
       >
@@ -150,39 +147,3 @@ const MapContainer = () => {
 }
 
 export default MapContainer;
-
-
-
-
-
-// @Docs 
-// https://www.npmjs.com/package/react-hook-geolocation as alternative of Geolocation component
-
-
-
-/*
-
-export const YourComponent = () => {
-  const { map } = useLeaflet();
-  const [bounds, setBounds] = React.useState({});
-
-  React.useEffect(() => {
-    const eventHandler = event => {
-      setBounds(event.target.getBounds());
-      //doSomethingElse();
-    }
-    map.on("moveend", eventHandler);
-
-    return () => {
-      map.off("moveend", eventHandler); // Remove event handler to avoid creating multiple handlers
-    }
-  }, [setBounds, map]);
-  // Use bounds for whatever you need
-  console.log(map);
-  return (
-    
-    <div style={{ zIndex: 1000 }}>Lat: {bounds.lat}; long: {bounds.lng}</div>
-  )
-}
-
-*/
