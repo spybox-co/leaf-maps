@@ -64,6 +64,7 @@ const initialState = {
     bounds: null
   },
   startLocate: false,
+  geolocation: null,
   autoCenterMap: false,
   expanded: initialAppSettings.menu.expanded,
   compactMode: false,
@@ -136,6 +137,10 @@ const StateProvider = ({ children }) => {
       // Set user geolocation data
       case 'set my position':
         return {...state, position: action.value };
+
+      // Update geolocation data details for console
+      case 'update geolocation details':
+        return {...state, geolocation: action.value };
 
       case 'start locate':
         return {...state, startLocate: action.value };

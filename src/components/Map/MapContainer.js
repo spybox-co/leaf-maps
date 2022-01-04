@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 
-import Geolocation from '../Geolocation';
+// import Geolocation from '../Geolocation';
+import Geolocate from './Controls/Geolocate';
 import { Map } from 'react-leaflet';
 
 import { BaseLayer, MapOverlays } from './Layers';
@@ -134,7 +135,7 @@ const MapContainer = () => {
         attributionControl={false} // maybe custom in the future
       >
 
-        {startLocate && <Geolocation />}
+        {startLocate && <Geolocate />}
         {/* <Geolocation watchPosition={startLocate} /> */}
         
         {startLocate && position !== null && <PositionMarker position={position} />}

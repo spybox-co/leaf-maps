@@ -14,6 +14,7 @@ const Button = props => {
     hasOnlyIcon,
     anchor,
     disabled,
+    iconDescription,
     ...other
   } = props;
 

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import useGeolocation from 'react-hook-geolocation';
 import { store } from '../../../store.js';
 
-
+// ToDo improve accuracy 
 const options = {
   enableHighAccuracy: true, 
   maximumAge:         15000, 
@@ -25,31 +25,40 @@ const Geolocate = props => {
   const onGeolocationUpdate = geolocation => {
     console.log('Here’s some new data from the Geolocation API: ', geolocation)
     dispatch({ type: 'set my position', value: [ geolocation.latitude, geolocation.longitude ]})
+    dispatch({ type: 'update geolocation details', value: geolocation })
   }
  
   // eslint-disable-next-line
   const geolocation = useGeolocation(options, onGeolocationUpdate)
 
-
+  // useEffect(() => {
+  //   console.log("update!")
+  // }, [geolocation])
 
   // if error -> handle to store & context
   return null;
-  // return !geolocation.error
-  //   ? (
-  //     <ul>
-  //       <li>Latitude:          {geolocation.latitude}</li>
-  //       <li>Longitude:         {geolocation.longitude}</li>
-  //       <li>Location accuracy: {geolocation.accuracy}</li>
-  //       <li>Altitude:          {geolocation.altitude}</li>
-  //       <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
-  //       <li>Heading:           {geolocation.heading}</li>
-  //       <li>Speed:             {geolocation.speed}</li>
-  //       <li>Timestamp:         {geolocation.timestamp}</li>
-  //     </ul>
-  //   )
-  //   : (
-  //     <p>No geolocation, sorry.</p>
-  //   )
 }
 
 export default Geolocate;
+
+
+// eslint-disable-next-line
+export const Status = geolocation => {
+
+  return !geolocation.error
+    ? (
+      <ul>
+        <li>Latitude:          {geolocation.latitude}</li>
+        <li>Longitude:         {geolocation.longitude}</li>
+        <li>Location accuracy: {geolocation.accuracy}</li>
+        <li>Altitude:          {geolocation.altitude}</li>
+        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
+        <li>Heading:           {geolocation.heading}</li>
+        <li>Speed:             {geolocation.speed}</li>
+        <li>Timestamp:         {geolocation.timestamp}</li>
+      </ul>
+    )
+    : (
+      <p>No geolocation, sorry.</p>
+    )
+}

@@ -3,7 +3,7 @@ import { store } from '../../../store.js';
 
 import ReactToPrint from "react-to-print";
 import { CodeSnippet, ExpandableTile, TileBelowTheFoldContent, TileAboveTheFoldContent } from "carbon-components-react";
-import {Button} from "../../../components/Button";
+import { Button } from "../../../components/Button";
 import Typo from "../../../components/Typography";
 import Tile from "../../../components/Tile";
 
@@ -21,7 +21,7 @@ import Tile from "../../../components/Tile";
 
 export default () => {
   const { state, dispatch } = useContext(store);
-  const { autoCenterMap, position, viewport, startLocate } = state;
+  const { autoCenterMap, position, viewport, startLocate, geolocation } = state;
  
 
   const handleGetPositionNow = () => {
@@ -93,6 +93,26 @@ export default () => {
           </TileBelowTheFoldContent>
         </ExpandableTile>
       )}
+            {geolocation && (     
+      <Tile style={expandStyle}>
+        <Typo>Status</Typo>
+        
+          <CodeSnippet type="multi">
+            {`
+Latitude:          ${geolocation.latitude}
+Longitude:         ${geolocation.longitude}
+Location accuracy: ${geolocation.accuracy}
+Altitude:          ${geolocation.altitude}
+Altitude accuracy: ${geolocation.altitudeAccuracy}
+Speed:             ${geolocation.speed}
+Timestamp:         ${geolocation.timestamp}
+            `}
+          </CodeSnippet>       
+        
+        {/* <GeoLocate ref={getInnerRef} position={position} focusZoom={focusZoom}/> */}
+        {/* <Locator /> */}
+      </Tile>
+      )}
       {/* <Tile style={expandStyle}>
 
         <h6>Position active geolocation</h6>
@@ -107,6 +127,7 @@ export default () => {
         <Typo>Viewport</Typo>
         <h6>Auto center map</h6>
         <CodeSnippet type="single">{`${autoCenterMap}`}</CodeSnippet>
+
         {position ? (
           <Button
             renderIcon={"Locate"}
@@ -145,11 +166,6 @@ export default () => {
         />
       </Tile>
 
-      <Tile style={expandStyle}>
-        <Typo>Status</Typo>
-        {/* <GeoLocate ref={getInnerRef} position={position} focusZoom={focusZoom}/> */}
-        {/* <Locator /> */}
-      </Tile>
     </div>
   )
 };
