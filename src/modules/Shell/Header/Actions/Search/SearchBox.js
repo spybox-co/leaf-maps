@@ -30,9 +30,9 @@ const SearchForm = () => {
 
 
   const [results, setResults] = useState([]); // []
-  const [dropdown, showDropdown] = useState(true); // false
+  const [dropdown, showDropdown] = useState(false); // false
   const [value, setValue] = useState('');
-  const [expanded, setExpanded] = useState(true); // false
+  const [expanded, setExpanded] = useState(false); // false
 
   const handleClick = () => {
     if(expanded) {
@@ -57,18 +57,20 @@ const SearchForm = () => {
 
   const ResultsProvider = (query) => {
     let results = [];
-    const SearchAPI = `https://photon.komoot.io/api/?q=${query}&limit=${options.queryLimit}&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}`; //&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}
+
+    const SearchGlobal = `https://photon.komoot.io/api/?q=${query}&limit=10`;
+    const SearchLocal = `https://photon.komoot.io/api/?q=${query}&limit=${options.queryLimit}&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}`; //&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}
     
-    const SearchCities = `https://photon.komoot.io/api/?q=${query}&limit=6`;
+    
     axios
-      .get(SearchCities)
+      .get(SearchGlobal)
       .then(res => {
         const response = res.data;
         results.push(response.features.filter(i => i.properties.type === "city"))
         // setResults(response.features.filter(i => i.properties.type === "city"));
         
         return axios
-          .get(SearchAPI)
+          .get(SearchLocal)
           .then(res => {
             const response = res.data;
             results.push(response.features)
@@ -91,6 +93,8 @@ const SearchForm = () => {
     showDropdown(false);
     setValue(data.properties.name)
   }
+
+
   // const prov = OpenStreetMapProvider();
   // const GeoSearchControlElement = SearchControl;
 
@@ -99,7 +103,7 @@ const SearchForm = () => {
     input: 'SearchBox-Input'
   }
 
-  const [cities, locals] = results;
+  const [globals, locals] = results;
   const dropdownHeight = 18; // (locals.length > options.maxDropdownHeight ? options.maxDropdownHeight : results.length) * 3 + 1;
   
 
@@ -148,28 +152,40 @@ const SearchForm = () => {
       {results.length !== 0 && dropdown && (
         <div className="SearchBox-Results">
           <ScrollableArea area={{ width: `100%`, height: `${dropdownHeight}rem` }}>
-            <ResultGroup>Cities</ResultGroup>
-            <ul>
-              {cities.map((result, i) => 
-                <ResultItem 
-                  key={i}
-                  onClick={() => ResultItemClickHandler(result)}
-                  properties={result.properties}
-                  name={result.properties.name}
-                />
-              )}
-            </ul>
-            <ResultGroup>Locations, places</ResultGroup>
-            <ul>
-              {locals.map((result, i) => 
-                <ResultItem 
-                  key={i}
-                  onClick={() => ResultItemClickHandler(result)}
-                  properties={result.properties}
-                  name={result.properties.name}
-                />
-              )}
-            </ul>
+
+
+            {globals && (
+              <>
+                <ResultGroup>{`Global places (${globals.length})`}</ResultGroup>
+                {globals.map((result, i) => 
+                  <ul>
+                    <ResultItem 
+                      key={i}
+                      onClick={() => ResultItemClickHandler(result)}
+                      properties={result.properties}
+                      name={result.properties.name}
+                    />
+                  </ul>
+                )}
+              </>
+            )}
+
+            {locals && (
+              <>
+                <ResultGroup>{`Local places, nearby locations (${locals.length})`}</ResultGroup>
+                {locals.map((result, i) => 
+                  <ul>
+                    <ResultItem 
+                      key={i}
+                      onClick={() => ResultItemClickHandler(result)}
+                      properties={result.properties}
+                      name={result.properties.name}
+                    />
+                  </ul>
+                )}
+              </>
+            )}
+
           </ScrollableArea>
         </div>
       )}

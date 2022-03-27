@@ -16,17 +16,17 @@ export const maps = [
     url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
     maxZoom: 17
   },
-  {
-    vendor: "Wikimedia Labs",
-    name: "Hike & Bike",
-    url: "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
-  },
-  {
-    vendor: "Wikimedia Labs",
-    name: "Black & White",
-    url: "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
-    maxZoom: 18
-  },
+  // {
+  //   vendor: "Wikimedia Labs",
+  //   name: "Hike & Bike",
+  //   url: "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
+  // },
+  // {
+  //   vendor: "Wikimedia Labs",
+  //   name: "Black & White",
+  //   url: "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
+  //   maxZoom: 18
+  // },
   {
     vendor: "Mapbox",
     name: "Streets",
@@ -128,10 +128,10 @@ export const layers = [
     name: "Sea Marks",
     url: "https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
   },
-  {
-    vendor: "Wikimedia Labs",
-    name: "Hillshading",
-    url: "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png"
-  }
+  // {
+  //   vendor: "Wikimedia Labs",
+  //   name: "Hillshading",
+  //   url: "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png"
+  // }
 ]
 
