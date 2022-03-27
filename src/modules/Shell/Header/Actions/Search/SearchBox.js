@@ -4,26 +4,34 @@ import { DebounceInput } from 'react-debounce-input';
 import { store } from '../../../../../store.js';
 import { cn } from '../../../../../utils/helpers';
 
+import ScrollableArea from '../../../../../components/ScrollableArea';
+
 import ActionButton from '../ActionButton';
 import SearchButton from './SearchButton';
 
 // import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
+
 import './SearchBox.scss';
 
 const options = {
   minQuerylength: 2,
+  queryLimit: 20,
   timeOut: 500,
+  noResultsTimeOut: 1000,
+  itemsOnList: 6
 }
-
-
+// More about API
+// https://github.com/komoot/photon
 
 const SearchForm = () => {
   const { state, dispatch } = useContext(store);
-  const [results, setResults] = useState([]);
-  const [dropdown, showDropdown] = useState(false);
+
+
+  const [results, setResults] = useState([]); // []
+  const [dropdown, showDropdown] = useState(true); // false
   const [value, setValue] = useState('');
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true); // false
 
   const handleClick = () => {
     if(expanded) {
@@ -47,12 +55,13 @@ const SearchForm = () => {
 
 
   const ResultsProvider = (query) => {
-    const SearchAPI = `https://photon.komoot.io/api/?q=${query}&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}`;
+    let results = [];
+    const SearchAPI = `https://photon.komoot.io/api/?q=${query}&limit=${options.queryLimit}`; //&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}
     axios
     .get(SearchAPI)
     .then(res => {
       const response = res.data;
-      setResults(response.features);
+      setResults(response.features.filter(i => i.properties.type === "city"));
     })
     .catch(error => {
       console.log(error)
@@ -109,21 +118,27 @@ const SearchForm = () => {
           />
         </>
       )}
+
       {results.length !== 0 && dropdown && (
-        <ul className="SearchBox-Results">
-          {results.map((r,i) => 
-            <ResultItem 
-              key={i}
-              onClick={() => {
-                dispatch({ type: 'set location', value: [r.geometry.coordinates[1], r.geometry.coordinates[0]], label: [r.properties.name, r.properties.city ? r.properties.city : null, r.properties.country ? r.properties.country : null, r.properties.postcode ? r.properties.postcode : null].filter(Boolean).join(', ') });
-                dispatch({ type: 'center map on location', value: [ r.geometry.coordinates[1], r.geometry.coordinates[0] ] });
-                showDropdown(false);
-              }}
-              properties={r.properties}
-              name={r.properties.name}
-            />
-          )}
-        </ul>
+        <div className="SearchBox-Results">
+          <ScrollableArea area={{ width: `100%`, height: `${options.itemsOnList * 3}rem` }}>
+            <ul >
+              {results.map((r,i) => 
+                <ResultItem 
+                  key={i}
+                  onClick={() => {
+                    dispatch({ type: 'set location', value: [r.geometry.coordinates[1], r.geometry.coordinates[0]], label: [r.properties.name, r.properties.city ? r.properties.city : null, r.properties.country ? r.properties.country : null, r.properties.postcode ? r.properties.postcode : null].filter(Boolean).join(', ') });
+                    dispatch({ type: 'center map on location', value: [ r.geometry.coordinates[1], r.geometry.coordinates[0] ] });
+                    showDropdown(false);
+                    setValue(r.properties.name)
+                  }}
+                  properties={r.properties}
+                  name={r.properties.name}
+                />
+              )}
+            </ul>
+          </ScrollableArea>
+        </div>
       )}
 
       {results.length === 0 && value.length > options.minQuerylength && dropdown && <NoResultsItem />}
@@ -157,7 +172,7 @@ const NoResultsItem = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       showMessage(true);
-    }, options.timeOut);
+    }, options.noResultsTimeOut);
     return () => clearTimeout(timer);
   }, [])
 

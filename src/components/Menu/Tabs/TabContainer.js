@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
 import { store } from '../../../store.js';
-import ScrollableArea from "../../ScrollableArea";
+import ScrollableArea from '../../ScrollableArea';
 
 import { IconButton } from "../../Button";
 

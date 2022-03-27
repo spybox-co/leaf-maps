@@ -116,6 +116,9 @@ const MapContainer = () => {
 
   const onDrag = () => dispatch({ type: 'center map', value: false });
 
+  const isPositionMarker = startLocate && position !== null;
+  const isLocationMarker = location.set && location.center !== null && location.label !== null;
+
   return(
     <div className={classes.map}>
       <Map
@@ -135,9 +138,10 @@ const MapContainer = () => {
         {startLocate && <Geolocate />}
         {/* <Geolocation watchPosition={startLocate} /> */}
         
-        {startLocate && position !== null && <PositionMarker position={position} />}
+        {isPositionMarker && <PositionMarker position={position} />}
 
-        {location.set && location.center !== null && location.label !== null && <LocationMarker position={location.center} label={location.label} />}
+        {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
+        
         <BaseLayer {...layersProps} />
         <MapOverlays {...layersProps} />
 

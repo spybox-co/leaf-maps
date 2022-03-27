@@ -33,6 +33,15 @@ Key Features:
  * Zoom panel
 
 
+#### **ver. 1.0.25** variant "Nut Tree"
+
+Key Updates:
+ * Improved geolocation accuraccy
+ * Improved search results and limited to cities places
+ * Custom components and detached from IBM Carbon Design System 
+ * Major UI changes in side menu
+ * Added Console (edit mode)
+
 ## How to Run Application
 **Possible options**:
 1. You can vivit my website and run app [Leaf Maps](https://leafmaps.spybox.co/) ([leafmaps.spybox.co](https://leafmaps.spybox.co))

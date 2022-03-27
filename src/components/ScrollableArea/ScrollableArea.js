@@ -6,7 +6,7 @@ export default class CustomScrollbars extends Component {
     super(props, context);
     this.state = {
       top: 0,
-      verHeight: `100vh`
+      verHeight: `100%`
     };
     this.handleScrollFrame = this.handleScrollFrame.bind(this);
     this.renderView = this.renderView.bind(this);
