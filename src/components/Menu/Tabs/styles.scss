@@ -1,41 +1,11 @@
 @import '../../../styles/variables.scss';
 
+
 .Tab {
-  button {
-    outline: 1px solid transparent;
-    outline-offset: -1px;
-    &:focus {
-      outline-color: $primary-color;
-    }
-  }
+  border-bottom: 1px solid $gray-80;
 
-
-  .active {
-    background-color: $gray-80;
-    &:hover {
-      background-color: $gray-70;
-    }
-    &:active {
-      background-color: $gray-60;
-    }
-    &::after {
-      position: absolute;
-      content: "";
-      border-left: 0.125rem solid $primary-color;
-      top: 0;
-      left: 0;
-      height: 100%;
-    }
-
-  }
-  .inactive {
-    background: none;
-    &:hover {
-      background-color: $gray-80;
-    }
-    &:active {
-      background-color: $gray-60;
-    }
+  &:last-child {
+    border: 0;
   }
 }
 

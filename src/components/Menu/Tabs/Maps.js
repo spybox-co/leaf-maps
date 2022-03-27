@@ -1,15 +1,30 @@
 import React, { useContext } from 'react';
 import { store } from '../../../store.js';
-import Link from '../Link/UILink';
+// import Link from '../Link/UILink';
+
+import LayerCard from '../LayerCard';
 
 export default () => {
   const { state } = useContext(store);
   const { maps } = state;
 
+  const { dispatch } = useContext(store);
+
+
+  const changeMap = map => {
+    dispatch({ type: 'change map', value: map });
+    // dispatch({ type: 'close menu'});
+  }
+
   return maps.length !== 0 && maps.map((map, index) => (
-    <Link
+    <LayerCard
       key={index}
       index={index}
+      onClick={event => {
+        changeMap(index);
+        event.preventDefault();
+      }}
+      kind="radio"
       active={state.activeMap.url === map.url ? true : false}
       label={map.vendor}
       title={map.name}

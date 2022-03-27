@@ -1,11 +1,12 @@
 @import '../../../styles/variables.scss';
 
 .root {
-  background-color: $gray-80;  
+  background-color: $gray-100;  
+  // border-left: 1px solid $gray-80;
 }
 
 .Container {
-  padding: 1rem 0 3rem;
+  padding: 0 0 3rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -20,15 +21,15 @@
   align-items: center;
   height: 3rem;
   justify-content: space-between;
-  &::after {
-    position: absolute;
-    content: "";
-    border-top: 1px $gray-70 solid;
-    z-index: 100;
-    width: 100%;
-    left: 0;
-    bottom: -1px;
-  }
+  // &::after {
+  //   position: absolute;
+  //   content: "";
+  //   border-top: 1px $gray-70 solid;
+  //   z-index: 100;
+  //   width: 100%;
+  //   left: 0;
+  //   bottom: -1px;
+  // }
 }
 
 .Tab {

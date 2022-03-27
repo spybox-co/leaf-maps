@@ -48,7 +48,7 @@ export const TabHeader = ({ title, expanded }) => {
       </h6>
       {!compactMode && (
         <CloseButton          
-          kind={"secondary"}
+          kind={"tertiary"}
           renderIcon="Close"
           iconDescription="Close"
           onClick={() => dispatch({ type: 'close menu'})}

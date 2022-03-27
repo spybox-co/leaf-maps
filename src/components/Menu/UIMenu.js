@@ -35,7 +35,10 @@ const tabs = [
 
 const UIMenu = props => {
   const { dispatch } = useContext(store);
-  const [activeTab, setActiveTab] = useState(tabs[2])
+
+
+  // ToDo: set from global state!
+  const [activeTab, setActiveTab] = useState(tabs[0])
   const {
     expanded,
   } = props;
@@ -58,12 +61,14 @@ const UIMenu = props => {
     >
       <UIMenuNavigator>
         {tabs.map((tab, i) => (
-          <TabButton 
-            key={i} 
-            onClick={() => actionTabClick(tab)} 
-            icon={tab.icon}
-            active={tab.name === activeTab.name && expanded ? true : false}
-          />))}
+          <li className="Tab" key={i}>
+            <TabButton
+              onClick={() => actionTabClick(tab)} 
+              renderIcon={tab.icon}
+              active={tab.name === activeTab.name && expanded ? true : false}
+            />
+          </li>
+          ))}
       </UIMenuNavigator>
       
         
