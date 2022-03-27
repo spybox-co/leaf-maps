@@ -66,14 +66,14 @@ const SearchForm = () => {
       .get(SearchGlobal)
       .then(res => {
         const response = res.data;
-        results.push(response.features.filter(i => i.properties.type === "city"))
+        results.push(response.features.filter(i => i.properties.type === "city" && i.properties.type !== "boundary"))
         // setResults(response.features.filter(i => i.properties.type === "city"));
         
         return axios
           .get(SearchLocal)
           .then(res => {
             const response = res.data;
-            results.push(response.features)
+            results.push(response.features.filter(i => i.properties.type !== "place" && i.properties.type !== "boundary"))
             setResults(results);
             console.log(results);
           })
@@ -87,11 +87,15 @@ const SearchForm = () => {
 
   }
 
-  const ResultItemClickHandler = (data) => {
-    dispatch({ type: 'center map on location', value: [ data.geometry.coordinates[1].toFixed(4), data.geometry.coordinates[0].toFixed(4) ] });
-    dispatch({ type: 'set location', value: [data.geometry.coordinates[1], data.geometry.coordinates[0]], label: [data.properties.name, data.properties.city && data.properties.city, data.properties.country && data.properties.country, data.properties.postcode && data.properties.postcode].filter(Boolean).join(', ') });
+  const ResultItemClickHandler = (data, event) => {
+    const lng = data.geometry.coordinates[1].toFixed(4);
+    const lat = data.geometry.coordinates[0].toFixed(4);
+    // dispatch({ type: 'center map on location', value: [ data.geometry.coordinates[1].toFixed(4), data.geometry.coordinates[0].toFixed(4) ] });
+    dispatch({ type: 'center map on location', value: [ lng, lat ] });
+    dispatch({ type: 'set location', value: [lng, lat], label: [data.properties.name, data.properties.city && data.properties.city, data.properties.country && data.properties.country, data.properties.postcode && data.properties.postcode].filter(Boolean).join(', ') });
     showDropdown(false);
     setValue(data.properties.name)
+    event.preventDefault();
   }
 
 
@@ -157,32 +161,32 @@ const SearchForm = () => {
             {globals && (
               <>
                 <ResultGroup>{`Global places (${globals.length})`}</ResultGroup>
+                <ul>
                 {globals.map((result, i) => 
-                  <ul>
-                    <ResultItem 
-                      key={i}
-                      onClick={() => ResultItemClickHandler(result)}
-                      properties={result.properties}
-                      name={result.properties.name}
-                    />
-                  </ul>
+                  <ResultItem 
+                    key={`globals_${i}_${result.properties.osm_id}`}
+                    onClick={event => ResultItemClickHandler(result, event)}
+                    properties={result.properties}
+                    name={result.properties.name}
+                  />
                 )}
+                </ul>
               </>
             )}
 
             {locals && (
               <>
                 <ResultGroup>{`Local places, nearby locations (${locals.length})`}</ResultGroup>
-                {locals.map((result, i) => 
-                  <ul>
+                <ul>
+                  {locals.map((result, i) => 
                     <ResultItem 
-                      key={i}
-                      onClick={() => ResultItemClickHandler(result)}
+                      key={`locals_${i}_${result.properties.osm_id}`}
+                      onClick={event => ResultItemClickHandler(result, event)}
                       properties={result.properties}
                       name={result.properties.name}
-                    />
-                  </ul>
-                )}
+                    />                    
+                  )}
+                </ul>
               </>
             )}
 
