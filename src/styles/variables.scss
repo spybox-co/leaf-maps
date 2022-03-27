@@ -127,6 +127,11 @@ $background: $gray-100;
 $navigation-autocentermap-disabled-color: $purple-60; // #8800ff; 
 $navigation-autocentermap-enabled-color: $blue-60;
 
+$elev-100: 0 2px 4px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.25);
+$elev-300: 0 4px 8px rgba(0, 0, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 0.25);
+$elev-500: 0 8px 16px rgba(0, 0, 0, 0.25), 0 16px 32px rgba(0, 0, 0, 0.25);
+$elev-700: 0 16px 32px rgba(0, 0, 0, 0.25), 0 32px 64px rgba(0, 0, 0, 0.25);
+
 
 
 // Deprecated

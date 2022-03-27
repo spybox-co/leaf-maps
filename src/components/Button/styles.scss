@@ -9,7 +9,7 @@
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   max-width: 20rem;
   min-height: 3rem;
   margin: 0px;
@@ -55,6 +55,17 @@
     }
     &:active {
       background-color: darken($primary-color, 20%);
+    }
+  }
+
+  &--tertiary {
+    color: $white;
+    background-color: transparent;
+    &:hover {
+      background-color: $gray-80;
+    }
+    &:active {
+      background-color: $gray-70;
     }
   }
 

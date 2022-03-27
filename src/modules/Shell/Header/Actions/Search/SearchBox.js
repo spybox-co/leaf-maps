@@ -5,6 +5,7 @@ import { store } from '../../../../../store.js';
 import { cn } from '../../../../../utils/helpers';
 
 import ScrollableArea from '../../../../../components/ScrollableArea';
+import { Button } from '../../../../../components/Button';
 
 import ActionButton from '../ActionButton';
 import SearchButton from './SearchButton';
@@ -19,7 +20,7 @@ const options = {
   queryLimit: 20,
   timeOut: 500,
   noResultsTimeOut: 1000,
-  itemsOnList: 6
+  maxDropdownHeight: 6
 }
 // More about API
 // https://github.com/komoot/photon
@@ -56,17 +57,39 @@ const SearchForm = () => {
 
   const ResultsProvider = (query) => {
     let results = [];
-    const SearchAPI = `https://photon.komoot.io/api/?q=${query}&limit=${options.queryLimit}`; //&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}
+    const SearchAPI = `https://photon.komoot.io/api/?q=${query}&limit=${options.queryLimit}&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}`; //&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}
+    
+    const SearchCities = `https://photon.komoot.io/api/?q=${query}&limit=6`;
     axios
-    .get(SearchAPI)
-    .then(res => {
-      const response = res.data;
-      setResults(response.features.filter(i => i.properties.type === "city"));
-    })
-    .catch(error => {
-      console.log(error)
-    });
+      .get(SearchCities)
+      .then(res => {
+        const response = res.data;
+        results.push(response.features.filter(i => i.properties.type === "city"))
+        // setResults(response.features.filter(i => i.properties.type === "city"));
+        
+        return axios
+          .get(SearchAPI)
+          .then(res => {
+            const response = res.data;
+            results.push(response.features)
+            setResults(results);
+            console.log(results);
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      })
+      .catch(error => {
+        console.log(error)
+      });
 
+  }
+
+  const ResultItemClickHandler = (data) => {
+    dispatch({ type: 'center map on location', value: [ data.geometry.coordinates[1].toFixed(4), data.geometry.coordinates[0].toFixed(4) ] });
+    dispatch({ type: 'set location', value: [data.geometry.coordinates[1], data.geometry.coordinates[0]], label: [data.properties.name, data.properties.city && data.properties.city, data.properties.country && data.properties.country, data.properties.postcode && data.properties.postcode].filter(Boolean).join(', ') });
+    showDropdown(false);
+    setValue(data.properties.name)
   }
   // const prov = OpenStreetMapProvider();
   // const GeoSearchControlElement = SearchControl;
@@ -75,6 +98,9 @@ const SearchForm = () => {
     root: cn('Header--module__Search', 'SearchBox', expanded && 'expanded'),
     input: 'SearchBox-Input'
   }
+
+  const [cities, locals] = results;
+  const dropdownHeight = 18; // (locals.length > options.maxDropdownHeight ? options.maxDropdownHeight : results.length) * 3 + 1;
   
 
   return (
@@ -121,19 +147,26 @@ const SearchForm = () => {
 
       {results.length !== 0 && dropdown && (
         <div className="SearchBox-Results">
-          <ScrollableArea area={{ width: `100%`, height: `${options.itemsOnList * 3}rem` }}>
-            <ul >
-              {results.map((r,i) => 
+          <ScrollableArea area={{ width: `100%`, height: `${dropdownHeight}rem` }}>
+            <ResultGroup>Cities</ResultGroup>
+            <ul>
+              {cities.map((result, i) => 
                 <ResultItem 
                   key={i}
-                  onClick={() => {
-                    dispatch({ type: 'set location', value: [r.geometry.coordinates[1], r.geometry.coordinates[0]], label: [r.properties.name, r.properties.city ? r.properties.city : null, r.properties.country ? r.properties.country : null, r.properties.postcode ? r.properties.postcode : null].filter(Boolean).join(', ') });
-                    dispatch({ type: 'center map on location', value: [ r.geometry.coordinates[1], r.geometry.coordinates[0] ] });
-                    showDropdown(false);
-                    setValue(r.properties.name)
-                  }}
-                  properties={r.properties}
-                  name={r.properties.name}
+                  onClick={() => ResultItemClickHandler(result)}
+                  properties={result.properties}
+                  name={result.properties.name}
+                />
+              )}
+            </ul>
+            <ResultGroup>Locations, places</ResultGroup>
+            <ul>
+              {locals.map((result, i) => 
+                <ResultItem 
+                  key={i}
+                  onClick={() => ResultItemClickHandler(result)}
+                  properties={result.properties}
+                  name={result.properties.name}
                 />
               )}
             </ul>
@@ -153,15 +186,21 @@ const ResultItem = ({ name, properties, onClick }) => {
   const label = [properties.city ? properties.city : null, properties.country ? properties.country : null, properties.postcode ? properties.postcode : null].filter(Boolean).join(', ')
   return(
     <li className="SearchBox-Result-item">
-      <button
+      <Button className="Result-item__link" 
         onClick={onClick}
+        kind={"tertiary"} 
+        renderIcon="ArrowRight"
       >
-        {name && <strong>{`${name} → `}</strong>}
+        
+        {name && <strong>{`${name} →`}</strong>}
+        &nbsp;
         {label}
-      </button>
+      </Button>
     </li>
   );
 }
+
+const ResultGroup = ({ children }) => <div className="SearchBox-Result-group">{children}</div>;
 
 
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { 
   // Add32,
   ArrowUp32,
+  ArrowRight32,
   Close32,
   Copy32, 
   DocumentBlank32,
@@ -48,6 +49,7 @@ const Components = {
   // Add: Add32,
   Add: Add,
   ArrowUp: ArrowUp32,
+  ArrowRight: ArrowRight32,
   Close: Close32,
   Copy: Copy32,
   DocumentBlank: DocumentBlank32,
