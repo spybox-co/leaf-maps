@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -15,11 +15,17 @@ const Icon = L.icon({
 });
 
 
+// Bind popup
+// https://stackoverflow.com/questions/42894803/rendering-react-components-inside-popup-of-react-leaflet-draw-drawn-layer-on-rea
 
 const LocationMarker = ({ position, label }) => {
   return(
     <>
-      <Marker icon={Icon} position={position}>
+      <Marker 
+        icon={Icon} 
+        position={position} 
+        // eventHandlers={() => this.openPopup(position)}
+      >
         <Popup 
           className="Tooltip"
         >
