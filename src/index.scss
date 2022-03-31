@@ -68,7 +68,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .leaflet-container {
-  height: calc(100vh - 3rem);
+  // ToDo -> temporary changed to see how it works on mobile browsers
+  // height: calc(100vh - 3rem);  
+  height: 100%;
   width: 100%;
   z-index: 0;
   background-color: $black;
