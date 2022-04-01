@@ -3,8 +3,10 @@
 
 .SideNavigation {
   display: flex;
-  color: #fff;
-  height: calc(100vh - 3rem);
+  color: $white;
+  // ToDo -> temporary changed to see how it works on mobile browsers
+  // height: calc(100vh - 3rem);
+  height: 100%;
 
 
   position: fixed;

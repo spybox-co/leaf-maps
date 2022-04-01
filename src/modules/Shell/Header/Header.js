@@ -43,6 +43,8 @@ export const Header = () => {
         <LocateButton />
       </GlobalPanel>
 
+
+      {/* ToDo -> Menu move to main container */}
       <UIMenu
         expanded={expanded}
         actionMenuHandle={actionMenuHandle}
