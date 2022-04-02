@@ -81,6 +81,7 @@ export default class App extends Component {
         <Content>
           <Map />
           <ZoomPanel />
+          <Attribution />
         </Content>
       </div>
     );
@@ -91,4 +92,18 @@ export default class App extends Component {
 
 
 
+const Attribution = () => {
+  const styles={
+    position: `absolute`,
+    bottom: 8,
+    left: 8,
+    background: `black`,
+    width: 40,
+    height: 40,
+  }
 
+  return(
+    <div style={styles} />
+  )
+  
+}
