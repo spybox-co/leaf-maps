@@ -9,7 +9,7 @@ import {
   // FeatureGroup 
 } from "react-leaflet";
 
-const { BaseLayer } = LayersControl;
+const { BaseLayer, Overlay } = LayersControl;
 
 // Miss some zoom levels for your tiles?
 // https://github.com/Zverik/Leaflet.LimitZoom
@@ -31,15 +31,14 @@ const { BaseLayer } = LayersControl;
 
 export default (props) => {
   const { state } = useContext(store);
-  const { maps } = props;
+  // const { maps } = props;
 
-  const { activeMap, mapSettings } = state;
+  const { activeMap, activeLayers, mapSettings, maps, layers } = state;
 
-  // console.log(maps);
+  console.log(activeLayers);
 
   return(
-    <LayersControl 
-      style={{ display: 'none' }}
+    <LayersControl
       position="bottomright"
     >
 
@@ -56,6 +55,19 @@ export default (props) => {
           />
         </BaseLayer>
       ))}
+      {layers.map((layer, i) => (
+        <Overlay 
+          key={i}
+          name={layer.name}
+          checked={activeLayers[i] && (activeLayers[i].url === layer.url ? true : false)}
+        >
+          {console.log(activeLayers[i] && (activeLayers[i].url === layer.url ? 'true' : 'false'))}
+          <TileLayer 
+            url={layer.url} 
+          />
+        </Overlay>
+      ))}
+
     </LayersControl> 
   )
 }
