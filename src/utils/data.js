@@ -6,9 +6,9 @@ export const maps = [
   },
   {
     vendor: "Open Street Map",
-    name: "Standard",
-    url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-    maxZoom: 20
+    name: "Mapnik",
+    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+    maxZoom: 19
   },
   {
     vendor: "Open Street Map",

@@ -11,6 +11,8 @@ const Attribution = () => {
 
   const { activeMap } = state;
 
+  // console.log(activeMap);
+
   const classes = {
     root: 'lf-Attribution',
     infoPanel: 'InfoPanel'
@@ -21,8 +23,6 @@ const Attribution = () => {
       <div className={classes.infoPanel}>
         <h4>Map style</h4>
         <h3><span>{activeMap.name}</span> by <span>{activeMap.vendor}</span></h3>
-        
-        {console.log(activeMap)}
       </div>
     </div>
   )

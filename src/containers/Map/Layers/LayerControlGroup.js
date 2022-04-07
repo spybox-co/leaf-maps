@@ -1,65 +1,61 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { store } from '../../../store.js';
 import {
   LayersControl, 
   TileLayer,
-  Marker, 
-  Circle, 
-  Popup,
-  FeatureGroup 
+  // Marker, 
+  // Circle, 
+  // Popup,
+  // FeatureGroup 
 } from "react-leaflet";
 
+const { BaseLayer } = LayersControl;
 
 // Miss some zoom levels for your tiles?
 // https://github.com/Zverik/Leaflet.LimitZoom
 
-export default () => (
-  <LayersControl position="topleft">
-    {/* <LayersControl.BaseLayer name="OpenStreetMap.BlackAndWhite">
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-      />
-    </LayersControl.BaseLayer>
-    <LayersControl.BaseLayer name="OpenStreetMap.Mapnik">
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-    </LayersControl.BaseLayer> */}
-    <LayersControl.Overlay name="Szlaky piesze">
-      <TileLayer
-        url="http://tile.lonvia.de/hiking/{z}/{x}/{y}.png"
-        zIndex={10}
-      />
-    </LayersControl.Overlay>
-    <LayersControl.Overlay name="Szlaky rowerowe">
-      <TileLayer
-        url="http://tile.lonvia.de/cycling/{z}/{x}/{y}.png"
-        zIndex={10}
-      />
-    </LayersControl.Overlay>
-    <LayersControl.Overlay name="Hillshading">
-      <TileLayer
-        url="https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png"
-        zIndex={10}
-      />
-    </LayersControl.Overlay>
-    <LayersControl.Overlay name="Marker with popup">
-      <Marker position={[51.51, -0.06]}>
-        <Popup>
-          <span>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </span>
-        </Popup>
-      </Marker>
-    </LayersControl.Overlay>
-    <LayersControl.Overlay name="Feature group">
-      <FeatureGroup color="purple">
-        <Popup>
-          <span>Popup in FeatureGroup</span>
-        </Popup>
-        <Circle center={[51.51, -0.06]} radius={200} />
-      </FeatureGroup>
-    </LayersControl.Overlay>
-  </LayersControl> 
-)
+
+
+
+// @Custom layer control
+// https://stackoverflow.com/questions/54261651/creating-a-custom-leaflet-layer-control-in-react
+
+// https://codesandbox.io/embed/competent-edison-wt5pl?fontsize=14
+// https://github.com/PaulLeCam/react-leaflet/issues/706 for v.3.x
+
+// https://stackoverflow.com/questions/59432189/remove-zoom-control-from-map-in-react-leaflet
+// https://stackoverflow.com/questions/55202423/leaflet-allow-for-switching-to-another-base-layer-at-higher-than-max-zoom
+
+// Leaflet docs
+// https://leafletjs.com/SlavaUkraini/reference.html#control-layers
+
+export default (props) => {
+  const { state } = useContext(store);
+  const { maps } = props;
+
+  const { activeMap, mapSettings } = state;
+
+  // console.log(maps);
+
+  return(
+    <LayersControl 
+      style={{ display: 'none' }}
+      position="bottomright"
+    >
+
+      {maps.map((map, i) => (
+        <BaseLayer 
+          key={i}
+          name={map.name}
+          checked={activeMap.url === map.url ? true : false}
+        >
+          <TileLayer 
+            url={`${map.url}${map.apikey ? map.apikey : ''}`} 
+            maxNativeZoom={map.maxZoom || mapSettings.maxZoom}
+            zoom={10}
+          />
+        </BaseLayer>
+      ))}
+    </LayersControl> 
+  )
+}

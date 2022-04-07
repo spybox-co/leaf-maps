@@ -35,7 +35,9 @@
 .circle {
   transition: fill, stroke 300ms;
 }
-
+.leaflet-control {
+  display: none;
+}
 // div.leaflet-bottom.leaflet-right {
 //   display: none;
 // }

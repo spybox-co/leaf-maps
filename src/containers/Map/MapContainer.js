@@ -4,7 +4,11 @@ import React, { useEffect, useContext } from 'react';
 import Geolocate from './Controls/Geolocate';
 import { Map } from 'react-leaflet';
 
-import { BaseLayer, MapOverlays } from './Layers';
+import { 
+  //BaseLayer, 
+  MapOverlays } from './Layers';
+
+import LayerControlGroup from './Layers/LayerControlGroup';
 import { PositionMarker, LocationMarker } from './Markers';
 
 
@@ -21,6 +25,17 @@ import Tile from "../../images/tile.png"
 
 import "./MapContainer.scss";
 
+
+// ToDo -> Migration to Leaflet 3.x
+
+
+// MapContainer & MapConsumer
+// https://react-leaflet.js.org/docs/api-map/
+
+
+// @Docs 2.x
+// https://react-leaflet-v2-docs.netlify.app/
+
 // dynamic minZoom & maxZoom (two last post)
 // https://github.com/PaulLeCam/react-leaflet/issues/350
 
@@ -34,6 +49,8 @@ import "./MapContainer.scss";
 // Other hooks (installed)
 // https://github.com/vadzim/use-leaflet
 // @Sample https://codesandbox.io/embed/use-leaflet-jbftf
+
+
 const mapFilterSettings = {
   saturation: 1,
   contrast: 100,
@@ -55,11 +72,16 @@ const MapContainer = () => {
     position,
     location,
     viewport,
-    startLocate
+    startLocate,
+    maps
   } = state;
 
   // @Param maxZoom in the future
   //const [maxZoom, setMaxZoom] = useState(state.mapSettings.maxZoom); 
+
+
+  // Context in React Leaflet 2.6.x
+  // https://codesandbox.io/s/remove-zoom-control-from-map-in-react-leaflet-wv4vl?file=/src/Leaflet.jsx
 
   useEffect(
     () => {
@@ -91,6 +113,7 @@ const MapContainer = () => {
   }
 
   const layersProps = {
+    maps: maps,
     map: !activeMap.apikey ? activeMap.url : `${activeMap.url}${activeMap.apikey}`,
     activeMap: activeMap,
     activeLayers: activeLayers,
@@ -141,8 +164,8 @@ const MapContainer = () => {
         {isPositionMarker && <PositionMarker position={position} />}
 
         {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
-        
-        <BaseLayer {...layersProps} />
+        <LayerControlGroup {...layersProps} />
+        {/* <BaseLayer {...layersProps} /> */}
         <MapOverlays {...layersProps} />
 
       </Map>

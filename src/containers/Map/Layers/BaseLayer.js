@@ -18,6 +18,9 @@ const BaseLayer = props => {
   // const calcZoom = zoom > maxZoom;
   // console.log(activeMap);
 
+  // Baselayer change
+  // https://stackoverflow.com/questions/33759578/how-to-change-base-layer-using-js-and-leaflet-layers-control
+
 
   if (activeMap && activeMap.maxZoom) {
     return (
