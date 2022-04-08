@@ -29,13 +29,18 @@ const { BaseLayer, Overlay } = LayersControl;
 // Leaflet docs
 // https://leafletjs.com/SlavaUkraini/reference.html#control-layers
 
-export default (props) => {
+export default () => {
   const { state } = useContext(store);
-  // const { maps } = props;
 
   const { activeMap, activeLayers, mapSettings, maps, layers } = state;
 
-  console.log(activeLayers);
+  // console.log(activeLayers);
+
+
+  const checkActiveLayers = (activeLayer, layer) => {
+    const checkLayer = activeLayer.map(active => active.url).filter(l => l === layer.url);
+    return checkLayer[0] === layer.url ? true : false;
+  }
 
   return(
     <LayersControl
@@ -59,9 +64,8 @@ export default (props) => {
         <Overlay 
           key={i}
           name={layer.name}
-          checked={activeLayers[i] && (activeLayers[i].url === layer.url ? true : false)}
+          checked={checkActiveLayers(activeLayers, layer)}
         >
-          {console.log(activeLayers[i] && (activeLayers[i].url === layer.url ? 'true' : 'false'))}
           <TileLayer 
             url={layer.url} 
           />
