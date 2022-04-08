@@ -4,9 +4,7 @@ import React, { useEffect, useContext } from 'react';
 import Geolocate from './Controls/Geolocate';
 import { Map } from 'react-leaflet';
 
-import { 
-  //BaseLayer, 
-  MapOverlays } from './Layers';
+// import { BaseLayer, MapOverlays } from './Layers';
 
 import LayerControlGroup from './Layers/LayerControlGroup';
 import { PositionMarker, LocationMarker } from './Markers';
