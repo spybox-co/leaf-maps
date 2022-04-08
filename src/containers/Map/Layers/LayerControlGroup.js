@@ -9,6 +9,8 @@ import {
   // FeatureGroup 
 } from "react-leaflet";
 
+import MapTileError from '../../../images/map_tile_error.png';
+
 const { BaseLayer, Overlay } = LayersControl;
 
 // Miss some zoom levels for your tiles?
@@ -56,7 +58,9 @@ export default () => {
           <TileLayer 
             url={`${map.url}${map.apikey ? map.apikey : ''}`} 
             maxNativeZoom={map.maxZoom || mapSettings.maxZoom}
-            zoom={10}
+            detectRetina={false}
+            errorTileUrl={MapTileError}
+
           />
         </BaseLayer>
       ))}
@@ -67,7 +71,9 @@ export default () => {
           checked={checkActiveLayers(activeLayers, layer)}
         >
           <TileLayer 
-            url={layer.url} 
+            url={layer.url}
+            detectRetina={false}
+            maxNativeZoom={18} 
           />
         </Overlay>
       ))}

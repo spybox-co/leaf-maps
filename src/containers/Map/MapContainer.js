@@ -159,14 +159,13 @@ const MapContainer = () => {
       >
 
         {startLocate && <Geolocate />}
-        {/* <Geolocation watchPosition={startLocate} /> */}
         
         {isPositionMarker && <PositionMarker position={position} />}
 
         {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
         <LayerControlGroup {...layersProps} />
         {/* <BaseLayer {...layersProps} /> */}
-        <MapOverlays {...layersProps} />
+        {/* <MapOverlays {...layersProps} /> */}
 
       </Map>
     </div>

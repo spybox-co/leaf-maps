@@ -26,7 +26,7 @@ export default () => {
   const selectLayer = (layer, index) => {
     const active = filterActiveLayers(layer.url) ? true : false;
     if (!active) {
-      console.log(layer, typeof layer);
+      // console.log(layer, typeof layer);
       dispatch({ type: 'add layer', value: layer, index: index });
     } else {
       dispatch({ type: 'delete layer', value: layer, index: index });

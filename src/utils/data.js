@@ -2,7 +2,8 @@ export const maps = [
   {
     vendor: "Stamen",
     name: "Toner Lite",
-    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
+    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
+    maxZoom: 16
   },
   {
     vendor: "Open Street Map",
@@ -14,7 +15,7 @@ export const maps = [
     vendor: "Open Street Map",
     name: "Open Topo Map",
     url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-    maxZoom: 17
+    maxZoom: 16
   },
   // {
   //   vendor: "Wikimedia Labs",
