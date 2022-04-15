@@ -1,10 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 
-// import Geolocation from '../Geolocation';
 import Geolocate from './Controls/Geolocate';
 import { Map } from 'react-leaflet';
-
-// import { BaseLayer, MapOverlays } from './Layers';
 
 import LayerControlGroup from './Layers/LayerControlGroup';
 import { PositionMarker, LocationMarker } from './Markers';
@@ -16,10 +13,8 @@ import { PositionMarker, LocationMarker } from './Markers';
 import { store } from '../../store.js';
 import { cn } from '../../utils/helpers';
 
-
 import Tile from "../../images/tile.png"
 
-// import LocateControl from './LocateControl';
 
 import "./MapContainer.scss";
 
@@ -162,8 +157,6 @@ const MapContainer = () => {
 
         {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
         <LayerControlGroup {...layersProps} />
-        {/* <BaseLayer {...layersProps} /> */}
-        {/* <MapOverlays {...layersProps} /> */}
 
       </Map>
     </div>

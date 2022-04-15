@@ -1,7 +1,7 @@
 import React from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 
-import { cn } from '../../../utils/helpers';
+import { cn } from '../../utils/helpers';
 
 //import './Preview.scss';
 

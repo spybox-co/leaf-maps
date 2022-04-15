@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import { store  } from '../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
-import { IconButton } from "../Button";
+import { IconButton } from "../../components/Button";
 
 
 import "./ZoomPanel.scss";

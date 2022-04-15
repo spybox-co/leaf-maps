@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from '../../../components/Icon';
-import { cn } from '../../../utils/helpers';
+import Icon from '../Icon';
+import { cn } from '../../utils/helpers';
 import Preview from '../Preview';
 
 import "./LayerCard.scss";

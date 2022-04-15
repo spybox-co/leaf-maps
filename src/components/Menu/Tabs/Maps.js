@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { store } from '../../../store.js';
 // import Link from '../Link/UILink';
 
-import LayerCard from '../LayerCard';
+import LayerCard from '../../../components/LayerCard';
 
 export default () => {
   const { state } = useContext(store);

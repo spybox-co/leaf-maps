@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Header, Content } from './modules/Shell';
 
 import Map from './containers/Map';
-import ZoomPanel from "./components/ZoomPanel";
-import Attribution from "./components/Attribution";
+import ZoomPanel from "./modules/ZoomPanel";
+import Attribution from "./modules/Attribution";
 
 // TO-USE in future:
 //import CaptureScreen from "./components/CaptureScreen/CaptureScreen";

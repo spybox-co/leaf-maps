@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { store } from '../../../store.js';
 // import CheckBox from '../CheckBox/UICheckBox';
 
-import LayerCard from '../LayerCard';
+import LayerCard from '../../../components/LayerCard';
 
 export default () => {
   const { state } = useContext(store);

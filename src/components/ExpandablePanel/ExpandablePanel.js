@@ -1,8 +1,8 @@
 import React from "react";
 
-import { IconButton } from "../Button";
-import Up from "@carbon/icons-react/es/up-to-top/16";
-import Down from "@carbon/icons-react/es/down-to-bottom/16";
+// import { IconButton } from "../Button";
+// import Up from "@carbon/icons-react/es/up-to-top/16";
+// import Down from "@carbon/icons-react/es/down-to-bottom/16";
 
 import ScrollableArea from "../ScrollableArea/ScrollableArea";
 
