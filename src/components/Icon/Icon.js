@@ -33,6 +33,7 @@ import {
 
 import { 
   Add,
+  Change,
   LayerStack, 
   Locate,
   Map,
@@ -57,6 +58,7 @@ const Components = {
   ArrowUp: ArrowUp32,
   ArrowRight: ArrowRight32,
   Close: Close32,
+  Change: Change,
   CheckmarkFilled: CheckmarkFilled32,
   CheckmarkOutline: CheckmarkOutline32,
   Copy: Copy32,

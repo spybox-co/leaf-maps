@@ -7,12 +7,12 @@ import { store } from '../../store.js';
 
 const Attribution = () => {
   // const { state, dispatch } = useContext(store);
-  const { state } = useContext(store);
+  const { state, dispatch } = useContext(store);
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const { activeMap } = state;
+  const { activeMap, maps } = state;
 
-  // console.log(activeMap);
+  console.log(activeMap);
 
   const handleClick = () => {
     setIsExpanded(isExpanded => !isExpanded);
@@ -21,17 +21,29 @@ const Attribution = () => {
 
   const classes = {
     root: ['lf-Attribution', isExpanded ? 'expanded' : 'collapsed'].join(' ').trim(),
-    infoPanel: 'InfoPanel'
+    infoPanel: ['InfoPanel', 'spbx--button', 'spbx--button--secondary'].join(' ').trim(),
+    infoButton: 'InfoButton'
   }
+
+  const changeMap = () => {
+    const currentIndex = maps.indexOf(activeMap);
+    const nextIndex =
+      currentIndex === maps.length - 1 ? 0 : currentIndex + 1;
+    console.log(nextIndex)
+    dispatch({ type: 'change map', value: nextIndex });
+  };
+
   return(
     <div className={classes.root}>
-      <InfoButton onClick={handleClick} />
-      <div className={classes.infoPanel}>
-        <div>
+      <InfoButton className={classes.infoButton} onClick={handleClick} />
+      <button className={classes.infoPanel} onClick={changeMap}>
+        <div className="Label">
           <h4>Map style</h4>
           <h3><span>{activeMap.name}</span> by <span>{activeMap.vendor}</span></h3>
         </div>
-      </div>
+        <div className="IconContainer"><Icon type="Change" /></div>
+        
+      </button>
     </div>
   )
   
@@ -41,9 +53,9 @@ export default Attribution;
 
 
 
-const InfoButton = ({ onClick }) => {
+const InfoButton = ({ onClick, className}) => {
   return(
-    <button onClick={onClick}>
+    <button className={className} onClick={onClick}>
       <Icon className="spbx--button__icon" type="Information" />
     </button>
   )

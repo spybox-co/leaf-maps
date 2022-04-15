@@ -1,4 +1,5 @@
 import Add from './Add';
+import Change from './Change';
 import LayerStack from './LayerStack';
 import Locate from './Locate';
 import Map from './Map';
@@ -8,11 +9,11 @@ import Substract from './Substract';
 
 export { 
   Add,
+  Change,
   LayerStack, 
   Locate,
   Map,
   Printer,
   Settings,
   Substract,
-  
 };

@@ -29,7 +29,7 @@ export const ExpandablePanel = ({ expanded, children }) => {
         className="collapse-button"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        {isExpanded ? 'Show' : 'Hide'} content
+        {isExpanded ? 'Show' : 'Hide'}
       </button>
       <div className="lf-Panel-container">
         <ScrollableArea area={{ width: `100%`, height: `100%` }}>
