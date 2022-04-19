@@ -33,7 +33,6 @@ const Preview = props => {
         style={previewStyle}
         center={center}
         zoom={13}
-        // zoom={layer ? zoomPrev : zoom-2}
         scrollWheelZoom={false}
         dragging={false}
         touchZoom={false}

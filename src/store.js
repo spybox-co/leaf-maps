@@ -1,4 +1,4 @@
-
+import React, { createContext, useReducer, useEffect } from 'react';
 
 // https://blog.logrocket.com/use-hooks-and-context-not-react-and-redux/
 
@@ -13,7 +13,7 @@ import { locationAPI } from "./utils/helpers";
 import { maps, layers } from './utils/data';
 
 
-import React, { createContext, useReducer, useEffect } from 'react';
+
 
 //  @Param lastViewportDataPosition & lastViewportDataZoomNumber from localStorage is initially parsed as a string!
 let storedPosition = JSON.parse(localStorage.getItem('lastViewportDataPosition'));
@@ -24,8 +24,6 @@ let lastStoredActiveLayers = JSON.parse(localStorage.getItem('lastStoredActiveLa
 
 
 const defaultMap = maps.filter(i => [true].includes(i.default)).[0];
-
-// console.info("default map", defaultMap );
 
 const initialAppSettings = {
   menu: {
@@ -38,7 +36,7 @@ const initialAppSettings = {
 const initialMapData = {
   zoom: 6,
   center: [0, 0],
-  mapFocus: 16,
+  mapFocus: 13, // was 16
   minZoom: 3,
   maxZoom: 20,  
 }
@@ -128,7 +126,7 @@ const StateProvider = ({ children }) => {
 
       // Search Location actions  
       case 'center map on location':
-        return {...state,  autoCenterMap: false, viewport: { ...state.viewport, center: action.value, zoom: focusLocationOnMapZoom }};
+        return {...state,  autoCenterMap: false, viewport: { ...state.viewport, center: action.value, zoom: focusPositionOnMapZoom }};
       case 'set location':
         return {...state, location: { ...state.viewport, set: true, center: action.value, label: action.label }};
       case 'clear location':

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { StateProvider } from './store.js';
 
-import './index.scss';
+import './styles/global.scss';
 import './styles/fibre.scss';
 
 import * as serviceWorker from './serviceWorker';

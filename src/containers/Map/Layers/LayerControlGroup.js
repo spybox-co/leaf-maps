@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { store } from '../../../store.js';
+// import * as L from 'leaflet';
+// import { Control, DomUtil, DomEvent } from 'leaflet';
 import {
   LayersControl, 
   TileLayer,
@@ -7,7 +9,7 @@ import {
   // Circle, 
   // Popup,
   // FeatureGroup 
-} from "react-leaflet";
+} from 'react-leaflet';
 
 import MapTileError from '../../../images/map_tile_error.png';
 
@@ -17,7 +19,9 @@ const { BaseLayer, Overlay } = LayersControl;
 // https://github.com/Zverik/Leaflet.LimitZoom
 
 
-
+// console.log(Control, DomEvent);
+// @Source
+// https://github.com/Leaflet/Leaflet/blob/main/src/control/Control.Layers.js
 
 // @Custom layer control
 // https://stackoverflow.com/questions/54261651/creating-a-custom-leaflet-layer-control-in-react
@@ -36,27 +40,35 @@ export default () => {
 
   const { activeMap, activeLayers, mapSettings, maps, layers } = state;
 
-  // console.log(activeLayers);
+  const mapUrl = (map) => {
+    return `${map.url}${map.apikey ? map.apikey : ''}`
+  }
 
+  const checkActiveMap = (activeMap, map) => {
+    const compareMaps = activeMap.url === map.url ? true : false;
+    return compareMaps;
+  }
 
   const checkActiveLayers = (activeLayer, layer) => {
-    const checkLayer = activeLayer.map(active => active.url).filter(l => l === layer.url);
-    return checkLayer[0] === layer.url ? true : false;
+    const compareArrays = activeLayer.map(active => active.url).includes(layer.url);
+    return compareArrays;
+  }
+
+  const layerCotrolProps = {
+    position: 'bottomright'
   }
 
   return(
-    <LayersControl
-      position="bottomright"
-    >
+    <LayersControl {...layerCotrolProps} >
 
       {maps.map((map, i) => (
         <BaseLayer 
           key={i}
           name={map.name}
-          checked={activeMap.url === map.url ? true : false}
+          checked={checkActiveMap(activeMap, map)}
         >
           <TileLayer 
-            url={`${map.url}${map.apikey ? map.apikey : ''}`} 
+            url={mapUrl(map)} 
             maxNativeZoom={map.maxZoom || mapSettings.maxZoom}
             detectRetina={false}
             errorTileUrl={MapTileError}
@@ -64,6 +76,8 @@ export default () => {
           />
         </BaseLayer>
       ))}
+
+
       {layers.map((layer, i) => (
         <Overlay 
           key={i}

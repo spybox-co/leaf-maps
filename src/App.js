@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Header, Content } from './modules/Shell';
 
 import Map from './containers/Map';
-import ZoomPanel from "./modules/ZoomPanel";
-import Attribution from "./modules/Attribution";
+import ZoomPanel from './modules/ZoomPanel';
+import Attribution from './modules/Attribution';
 
 // TO-USE in future:
 //import CaptureScreen from "./components/CaptureScreen/CaptureScreen";
 //import Panel from "./components/Panel";
 //import UIFooter from "./components/Footer/UIFooter";
 
-import "./App.scss";
+import './App.scss';
 
 
 
@@ -37,55 +37,28 @@ import "./App.scss";
 // html2canvas: https://stackblitz.com/edit/react-screen-capture?file=ScreenCapture.js
 // dom-to-image: https://github.com/tsayen/dom-to-image
 
+// PWA Prompt
+// https://blog.anam.co/progressive-web-apps-with-create-react-app/
 
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      lastMaps: [], // To-Do -> push to localStore used last 3 maps 
-    };
-  }
+export default function App() {
 
-  // https://blog.anam.co/progressive-web-apps-with-create-react-app/
-  installPrompt = null;
-
-  componentDidMount() {
+  useEffect(() => {
     console.log("👋 mounted");
     console.log("screen orientation is ", window.screen.orientation.type)
     window.screen.orientation.addEventListener('change', function() {
       console.log("new orientation is ", window.screen.orientation.type);
     });
-  }
+  });
 
-  customInstallPWAPrompt = () => {
-    console.log("Listening for Install prompt");
-    window.addEventListener('beforeinstallprompt',e=>{
-      // For older browsers
-      e.preventDefault();
-      console.log("Install Prompt fired");
-      this.installPrompt = e;
-      // See if the app is already installed, in that case, do nothing
-      if((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true){
-        return false;
-      }
-      // Set the state variable to make button visible
-      this.setState({
-        installButton:true
-      })
-    });
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Content>
-          <Map />
-          <ZoomPanel />
-          <Attribution />
-        </Content>
-      </div>
-    );
-  }
+  return(
+    <div className="App">
+      <Header />
+      <Content>
+        <Map />
+        <ZoomPanel />
+        <Attribution />
+      </Content>
+    </div>
+  );
 }
 
