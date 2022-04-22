@@ -1,31 +1,28 @@
 {
-  "name": "leaf-maps",
+  "name": "next-leaflet-starter",
+  "homepage": "https://next-leaflet-starter.netlify.app",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
-  },
+  "license": "MIT",
+  "author": "Colby Fayock <hello@colbyfayock.com>",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next build && next export",
+    "start": "next start"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "leaflet": "^1.7.1",
+    "next": "12.0.10",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-leaflet": "^3.2.5",
+    "sass": "^1.50.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colbyfayock/next-leaflet-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/colbyfayock/next-leaflet-starter/issues"
   }
 }
