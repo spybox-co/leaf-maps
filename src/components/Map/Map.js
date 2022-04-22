@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import L from 'leaflet';
 import * as ReactLeaflet from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import styles from './Map.module.scss';
+
+import { store } from 'store';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
@@ -12,6 +14,10 @@ import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 const { MapContainer, TileLayer, MapConsumer } = ReactLeaflet;
 
 const Map = ({ children, className, ...rest }) => {
+  const { state, dispatch } = useContext(store);
+
+  const { activeMap } = state;
+
   let mapClassName = styles.map;
 
   if ( className ) {
@@ -30,13 +36,22 @@ const Map = ({ children, className, ...rest }) => {
     })();
   }, []);
 
+
+  const maoOptions = {
+    zoomControl: false,
+    attributionControl: false
+  }
   return (
-    <MapContainer className={mapClassName} {...rest}>
+    <MapContainer 
+      className={mapClassName} 
+      {...maoOptions}
+      {...rest}
+    >
       {/* <MapConsumer>
         {(map) => children(ReactLeaflet, map)}
       </MapConsumer> */}
       {/* {children} */}
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <TileLayer url={activeMap.url} detectRetina={false} />
     </MapContainer>
   )
 }

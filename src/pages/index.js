@@ -1,14 +1,26 @@
 import Head from 'next/head';
+import { useEffect, useContext } from 'react';
+import { store } from 'store';
 
-import Map from 'src/components/Map';
+
+import Map from 'components/Map';
 
 
 
-import styles from 'styles/Home.module.scss';
+// import styles from 'styles/Home.module.scss';
 
-const DEFAULT_CENTER = [38.907132, -77.036546]
 
-export default function Home() {
+export default function Home({ data }) {
+  const { state, dispatch } = useContext(store);
+
+  const { viewport } = state;
+
+  useEffect(
+    () => {
+      dispatch({ type: 'set initial position', value: [data.latitude, data.longitude] })
+      console.log(state)
+    }, [data]
+  );
   return (
     <>
       <Head>
@@ -16,7 +28,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={12} />
+      <Map center={viewport.center} zoom={viewport.zoom} />
 
 
 
