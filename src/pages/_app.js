@@ -1,7 +1,15 @@
-import '../../styles/globals.scss'
+import Main from 'src/components/Shell/Main';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import 'styles/globals.scss'
+
+function App({ Component, pageProps }) {
+  return (
+    <div className="lf--core">
+      <Main>
+        <Component {...pageProps} />
+      </Main>
+    </div>
+  )
 }
 
-export default MyApp
+export default App

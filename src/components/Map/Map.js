@@ -9,7 +9,7 @@ import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
-const { MapContainer, MapConsumer } = ReactLeaflet;
+const { MapContainer, TileLayer, MapConsumer } = ReactLeaflet;
 
 const Map = ({ children, className, ...rest }) => {
   let mapClassName = styles.map;
@@ -32,9 +32,11 @@ const Map = ({ children, className, ...rest }) => {
 
   return (
     <MapContainer className={mapClassName} {...rest}>
-      <MapConsumer>
+      {/* <MapConsumer>
         {(map) => children(ReactLeaflet, map)}
-      </MapConsumer>
+      </MapConsumer> */}
+      {/* {children} */}
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     </MapContainer>
   )
 }

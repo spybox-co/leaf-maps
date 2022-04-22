@@ -15,6 +15,16 @@ a {
   box-sizing: border-box;
 }
 
-main {
+.lf--content {
+  position: absolute;
+  height: 100%;
   width: 100%;
+  padding: 0;
+  background: #000;
+  will-change: margin-left;
+  overflow: hidden;
+}
+
+.lf--core {
+  min-height: 100vh;
 }
