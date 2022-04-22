@@ -1,8 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 
 import Geolocate from './Controls/Geolocate';
-import { Map } from 'react-leaflet';
+// import { Map } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap, useMapEvents } from 'react-leaflet'
 
+import LayerControl, { GroupedLayer } from './Layers/LayerControl';
 import LayerControlGroup from './Layers/LayerControlGroup';
 import { PositionMarker, LocationMarker } from './Markers';
 
@@ -55,7 +57,7 @@ const mapStyle = {
   filter: `saturate(${mapFilterSettings.saturation}) contrast(${mapFilterSettings.contrast}%)`
 }
 
-const MapContainer = () => {
+const Map = () => {
   const { state, dispatch } = useContext(store);
  
   const {
@@ -100,6 +102,7 @@ const MapContainer = () => {
   const mapOptions = {
     minZoom: state.mapSettings.minZoom,
     zoom: viewport.zoom,
+    center: viewport.center,
     scrollWheelZoom: autoCenterMap ? "center" : "true",
     setView: autoCenterMap ? true : false, // false if autocenter map is not true?
     style: mapStyle
@@ -130,18 +133,33 @@ const MapContainer = () => {
     console.log("Clicked on the map!")
   }
 
+
+
   const onDrag = () => dispatch({ type: 'center map', value: false });
 
   const isPositionMarker = startLocate && position !== null;
   const isLocationMarker = location.set && location.center !== null && location.label !== null;
 
+
+  function MyComponent() {
+    const map = useMapEvents({
+      click: () => {
+        map.locate()
+      },
+      locationfound: (location) => {
+        console.log('location found:', location)
+      },
+    })
+  }
+
   return(
     <div className={classes.map}>
-      <Map
+      <MapContainer
         onViewportChanged={onViewportChanged}
         onDrag={onDrag}
         onClick={onClickReset}
         viewport={viewport}
+        
         {...mapOptions}
 
         maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
@@ -150,17 +168,37 @@ const MapContainer = () => {
         zoomControl={false} // next to disable default zoom control & make custom
         attributionControl={false} // maybe custom in the future
       >
-
+        {/* <MyComponent /> */}
+        
         {startLocate && <Geolocate />}
         
         {isPositionMarker && <PositionMarker position={position} />}
 
         {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
-        <LayerControlGroup {...layersProps} />
 
-      </Map>
+        {/* <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
+        <LayerControl>
+          <GroupedLayer checked name="OpenStreetMap" group="Base Layers">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          </GroupedLayer>
+
+          <GroupedLayer name="OpenStreetMap B&W" group="Base Layers">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+            />
+          </GroupedLayer>
+
+        </LayerControl>
+        
+        {/* <LayerControlGroup {...layersProps} /> */}
+
+      </MapContainer>
     </div>
   )
 }
 
-export default MapContainer;
+export default Map;

@@ -11,6 +11,8 @@ import {
   // FeatureGroup 
 } from 'react-leaflet';
 
+// import LayerControl from './LayerControl';
+
 import MapTileError from '../../../images/map_tile_error.png';
 
 const { BaseLayer, Overlay } = LayersControl;
@@ -26,7 +28,12 @@ const { BaseLayer, Overlay } = LayersControl;
 // @Custom layer control
 // https://stackoverflow.com/questions/54261651/creating-a-custom-leaflet-layer-control-in-react
 
+// Change base layer leaflet in react
+// https://stackoverflow.com/questions/33759578/how-to-change-base-layer-using-js-and-leaflet-layers-control/33762133#33762133
+
 // https://codesandbox.io/embed/competent-edison-wt5pl?fontsize=14
+// https://codesandbox.io/s/goofy-water-13hld?file=/src/LayerControl.js:0-4590
+
 // https://github.com/PaulLeCam/react-leaflet/issues/706 for v.3.x
 
 // https://stackoverflow.com/questions/59432189/remove-zoom-control-from-map-in-react-leaflet
@@ -72,7 +79,6 @@ export default () => {
             maxNativeZoom={map.maxZoom || mapSettings.maxZoom}
             detectRetina={false}
             errorTileUrl={MapTileError}
-
           />
         </BaseLayer>
       ))}
