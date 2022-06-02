@@ -9,19 +9,13 @@ export const maps = [
     vendor: "Open Street Map",
     name: "Open Topo Map",
     url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-    maxZoom: 16
+    maxZoom: 17
   },
-  // {
-  //   vendor: "Wikimedia Labs",
-  //   name: "Hike & Bike",
-  //   url: "https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
-  // },
-  // {
-  //   vendor: "Wikimedia Labs",
-  //   name: "Black & White",
-  //   url: "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
-  //   maxZoom: 18
-  // },
+  {
+    vendor: "CyclOSM",
+    name: "Bike Map",
+    url: "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+  },
   {
     vendor: "Mapbox",
     name: "Streets",
@@ -39,13 +33,6 @@ export const maps = [
     name: "Satellite Streets",
     url: "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}",
     apikey: "?access_token=pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNqaWJ1djgxZjFtMXMzcGxndjVtY2kwNTcifQ.mSBj4uB0ilknv9tWABt8fQ"
-  },
-  {
-    vendor: "Esri",
-    name: "World",
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    maxZoom: 18,
-    desc: "Satelite"
   },
   {
     vendor: "Thunder Forest",
@@ -96,16 +83,17 @@ export const maps = [
     default: true
   },
   {
-    vendor: "Stamen",
-    name: "Toner Lite",
-    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
-    maxZoom: 16
+    vendor: "Esri",
+    name: "World",
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    maxZoom: 18,
+    desc: "Satelite"
   },
   {
     vendor: "Stamen",
-    name: "Toner",
-    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png",
-    maxZoom: 16
+    name: "Toner Lite",
+    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
+    maxZoom: 18,
   }
 ];
 
@@ -119,6 +107,11 @@ export const layers = [
     vendor: "Way Marked Trails",
     name: "Cycling Routes",
     url: "https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png"
+  },
+  {
+    vendor: "CyclOSM",
+    name: "Bike Map Lite",
+    url: "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm-lite/{z}/{x}/{y}.png"
   },
   {
     vendor: "Way Marked Trails",
@@ -135,10 +128,5 @@ export const layers = [
     name: "Sea Marks",
     url: "https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
   },
-  // {
-  //   vendor: "Wikimedia Labs",
-  //   name: "Hillshading",
-  //   url: "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png"
-  // }
 ]
 
