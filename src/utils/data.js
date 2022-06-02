@@ -14,7 +14,8 @@ export const maps = [
   {
     vendor: "CyclOSM",
     name: "Bike Map",
-    url: "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+    url: "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
+    maxZoom: 18
   },
   {
     vendor: "Mapbox",
