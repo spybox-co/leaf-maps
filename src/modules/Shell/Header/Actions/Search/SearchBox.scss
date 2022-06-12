@@ -50,6 +50,13 @@
   .Result-item__link {
     width: 100%;
     max-width: 100%;
+    span {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
   }
 }
 

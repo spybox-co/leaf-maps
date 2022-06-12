@@ -120,7 +120,7 @@ const StateProvider = ({ children }) => {
       case 'on change viewport':
         return {...state, viewport: action.value };
       case 'center map on position':
-        return {...state, autoCenterMap: true, viewport: { ...state.viewport, center: action.value, zoom: focusPositionOnMapZoom }};
+        return {...state, autoCenterMap: true, viewport: { ...state.viewport, center: action.value }}; // zoom: focusPositionOnMapZoom
       case 'set zoom':
         return {...state, viewport: { ...state.viewport, zoom: action.value }};
       case 'zoom in':

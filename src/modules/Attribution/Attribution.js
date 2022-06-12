@@ -39,7 +39,7 @@ const Attribution = () => {
       <button className={classes.infoPanel} onClick={changeMap}>
         <div className="Label">
           <h4>Map style</h4>
-          <h3><span>{activeMap.name}</span> by <span>{activeMap.vendor}</span></h3>
+          <h3>{activeMap.name}<span> by </span>{activeMap.vendor}</h3>
         </div>
         <div className="IconContainer"><Icon type="Change" /></div>
         
@@ -56,7 +56,7 @@ export default Attribution;
 const InfoButton = ({ onClick, className}) => {
   return(
     <button className={className} onClick={onClick}>
-      <Icon className="spbx--button__icon" type="Information" />
+      <Icon type="Information" />
     </button>
   )
 }

@@ -211,10 +211,11 @@ const ResultItem = ({ name, properties, onClick }) => {
         kind={"tertiary"} 
         renderIcon="ArrowRight"
       >
-        
+        <span>
         {name && <strong>{`${name} →`}</strong>}
         &nbsp;
         {label}
+        </span>
       </Button>
     </li>
   );
