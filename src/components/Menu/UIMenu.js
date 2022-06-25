@@ -55,8 +55,8 @@ const UIMenu = props => {
   return (
     <UISideNavigation
       // isFixedNav
-      expanded={expanded}
       // isChildOfHeader={true}
+      expanded={expanded}
       aria-label="Side navigation"
     >
       <UIMenuNavigator>
@@ -111,8 +111,8 @@ const Version = () => {
       transform: `rotate(-90deg)`
     }}>
       <small style={{ color: update.app.color, padding: `0 1rem` }}>
-        {update.app.version && <span>ver. {update.app.version}</span>}
-        {update.app.variant && <span style={{ marginLeft: `0.75rem` }}>variant: {update.app.variant}</span>}
+        {update.app.version && <span><sup>version</sup>{update.app.version}</span>}
+        {update.app.variant && <span style={{ marginLeft: `0.75rem` }}><sup>variant</sup>{update.app.variant}</span>}
       </small>
     </div>
   )

@@ -18,6 +18,18 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font-size: 100%;
   vertical-align: baseline;
 }
+sup, sub {
+  font-size: 80%;
+  padding: 0 0.25rem;
+}
+
+sup {
+  vertical-align: super;
+}
+
+sub {
+  vertical-align: sub;
+}
 
 body {
   overflow: hidden;

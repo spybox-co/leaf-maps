@@ -84,6 +84,8 @@ const StateProvider = ({ children }) => {
   
   const [state, dispatch] = useReducer((state, action) => {
     const focusLocationOnMapZoom = initialMapData.mapFocus; // state.activeMap.maxZoom < state.mapSettings.maxZoom ? state.activeMap.maxZoom : 16;
+    
+    // eslint-disable-next-line
     const focusPositionOnMapZoom = state.viewport.zoom < 14 ? focusLocationOnMapZoom : state.viewport.zoom;
 
     switch(action.type) {
