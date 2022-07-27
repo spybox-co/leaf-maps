@@ -1,5 +1,6 @@
 import { StateProvider } from 'store';
-import { locationAPI } from 'utils/helpers';
+import { useEffect, useContext } from 'react';
+// import { locationAPI } from 'utils/helpers';
 
 import Main from 'components/Shell/Main';
 
@@ -7,6 +8,7 @@ import 'styles/globals.scss'
 
 function App({ Component, pageProps, data }) {
   console.log(data)
+
   return (
     <StateProvider>
       <div className="lf--core">

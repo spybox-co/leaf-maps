@@ -1,9 +1,13 @@
 import Head from 'next/head';
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { store } from 'store';
 
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-import Map from 'components/Map';
+
+import Mapbox from 'components/Mapbox';
+// import Map from 'components/Map';
 
 
 
@@ -12,15 +16,18 @@ import Map from 'components/Map';
 
 export default function Home({ data }) {
   const { state, dispatch } = useContext(store);
-
-  const { viewport } = state;
-
   useEffect(
     () => {
-      dispatch({ type: 'set initial position', value: [data.latitude, data.longitude] })
+      dispatch({ type: 'set initial position', value: [data.latitude || 51, data.longitude || 0] })
       console.log(state)
     }, [data]
   );
+  const { viewport } = state;
+
+
+
+
+
   return (
     <>
       <Head>
@@ -28,7 +35,12 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Map center={viewport.center} zoom={viewport.zoom} />
+      <Mapbox data={data} />
+    
+      {/* <Mapbox 
+        center={viewport.center || [51,0]} 
+        zoom={viewport.zoom} 
+      /> */}
 
 
 

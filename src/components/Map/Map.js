@@ -44,6 +44,9 @@ const Map = ({ children, className, ...rest }) => {
   return (
     <MapContainer 
       className={mapClassName} 
+      // no communication
+      center={[50.5, 30.5]} 
+      zoom={13}
       {...maoOptions}
       {...rest}
     >
