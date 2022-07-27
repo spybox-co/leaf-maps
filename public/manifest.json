@@ -1,0 +1,47 @@
+{
+  "short_name": "Leaf Maps",
+  "name": "SPYBOX Leaf Maps",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "128x128 96x96 64x64 48x48 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./images/logo-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "./images/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "./images/logo-256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "./images/logo-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "density": 1
+    },
+    {
+      "src": "./images/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "density": 1
+    }
+  ],
+  "theme_color": "#161616",
+  "background_color": "#161616"
+}
+
