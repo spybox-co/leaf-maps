@@ -24,9 +24,7 @@ export default function Home({ data }) {
   );
   const { viewport } = state;
 
-
-
-
+  console.log(data)
 
   return (
     <>
@@ -46,4 +44,13 @@ export default function Home({ data }) {
 
     </>
   )
+}
+
+// Opt-out of Automatic Static Optimization
+// https://nextjs.org/docs/messages/opt-out-auto-static-optimization
+
+Home.getInitialProps = async (ctx) => {
+  const res = await fetch('https://www.geolocation-db.com/json/')
+  const json = await res.json()
+  return { data: json }
 }

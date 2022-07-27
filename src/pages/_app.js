@@ -6,24 +6,17 @@ import Main from 'components/Shell/Main';
 
 import 'styles/globals.scss'
 
-function App({ Component, pageProps, data }) {
-  console.log(data)
+export default function App({ Component, pageProps }) {
 
   return (
     <StateProvider>
       <div className="lf--core">
         <Main>
-          <Component {...pageProps} data={data} />
+          <Component {...pageProps} />
         </Main>
       </div>
     </StateProvider>
   )
 }
 
-App.getInitialProps = async (ctx) => {
-  const res = await fetch('https://www.geolocation-db.com/json/')
-  const json = await res.json()
-  return { data: json }
-}
 
-export default App
