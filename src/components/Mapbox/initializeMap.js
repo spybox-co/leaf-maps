@@ -9,6 +9,10 @@ export function initializeMap(mapboxgl, map) {
       trackUserLocation: true,
     })
   );
+  // Add zoom and rotation controls to the map.
+  map.addControl(
+    new mapboxgl.NavigationControl()
+  );
 
   // map.on("mouseenter", "data", function () {
   //   map.getCanvas().style.cursor = "pointer";
