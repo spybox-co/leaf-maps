@@ -111,6 +111,8 @@ const StateProvider = ({ children }) => {
         return {...state, autoCenterMap: true, viewport: { ...state.viewport, center: action.value, zoom: focusPositionOnMapZoom }};
       case 'set zoom':
         return {...state, viewport: { ...state.viewport, zoom: action.value }};
+        case 'set center':
+          return {...state, viewport: { ...state.viewport, center: action.value }};
       case 'zoom in':
         return {...state, viewport: { ...state.viewport, zoom: state.viewport.zoom + 1 }};
 
@@ -167,7 +169,7 @@ const StateProvider = ({ children }) => {
     let location = [];
 
     axios
-    .get('https://www.cloudflare.com/cdn-cgi/trace')
+    .get('https://www.geolocation-db.com/json/')
     .then(res => {
       const response = res.data;
       location = [response.latitude, response.longitude];

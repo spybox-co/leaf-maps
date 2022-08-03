@@ -1,17 +1,14 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useState, useEffect, useContext } from 'react';
 import { store } from 'store';
 
-import mapboxgl from 'mapbox-gl';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
 import Mapbox from 'components/Mapbox';
-// import Map from 'components/Map';
 
-
-
-// import styles from 'styles/Home.module.scss';
 
 
 export default function Home({ data }) {
@@ -28,6 +25,24 @@ export default function Home({ data }) {
       console.log(state)
     }, [data]
   );
+  useEffect(
+    () => {
+      console.log("Stejt apdejt",state)
+    }, [state]
+  );
+
+  const router = useRouter()
+
+  useEffect(() => {
+    // Always do navigations after the first render
+    router.push(`/?lat=${state.viewport.center[0]}&lng=${state.viewport.center[1]}&z=${state.viewport.zoom}`, undefined, { shallow: true })
+  }, [state])
+
+  useEffect(() => {
+    // The counter changed!
+  }, [router.query.counter])
+
+
   const { viewport } = state;
 
   console.log(data)
@@ -40,13 +55,6 @@ export default function Home({ data }) {
 
       <Mapbox data={data} />
     
-      {/* <Mapbox 
-        center={viewport.center || [51,0]} 
-        zoom={viewport.zoom} 
-      /> */}
-
-
-
     </>
   )
 }
@@ -54,9 +62,9 @@ export default function Home({ data }) {
 // Opt-out of Automatic Static Optimization
 // https://nextjs.org/docs/messages/opt-out-auto-static-optimization
 
-// Home.getInitialProps = async (ctx) => {
 export async function getStaticProps () {
   const res = await fetch('https://www.geolocation-db.com/json/')
   const json = await res.json()
+
   return { props: { data: json } }
 }
