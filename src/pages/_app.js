@@ -1,6 +1,4 @@
 import { StateProvider } from 'store';
-import { useEffect, useContext } from 'react';
-// import { locationAPI } from 'utils/helpers';
 
 import Main from 'components/Shell/Main';
 

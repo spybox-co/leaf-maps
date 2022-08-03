@@ -28,3 +28,9 @@ a {
 .lf--core {
   min-height: 100vh;
 }
+
+.mapboxgl-ctrl-logo {
+  // display: none !important;
+  pointer-events: none;
+  opacity: 0.25;
+}

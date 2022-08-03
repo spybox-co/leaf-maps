@@ -26,10 +26,11 @@ export default function Mapbox({ data }) {
     // setPageIsMounted(true);
 
     let map = new mapboxgl.Map({
-      container: "lm-map",
+      container: "map-container",
       style: "mapbox://styles/mapbox/streets-v11",
       center: [data.longitude || viewport.longitude, data.latitude || viewport.latitude],
       zoom: viewport.zoom,
+      attributionControl: false,
       // pitch: 45,
       // maxBounds: [
       //   [-77.875588, 38.50705], // Southwest coordinates
@@ -42,6 +43,6 @@ export default function Mapbox({ data }) {
   }, []);
 
 
-  return <div id="lm-map" style={{ height: "100%", width: "100%" }} />
+  return <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }} />
 
 }

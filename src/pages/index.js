@@ -16,6 +16,12 @@ import Mapbox from 'components/Mapbox';
 
 export default function Home({ data }) {
   const { state, dispatch } = useContext(store);
+
+  // @DOCS - Shallow Routing
+  // https://nextjs.org/docs/routing/shallow-routing
+  // @Example
+  // https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-shallow-routing?file=pages%2Findex.js
+
   useEffect(
     () => {
       dispatch({ type: 'set initial position', value: [data.latitude || 51, data.longitude || 0] })
@@ -30,7 +36,6 @@ export default function Home({ data }) {
     <>
       <Head>
         <title>SPYBOX | Leaf Maps</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Mapbox data={data} />
@@ -49,8 +54,9 @@ export default function Home({ data }) {
 // Opt-out of Automatic Static Optimization
 // https://nextjs.org/docs/messages/opt-out-auto-static-optimization
 
-Home.getInitialProps = async (ctx) => {
+// Home.getInitialProps = async (ctx) => {
+export async function getStaticProps () {
   const res = await fetch('https://www.geolocation-db.com/json/')
   const json = await res.json()
-  return { data: json }
+  return { props: { data: json } }
 }
