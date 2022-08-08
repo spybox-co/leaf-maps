@@ -1,10 +1,23 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { initializeMap } from "./initializeMap";
 
 import { store } from 'store';
 
+import { maps } from 'utils//maps/data';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
+
+
+const selectedStyles = [
+  maps.streets,
+  //maps.hikebike,
+  maps.cycle,
+  maps.outdoors,
+  maps.transport,
+  maps.outdoorsRaster,
+  maps.satellite
+];
 
 
 // @DOCS ChangeMap
@@ -14,9 +27,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 
 export default function Mapbox({ data }) {
-  // const [pageIsMounted, setPageIsMounted] = useState(false);
+  const [pageIsMounted, setPageIsMounted] = useState(false);
   const [Map, setMap] = useState();
   const { state, dispatch } = useContext(store);
+  // const mapContainer = 'map-container'
+  // const map = useRef(null);
+
+  const [mapStyle, setMapStyle] = useState(maps.streets)
 
   let coords = null;
   let zoom = null;
@@ -30,14 +47,36 @@ export default function Mapbox({ data }) {
     zoom: 10
   });
 
+  const nextStyle = () => {
+    // const { mapStyle } = state;
+    const currentIndex = selectedStyles.indexOf(mapStyle);
+    const nextIndex = currentIndex === selectedStyles.length - 1 ? 0 : currentIndex + 1;
+
+    setMapStyle(selectedStyles[nextIndex]);
+    
+    
+    // dispatch({
+    //   type: 'change map', 
+    //   value: selectedStyles[nextIndex]
+    // });
+  };
+
   mapboxgl.accessToken = 'pk.eyJ1IjoiZG9taW5pY29tIiwiYSI6ImNsNjNrOWFlNTA5czMzY3BkNmg1c3NjMzAifQ.goJvrYudhO-le3B-_eaY_Q';
   
+
+
   useEffect(() => {
-    // setPageIsMounted(true);
+    setPageIsMounted(true);
+    dispatch({
+      type: 'change map', 
+      value: selectedStyles[0]
+    });
+
 
     let map = new mapboxgl.Map({
       container: "map-container",
-      style: "mapbox://styles/mapbox/streets-v11",
+      // container: "map-container",
+      // style: "mapbox://styles/mapbox/streets-v11",
       center: [data.longitude || viewport.longitude, data.latitude || viewport.latitude],
       zoom: viewport.zoom,
       attributionControl: false,
@@ -47,14 +86,16 @@ export default function Mapbox({ data }) {
       //   [-76.15381, 39.548764], // Northeast coordinates
       // ],
     });
+
+
     map.on('zoomend', () => {
       const bounds = map.getBounds();
       zoom = map.getZoom();
       console.log(bounds)
-      console.log("current zoom", zoom)
+      console.log("current zoom", zoom.toFixed(2))
       dispatch({ 
         type: 'set zoom', 
-        value: zoom
+        value: zoom.toFixed(2)
       })
     });
     map.on('moveend', () => {
@@ -65,7 +106,7 @@ export default function Mapbox({ data }) {
         value: [coords.lng.toFixed(4), coords.lat.toFixed(4)]
       })
     });
-
+    map.setStyle(selectedStyles[0]);
     /*
     map.addControl(
       new MapboxGeocoder({
@@ -76,26 +117,39 @@ export default function Mapbox({ data }) {
     */
     initializeMap(mapboxgl, map);
     setMap(map);
+    
   }, []);
 
   useEffect(() => {
-    console.log("fgh")
-    if (coords !== null && zoom !== null) {
-      const viewport = {
-        center: [ coords.lng, coords.lat ],
-        zoom: zoom
-      }
-      console.log("wiułsrort", viewport)
-      // dispatch({ 
-      //   type: 'on change viewport', 
-      //   setState: {
-      //     viewport: viewport
-      //   } 
-      // })
+    if (pageIsMounted) {
+      Map.setStyle(mapStyle)
     }
-  }, [])
+  }, [pageIsMounted, setMap, Map, mapStyle]);
 
 
-  return <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }} />
+  return(
+    <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }}>
+      <SwitchMapButton onClick={nextStyle} />
+    </div>
+  )
 
 }
+
+
+const SwitchMapButton = ({ onClick }) => {
+  const styles = {
+    position: 'absolute',
+    bottom: 8,
+    right: 8,
+    padding: 8,
+    zIndex: 1000,
+    height: 32,
+    display: 'flex',
+    alignItems: 'center'
+  };
+  return (
+    <button style={styles} onClick={onClick}>
+      Switch Map
+    </button>
+  );
+};

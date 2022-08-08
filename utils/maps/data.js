@@ -1,5 +1,5 @@
-import * as tiles from "./rasterMapsDataBase";
-import * as vector from "./vectorMapsDataBase";
+import * as tiles from './rasterMapsDataBase';
+import * as vector from './vectorMapsDataBase';
 
 // Vector Tiles hosting
 // https://github.com/mapbox/awesome-vector-tiles
