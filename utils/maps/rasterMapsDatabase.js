@@ -272,7 +272,7 @@ export const wikimedia = {
     sources: {
       'raster-tiles': {
         type: 'raster',
-        tiles: ['https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png'],
+        tiles: ['http://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png'],
         tileSize: 256,
         attribution: '---'
       }

@@ -11,7 +11,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 const selectedStyles = [
   maps.streets,
-  //maps.hikebike,
+  // maps.hikebike,
   maps.cycle,
   maps.outdoors,
   maps.transport,
