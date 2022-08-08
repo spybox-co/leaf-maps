@@ -1,4 +1,4 @@
-import * as tiles from './rasterMapsDataBase';
+import * as tiles from './rasterMapsDatabase';
 import * as vector from './vectorMapsDataBase';
 
 // Vector Tiles hosting
