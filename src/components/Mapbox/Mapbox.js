@@ -11,7 +11,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 const selectedStyles = [
   maps.streets,
-  // maps.hikebike,
   maps.cycle,
   maps.outdoors,
   maps.transport,
@@ -47,8 +46,7 @@ export default function Mapbox({ data }) {
     zoom: 10
   });
 
-  const nextStyle = () => {
-    // const { mapStyle } = state;
+  const functionSwitchMapStyle = () => {
     const currentIndex = selectedStyles.indexOf(mapStyle);
     const nextIndex = currentIndex === selectedStyles.length - 1 ? 0 : currentIndex + 1;
 
@@ -75,8 +73,6 @@ export default function Mapbox({ data }) {
 
     let map = new mapboxgl.Map({
       container: "map-container",
-      // container: "map-container",
-      // style: "mapbox://styles/mapbox/streets-v11",
       center: [data.longitude || viewport.longitude, data.latitude || viewport.latitude],
       zoom: viewport.zoom,
       attributionControl: false,
@@ -98,6 +94,7 @@ export default function Mapbox({ data }) {
         value: zoom.toFixed(2)
       })
     });
+
     map.on('moveend', () => {
       coords = map.getCenter();
       console.log(coords.lng.toFixed(2), coords.lat.toFixed(2));
@@ -129,7 +126,7 @@ export default function Mapbox({ data }) {
 
   return(
     <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }}>
-      <SwitchMapButton onClick={nextStyle} />
+      <SwitchMapButton onClick={functionSwitchMapStyle} />
     </div>
   )
 
@@ -140,7 +137,7 @@ const SwitchMapButton = ({ onClick }) => {
   const styles = {
     position: 'absolute',
     bottom: 8,
-    right: 8,
+    left: 8,
     padding: 8,
     zIndex: 1000,
     height: 32,

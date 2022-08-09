@@ -34,3 +34,10 @@ a {
   pointer-events: none;
   opacity: 0.25;
 }
+.lf--geolocation {
+  background: gray;
+}
+
+.lf--geolocation.mapboxgl-ctrl-geolocate-active {
+  background: gray;
+}
