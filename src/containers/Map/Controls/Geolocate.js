@@ -5,8 +5,8 @@ import { store } from '../../../store.js';
 // ToDo improve accuracy 
 const options = {
   enableHighAccuracy: true, 
-  maximumAge:         15000, 
-  timeout:            12000
+  maximumAge:         0, 
+  timeout:            6000
 };
 
 // @Docs 
