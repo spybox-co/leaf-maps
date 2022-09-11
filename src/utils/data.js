@@ -66,6 +66,16 @@ export const maps = [
     apikey: "?apikey=f44334560bdb4771a041609cc75a8983"
   },
   {
+    vendor: "Seznam",
+    name: "Base Map",
+    url: "https://mapserver.mapy.cz/base-m/{z}-{x}-{y}"
+  },
+  {
+    vendor: "Seznam",
+    name: "Tourist Map",
+    url: "https://mapserver.mapy.cz/turist-m/{z}-{x}-{y}"
+  },
+  {
     vendor: "Öpnvkarte",
     name: "Transport Map",
     url: "https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png",
