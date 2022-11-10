@@ -21,13 +21,15 @@ export default function Home({ data }) {
 
   useEffect(
     () => {
-      dispatch({ type: 'set initial position', value: [data.latitude || 51, data.longitude || 0] })
-      console.log(state)
+      if (data) {
+        dispatch({ type: 'set initial position', value: [data.latitude, data.longitude] })
+        console.log("Props", data)
+      }
     }, [data]
   );
   useEffect(
     () => {
-      console.log("Stejt apdejt",state)
+      console.log("State updated:", state)
     }, [state]
   );
 
@@ -62,9 +64,15 @@ export default function Home({ data }) {
 // Opt-out of Automatic Static Optimization
 // https://nextjs.org/docs/messages/opt-out-auto-static-optimization
 
-export async function getStaticProps () {
-  const res = await fetch('https://www.geolocation-db.com/json/')
-  const json = await res.json()
+export async function getServerSideProps(context) {
+  try {
+    const res = await fetch('https://www.geolocation-db.com/json/')
+    const results = await res.json()
 
-  return { props: { data: json } }
+    return { props: { data: results } }
+  } catch (error) {
+
+    console.error('runtime error: ', error);
+    return { props: { data: { latitude: 51, longitude: 0 } } }
+  }
 }

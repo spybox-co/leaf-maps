@@ -8,7 +8,8 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next build && next export",
-    "start": "next start"
+    "start": "next start",
+    "delete": "rm -rf node_modules && rm -rf build"
   },
   "dependencies": {
     "axios": "^0.26.1",

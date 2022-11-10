@@ -24,6 +24,7 @@ const Map = ({ children, className, ...rest }) => {
     mapClassName = `${mapClassName} ${className}`;
   }
 
+
   useEffect(() => {
     (async function init() {
       delete L.Icon.Default.prototype._getIconUrl;
