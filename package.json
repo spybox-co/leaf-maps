@@ -25,7 +25,7 @@
     "react-hook-geolocation": "^1.0.6",
     "react-leaflet": "^2.7.0",
     "react-leaflet-geosearch": "^0.3.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "react-to-print": "^2.10.0",
     "underscore": "^1.13.1",
     "use-leaflet": "^1.6.1"
