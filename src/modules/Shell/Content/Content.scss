@@ -1,13 +1,14 @@
+@import '../../../styles/variables.scss';
+
 .spbx--header ~ .spbx--content {
   padding-top: 3rem;
   margin: 0;
 }
 
 .spbx--content {
-  // height: calc(100vh - 3rem);
-  position: absolute;
-  height: 100%;
+  // position: absolute;
+  // height: 100%;
   padding: 0;
-  background: black;
+  background: $gray-100;
   will-change: margin-left;
 }

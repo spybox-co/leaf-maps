@@ -34,6 +34,7 @@ sub {
 body {
   overflow: hidden;
   font-family: $font-stack;
+  background: $gray-100;
 }
 
 header {
@@ -86,16 +87,12 @@ strong {
 .leaflet-container {
   // ToDo -> temporary changed to see how it works on mobile browsers
   // height: calc(100vh - 3rem);  
-  height: 100%;
-  width: 100%;
-  z-index: 0;
+  // height: 100%;
+  // width: 100%;
+  // z-index: 0;
   background-color: $black;
 }
 
-.lf-Map-container {
-  width: 100%;
-  height: 100%;
-}
 
 .leaflet-popup-content-wrapper {
   background: $gray-100;

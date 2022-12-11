@@ -52,10 +52,10 @@ const mapFilterSettings = {
 
 const mapStyle = {
   backgroundImage: `url(${Tile})`,
-  filter: `saturate(${mapFilterSettings.saturation}) contrast(${mapFilterSettings.contrast}%)`
+  // filter: `saturate(${mapFilterSettings.saturation}) contrast(${mapFilterSettings.contrast}%)`
 }
 
-const MapContainer = () => {
+const MapContainer = ({ children }) => {
   const { state, dispatch } = useContext(store);
  
   const {
@@ -94,7 +94,9 @@ const MapContainer = () => {
   )
 
   const classes = {
-    map: cn('lf-Map-container', autoCenterMap ? 'ac-enabled' : 'ac-disabled')
+    root: 'lf-Map',
+    container: cn('lf-Map-container', autoCenterMap ? 'ac-enabled' : 'ac-disabled'),
+    content: 'lf-Map-content'
   };
 
   const mapOptions = {
@@ -136,29 +138,33 @@ const MapContainer = () => {
   const isLocationMarker = location.set && location.center !== null && location.label !== null;
 
   return(
-    <div className={classes.map}>
-      <Map
-        onViewportChanged={onViewportChanged}
-        onDrag={onDrag}
-        onClick={onClickReset}
-        viewport={viewport}
-        {...mapOptions}
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <Map
+          id="map"
+          className={classes.content}
+          onViewportChanged={onViewportChanged}
+          onDrag={onDrag}
+          onClick={onClickReset}
+          viewport={viewport}
+          {...mapOptions}
 
-        maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
-        zoomend={event => console.log(event)}
-        // ToDo
-        zoomControl={false} // next to disable default zoom control & make custom
-        attributionControl={false} // maybe custom in the future
-      >
+          maxZoom={activeMap.maxZoom ? activeMap.maxZoom : state.mapSettings.maxZoom}
+          zoomend={event => console.log(event)}
+          // ToDo
+          zoomControl={false} // next to disable default zoom control & make custom
+          // attributionControl={false} // maybe custom in the future
+        >
 
-        {startLocate && <Geolocate />}
-        
-        {isPositionMarker && <PositionMarker position={position} />}
+          {startLocate && <Geolocate />}
+          
+          {isPositionMarker && <PositionMarker position={position} />}
 
-        {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
-        <LayerControlGroup {...layersProps} />
-
-      </Map>
+          {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
+          <LayerControlGroup {...layersProps} />
+          {children}
+        </Map>
+      </div>
     </div>
   )
 }

@@ -1,14 +1,16 @@
+@import '../../styles/global.scss';
+
 .navigation {
   // transform: translateX(-100%); 
   width: 0;
   &.open {
-    width: 20rem;
+    width: $navigation-width;
   }
 }
 .navigation-content {
   transform: translateX(-100%); 
   transition: transform 0.11s cubic-bezier(0.2, 0, 1, 0.9);
-  width: 17rem;
+  width: 17rem; // calc($navigation-width - 3rem);
 }
 .open {
   .navigation-content {

@@ -44,11 +44,6 @@ export const Header = () => {
       </GlobalPanel>
 
 
-      {/* ToDo -> Menu move to main container */}
-      <UIMenu
-        expanded={expanded}
-        actionMenuHandle={actionMenuHandle}
-      />
     </header>
   );
 }

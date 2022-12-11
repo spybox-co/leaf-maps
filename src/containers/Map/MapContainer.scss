@@ -1,12 +1,32 @@
 @import '../../styles/variables.scss';
+@import '../../styles/global.scss';
 
+$navigationWidth: 20rem;
 
-
-.lf-Map-container {
+.lf-Map {
+  // position: absolute;
+  // height: 100%;
   overflow: hidden;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
 }
 
+.menu-expanded .lf-Map {
+  left: 17rem;
+  width: calc(100% - 17rem);
+}
 .lf-Map-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+
+  overflow: hidden;
+  position: relative;
+
   &.ac-enabled {
     .circle {
       fill: $primary-color;
@@ -35,9 +55,17 @@
 .circle {
   transition: fill, stroke 300ms;
 }
-.leaflet-control {
-  display: none;
+.lf-Map-content {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
+
+
+// .leaflet-control {
+//   display: none;
+// }
 // div.leaflet-bottom.leaflet-right {
 //   display: none;
 // }

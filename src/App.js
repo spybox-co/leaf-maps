@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
+import { store } from 'store.js';
 import { Header, Content } from './modules/Shell';
+import UIMenu from './components/Menu/UIMenu';
+import { Main } from './components/Main';
 
 import Map from './containers/Map';
 import ZoomPanel from "./modules/ZoomPanel";
@@ -38,54 +41,55 @@ import "./App.scss";
 // dom-to-image: https://github.com/tsayen/dom-to-image
 
 
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      lastMaps: [], // To-Do -> push to localStore used last 3 maps 
-    };
-  }
+const App = () => {
+  const { state, dispatch } = useContext(store);
 
-  // https://blog.anam.co/progressive-web-apps-with-create-react-app/
-  installPrompt = null;
+  const actionMenuHandle = () => {
+    dispatch({ type: 'toggle menu'})
+  };
 
-  componentDidMount() {
-    console.log("👋 mounted");
-    console.log("screen orientation is ", window.screen.orientation.type)
-    window.screen.orientation.addEventListener('change', function() {
-      console.log("new orientation is ", window.screen.orientation.type);
-    });
-  }
+  const { expanded, compactMode } = state;
 
-  customInstallPWAPrompt = () => {
-    console.log("Listening for Install prompt");
-    window.addEventListener('beforeinstallprompt',e=>{
-      // For older browsers
-      e.preventDefault();
-      console.log("Install Prompt fired");
-      this.installPrompt = e;
-      // See if the app is already installed, in that case, do nothing
-      if((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true){
-        return false;
-      }
-      // Set the state variable to make button visible
-      this.setState({
-        installButton:true
-      })
-    });
-  }
 
-  render() {
     return (
       <div className="App">
         <Header />
-        <Content>
-          <Map />
-          <ZoomPanel />
-          <Attribution />
+        <UIMenu
+          expanded={expanded}
+          actionMenuHandle={actionMenuHandle}
+        />
+        <Content expanded={expanded}>
+          <Map>          
+            <ZoomPanel />
+            <Attribution />
+          </Map>
+
         </Content>
       </div>
     );
   }
-}
+export default App;
 
+// https://blog.anam.co/progressive-web-apps-with-create-react-app/
+
+/*
+const installPrompt = null;
+
+const customInstallPWAPrompt = () => {
+  console.log("Listening for Install prompt");
+  window.addEventListener('beforeinstallprompt',e=>{
+    // For older browsers
+    e.preventDefault();
+    console.log("Install Prompt fired");
+    this.installPrompt = e;
+    // See if the app is already installed, in that case, do nothing
+    if((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true){
+      return false;
+    }
+    // Set the state variable to make button visible
+    this.setState({
+      installButton:true
+    })
+  });
+}
+*/
