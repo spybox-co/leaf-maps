@@ -2,6 +2,8 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { initializeMap } from "./initializeMap";
 
+import ViewMode from './controls/ViewMode';
+
 import { store } from 'store';
 
 import { maps } from 'utils//maps/data';
@@ -10,12 +12,14 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 
 const selectedStyles = [
+  maps.dark,
   maps.streets,
   maps.cycle,
   maps.outdoors,
   maps.transport,
   maps.outdoorsRaster,
-  maps.satellite
+  maps.satellite,
+  maps.light
 ];
 
 
@@ -32,7 +36,8 @@ export default function Mapbox({ data }) {
   // const mapContainer = 'map-container'
   // const map = useRef(null);
 
-  const [mapStyle, setMapStyle] = useState(maps.streets)
+  const [mapStyle, setMapStyle] = useState(maps.dark) // from global state
+  const [mode, setMode] = useState('2D');
 
   let coords = null;
   let zoom = null;
@@ -45,6 +50,19 @@ export default function Mapbox({ data }) {
     longitude: -0.1278,
     zoom: 10
   });
+  
+
+
+  const functionSetMode = () => {
+    if(mode === '2D') {
+      setMode('3D')
+      Map.setPitch(45)
+    }
+    if(mode === '3D') {
+      setMode('2D')
+      Map.setPitch(0).easeTo()
+    }
+  }
 
   const functionSwitchMapStyle = () => {
     const currentIndex = selectedStyles.indexOf(mapStyle);
@@ -103,7 +121,22 @@ export default function Mapbox({ data }) {
         value: [coords.lng.toFixed(4), coords.lat.toFixed(4)]
       })
     });
-    map.setStyle(selectedStyles[0]);
+
+    map.on('rotateend', () => {
+      const pitch = map.getPitch();
+      const rotate = map.getBearing();
+      console.log("pitch", pitch);
+      console.log("rotate", rotate);
+    });
+
+    map.addSource('mapbox-dem', {
+      'type': 'raster-dem',
+      'url': 'mapbox://mapbox.terrain-rgb'
+    });
+    map.setTerrain({
+      'source': 'mapbox-dem',
+      'exaggeration': 1.5
+      });
     /*
     map.addControl(
       new MapboxGeocoder({
@@ -127,6 +160,7 @@ export default function Mapbox({ data }) {
   return(
     <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }}>
       <SwitchMapButton onClick={functionSwitchMapStyle} />
+      <ViewMode onClick={functionSetMode} mode={mode} />
     </div>
   )
 
