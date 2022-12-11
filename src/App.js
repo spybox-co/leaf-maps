@@ -2,11 +2,9 @@ import React, { useContext } from 'react';
 import { store } from 'store.js';
 import { Header, Content } from './modules/Shell';
 import UIMenu from './components/Menu/UIMenu';
-import { Main } from './components/Main';
 
 import Map from './containers/Map';
-import ZoomPanel from "./modules/ZoomPanel";
-import Attribution from "./modules/Attribution";
+import { ZoomPanel, Attribution } from "./modules/Controls";
 
 // TO-USE in future:
 //import CaptureScreen from "./components/CaptureScreen/CaptureScreen";

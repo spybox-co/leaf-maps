@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import Icon from '../../components/Icon';
+import Icon from '../../../components/Icon';
 import './Attribution.scss';
 
-import { store } from '../../store.js';
+import { store } from '../../../store.js';
 // import { cn } from '../../utils/helpers';
 
 const Attribution = () => {
