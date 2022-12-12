@@ -24,7 +24,6 @@ $navigationWidth: 20rem;
   }
 }
 .lf-Map-container {
-  font: $font-stack;
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -60,6 +59,8 @@ $navigationWidth: 20rem;
 .circle {
   transition: fill, stroke 300ms;
 }
+
+
 .lf-Map-content {
   overflow: hidden;
   position: relative;

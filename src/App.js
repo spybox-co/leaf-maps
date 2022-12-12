@@ -45,8 +45,8 @@ const App = () => {
   const actionMenuHandle = () => {
     dispatch({ type: 'toggle menu'})
   };
-
-  const { expanded, compactMode } = state;
+  
+  const { expanded } = state; // compactMode 
 
 
     return (

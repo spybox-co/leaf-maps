@@ -4,6 +4,7 @@ import {
   // Add32,
   ArrowUp32,
   ArrowRight32,
+  Bookmark32,
   Checkbox32,
   CheckboxChecked32,
   CheckboxCheckedFilled32,
@@ -15,6 +16,7 @@ import {
   DocumentPdf32, 
   Download32,
   Fade32, 
+  Flag32,
   Information32,
   InformationFilled32,
   Launch32,
@@ -51,7 +53,6 @@ import { cn } from '../../utils/helpers';
 
 
 import './Icon.scss';
-import { Share32 } from '@carbon/icons';
 
 // @Info: Dynamic Component name in React
 // @See:  https://dev.to/arpit016/dynamic-components-in-react-4iic
@@ -62,6 +63,7 @@ const Components = {
   Add: Add,
   ArrowUp: ArrowUp32,
   ArrowRight: ArrowRight32,
+  Bookmark: Bookmark32,
   Close: Close32,
   Change: Change,
   Checkbox: Checkbox32,
@@ -74,6 +76,7 @@ const Components = {
   DocumentPdf: DocumentPdf32,
   Download: Download32,
   Fade: Fade32,
+  Flag: Flag32,
   GlyphStar: GlyphStar,
   Information: Information32,
   InformationFilled: InformationFilled32,

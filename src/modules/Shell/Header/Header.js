@@ -5,7 +5,7 @@ import { cn } from '../../../utils/helpers'; // To-do path
 
 import { MenuButton, SearchBox, LocateButton } from './Actions';
 
-import UIMenu from '../../../components/Menu/UIMenu';
+// import UIMenu from '../../../components/Menu/UIMenu';
 
 
 

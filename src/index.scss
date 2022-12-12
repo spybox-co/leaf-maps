@@ -103,6 +103,9 @@ strong {
 
 
 }
+.leaflet-container {
+  font: 0.75rem/1.3 $font-stack !important;
+}
 .leaflet-popup-close-button {
   // To-Do
   font-family: "IBM Plex" !important;

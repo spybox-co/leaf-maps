@@ -44,10 +44,10 @@ import "./MapContainer.scss";
 // @Sample https://codesandbox.io/embed/use-leaflet-jbftf
 
 
-const mapFilterSettings = {
-  saturation: 1,
-  contrast: 100,
-}
+// const mapFilterSettings = {
+//   saturation: 1,
+//   contrast: 100,
+// }
 
 
 const mapStyle = {
@@ -162,8 +162,9 @@ const MapContainer = ({ children }) => {
 
           {isLocationMarker && <LocationMarker position={location.center} label={location.label} />}
           <LayerControlGroup {...layersProps} />
-          {children}
+
         </Map>
+        {children}
       </div>
     </div>
   )
