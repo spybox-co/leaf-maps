@@ -69,14 +69,14 @@ const SelectCardIcon = ({ kind, active }) => {
   if (kind === 'selectable') {
     return(
       <>
-        {active ? <Icon className="LayerCard-icon" type="CheckmarkFilled" /> : null}
+        {active ? <Icon className="LayerCard-icon" type="CheckboxCheckedFilled" /> : <Icon className="LayerCard-icon" type="Checkbox" />}
       </>
     )
   }
   if (kind === 'radio') {
     return(
       <>
-        {active ? <Icon className="LayerCard-icon" type="RadioButtonChecked" /> : null}
+        {active ? <Icon className="LayerCard-icon" type="CheckmarkFilled" /> : <Icon className="LayerCard-icon" type="RadioButton" />}
       </>
     )
   }

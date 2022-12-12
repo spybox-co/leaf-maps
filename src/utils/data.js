@@ -12,6 +12,12 @@ export const maps = [
     maxZoom: 17
   },
   {
+    vendor: "Open Street Map",
+    name: "MTB Map",
+    url: "http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png",
+    maxZoom: 17
+  },
+  {
     vendor: "CyclOSM",
     name: "Bike Map",
     url: "https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
@@ -61,6 +67,12 @@ export const maps = [
   },
   {
     vendor: "Thunder Forest",
+    name: "Transport Dark",
+    url: "https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png",
+    apikey: "?apikey=f44334560bdb4771a041609cc75a8983"
+  },
+  {
+    vendor: "Thunder Forest",
     name: "Neighbourhood",
     url: "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png",
     apikey: "?apikey=f44334560bdb4771a041609cc75a8983"
@@ -82,6 +94,13 @@ export const maps = [
     apikey: "?apikey=f44334560bdb4771a041609cc75a8983",
     maxZoom: 18
   },
+  // {
+  //   vendor: "Jawg Maps",
+  //   name: "Matrix",
+  //   url: "https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png",
+  //   apikey: "?access-token=f44334560bdb4771a041609cc75a8983",
+  //   maxZoom: 18
+  // },
   {
     vendor: "Carto",
     name: "Positron",
@@ -105,6 +124,12 @@ export const maps = [
     name: "Toner Lite",
     url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
     maxZoom: 18,
+  },
+  {
+    vendor: "NASA",
+    name: "Global Imagery Browse Services (GIBS)",
+    url: "https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg",
+    maxZoom: 8,
   }
 ];
 
@@ -133,6 +158,11 @@ export const layers = [
     vendor: "Way Marked Trails",
     name: "Horse Riding",
     url: "https://tile.waymarkedtrails.org/riding/{z}/{x}/{y}.png"
+  },
+  {
+    vendor: "Stamen",
+    name: "Toner Hybrid",
+    url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.png"
   },
   {
     vendor: "Open Sea Map",
