@@ -23,7 +23,8 @@ import {
   RadioButtonChecked32,
   View32,
   Search32,
-  Send32
+  Send32,
+  Share32
 } from '@carbon/icons-react';
 
 import {
@@ -50,6 +51,7 @@ import { cn } from '../../utils/helpers';
 
 
 import './Icon.scss';
+import { Share32 } from '@carbon/icons';
 
 // @Info: Dynamic Component name in React
 // @See:  https://dev.to/arpit016/dynamic-components-in-react-4iic
@@ -90,6 +92,7 @@ const Components = {
   Search: Search32,
   Send: Send32,
   Settings: Settings,
+  Share: Share32,
   Substract: Substract,
   View: View32,
 };
