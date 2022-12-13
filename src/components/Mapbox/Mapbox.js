@@ -103,15 +103,53 @@ export default function Mapbox({ data }) {
         value: [coords.lng.toFixed(4), coords.lat.toFixed(4)]
       })
     });
+
     map.setStyle(selectedStyles[0]);
-    /*
-    map.addControl(
-      new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl
-      })
-    );
-    */
+
+
+
+
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    
+    function success(pos) {
+      const crd = pos.coords;
+    
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+      map.fire('geolocate', pos);
+      map.jumpTo({
+        center: [crd.longitude, crd.latitude],
+        zoom: 17,
+        bearing: 0,
+        pitch: 0
+      });
+    }
+    
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+    
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+    // map.on('geolocate', (position) => { 
+    //   console.clean();
+    //   console.warn(position, "cfel"); 
+    // });
+
+
+
+    
+
+
+ 
+
     initializeMap(mapboxgl, map);
     setMap(map);
     
@@ -123,6 +161,13 @@ export default function Mapbox({ data }) {
     }
   }, [pageIsMounted, setMap, Map, mapStyle]);
 
+  // Need to useRef
+  const MapContainer = ({ children }) => (
+    <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }}>
+      {children}
+    </div>
+  )
+
 
   return(
     <div id="map-container" className="lf--map-container" style={{ height: "100%", width: "100%" }}>
@@ -131,6 +176,8 @@ export default function Mapbox({ data }) {
   )
 
 }
+
+
 
 
 const SwitchMapButton = ({ onClick }) => {
@@ -145,7 +192,7 @@ const SwitchMapButton = ({ onClick }) => {
     alignItems: 'center'
   };
   return (
-    <button style={styles} onClick={onClick}>
+    <button className="Button SwitchMap" style={styles} onClick={onClick}>
       Switch Map
     </button>
   );
