@@ -3,7 +3,8 @@ import React, { useContext } from 'react';
 
 import { cn } from '../../../../../utils/helpers';
 
-import ActionButton from '../ActionButton';
+// eslint-disable-next-line
+import { Button, IconButton } from '../../../../../components/Button';
 
 import { store } from '../../../../../store.js';
 
@@ -14,15 +15,6 @@ import './LocateButton.scss';
 const LocateButton = () => {
   const { state, dispatch } = useContext(store);
   const { startLocate, autoCenterMap, position } = state;
-
-
-  // @PARAM position needed
-  const kind = startLocate
-  ? autoCenterMap
-    ? "autocentermap-enabled"
-    : "autocentermap-disabled"
-  : "gps-off";
-
 
   const handleLocateClick = () => {
     // Initiate geolocation
@@ -43,19 +35,19 @@ const LocateButton = () => {
     }
   }
 
-  const classes = cn('LocateButton', startLocate && position ? 'geolocation-on' : 'geolocation-off');
+  const classes = cn('LocateButton', startLocate && position ? 'geolocation--on' : 'geolocation--off', autoCenterMap ? 'auto-center--on' : 'auto-center--off' );
 
   return(
-    <ActionButton
-      className={classes}
-      id="geolocate"
-      kind={kind}
-      // renderIcon={LocateIcon}
-      iconDescription="Locate your position!"
-      onClick={handleLocateClick}
-    >
-      <LocateIcon enabled={startLocate} follow={autoCenterMap}/>
-    </ActionButton>
+    <div className={classes}>
+      <IconButton
+        id="geolocate"
+        kind="ghost"
+        iconDescription="Locate your position!"
+        onClick={handleLocateClick}
+      >
+        <LocateIcon enabled={startLocate} follow={autoCenterMap}/>
+      </IconButton>
+    </div>
   )
 }
 

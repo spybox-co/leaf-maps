@@ -5,7 +5,8 @@ import { store } from '../../../../../store.js';
 import { cn } from '../../../../../utils/helpers';
 
 import ScrollableArea from '../../../../../components/ScrollableArea';
-import { Button } from '../../../../../components/Button';
+// eslint-disable-next-line
+import { Button, IconButton } from '../../../../../components/Button';
 
 import ActionButton from '../ActionButton';
 import SearchButton from './SearchButton';
@@ -104,6 +105,7 @@ const SearchForm = () => {
 
   const classes = {
     root: cn('Header--module__Search', 'SearchBox', expanded && 'expanded'),
+    searchBox: cn('SearchBox-Input-wrapper'),
     input: 'SearchBox-Input'
   }
 
@@ -113,9 +115,10 @@ const SearchForm = () => {
 
   return (
     <div className={classes.root}>
-      <SearchButton 
-        kind={expanded && 'expanded'}
-        onClick={handleClick} 
+      <div className={classes.searchBox} aria-owns="search-menu" aria-haspopup="menu">
+      <SearchButton
+        expanded={expanded}
+        onClick={handleClick}
       />
       {expanded && (
         <>
@@ -148,7 +151,7 @@ const SearchForm = () => {
               setExpanded(false);
               dispatch({ type: 'clear location'});
             }}
-            kind={expanded && 'expanded'}
+            // kind={expanded && 'expanded'}
           />
         </>
       )}
@@ -195,7 +198,7 @@ const SearchForm = () => {
       )}
 
       {results.length === 0 && value.length > options.minQuerylength && dropdown && <NoResultsItem />}
-
+      </div>           
     </div>
   )
 }
@@ -208,7 +211,7 @@ const ResultItem = ({ name, properties, onClick }) => {
     <li className="SearchBox-Result-item">
       <Button className="Result-item__link" 
         onClick={onClick}
-        kind={"tertiary"} 
+        kind="ghost"
         renderIcon="ArrowRight"
       >
         <span>

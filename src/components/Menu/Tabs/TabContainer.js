@@ -14,10 +14,11 @@ const TabContainer = props => {
   const { 
     children, 
     // component, 
+    theme,
     expanded 
   } = props;
 
-  const classes = cn(styles.Container, 'tab-container', expanded && 'open');
+  const classes = cn(styles.Container, 'tab-container', expanded && 'open', theme && theme);
 
   return(
     
@@ -42,13 +43,13 @@ export const TabHeader = ({ title, expanded }) => {
   const { compactMode } = state;
 
   return(
-    <div className={styles.Header}>
+    <div className={styles.Header} data-mode="dark">
       <h6>
         {title}
       </h6>
       {!compactMode && (
         <CloseButton          
-          kind={"tertiary"}
+          kind="ghost"
           renderIcon="Close"
           iconDescription="Close"
           onClick={() => dispatch({ type: 'close menu'})}

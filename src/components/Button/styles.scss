@@ -1,5 +1,168 @@
 @import '../../styles/variables.scss';
 
+.fbr--button {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: 0.16px;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 20rem;
+  min-height: 3rem;
+  margin: 0px;
+  padding: calc(0.875rem - 3px) 63px calc(0.875rem - 3px) 15px;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: top;
+  border-radius: 0px;
+  outline: 1px solid transparent;
+  outline-offset: -3px;
+  cursor: pointer;
+  transition: all 70ms cubic-bezier(0, 0, 0.38, 0.9) 0s;
+
+  border-color: rgba(0,0,0,0);
+  border-style: solid;
+  border-width: 1px;
+
+  &__icon {
+    position: absolute;
+    flex-shrink: 0;
+    top: auto;
+    // height: 1.25rem;
+    // width: 1.25rem;
+    right: 1rem;
+  }
+
+
+  &--default {
+    color: $white;
+    background-color: $gray-70;
+    &:hover {
+      background-color: $gray-60;
+    }
+    &:active {
+      background-color: $gray-50;
+    }
+  }
+
+  &--primary {
+    color: $white;
+    background-color: $primary-color;
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+    &:active {
+      background-color: darken($primary-color, 20%);
+    }
+  }
+
+  &--danger {
+    color: $white;
+    background-color: $danger-color;
+  }
+
+  &--warning {
+    color: $gray-100;
+    background-color: $warning-color;
+  }
+
+  &--secondary {
+    color: $white;
+    background-color: $gray-80;
+    &:hover {
+      background-color: $gray-70;
+    }
+    &:active {
+      background-color: $gray-60;
+    }
+  }
+  &--tertiary {
+    &[data-mode="dark"] {
+      color: $white;
+    }
+    color: $primary-color;
+    background-color: transparent;
+    &:hover {
+      background-color: rgba($gray-50, 0.16);
+    }
+    &:active {
+      background-color: rgba($gray-50, 0.32);
+    }
+  }
+  &--ghost {
+    &[data-mode="dark"] {
+      color: $white;
+    }
+    color: $gray-100;
+    background-color: transparent;
+    &:hover {
+      background-color: rgba($gray-50, 0.16);
+    }
+    &:active {
+      background-color: rgba($gray-50, 0.32);
+    }
+  }
+  &--white {
+    color: $gray-100;
+    background-color: $white;
+    &:hover {
+      background-color: $gray-20;
+    }
+    &:active {
+      background-color: $gray-30;
+    }
+  }
+  
+  &--green {
+    color: $white;
+    background-color: $green-color;
+  }
+  &--orange {
+    color: $white;
+    background-color: $orange-color;
+  }
+  &--custom {
+    color: $white;
+    background: none;
+  }
+
+  &--disabled, &:disabled {
+    color: $gray-30;
+    background-color: $gray-60;
+  }
+  &:focus {
+    outline-color: currentColor;
+  }
+}
+
+
+.fbr--button--icon-only {
+  min-width: 3rem;
+  padding: 0.875rem;
+  /* padding-right: 0.9375rem;
+  padding-left: 0.9375rem; */
+  .fbr--button__icon {
+    position: static;
+
+  }
+}
+[class*="dark"],
+[data-mode="dark"] {
+  .fbr--button--ghost {
+    color: $white;
+  }
+}
+[class*="light"],
+[data-mode="light"] {
+  .fbr--button--ghost {
+    color: $gray-100;
+  }
+}
+
+/*
 .spbx--button {
   font-size: 0.875rem;
   font-weight: 400;
@@ -62,10 +225,10 @@
     color: $white;
     background-color: transparent;
     &:hover {
-      background-color: $gray-80;
+      background-color: rgba($gray-50, 0.16);
     }
     &:active {
-      background-color: $gray-70;
+      background-color: rgba($gray-50, 0.32);
     }
   }
 
@@ -118,3 +281,4 @@
   padding-right: 0.9375rem;
   padding-left: 0.9375rem;
 }
+*/

@@ -19,24 +19,25 @@ const Button = props => {
   } = props;
 
   const buttonKind = 
-    (kind === 'primary' && 'spbx--button--primary') ||
-    (kind === 'secondary' && 'spbx--button--secondary') ||
-    (kind === 'tertiary' && 'spbx--button--tertiary') ||
-    (kind === 'danger' && 'spbx--button--danger') ||
-    (kind === 'warning' && 'spbx--button--warning') ||
-    (kind === 'green' && 'spbx--button--green') ||
-    (kind === 'orange' && 'spbx--button--orange') ||
+    (kind === 'primary' && 'fbr--button--primary') ||
+    (kind === 'secondary' && 'fbr--button--secondary') ||
+    (kind === 'tertiary' && 'fbr--button--tertiary') ||
+    (kind === 'ghost' && 'fbr--button--ghost') ||
+    (kind === 'danger' && 'fbr--button--danger') ||
+    (kind === 'warning' && 'fbr--button--warning') ||
+    (kind === 'green' && 'fbr--button--green') ||
+    (kind === 'orange' && 'fbr--button--orange') ||
     // To-Do
-    (kind && `spbx--button--custom ${kind}`);
+    (kind && `fbr--button--custom ${kind}`);
 
   
 
   const classes = [
     className ? className : null,
-    'spbx--button',
-    hasOnlyIcon && 'spbx--button--icon-only',
-    kind ? buttonKind : 'spbx--button--default',
-    disabled && 'spbx--button--disabled',
+    'fbr--button',
+    hasOnlyIcon && 'fbr--button--icon-only',
+    kind ? buttonKind : 'fbr--button--default',
+    disabled && 'fbr--button--disabled',
     
   ].join(' ').trim();
 
@@ -71,7 +72,7 @@ const RenderIconComponent = (icon) => {
   // console.log("Icon type:", icon, typeof icon);
   
   if (typeof icon === 'string') {
-    return <Icon className="spbx--button__icon" type={icon} />
+    return <Icon className="fbr--button__icon" type={icon} />
   }
   if (typeof icon === 'function') {
     return icon;

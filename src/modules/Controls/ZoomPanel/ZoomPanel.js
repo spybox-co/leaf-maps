@@ -65,8 +65,8 @@ const ZoomPanel = props => {
     <div className="lf-ZoomPanel" style={style.root} {...others}>
       <IconButton
         style={style.button}
-        kind="secondary"
-        disabled={zoom === maxZoom ? true : false}
+        kind="ghost"
+        disabled={zoom === maxZoom ? true : null}
         onClick={() => dispatch({ type: 'zoom in' })}
         // onClick={() => dispatch({ type: 'set zoom', value: zoom + 1 })}
         renderIcon="Add"
@@ -83,8 +83,8 @@ const ZoomPanel = props => {
 
       <IconButton
         style={style.button}
-        kind="secondary"
-        disabled={zoom === minZoom ? true : false}
+        kind="ghost"
+        disabled={zoom === minZoom ? true : null}
         onClick={() => dispatch({ type: 'set zoom', value: zoom - 1 })}
         renderIcon="Substract"
         iconDescription="Zoom out"

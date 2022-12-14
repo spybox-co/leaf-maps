@@ -7,7 +7,7 @@ import UISideNavigation from './UISideNavigation';
 
 // import Console from '../../components/Console';
 
-import TabContainer, { TabHeader, TabButton, Maps, Layers, Console } from './Tabs'
+import TabContainer, { TabHeader, TabButton, Maps, Layers, Console, Share } from './Tabs'
 
 import * as update from "../../version";
 
@@ -27,9 +27,16 @@ const tabs = [
     icon: "LayerStack"
   },
   {
+    name: "Share",
+    component: <Share />,
+    icon: "Share",
+    theme: "g10 theme-light"
+  },
+  {
     name: "Console",
     component: <Console />,
-    icon: "Settings"
+    icon: "Settings",
+    theme: "g10 theme-light"
   }
 ];
 
@@ -75,6 +82,7 @@ const UIMenu = props => {
       <UIMenuTabContainer 
         title={activeTab.name}
         expanded={expanded}
+        theme={activeTab.theme ? activeTab.theme : null}
       >
         {activeTab.component}
       </UIMenuTabContainer>
@@ -84,12 +92,12 @@ const UIMenu = props => {
 }
 export default UIMenu;
 
-const UIMenuTabContainer = ({ children, title }) => {
+const UIMenuTabContainer = ({ children, title, theme }) => {
   const classes = cn(styles.NavigationContent, "navigation-content")
   return(
     <div className={classes}>
       <TabHeader title={title} />
-      <TabContainer>
+      <TabContainer theme={theme}>
         {children}
       </TabContainer>
       <Version />

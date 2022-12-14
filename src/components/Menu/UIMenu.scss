@@ -1,5 +1,5 @@
 @import '../../styles/global.scss';
-
+@import '../../styles/variables.scss';
 .navigation {
   // transform: translateX(-100%); 
   width: 0;
@@ -16,6 +16,9 @@
   .navigation-content {
     transform: translateX(0); 
   }
+}
+.tab-container.g10 {
+  background-color: $gray-10;
 }
 
 // In the future: 

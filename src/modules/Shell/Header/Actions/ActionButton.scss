@@ -45,11 +45,12 @@
 
   &--default {
     color: $white;
+    background-color: transparent;
     &:hover {
-      background-color: $gray-80;
+      background-color: rgba($gray-50, 0.16);
     }
     &:active {
-      background-color: $gray-60;
+      background-color: rgba($gray-50, 0.32);
     }
   }
 

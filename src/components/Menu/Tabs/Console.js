@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { store } from '../../../store.js';
 
-import ReactToPrint from "react-to-print";
 import { CodeSnippet, ExpandableTile, TileBelowTheFoldContent, TileAboveTheFoldContent } from "carbon-components-react";
 import { Button } from "../../../components/Button";
 import Typo from "../../../components/Typography";
@@ -39,7 +38,7 @@ export default () => {
     }
   }
   return(
-    <div className="Console">
+    <div className="Console theme-light">
       <StaticTile>
       <h3>My position</h3>
       {startLocate && position !== null ? (
@@ -83,7 +82,7 @@ export default () => {
                   <CodeSnippet type="single">{`${position[1]}`}</CodeSnippet>
                   <Button 
                     renderIcon={"Launch"}
-                    kind="secondary"
+                    kind="ghost"
                     anchor
                     href={`https://www.google.pl/maps/@${position[0]},${position[1]},${viewport.zoom}z`}
                     target="_blank"
@@ -144,27 +143,9 @@ Timestamp:         ${geolocation.timestamp}
           <CodeSnippet type="single">{`${viewport.center[1]}`}</CodeSnippet>
         </div>
 
-        <Button 
-          renderIcon={"Launch"}
-          kind="tertiary"
-          anchor
-          disabled={autoCenterMap}
-          href={!autoCenterMap ? `https://www.google.pl/maps/@${viewport.center[0]},${viewport.center[1]},${viewport.zoom}z` : null}
-          target="_blank"
-        >Show this view on Google Maps</Button>
+
       </Tile>
-      <Tile style={expandStyle}>
-        <h6>Print Map</h6>
-        <ReactToPrint
-          trigger={() => 
-            <Button 
-              kind="secondary"
-              renderIcon={"Printer"}
-              disabled
-            >Print map out (viewport)</Button>}
-          content={() => this.componentRef}
-        />
-      </Tile>
+
 
     </div>
   )

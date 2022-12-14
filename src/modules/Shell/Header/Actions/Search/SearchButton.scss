@@ -1,1 +1,6 @@
 @import '../../../../../styles/variables.scss';
+
+
+.SearchButton.expanded {
+  pointer-events: none;
+}

@@ -9,12 +9,21 @@
   transition: width ease 150ms;
   &.expanded {
     background-color: $gray-80;
-    outline: $white solid 2px;
-    outline-offset: -2px;
+
     //width: 100%;
     flex: 1 1 100%;
   }
+  &:focus-within {
+    outline: $white solid 2px;
+    outline-offset: -2px;
+    overflow: hidden;
+  }
 
+}
+.SearchBox-Input-wrapper {
+  display: flex;
+  // width: 100%;
+  flex-grow: 1;
 }
 .SearchBox-Input {
   background-color: transparent;

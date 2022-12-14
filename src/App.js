@@ -4,6 +4,7 @@ import { Header, Content } from './modules/Shell';
 import UIMenu from './components/Menu/UIMenu';
 
 import Map from './containers/Map';
+// eslint-disable-next-line
 import { ZoomPanel, Attribution } from "./modules/Controls";
 
 // TO-USE in future:
@@ -50,7 +51,7 @@ const App = () => {
 
 
     return (
-      <div className="App">
+      <div className="App theme-dark">
         <Header />
         <UIMenu
           expanded={expanded}
@@ -59,7 +60,7 @@ const App = () => {
         <Content expanded={expanded}>
           <Map>          
             <ZoomPanel />
-            <Attribution />
+            {/* <Attribution /> */}
           </Map>
 
         </Content>
