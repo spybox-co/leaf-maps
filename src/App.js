@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { store } from 'store.js';
-import { Header, Content } from './modules/Shell';
+
 import UIMenu from './components/Menu/UIMenu';
 
-import Map from './containers/Map';
+import { Header, Content } from './modules/Shell';
+import { MapContainer } from './modules/MapContainer';
 // eslint-disable-next-line
 import { ZoomPanel, Attribution } from "./modules/Controls";
 
@@ -58,10 +59,11 @@ const App = () => {
           actionMenuHandle={actionMenuHandle}
         />
         <Content expanded={expanded}>
-          <Map>          
+          
+          <MapContainer>          
             <ZoomPanel />
             {/* <Attribution /> */}
-          </Map>
+          </MapContainer>
 
         </Content>
       </div>

@@ -119,6 +119,10 @@ const StateProvider = ({ children }) => {
       case 'change map':
         localStorage.setItem('lastMap', action.value);
         return {...state, activeMap: maps[action.value] };
+      case 'refresh map':
+        return {...state, activeMap: state.activeMap };
+
+      // Viewport & position actions  
       case 'on change viewport':
         return {...state, viewport: action.value };
       case 'center map on position':

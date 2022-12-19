@@ -38,10 +38,10 @@ export const Header = () => {
       </HeaderName>
 
 
-      <GlobalPanel>
+      <GlobalModule>
         <SearchBox />
         <LocateButton />
-      </GlobalPanel>
+      </GlobalModule>
 
 
     </header>
@@ -58,7 +58,7 @@ const HeaderName = ({ prefix, href, children }) => {
   )
 }
 
-const GlobalPanel = props => {
+const GlobalModule = props => {
   return <div className="spbx--header__global">{props.children}</div>;
 };
 

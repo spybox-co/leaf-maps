@@ -1,9 +1,7 @@
 import React from 'react';
-// import { IconButton } from "../../Button";
+import Icon from '../Icon';
 
-import Icon from '../../Icon';
 
-import './styles.scss';
 import './TabButton.scss';
 
 const TabButton = props => {
@@ -51,15 +49,3 @@ const RenderIconComponent = ({ icon }) => {
   }
   return null;
 }
-
-
-
-/*
-  <IconButton
-    kind={props.active ? "active" : "inactive"}
-    disabled={false}
-    onClick={props.onClick}
-    renderIcon={props.icon}
-    iconDescription="Tab icon"
-  />
-*/

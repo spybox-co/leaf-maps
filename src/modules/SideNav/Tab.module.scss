@@ -1,0 +1,42 @@
+@import '../../../styles/variables.scss';
+
+.root {
+  background-color: $gray-100;  
+  // border-left: 1px solid $gray-80;
+}
+
+.Container {
+  padding: 0 0 3rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100%;
+
+}
+
+.Header {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding-left: 1rem;
+  align-items: center;
+  height: 3rem;
+  justify-content: space-between;
+  // &::after {
+  //   position: absolute;
+  //   content: "";
+  //   border-top: 1px $gray-70 solid;
+  //   z-index: 100;
+  //   width: 100%;
+  //   left: 0;
+  //   bottom: -1px;
+  // }
+}
+
+.Tab {
+  width: 3rem;
+  height: 3rem;
+  svg {
+    fill: currentColor;
+  }
+}

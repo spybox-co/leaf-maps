@@ -3,35 +3,34 @@
 
 .SearchBox {
   display: flex;
-  width: 3rem;
-  max-width: 35rem;
+  max-width: 3rem;
+  
   position: relative;
-  transition: width ease 150ms;
+  
   &.expanded {
     background-color: $gray-80;
-
-    //width: 100%;
-    flex: 1 1 100%;
+    flex-grow: 1;
+    max-width: 35rem;
   }
   &:focus-within {
     outline: $white solid 2px;
     outline-offset: -2px;
   }
-
+  transition: max-width .11s cubic-bezier(.5,0,.1,1), background-color .11s cubic-bezier(.5,0,.1,1);
 }
 .SearchBox-Input-wrapper {
   display: flex;
-  // width: 100%;
   flex-grow: 1;
 }
 .SearchBox-Input {
   background-color: transparent;
+  display: flex;
   color: $gray-10;
   padding: 0;
   height: 100%;
-  flex: 1 1 100%;
-  display: flex;
-  min-width: calc(100% - 6rem);
+  flex-grow: 1;
+  width: calc(100% - 6rem);
+  
 }
 
 .SearchBox-Results {

@@ -3,4 +3,7 @@
 
 .SearchButton.expanded {
   pointer-events: none;
+  &:hover, &:active {
+    background-color: transparent;
+  }
 }

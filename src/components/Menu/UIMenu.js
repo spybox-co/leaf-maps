@@ -7,9 +7,9 @@ import UISideNavigation from './UISideNavigation';
 
 // import Console from '../../components/Console';
 
-import TabContainer, { TabHeader, TabButton, Maps, Layers, Console, Share } from './Tabs'
-
-import * as update from "../../version";
+import TabContainer, { TabHeader, Maps, Layers, Console, Share } from './Tabs'
+import { TabButton } from '../../components/TabButton';
+import * as update from '../../version';
 
 import styles from './Menu.module.scss'
 
@@ -55,7 +55,10 @@ const UIMenu = props => {
 
   const actionTabClick = tab => {
     if (!expanded) dispatch({ type: 'open menu'});
-    if (expanded && activeTab.name === tab.name)  dispatch({ type: 'close menu'})
+    if (expanded && activeTab.name === tab.name) { 
+      dispatch({ type: 'close menu'}) 
+      dispatch({ type: 'refresh map'}) 
+    }
     if (activeTab.name !== tab.name) setActiveTab(tab);
   }
 

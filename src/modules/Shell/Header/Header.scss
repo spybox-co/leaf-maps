@@ -13,24 +13,10 @@
   }
 }
 
-.bx--header {
-  align-items: center;
-  background-color: #161616;
-  border-bottom: 1px solid #393939;
-  display: flex;
-  height: 3rem;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 8000;
-}
-
-
 .spbx--header {
   align-items: center;
-  background-color: #161616;
-  border-bottom: 1px solid #393939;
+  background-color: $gray-100;
+  border-bottom: 1px solid $gray-80;
   display: flex;
   height: 3rem;
   left: 0;

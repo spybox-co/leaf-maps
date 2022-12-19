@@ -10,12 +10,12 @@ import { cn } from '../../../utils/helpers';
 import '../UIMenu.scss';
 import styles from './Tab.module.scss';
 
-const TabContainer = props => {
+const ActionPanel = props => {
   const { 
-    children, 
-    // component, 
-    theme,
-    expanded 
+    children,
+    expanded,
+    name,
+    theme, 
   } = props;
 
   const classes = cn(styles.Container, 'tab-container', expanded && 'open', theme && theme);
@@ -24,17 +24,14 @@ const TabContainer = props => {
     
       <ScrollableArea className={styles.root} area={{ width: `100%`, height: `calc(100% - 3rem)` }}>
         <div className={classes}>
-
-          {/* {component} */}
           {children}
-        
         </div>
       </ScrollableArea>
     
   )
 }
 
-export default TabContainer;
+export default ActionPanel;
 
 const CloseButton = props => <IconButton           
                                 kind="ghost"
@@ -42,7 +39,7 @@ const CloseButton = props => <IconButton
                                 iconDescription="Close"{...props} 
                               />
 
-export const TabHeader = ({ title, expanded }) => {
+export const Header = ({ title, expanded }) => {
   const { state, dispatch } = useContext(store);
   const { compactMode } = state;
 
