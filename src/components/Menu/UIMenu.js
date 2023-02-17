@@ -9,6 +9,7 @@ import UISideNavigation from './UISideNavigation';
 
 import TabContainer, { TabHeader, Maps, Layers, Console, Share } from './Tabs'
 import { TabButton } from '../../components/TabButton';
+import { Tag } from '../../components/Tag';
 import * as update from '../../version';
 
 import styles from './Menu.module.scss'
@@ -121,10 +122,13 @@ const Version = () => {
       alignItems: `center`,
       transform: `rotate(-90deg)`
     }}>
-      <small style={{ color: update.app.color, padding: `0 1rem` }}>
+      <Tag>Version</Tag>
+      <Tag color={update.app.color}>{update.app.version}</Tag>
+      <Tag type="blue">{update.app.variant}</Tag>
+      {/* <small style={{ color: update.app.color, padding: `0 1rem` }}>
         {update.app.version && <span><sup>version</sup>{update.app.version}</span>}
         {update.app.variant && <span style={{ marginLeft: `0.75rem` }}><sup>variant</sup>{update.app.variant}</span>}
-      </small>
+      </small> */}
     </div>
   )
 }

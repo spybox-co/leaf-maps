@@ -1,0 +1,36 @@
+@import '../../styles/variables.scss';
+
+$opacity: 0.25;
+
+.fbr--tag {
+  color: $gray-50;
+  background-color: rgba($gray-50, $opacity);
+  font-size: 0.75rem;
+  height: 1.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.75rem;
+  margin: 0.5rem;
+  // border: 1px solid $gray-10;
+  &:not(:first-child) {
+    margin-left: 0;
+  }
+
+
+  &-white {
+    color: $white;
+    background-color: rgba($white, $opacity);
+  }
+
+  &-magenta {
+    color: $magenta-50;
+    background-color: rgba($magenta-50, $opacity);
+  }
+  &-red {
+    color: $red-50;
+    background-color: rgba($red-50, $opacity);
+  }
+  &-blue {
+    color: $blue-50;
+    background-color: rgba($blue-50, $opacity);
+  }
+}

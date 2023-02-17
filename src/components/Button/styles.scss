@@ -52,10 +52,10 @@
     color: $white;
     background-color: $primary-color;
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: $primary-color-hover; // darken($primary-color, 10%);
     }
     &:active {
-      background-color: darken($primary-color, 20%);
+      background-color: $primary-color-press; // darken($primary-color, 20%);
     }
   }
 

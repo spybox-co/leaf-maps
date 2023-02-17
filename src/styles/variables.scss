@@ -112,7 +112,7 @@ $blue-color: #0f62fe;
 $yellow-color: #fdd13a;
 $orange-color: #ff832b;
 
-$primary-color: $blue-color;
+$primary-color: $blue-60;
 $danger-color: $red-color;
 $warning-color: $yellow-color;
 
@@ -121,6 +121,11 @@ $tetrinary-color: $gray-30;
 
 
 $background: $gray-100;
+
+
+
+$primary-color-hover: $blue-70;
+$primary-color-press: $blue-80;
 
 // To Do, consider better color
 // added some colors from carbon
