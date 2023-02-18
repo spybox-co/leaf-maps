@@ -20,10 +20,6 @@ export const Tag = ({ children, color, type }) => {
     type && `fbr--tag-${type}`
   ].join(' ').trim();
 
-  if (color) {
-    console.log(hexToRgb(color))
-  } 
-
   return (
     <span 
       style={color ? styles : null}

@@ -141,12 +141,30 @@
 
 .fbr--button--icon-only {
   min-width: 3rem;
+  min-height: 3rem;
   padding: 0.875rem;
   /* padding-right: 0.9375rem;
   padding-left: 0.9375rem; */
   .fbr--button__icon {
     position: static;
 
+  }
+  &.fbr--button {
+    &--lg {
+      min-width: 3rem;
+      min-height: 3rem;
+      padding: 0.875rem;
+    }
+    &--md {
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0.6875rem;;
+    }
+    &--sm {
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.4375rem;
+    }
   }
 }
 [class*="dark"],

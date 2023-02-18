@@ -1,44 +1,21 @@
 import React, { 
   useContext
   // useEffect 
-} from "react";
+} from 'react';
 import { store  } from '../../../store.js';
 //import { ClickableTile, TextInput } from "carbon-components-react";
-import { IconButton } from "../../../components/Button";
+import { IconButton } from '../../../components/Button';
 
 
-import "./ZoomPanel.scss";
+import './ZoomPanel.scss';
 
-const style = {
-  root: {
-    display: `flex`,
-    flexWrap: `nowrap`,
-    flexDirection: `column`,
-    justifyContent: `flex-start`,
-    alignItems: `flex-end`
-  },
-  number: {
-    width: 48,
-    height: 48,
-    display: `flex`,
-    justifyContent: `center`,
-    alignItems: `center`,
-    backgroundColor: `#f3f3f3`
-  },
-  button: {
-    minHeight: 40,
-    width: 48,
-    height: 48,
-    justifyContent: `center`,
-    alignItems: `center`
-  }
-};
-
-const ZoomPanel = props => {
+const ZoomPanel = ({
+  size = 'medium', 
+  ...others
+}) => {
 
   const { state, dispatch } = useContext(store);
   const { mapSettings, viewport } = state;
-  const { ...others } = props;
 
 
 
@@ -61,11 +38,17 @@ const ZoomPanel = props => {
   );
   */
 
+  const classes = [
+    'lf-ZoomPanel',
+    'lf-Control',
+    size ? `${size}` : null
+  ].join(' ').trim();
+
   return (
-    <div className="lf-ZoomPanel" style={style.root} {...others}>
+    <div className={classes} {...others}>
       <IconButton
-        style={style.button}
         kind="ghost"
+        size={size}
         disabled={zoom === maxZoom ? true : null}
         onClick={() => dispatch({ type: 'zoom in' })}
         // onClick={() => dispatch({ type: 'set zoom', value: zoom + 1 })}
@@ -82,8 +65,8 @@ const ZoomPanel = props => {
      
 
       <IconButton
-        style={style.button}
         kind="ghost"
+        size={size}
         disabled={zoom === minZoom ? true : null}
         onClick={() => dispatch({ type: 'set zoom', value: zoom - 1 })}
         renderIcon="Substract"

@@ -62,7 +62,7 @@ const App = () => {
           
           <MapContainer>          
             <ZoomPanel />
-            {/* <Attribution /> */}
+            <Attribution />
           </MapContainer>
 
         </Content>

@@ -10,7 +10,7 @@ $opacity: 0.25;
   padding: 0.25rem 0.5rem;
   border-radius: 0.75rem;
   margin: 0.5rem;
-  // border: 1px solid $gray-10;
+  cursor: default;
   &:not(:first-child) {
     margin-left: 0;
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Icon from '../Icon';
-import './styles.scss';
+import './Button.scss';
 
 const Button = props => {
   const { 
@@ -15,8 +15,14 @@ const Button = props => {
     anchor,
     disabled,
     iconDescription,
+    size,
     ...other
   } = props;
+
+
+  // sm,
+  // md,
+  // lg,
 
   const buttonKind = 
     (kind === 'primary' && 'fbr--button--primary') ||
@@ -30,7 +36,10 @@ const Button = props => {
     // To-Do
     (kind && `fbr--button--custom ${kind}`);
 
-  
+  const buttonSize = 
+    (size === 'small' && 'fbr--button--sm') ||
+    (size === 'medium' && 'fbr--button--md') ||
+    (size === 'large' && 'fbr--button--lg');
 
   const classes = [
     className ? className : null,
@@ -38,6 +47,7 @@ const Button = props => {
     hasOnlyIcon && 'fbr--button--icon-only',
     kind ? buttonKind : 'fbr--button--default',
     disabled && 'fbr--button--disabled',
+    buttonSize || 'fbr--button-lg'
     
   ].join(' ').trim();
 
