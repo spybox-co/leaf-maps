@@ -36,14 +36,15 @@ const Attribution = () => {
   return(
     <div className={classes.root}>
       <InfoButton className={classes.infoButton} onClick={handleClick} />
-      <button className={classes.infoPanel} onClick={changeMap}>
-        <div className="Label">
-          <h4>Map style</h4>
-          <h3>{activeMap.name}<span> by </span>{activeMap.vendor}</h3>
-        </div>
-        <div className="IconContainer"><Icon type="Change" /></div>
-        
-      </button>
+      {isExpanded && (
+        <button className={classes.infoPanel} onClick={changeMap}>
+          <div className="Label">
+            <h4>Map style</h4>
+            <h3>{activeMap.name}<span> by </span>{activeMap.vendor}</h3>
+          </div>
+          <div className="IconContainer"><Icon type="Change" /></div>
+        </button>
+      )}
     </div>
   )
   
