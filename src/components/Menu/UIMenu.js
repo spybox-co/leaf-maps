@@ -7,7 +7,7 @@ import UISideNavigation from './UISideNavigation';
 
 // import Console from '../../components/Console';
 
-import TabContainer, { TabHeader, Maps, Layers, Console, Share } from './Tabs'
+import TabContainer, { TabHeader, Maps, Layers, Console, Bookmarks, Share } from './Tabs'
 import { TabButton } from '../../components/TabButton';
 import { Tag } from '../../components/Tag';
 import * as update from '../../version';
@@ -26,6 +26,12 @@ const tabs = [
     name: "Layers",
     component: <Layers />,
     icon: "LayerStack"
+  },
+  {
+    name: "Bookmarks",
+    component: <Bookmarks />,
+    icon: "Bookmark",
+    theme: "g10 theme-light"
   },
   {
     name: "Share",

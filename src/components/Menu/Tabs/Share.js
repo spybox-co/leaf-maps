@@ -30,7 +30,7 @@ export default () => {
   return(
     <div className="Console theme-light">
       <StaticTile>
-      <h3>Show on Google Maps</h3>
+      <h5>Show on Google Maps</h5>
 
       {startLocate && position !== null && (
                 <Button 

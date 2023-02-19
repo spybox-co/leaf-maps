@@ -15,45 +15,39 @@
   padding-left: 1rem;
   cursor: pointer;
   background-color: $gray-80;
+
+  &-label {
+    display: block;
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1.125rem;
+    letter-spacing: 0.16px;
+  }
+  
+  &-title {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 0;
+    // font-size: calc(1.25rem + 0 * (100vw - 20rem) / 62);
+    display: block;
+    max-width: 17.1875rem;
+  }
 }
 .LayerCard.active {
-  // color: $primary-color;
-  // background-color: $gray-10;
-  background-color: $primary-color;
-}
-// .LayerCard.active .LayerCard-active-label {
-//   position: absolute;
-//   content: "";
-//   border-left: 0.5rem solid $primary-color;
-//   top: 0;
-//   left: 0;
-//   height: 100%;
-// }
+  background-color: rgba($blue-60, 0.25);
 
-.LayerCard.active:hover {
-  color: $white;
-  background-color: darken($primary-color, 10%);
+  &:hover {
+    color: $white;
+    background-color: rgba($blue-60, 0.5); // darken($primary-color, 10%);
+  }
 }
+
+
 .LayerCard:hover {
   background-color: $gray-70;
 }
-.LayerCard-label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.125rem;
-  letter-spacing: 0.16px;
-}
 
-.LayerCard-title {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 130%;
-  letter-spacing: 0;
-  // font-size: calc(1.25rem + 0 * (100vw - 20rem) / 62);
-  display: block;
-  max-width: 17.1875rem;
-}
 .LayerCard-option {
   position: absolute;
   color: $gray-30;

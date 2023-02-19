@@ -48,9 +48,9 @@ export const TabHeader = ({ title, expanded }) => {
 
   return(
     <div className={styles.Header} data-mode="dark">
-      <h6>
+      <h2 className="Title">
         {title}
-      </h6>
+      </h2>
       {!compactMode && (
         <CloseButton          
           onClick={() => dispatch({ type: 'close menu'})}

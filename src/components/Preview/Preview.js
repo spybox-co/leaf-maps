@@ -5,11 +5,12 @@ import { cn } from '../../utils/helpers';
 
 const Preview = props => {
   const { 
+    className,
     source, 
     layer, 
     center, 
-    zoom, 
-    className 
+    zoom,
+    fixedZoom = false
   } = props;
 
   const classes = cn(className, 'ui--item-preview');
@@ -27,8 +28,7 @@ const zoomPrev = (zoom < 12 ? 10 : zoom-2)
         attributionControl={false}
         style={previewStyle}
         center={center}
-        // zoom={13}
-        zoom={layer ? zoomPrev : zoom-2}
+        zoom={!fixedZoom ? zoomPrev : 13}
         scrollWheelZoom={false}
         dragging={false}
         touchZoom={false}

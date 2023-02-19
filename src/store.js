@@ -18,8 +18,9 @@ import React, { createContext, useReducer, useEffect } from 'react';
 //  @Param lastViewportDataPosition & lastViewportDataZoomNumber from localStorage is initially parsed as a string!
 let storedPosition = JSON.parse(localStorage.getItem('lastViewportDataPosition'));
 let storedZoom = parseInt(localStorage.getItem('lastViewportDataZoomNumber'), 10);
-let storedLastActiveMap = localStorage.getItem('lastMap');
-let lastStoredActiveLayers = JSON.parse(localStorage.getItem('lastStoredActiveLayers'));
+let storedLastUsedActiveMap = localStorage.getItem('lastMap');
+let storedLastUsedActiveLayers = JSON.parse(localStorage.getItem('storedLastUsedActiveLayers'));
+let storedBookmarks = JSON.parse(localStorage.getItem('storedBookmarks'));
 
 
 
@@ -48,6 +49,7 @@ const initialState = {
   layers: layers,
   activeMap: initialAppSettings.map,
   activeLayers: [],
+  bookmarks: [],
   viewport: {
     center: initialMapData.center,
     zoom: initialMapData.zoom
@@ -101,12 +103,12 @@ const StateProvider = ({ children }) => {
       // Updating map overlayers
       case 'add layer':
         const addActiveLayer = [ ...state.activeLayers, action.value ];
-        localStorage.setItem('lastStoredActiveLayers', JSON.stringify(addActiveLayer));
+        localStorage.setItem('storedLastUsedActiveLayers', JSON.stringify(addActiveLayer));
         return {...state, activeLayers: addActiveLayer };
 
       case 'delete layer':
         const updateActiveLayers = _.reject(state.activeLayers, (el) => { return el.url === action.value.url });
-        localStorage.setItem('lastStoredActiveLayers', JSON.stringify(updateActiveLayers));
+        localStorage.setItem('storedLastUsedActiveLayers', JSON.stringify(updateActiveLayers));
         return {...state, activeLayers: updateActiveLayers };
 
 
@@ -144,6 +146,22 @@ const StateProvider = ({ children }) => {
       case 'set my position':
         return {...state, position: action.value };
 
+      // Bookmarks
+      case 'add bookmark':
+        const addBookmark = [ ...state.bookmarks, action.value ];
+        localStorage.setItem('storedBookmarks', JSON.stringify(addBookmark));
+        return {...state, bookmarks: addBookmark };
+
+      case 'delete bookmark':
+        const deleteBookmark = _.reject(state.bookmarks, (el) => { return el.date_added === action.value });
+        localStorage.setItem('storedBookmarks', JSON.stringify(deleteBookmark));
+        return {...state, bookmarks: deleteBookmark };
+
+      case 'delete all bookmarks':
+        const deleteAllBookmarks = [];
+        localStorage.setItem('storedBookmarks', JSON.stringify(deleteAllBookmarks));
+        return {...state, bookmarks: deleteAllBookmarks };
+
       // Update geolocation data details for console
       case 'update geolocation details':
         return {...state, geolocation: action.value };
@@ -166,11 +184,13 @@ const StateProvider = ({ children }) => {
       // Local Storage
       case 'last stored position':
         return { ...state, viewport: { center: storedPosition, zoom: storedZoom }};
+        
       case 'last stored settings':
         return {
           ...state, 
-          activeMap: storedLastActiveMap ? maps[storedLastActiveMap] : maps[0],
-          activeLayers: lastStoredActiveLayers ? lastStoredActiveLayers : [],
+          activeMap: storedLastUsedActiveMap ? maps[storedLastUsedActiveMap] : maps[0],
+          activeLayers: storedLastUsedActiveLayers ? storedLastUsedActiveLayers : [],
+          bookmarks: storedBookmarks ? storedBookmarks : []
         };
 
       // No action...  
@@ -216,7 +236,7 @@ const StateProvider = ({ children }) => {
         getDefaultUserLocationData();
       }
 
-      if (storedLastActiveMap || lastStoredActiveLayers) {
+      if (storedLastUsedActiveMap || storedLastUsedActiveLayers || storedBookmarks) {
         dispatch({ type: 'last stored settings' })
       }
 
@@ -233,12 +253,12 @@ const StateProvider = ({ children }) => {
       //   console.log("Position (lat, lng):", storedPosition ? storedPosition : "not stored data");
       //   console.log("Zoom (number):", storedZoom ? storedZoom : 'not stored data');
 
-      //   console.log("Initial map from localStorage:", storedLastActiveMap ? maps[storedLastActiveMap].name : "not stored data");
+      //   console.log("Initial map from localStorage:", storedLastUsedActiveMap ? maps[storedLastUsedActiveMap].name : "not stored data");
       //   // Still variable from state
-      //   if (lastStoredActiveLayers && lastStoredActiveLayers.length > 0) {
+      //   if (storedLastUsedActiveLayers && storedLastUsedActiveLayers.length > 0) {
       //     console.group("Initial layers from localStorage:");
-      //     console.log(lastStoredActiveLayers)
-      //       HowManyLayersAreActive(lastStoredActiveLayers); 
+      //     console.log(storedLastUsedActiveLayers)
+      //       HowManyLayersAreActive(storedLastUsedActiveLayers); 
       //     console.groupEnd();
       //   } else { 
       //     console.info("Initial layers from localStorage:", "not stored data");

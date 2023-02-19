@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+
+.Bookmark {
+  text-align: left;
+  width: 100%;
+  position: relative;
+  color: $gray-100;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin-left: 1px; 
+  margin-bottom: 1px;
+  margin-right: 1px; 
+  text-decoration: none;
+  transition: all 0.35s ease;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  cursor: pointer;
+  background-color: $white;
+  border: 0;
+  &:hover {
+    background-color: darken($white, 10%);
+  }
+  &:active {
+    background-color: darken($white, 15%);
+  }
+
+  &-label {
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.125rem;
+    letter-spacing: 0.16px;
+    span {
+      font-size: inherit;
+      margin-left: 0.5rem;
+    }
+  }
+  
+  &-title {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 0;
+    // font-size: calc(1.25rem + 0 * (100vw - 20rem) / 62);
+    display: block;
+    max-width: 17.1875rem;
+  }
+  &-actions {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
+
+
+
+.Bookmark-map-preview {
+  margin-top: 0.75rem;
+  height: 6rem;
+  // width: 8rem;
+}

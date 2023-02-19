@@ -46,7 +46,7 @@ const LayerCard = props => {
         className="LayerCard-map-preview"
         source={map} 
         layer={layer}
-        center={center} 
+        center={center}
         zoom={zoom}
       />
     </a>

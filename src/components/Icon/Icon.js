@@ -11,7 +11,7 @@ import {
   CheckmarkFilled32,
   CheckmarkOutline32,
   Close32,
-  Copy32, 
+  Copy32,
   DocumentBlank32,
   DocumentPdf32, 
   Download32,
@@ -26,7 +26,8 @@ import {
   View32,
   Search32,
   Send32,
-  Share32
+  Share32,
+  TrashCan32
 } from '@carbon/icons-react';
 
 import {
@@ -97,6 +98,7 @@ const Components = {
   Settings: Settings,
   Share: Share32,
   Substract: Substract,
+  TrashCan: TrashCan32,
   View: View32,
 };
 

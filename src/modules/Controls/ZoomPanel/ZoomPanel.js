@@ -9,10 +9,11 @@ import { IconButton } from '../../../components/Button';
 
 import './ZoomPanel.scss';
 
-const ZoomPanel = ({
-  size = 'medium', 
-  ...others
-}) => {
+const ZoomPanel = props => {
+  const {
+    size = 'medium', 
+    ...others
+  } = props;
 
   const { state, dispatch } = useContext(store);
   const { mapSettings, viewport } = state;

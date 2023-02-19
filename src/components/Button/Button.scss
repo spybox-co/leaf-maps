@@ -168,15 +168,17 @@
   }
 }
 [class*="dark"],
-[data-mode="dark"] {
+[data-mode="dark"],
+.theme-dark {
   .fbr--button--ghost {
-    color: $white;
+    color: $white !important;
   }
 }
 [class*="light"],
-[data-mode="light"] {
+[data-mode="light"],
+.theme-light {
   .fbr--button--ghost {
-    color: $gray-100;
+    color: $gray-100 !important;
   }
 }
 

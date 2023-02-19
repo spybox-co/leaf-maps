@@ -3,6 +3,7 @@ import Icon from '../../../components/Icon';
 import './Attribution.scss';
 
 import { store } from '../../../store.js';
+import { IconButton } from '../../../components/Button';
 // import { cn } from '../../utils/helpers';
 
 const Attribution = () => {
@@ -12,11 +13,9 @@ const Attribution = () => {
 
   const { activeMap, maps } = state;
 
-  console.log(activeMap);
 
   const handleClick = () => {
     setIsExpanded(isExpanded => !isExpanded);
-    console.log("Atribution", isExpanded)
   }
 
   const classes = {
@@ -37,13 +36,18 @@ const Attribution = () => {
     <div className={classes.root}>
       <InfoButton className={classes.infoButton} onClick={handleClick} />
       {isExpanded && (
-        <button className={classes.infoPanel} onClick={changeMap}>
-          <div className="Label">
-            <h4>Map style</h4>
-            <h3>{activeMap.name}<span> by </span>{activeMap.vendor}</h3>
+        <>
+          <div className={classes.infoPanel} onClick={changeMap}>
+            <div className="Label">
+              <span>{activeMap.name}</span>
+              {/* <h4>Map style</h4>
+              <h3>{activeMap.name}<span> by </span>{activeMap.vendor}</h3> */}
+            </div>
+            {/* <div className="IconContainer"><Icon type="Change" /></div> */}
+            <IconButton onClick={changeMap} renderIcon={"Change"} size="medium" kind="ghost"/>
           </div>
-          <div className="IconContainer"><Icon type="Change" /></div>
-        </button>
+          
+        </>
       )}
     </div>
   )
