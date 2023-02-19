@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.fbr--tile {
+  padding: 1rem;
+  color: $gray-100;
+
+  cursor: default;
+
+  &--clickable {
+    cursor: pointer;
+  }
+}

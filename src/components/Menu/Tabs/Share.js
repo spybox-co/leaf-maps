@@ -8,7 +8,7 @@ import { Button } from "../../Button";
 // eslint-disable-next-line
 import Typo from "../../Typography";
 // eslint-disable-next-line
-import Tile from "../../Tile";
+// import Tile from "../../Tile";
 
 // import Icon from "../../../components/Icon";
 

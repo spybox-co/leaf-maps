@@ -61,10 +61,10 @@ export default () => {
     </Button>;
  
   return(
-    <div className="Console theme-light">
+    <div className="Bookmarks theme-light">
       {bookmarks.length === 0 ? (
         <>
-          <StaticTile>
+          <Tile>
             <h4>No bookmarks yet</h4>
             <p>Add bookmark to save current map view</p>
     
@@ -72,7 +72,7 @@ export default () => {
 
 
               
-          </StaticTile>
+          </Tile>
         </>
       ) : (
         <>
@@ -87,11 +87,11 @@ export default () => {
               dateAdded={bookmark.date_added}
             />
           ))}
-          <StaticTile style={expandStyle}>
+          <Tile>
             <h6>Actions</h6>
             {AddBookmarkAction}
             {DeleteAllBookmarksAction}
-          </StaticTile>
+          </Tile>
         </>
       )}
 
@@ -104,13 +104,4 @@ export default () => {
 
 
 
-const StaticTile = ({ children }) => (
-  <div className="bx--tile" style={{ padding: `1rem`, ...expandStyle }}>
-    {children}
-  </div>
-)
-
-
-
-const expandStyle = { color: `black` };
 

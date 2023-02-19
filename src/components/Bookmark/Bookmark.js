@@ -30,6 +30,7 @@ const Bookmark = props => {
 
   const setViewport = () => {
     dispatch({ type: 'on change viewport', value: { center: center, zoom: zoom } });
+    dispatch({ type: 'disable center map' });
   }
 
   const classes = {

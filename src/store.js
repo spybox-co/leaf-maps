@@ -111,6 +111,11 @@ const StateProvider = ({ children }) => {
         localStorage.setItem('storedLastUsedActiveLayers', JSON.stringify(updateActiveLayers));
         return {...state, activeLayers: updateActiveLayers };
 
+      case 'clear selected layers':
+        const clearAllActiveLayers = [];
+        localStorage.setItem('storedLastUsedActiveLayers', JSON.stringify(clearAllActiveLayers));
+        return {...state, activeLayers: clearAllActiveLayers };
+
 
 
       // Initial position  
@@ -172,6 +177,10 @@ const StateProvider = ({ children }) => {
         return {...state, startLocate: false, position: null, autoCenterMap: false };  
       case 'center map':
         return {...state, autoCenterMap: action.value };
+      case 'disable center map':
+        return {...state, autoCenterMap: false };
+      case 'enable center map':
+        return {...state, autoCenterMap: true };
       
       // Menu actions
       case 'open menu':

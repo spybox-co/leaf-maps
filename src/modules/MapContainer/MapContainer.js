@@ -13,7 +13,7 @@ import { PositionMarker, LocationMarker } from './Markers';
 import { store } from '../../store.js';
 import { cn } from '../../utils/helpers';
 
-import Tile from "../../images/tile.png"
+import Tile from '../../images/tile.png';
 
 
 import "./MapContainer.scss";
@@ -142,6 +142,7 @@ const MapContainer = ({ children }) => {
       <div className={classes.container}>
         <Map
           id="map"
+          animate={true}
           className={classes.content}
           onViewportChanged={onViewportChanged}
           onDrag={onDrag}
