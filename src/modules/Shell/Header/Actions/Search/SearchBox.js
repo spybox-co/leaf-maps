@@ -31,6 +31,7 @@ const SearchForm = () => {
 
 
   const [results, setResults] = useState([]); // []
+  const [coords, setCoords] = useState([]); // []
   const [dropdown, showDropdown] = useState(false); // false
   const [value, setValue] = useState('');
   const [expanded, setExpanded] = useState(false); // false
@@ -53,7 +54,8 @@ const SearchForm = () => {
       } else {
         window.document.querySelector('.spbx--header__global').classList.remove("search-is-active")
       }
-    }, [results, expanded]);
+      console.log("kords", coords)
+    }, [results, coords, expanded]);
 
 
   const ResultsProvider = (query) => {
@@ -62,9 +64,32 @@ const SearchForm = () => {
     const SearchGlobal = `https://photon.komoot.io/api/?q=${query}&limit=10`;
     const SearchLocal = `https://photon.komoot.io/api/?q=${query}&limit=${options.queryLimit}&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}`; //&lat=${state.viewport.center[0]}&lon=${state.viewport.center[1]}
     
-    
+
+
+    const checkIfQueryIsGPS = (string) => {
+      const LatLng = string.replace("(", "").replace(")", "").split(", ")
+      const Lat = parseFloat(LatLng[0]);
+      const Lng = parseFloat(LatLng[1]);
+
+      // console.log("test", Number.isNaN(32)); 
+      // console.log("test z dupy", Number.isNaN('dupa')); 
+      // console.log("query test", isNumeric(Lat) && isNumeric(Lng));
+
+
+      if (!Number.isNaN(Lat) && !Number.isNaN(Lng)) {
+        const coordinates = { lat: Lat, lng: Lng };
+        console.log("true, query is numbers", coordinates);
+ 
+          setCoords(coordinates);
+      } else {
+        console.log("query is not valid GPS")
+      }
+    }
+    // checkIfQueryIsGPS(query);
+
     axios
       .get(SearchGlobal)
+      .then(checkIfQueryIsGPS(query))
       .then(res => {
         const response = res.data;
         results.push(response.features.filter(i => i.properties.type === "city" && i.properties.type !== "boundary"))
@@ -96,6 +121,13 @@ const SearchForm = () => {
     dispatch({ type: 'set location', value: [lng, lat], label: [data.properties.name, data.properties.city && data.properties.city, data.properties.country && data.properties.country, data.properties.postcode && data.properties.postcode].filter(Boolean).join(', ') });
     showDropdown(false);
     setValue(data.properties.name)
+    event.preventDefault();
+  }
+  const CoordsItemClickHandler = (data, event) => {
+    dispatch({ type: 'center map on location', value: [ data.lat, data.lng ] });
+    // dispatch({ type: 'set location', value: [lng, lat], label: [data.properties.name, data.properties.city && data.properties.city, data.properties.country && data.properties.country, data.properties.postcode && data.properties.postcode].filter(Boolean).join(', ') });
+    showDropdown(false);
+    // setValue(data.properties.name)
     event.preventDefault();
   }
 
@@ -159,6 +191,20 @@ const SearchForm = () => {
       {results.length !== 0 && dropdown && (
         <div className="SearchBox-Results">
           <ScrollableArea area={{ width: `100%`, height: `${dropdownHeight}rem` }}>
+            {coords && coords.length !== 0 && (
+              <div className="SearchBox-Result-item">
+                <Button className="Result-item__link" 
+                  onClick={event => CoordsItemClickHandler(coords, event)}
+                  kind="ghost"
+                  renderIcon="ArrowRight"
+                >
+                  <span>
+                  {coords && (<>{`Show location → `}<strong>{`${coords.lat}`}</strong>{`, `}<strong>{`${coords.lng}`}</strong></>)}
+                  &nbsp;
+                  </span>
+                </Button>
+              </div>
+            )}
 
 
             {globals && (
