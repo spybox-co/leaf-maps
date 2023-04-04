@@ -12,7 +12,7 @@ const Tile = props => {
 
   const classes = [
     'fbr--tile',
-    clickable && 'fbr--tile--clickable'
+    clickable && 'fbr--tile--clickable',
   ].join(' ').trim();
 
   return (
@@ -23,3 +23,12 @@ const Tile = props => {
 }
 
 export default Tile;
+
+export const SelectableTile = props => {
+  const classes = [
+    'fbr--tile',
+  ].join(' ').trim();
+  return (
+    <div className={classes} />
+  )
+}

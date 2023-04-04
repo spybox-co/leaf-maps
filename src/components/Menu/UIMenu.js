@@ -18,12 +18,12 @@ import styles from './Menu.module.scss'
 
 const tabs = [
   {
-    name: "Maps",
+    name: "Basemaps",
     component: <Maps />,
     icon: "Map"
   },
   {
-    name: "Layers",
+    name: "Overlayers",
     component: <Layers />,
     icon: "LayerStack"
   },

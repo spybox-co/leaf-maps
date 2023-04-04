@@ -37,7 +37,7 @@ const Attribution = () => {
       <InfoButton className={classes.infoButton} onClick={handleClick} />
       {isExpanded && (
         <>
-          <div className={classes.infoPanel} onClick={changeMap}>
+          <div className={classes.infoPanel}>
             <div className="Label">
               <span>{activeMap.name}</span>
               {/* <h4>Map style</h4>

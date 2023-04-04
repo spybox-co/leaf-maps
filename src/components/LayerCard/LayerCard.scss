@@ -15,6 +15,7 @@
   padding-left: 1rem;
   cursor: pointer;
   background-color: $gray-80;
+  border: 2px solid transparent;
 
   &-label {
     display: block;
@@ -35,12 +36,13 @@
   }
 }
 .LayerCard.active {
-  background-color: rgba($blue-60, 0.25);
+  // background-color: rgba($blue-60, 0.25);
+  border-color: $gray-40;
 
-  &:hover {
-    color: $white;
-    background-color: rgba($blue-60, 0.5); // darken($primary-color, 10%);
-  }
+  // &:hover {
+  //   color: $white;
+  //   background-color: rgba($blue-60, 0.5); // darken($primary-color, 10%);
+  // }
 }
 
 

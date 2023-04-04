@@ -24,7 +24,7 @@ let storedBookmarks = JSON.parse(localStorage.getItem('storedBookmarks'));
 
 
 
-const defaultMap = maps.filter(i => [true].includes(i.default)).[0];
+const defaultMap = maps.filter(i => [true].includes(i.default)).[0] || maps[0];
 
 // console.info("default map", defaultMap );
 

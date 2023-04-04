@@ -77,16 +77,16 @@ export const maps = [
     url: "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png",
     apikey: "?apikey=f44334560bdb4771a041609cc75a8983"
   },
-  {
-    vendor: "Seznam",
-    name: "Base Map",
-    url: "https://mapserver.mapy.cz/base-m/{z}-{x}-{y}"
-  },
-  {
-    vendor: "Seznam",
-    name: "Tourist Map",
-    url: "https://mapserver.mapy.cz/turist-m/{z}-{x}-{y}"
-  },
+  // {
+  //   vendor: "Seznam",
+  //   name: "Base Map",
+  //   url: "https://mapserver.mapy.cz/base-m/{z}-{x}-{y}"
+  // },
+  // {
+  //   vendor: "Seznam",
+  //   name: "Tourist Map",
+  //   url: "https://mapserver.mapy.cz/turist-m/{z}-{x}-{y}"
+  // },
   {
     vendor: "Öpnvkarte",
     name: "Transport Map",
@@ -125,12 +125,12 @@ export const maps = [
     url: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
     maxZoom: 18,
   },
-  {
-    vendor: "NASA",
-    name: "Global Imagery Browse Services (GIBS)",
-    url: "https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg",
-    maxZoom: 8,
-  }
+  // {
+  //   vendor: "NASA",
+  //   name: "Global Imagery Browse Services (GIBS)",
+  //   url: "https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg",
+  //   maxZoom: 8,
+  // }
 ];
 
 export const layers = [
